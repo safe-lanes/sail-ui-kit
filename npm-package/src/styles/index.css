@@ -1,0 +1,254 @@
+/* SAIL Foundation Styles */
+/* Maritime UI Components base styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Maritime Color Palette */
+  --maritime-blue: #5DADE2;
+  --maritime-blue-hover: #4A9BD1;
+  --maritime-blue-dark: #2E86AB;
+  --maritime-navy: #16569e;
+  --maritime-gray: #4f5863;
+  --maritime-light-gray: #f8f9fa;
+  
+  /* Status Colors */
+  --status-active: #10b981;
+  --status-maintenance: #f59e0b;
+  --status-port: #3b82f6;
+  --status-inactive: #6b7280;
+  
+  /* Compliance Colors */
+  --compliant: #10b981;
+  --non-compliant: #ef4444;
+  --partial-compliant: #f59e0b;
+  --pending: #6b7280;
+  
+  /* Severity Colors */
+  --severity-low: #10b981;
+  --severity-medium: #f59e0b;
+  --severity-high: #f97316;
+  --severity-critical: #ef4444;
+}
+
+/* Maritime Form Styling */
+.maritime-form {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.maritime-form .form-field {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.maritime-form .form-field:focus {
+  outline: none;
+  border-color: var(--maritime-blue);
+  box-shadow: 0 0 0 3px rgba(93, 173, 226, 0.1);
+}
+
+.maritime-form .form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+/* Maritime Buttons */
+.maritime-button {
+  background-color: var(--maritime-blue);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.maritime-button:hover {
+  background-color: var(--maritime-blue-hover);
+  transform: translateY(-1px);
+}
+
+.maritime-button:active {
+  transform: translateY(0);
+}
+
+/* Status Indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-active {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: rgb(16, 185, 129);
+}
+
+.status-maintenance {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: rgb(245, 158, 11);
+}
+
+.status-port {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: rgb(59, 130, 246);
+}
+
+.status-inactive {
+  background-color: rgba(107, 114, 128, 0.1);
+  color: rgb(107, 114, 128);
+}
+
+/* Compliance Indicators */
+.compliance-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.compliance-compliant {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: rgb(16, 185, 129);
+}
+
+.compliance-non-compliant {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(239, 68, 68);
+}
+
+.compliance-partial {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: rgb(245, 158, 11);
+}
+
+.compliance-pending {
+  background-color: rgba(107, 114, 128, 0.1);
+  color: rgb(107, 114, 128);
+}
+
+/* Maritime Layout */
+.maritime-layout {
+  font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  background-color: var(--maritime-light-gray);
+}
+
+.maritime-sidebar {
+  background-color: white;
+  border-right: 1px solid #e5e7eb;
+  min-height: 100vh;
+}
+
+.maritime-content {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 100%;
+}
+
+/* Navigation Styling */
+.maritime-nav {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.maritime-nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--maritime-navy);
+  font-weight: 600;
+}
+
+/* Module Navigator */
+.module-navigator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.module-navigator:hover {
+  background-color: #f3f4f6;
+}
+
+.module-navigator .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: var(--maritime-gray);
+}
+
+.module-navigator .label {
+  color: var(--maritime-gray);
+  font-size: 0.625rem;
+  font-weight: 400;
+  font-family: 'Mulish', Helvetica;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .maritime-form {
+    padding: 1rem;
+  }
+  
+  .maritime-content {
+    padding: 1rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --maritime-light-gray: #1f2937;
+  }
+  
+  .maritime-layout {
+    background-color: #111827;
+    color: #f9fafb;
+  }
+  
+  .maritime-sidebar {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .maritime-nav {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .maritime-form {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .maritime-form .form-field {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+}

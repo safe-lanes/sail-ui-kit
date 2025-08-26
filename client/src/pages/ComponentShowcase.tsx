@@ -1,0 +1,1410 @@
+import React, { useState } from "react";
+import { Link, useLocation } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Palette, 
+  Shield, 
+  Ship,
+  Eye,
+  Code,
+  Package,
+  FileText,
+  MousePointer,
+  Layout,
+  MessageSquare,
+  Layers
+} from "lucide-react";
+import { 
+  Alert, 
+  AlertDescription, 
+  AlertTitle 
+} from "@/components/ui/alert";
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { 
+  Tooltip, 
+  TooltipContent, 
+  TooltipProvider, 
+  TooltipTrigger 
+} from "@/components/ui/tooltip";
+import { 
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { 
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { StandardNavigationBar } from "@/components/StandardNavigationBar";
+import { 
+  VesselStatusIndicator,
+  SafetyRatingBadge,
+  TMSAComplianceIndicator,
+  OperationsDashboard,
+  VESSEL_TYPES,
+  MARITIME_RANKS,
+  TMSA_ELEMENTS,
+  INCIDENT_TYPES,
+  SEVERITY_LEVELS,
+  MARITIME_COMPONENTS_VERSION
+} from "@/components/maritime";
+import type { SafetyRating } from "@/components/maritime";
+import { Form } from "@/components/ui/form";
+
+export const ComponentShowcase: React.FC = () => {
+  const [location, navigate] = useLocation();
+  const [showSAILFormDemo, setShowSAILFormDemo] = useState(false);
+  const [currentSection, setCurrentSection] = useState('A');
+
+  const handleModuleChange = (moduleId: string) => {
+    switch (moduleId) {
+      case "crewing":
+        navigate("/");
+        break;
+      case "technical-pms":
+        navigate("/technical-pms");
+        break;
+      default:
+        navigate("/");
+    }
+  };
+
+  // Sample data for demonstrations
+  const sampleVessels = [
+    {
+      name: "MV Atlantic Star",
+      imoNumber: "9123456",
+      vesselType: "Oil Tanker",
+      status: { status: "active" as const, location: "Persian Gulf", lastUpdate: "2 hours ago" }
+    },
+    {
+      name: "MV Pacific Dawn",
+      imoNumber: "9234567",
+      vesselType: "Container",
+      status: { status: "port" as const, location: "Singapore", lastUpdate: "1 hour ago" }
+    },
+    {
+      name: "MV Northern Light",
+      imoNumber: "9345678",
+      vesselType: "Chemical Tanker",
+      status: { status: "maintenance" as const, location: "Dubai", lastUpdate: "30 minutes ago" }
+    },
+    {
+      name: "MV Ocean Explorer",
+      imoNumber: "9456789",
+      vesselType: "LNG Tanker",
+      status: { status: "emergency" as const, location: "Red Sea", lastUpdate: "5 minutes ago" }
+    }
+  ];
+
+  const sampleTMSAElements = [
+    { 
+      element: { id: "EL1", name: "Management & Leadership", code: "EL1", description: "Shore-based management" },
+      status: { elementId: "EL1", status: "compliant" as const, score: 95, lastAuditDate: "2024-01-15" }
+    },
+    { 
+      element: { id: "EL2", name: "Shore HR Management", code: "EL2", description: "Human resources management" },
+      status: { elementId: "EL2", status: "non_compliant" as const, score: 65, lastAuditDate: "2024-01-10" }
+    },
+    { 
+      element: { id: "EL3", name: "Crewing Management", code: "EL3", description: "Crew management and training" },
+      status: { elementId: "EL3", status: "partially_compliant" as const, score: 78, lastAuditDate: "2024-01-20" }
+    },
+    { 
+      element: { id: "EL4", name: "Technical Management", code: "EL4", description: "Technical operations" },
+      status: { elementId: "EL4", status: "not_assessed" as const }
+    }
+  ];
+
+  return (
+    <div className="bg-transparent w-full">
+      <div className="overflow-hidden bg-[url(/figmaAssets/vector.svg)] bg-[100%_100%] w-full min-h-screen relative">
+        <StandardNavigationBar
+          currentModule="crewing"
+          onModuleChange={handleModuleChange}
+          activeSection="components"
+        />
+
+        {/* Left sidebar - Hidden on mobile, visible on lg+ */}
+        <aside className="hidden lg:block w-[67px] absolute left-0 top-[66px] h-[calc(100vh-66px)]">
+          {/* Light blue section with icon and "All" text */}
+          <div className="w-full h-[79px] flex flex-col items-center justify-center bg-[#52baf3]">
+            <div className="w-6 h-6 mb-1">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="white"/>
+                <path d="M19 15L19.74 17.74L22 18L19.74 18.26L19 21L18.26 18.26L16 18L18.26 17.74L19 15Z" fill="white"/>
+                <path d="M5 6L5.5 7.5L7 8L5.5 8.5L5 10L4.5 8.5L3 8L4.5 7.5L5 6Z" fill="white"/>
+              </svg>
+            </div>
+            <div className="text-white text-[10px] font-normal font-['Roboto',Helvetica]">
+              All
+            </div>
+          </div>
+
+          {/* Dark blue section */}
+          <div className="w-full h-[calc(100%-79px)] bg-[#16569e]">
+          </div>
+        </aside>
+
+        {/* Main content - Responsive layout */}
+        <main className="absolute top-[67px] left-0 lg:left-[67px] w-full lg:w-[calc(100%-67px)] h-[calc(100%-67px)] overflow-y-auto">
+          <div className="p-3 sm:p-4 lg:p-6">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-3xl font-bold flex items-center gap-2">
+                  <Palette className="h-8 w-8" />
+                  Maritime UI Components
+                </h1>
+                <p className="text-muted-foreground">Comprehensive library of maritime-specific UI components v{MARITIME_COMPONENTS_VERSION}</p>
+              </div>
+            </div>
+
+            <Tabs defaultValue="components" className="space-y-4">
+              <TabsList className="grid w-full grid-cols-7">
+                <TabsTrigger value="components">Maritime</TabsTrigger>
+                <TabsTrigger value="constants">Constants</TabsTrigger>
+                <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+                <TabsTrigger value="form">Form UI</TabsTrigger>
+                <TabsTrigger value="layout">Layout UI</TabsTrigger>
+                <TabsTrigger value="feedback">Feedback UI</TabsTrigger>
+                <TabsTrigger value="usage">Usage Guide</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="components" className="space-y-6">
+                {/* Vessel Status Indicators */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Ship className="h-5 w-5" />
+                      Vessel Status Indicators
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {sampleVessels.map((vessel, index) => (
+                        <div key={index} className="border rounded-lg p-4">
+                          <VesselStatusIndicator 
+                            vessel={vessel}
+                            size="md"
+                            showDetails={true}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <Separator />
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                      <div className="text-center">
+                        <VesselStatusIndicator 
+                          vessel={{
+                            name: "Sample Vessel",
+                            vesselType: "Oil Tanker",
+                            status: { status: "active" }
+                          }}
+                          size="sm"
+                        />
+                        <p className="text-xs mt-2">Small</p>
+                      </div>
+                      <div className="text-center">
+                        <VesselStatusIndicator 
+                          vessel={{
+                            name: "Sample Vessel",
+                            vesselType: "Oil Tanker", 
+                            status: { status: "port" }
+                          }}
+                          size="md"
+                        />
+                        <p className="text-xs mt-2">Medium</p>
+                      </div>
+                      <div className="text-center">
+                        <VesselStatusIndicator 
+                          vessel={{
+                            name: "Sample Vessel",
+                            vesselType: "Oil Tanker",
+                            status: { status: "maintenance" }
+                          }}
+                          size="lg"
+                        />
+                        <p className="text-xs mt-2">Large</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Safety Rating Badges */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Shield className="h-5 w-5" />
+                      Safety Rating Badges
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                      {[1, 2, 3, 4, 5].map((rating) => (
+                        <div key={rating} className="border rounded-lg p-4 text-center">
+                          <SafetyRatingBadge 
+                            rating={rating as 1 | 2 | 3 | 4 | 5}
+                            size="md"
+                            showDetails={true}
+                          />
+                          <p className="text-xs mt-2">Rating {rating}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <Separator />
+                    <div className="space-y-2">
+                      <h4 className="font-medium">Different Types:</h4>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <SafetyRatingBadge rating={4} type="crew" size="md" />
+                        <SafetyRatingBadge rating={3} type="vessel" size="md" />
+                        <SafetyRatingBadge rating={5} type="incident" size="md" />
+                        <SafetyRatingBadge rating={2} type="compliance" size="md" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* TMSA Compliance Indicators */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FileText className="h-5 w-5" />
+                      TMSA Compliance Indicators
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {sampleTMSAElements.map((element, index) => (
+                        <div key={index} className="border rounded-lg p-4">
+                          <TMSAComplianceIndicator 
+                            element={element.element}
+                            status={element.status}
+                            showDetails={true}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="constants" className="space-y-6">
+                {/* Vessel Types */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Vessel Types</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {VESSEL_TYPES.map((type) => (
+                        <Badge key={type} variant="outline">{type}</Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Maritime Ranks */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Maritime Ranks</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <h4 className="font-medium mb-2">Senior Officers</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {MARITIME_RANKS.SENIOR_OFFICERS.map((rank) => (
+                          <Badge key={rank} className="bg-blue-100 text-blue-800">{rank}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2">Junior Officers</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {MARITIME_RANKS.JUNIOR_OFFICERS.map((rank) => (
+                          <Badge key={rank} className="bg-green-100 text-green-800">{rank}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2">Ratings</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {MARITIME_RANKS.RATINGS.map((rank) => (
+                          <Badge key={rank} className="bg-gray-100 text-gray-800">{rank}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* TMSA Elements */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>TMSA Elements</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {TMSA_ELEMENTS.map((element) => (
+                        <div key={element.id} className="flex items-center gap-2 p-2 border rounded">
+                          <Badge variant="outline">{element.code}</Badge>
+                          <span className="text-sm">{element.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Incident Types & Severity Levels */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Incident Types</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {INCIDENT_TYPES.map((type) => (
+                          <Badge key={type} variant="outline">{type}</Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Severity Levels</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {Object.values(SEVERITY_LEVELS).map((level) => (
+                          <div key={level.value} className="flex items-center gap-2">
+                            <Badge className={level.color}>{level.label}</Badge>
+                            <span className="text-sm text-muted-foreground">{level.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="dashboard" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Operations Dashboard Preview</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <OperationsDashboard 
+                      vessels={sampleVessels.map(v => ({
+                        id: v.imoNumber || "unknown",
+                        name: v.name,
+                        imoNumber: v.imoNumber,
+                        vesselType: v.vesselType,
+                        status: v.status,
+                        safetyRating: 4 as SafetyRating,
+                        crewCount: 25,
+                        lastInspection: "2024-01-15"
+                      }))}
+                      incidents={{
+                        total: 12,
+                        critical: 1,
+                        high: 2,
+                        medium: 4,
+                        low: 5,
+                        thisMonth: 3,
+                        trend: "down" as const
+                      }}
+                      compliance={{
+                        totalElements: 13,
+                        compliant: 8,
+                        partiallyCompliant: 3,
+                        nonCompliant: 2,
+                        overallScore: 78
+                      }}
+                      tmsakElements={sampleTMSAElements}
+                    />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="usage" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Code className="h-5 w-5" />
+                      Usage Guide
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <h4 className="font-medium mb-2">Import Components:</h4>
+                      <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
+{`import { 
+  VesselStatusIndicator,
+  SafetyRatingBadge,
+  TMSAComplianceIndicator,
+  OperationsDashboard
+} from "@/components/maritime";`}
+                      </pre>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-medium mb-2">Import Constants:</h4>
+                      <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
+{`import { 
+  VESSEL_TYPES,
+  MARITIME_RANKS,
+  TMSA_ELEMENTS,
+  INCIDENT_TYPES,
+  SEVERITY_LEVELS
+} from "@/components/maritime";`}
+                      </pre>
+                    </div>
+
+                    <div>
+                      <h4 className="font-medium mb-2">Example Usage:</h4>
+                      <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
+{`<VesselStatusIndicator 
+  vessel={{
+    name: "MV Atlantic Star",
+    vesselType: "Oil Tanker",
+    status: { 
+      status: "active",
+      location: "Persian Gulf"
+    }
+  }}
+  size="md"
+  showDetails={true}
+/>
+
+<SafetyRatingBadge 
+  rating={4}
+  type="crew"
+  showDetails={true}
+/>
+
+<TMSAComplianceIndicator 
+  element="EL1"
+  status="compliant"
+  score={95}
+/>`}
+                      </pre>
+                    </div>
+
+                    <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                      <h4 className="font-medium text-blue-900 mb-2">Component Library Information</h4>
+                      <div className="text-sm text-blue-800 space-y-1">
+                        <p><strong>Version:</strong> {MARITIME_COMPONENTS_VERSION}</p>
+                        <p><strong>Total Components:</strong> 5 main components</p>
+                        <p><strong>Total Constants:</strong> {VESSEL_TYPES.length + Object.keys(MARITIME_RANKS).length + TMSA_ELEMENTS.length + INCIDENT_TYPES.length + Object.keys(SEVERITY_LEVELS).length} constants and enums</p>
+                        <p><strong>Documentation:</strong> All components include TypeScript types and tooltips</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="form" className="space-y-6">
+                {/* Form Controls */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <MousePointer className="h-5 w-5" />
+                      Form Components
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {/* Buttons */}
+                    <div>
+                      <h4 className="font-medium mb-3">Buttons</h4>
+                      <div className="flex flex-wrap gap-2">
+                        <Button>Default</Button>
+                        <Button variant="secondary">Secondary</Button>
+                        <Button variant="destructive">Destructive</Button>
+                        <Button variant="outline">Outline</Button>
+                        <Button variant="ghost">Ghost</Button>
+                        <Button variant="link">Link</Button>
+                        <Button size="sm">Small</Button>
+                        <Button size="lg">Large</Button>
+                        <Button disabled>Disabled</Button>
+                        <Button className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white">Maritime Blue</Button>
+                        <Button className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white" size="sm">Save Draft</Button>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Inputs - Maritime Form Style */}
+                    <div>
+                      <h4 className="font-medium mb-3">Input Fields (Maritime Form Style)</h4>
+                      <div className="bg-gray-50 p-6 rounded-lg border">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="seafarer-name" className="text-sm font-medium text-gray-700">Seafarer's Name</Label>
+                            <Input id="seafarer-name" placeholder="James Michael" className="bg-white" />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="rank" className="text-sm font-medium text-gray-700">Seafarer's Rank</Label>
+                            <Select>
+                              <SelectTrigger className="bg-white">
+                                <SelectValue placeholder="Select rank" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="master">Master</SelectItem>
+                                <SelectItem value="chief-officer">Chief Officer</SelectItem>
+                                <SelectItem value="2nd-officer">2nd Officer</SelectItem>
+                                <SelectItem value="3rd-officer">3rd Officer</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="nationality" className="text-sm font-medium text-gray-700">Nationality</Label>
+                            <Select>
+                              <SelectTrigger className="bg-white">
+                                <SelectValue placeholder="Select nationality..." />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="british">British</SelectItem>
+                                <SelectItem value="filipino">Filipino</SelectItem>
+                                <SelectItem value="indian">Indian</SelectItem>
+                                <SelectItem value="norwegian">Norwegian</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="vessel" className="text-sm font-medium text-gray-700">Vessel</Label>
+                            <Select>
+                              <SelectTrigger className="bg-white">
+                                <SelectValue placeholder="Select vessel" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="mv-atlantic-star">MV Atlantic Star</SelectItem>
+                                <SelectItem value="mv-pacific-dawn">MV Pacific Dawn</SelectItem>
+                                <SelectItem value="mv-northern-light">MV Northern Light</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="sign-on-date" className="text-sm font-medium text-gray-700">Sign On Date</Label>
+                            <Input id="sign-on-date" type="date" className="bg-white" />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="appraisal-type" className="text-sm font-medium text-gray-700">Appraisal Type</Label>
+                            <Select>
+                              <SelectTrigger className="bg-white">
+                                <SelectValue placeholder="Select type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="initial">Initial Assessment</SelectItem>
+                                <SelectItem value="mid-contract">Mid Contract</SelectItem>
+                                <SelectItem value="end-contract">End of Contract</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="flex justify-end">
+                          <Button className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white px-6">
+                            Save
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Select Dropdowns - Appraisal Form Style */}
+                    <div>
+                      <h4 className="font-medium mb-3">Select Dropdowns (Appraisal Form Style)</h4>
+                      <div className="bg-gray-50 p-4 rounded-lg border">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-2">
+                            <Label className="text-sm font-medium text-gray-700">Vessel Type</Label>
+                            <Select>
+                              <SelectTrigger className="bg-white">
+                                <SelectValue placeholder="Select vessel type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="oil-tanker">Oil Tanker</SelectItem>
+                                <SelectItem value="container">Container</SelectItem>
+                                <SelectItem value="bulk-carrier">Bulk Carrier</SelectItem>
+                                <SelectItem value="lng-tanker">LNG Tanker</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-sm font-medium text-gray-700">Primary Appraiser</Label>
+                            <Select>
+                              <SelectTrigger className="bg-white">
+                                <SelectValue placeholder="Select appraiser" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="captain-smith">Captain Smith</SelectItem>
+                                <SelectItem value="chief-jones">Chief Officer Jones</SelectItem>
+                                <SelectItem value="manager-brown">Fleet Manager Brown</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-sm font-medium text-gray-700">PI Category</Label>
+                            <Select>
+                              <SelectTrigger className="bg-white">
+                                <SelectValue placeholder="Select category" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="leadership">Leadership</SelectItem>
+                                <SelectItem value="technical">Technical</SelectItem>
+                                <SelectItem value="safety">Safety</SelectItem>
+                                <SelectItem value="communication">Communication</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Checkboxes and Radios */}
+                    <div>
+                      <h4 className="font-medium mb-3">Checkboxes & Radio Groups</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                          <h5 className="text-sm font-medium">Checkboxes</h5>
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Checkbox id="terms" />
+                              <Label htmlFor="terms">Accept terms and conditions</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Checkbox id="marketing" />
+                              <Label htmlFor="marketing">Send me marketing emails</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Checkbox id="disabled" disabled />
+                              <Label htmlFor="disabled">Disabled option</Label>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-3">
+                          <h5 className="text-sm font-medium">Radio Group</h5>
+                          <RadioGroup defaultValue="option-one">
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="option-one" id="option-one" />
+                              <Label htmlFor="option-one">Option One</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="option-two" id="option-two" />
+                              <Label htmlFor="option-two">Option Two</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="option-three" id="option-three" />
+                              <Label htmlFor="option-three">Option Three</Label>
+                            </div>
+                          </RadioGroup>
+                        </div>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Sliders and Switches */}
+                    <div>
+                      <h4 className="font-medium mb-3">Interactive Controls</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                          <h5 className="text-sm font-medium">Slider</h5>
+                          <Slider defaultValue={[50]} max={100} step={1} />
+                        </div>
+                        <div className="space-y-3">
+                          <h5 className="text-sm font-medium">Switch</h5>
+                          <div className="flex items-center space-x-2">
+                            <Switch id="airplane-mode" />
+                            <Label htmlFor="airplane-mode">Airplane Mode</Label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* SAIL Form System */}
+                    <div>
+                      <h4 className="font-medium mb-3">SAIL Form System</h4>
+                      <div className="space-y-4">
+                        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                          <h5 className="text-sm font-medium text-blue-900 mb-2">Full-screen Maritime Forms</h5>
+                          <p className="text-sm text-blue-800 mb-3">
+                            The SAIL Form system provides standardized full-screen popup forms with stepper navigation, 
+                            configurable sections, and consistent maritime styling. Perfect for appraisals, inspections, 
+                            and compliance forms across all TMSA modules.
+                          </p>
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            <Badge variant="secondary">Popup Overlay</Badge>
+                            <Badge variant="secondary">Stepper Navigation</Badge>
+                            <Badge variant="secondary">Card Sections</Badge>
+                            <Badge variant="secondary">Form Validation</Badge>
+                            <Badge variant="secondary">Mobile Responsive</Badge>
+                          </div>
+                          <Button 
+                            onClick={() => setShowSAILFormDemo(true)}
+                            className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white"
+                          >
+                            View SAIL Form Preview
+                          </Button>
+                        </div>
+
+                        {/* SAIL Form Field Examples */}
+                        <div>
+                          <h5 className="text-sm font-medium mb-3">SAIL Form Components</h5>
+                          <div className="bg-gray-50 p-4 rounded-lg border">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                              <div className="space-y-2">
+                                <Label className="text-sm font-medium text-gray-700">SAIL Form Field (Text)</Label>
+                                <Input placeholder="Standard SAIL input field" className="bg-white" />
+                              </div>
+                              <div className="space-y-2">
+                                <Label className="text-sm font-medium text-gray-700">SAIL Form Field (Select)</Label>
+                                <Select>
+                                  <SelectTrigger className="bg-white">
+                                    <SelectValue placeholder="Choose option..." />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="option1">Maritime Option 1</SelectItem>
+                                    <SelectItem value="option2">Maritime Option 2</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </div>
+                            </div>
+                            <div className="mb-3">
+                              <Label className="text-sm font-medium text-gray-700 mb-2 block">SAIL Form Grid Layout</Label>
+                              <div className="grid grid-cols-3 gap-3">
+                                <Input placeholder="Col 1" className="bg-white" />
+                                <Input placeholder="Col 2" className="bg-white" />
+                                <Input placeholder="Col 3" className="bg-white" />
+                              </div>
+                            </div>
+                            <div className="text-xs text-gray-600">
+                              <strong>Features:</strong> Responsive grids (1-6 columns), form validation, 
+                              tables with CRUD operations, standardized styling, and consistent UX across modules.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* SAIL Form Demo Popup - Proper Modal Overlay */}
+                {showSAILFormDemo && (
+                  <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                    {/* Modal Card with shadow and rounded corners */}
+                    <div className="bg-white rounded-xl shadow-2xl max-w-7xl w-full h-[90vh] flex flex-col relative">
+                      {/* Header - Exact match to reference */}
+                      <div className="bg-white border-b border-gray-200 p-4 flex justify-between items-center rounded-t-xl">
+                        <div className="flex items-center gap-3">
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => setShowSAILFormDemo(false)}
+                            className="text-gray-600 hover:bg-gray-100 h-8 w-8 p-0"
+                          >
+                            ←
+                          </Button>
+                          <h1 className="text-lg font-medium text-gray-900">Crew Appraisal Form</h1>
+                        </div>
+                        <Button className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white px-4">
+                          Save Draft
+                        </Button>
+                      </div>
+                      
+                      {/* Body - Split layout exactly like reference */}
+                      <div className="flex-1 flex overflow-hidden">
+                        {/* Left Sidebar - Complete stepper navigation */}
+                        <div className="w-80 bg-gray-50 border-r border-gray-200 p-6">
+                          <div className="space-y-4">
+                            {/* Section A - Clickable */}
+                            <div 
+                              className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+                              onClick={() => setCurrentSection('A')}
+                            >
+                              <div className={`w-12 h-12 ${currentSection === 'A' ? 'bg-[#4A90E2]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
+                                A
+                              </div>
+                              <div className="flex-1 pt-2">
+                                <h3 className={`font-medium text-sm ${currentSection === 'A' ? 'text-[#4A90E2]' : 'text-gray-600'}`}>Seafarer's Information</h3>
+                              </div>
+                            </div>
+                            
+                            {/* Connecting line */}
+                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            
+                            {/* Section B - Clickable */}
+                            <div 
+                              className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+                              onClick={() => setCurrentSection('B')}
+                            >
+                              <div className={`w-12 h-12 ${currentSection === 'B' ? 'bg-[#4A90E2]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
+                                B
+                              </div>
+                              <div className="flex-1 pt-2">
+                                <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#4A90E2]' : 'text-gray-600'}`}>Information at Start of</h3>
+                                <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#4A90E2]' : 'text-gray-600'}`}>Appraisal Period</h3>
+                              </div>
+                            </div>
+                            
+                            {/* Connecting line */}
+                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            
+                            {/* Section C - Non-clickable for demo */}
+                            <div className="flex items-start gap-4 opacity-60">
+                              <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
+                                C
+                              </div>
+                              <div className="flex-1 pt-2">
+                                <h3 className="font-medium text-gray-600 text-sm">Competence</h3>
+                                <h3 className="font-medium text-gray-600 text-sm">Assessment</h3>
+                                <p className="text-xs text-gray-500">(Professional Knowledge & Skills)</p>
+                              </div>
+                            </div>
+                            
+                            {/* Connecting line */}
+                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            
+                            {/* Section D - Non-clickable for demo */}
+                            <div className="flex items-start gap-4 opacity-60">
+                              <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
+                                D
+                              </div>
+                              <div className="flex-1 pt-2">
+                                <h3 className="font-medium text-gray-600 text-sm">Behavioural</h3>
+                                <h3 className="font-medium text-gray-600 text-sm">Assessment (Soft</h3>
+                                <h3 className="font-medium text-gray-600 text-sm">Skills)</h3>
+                              </div>
+                            </div>
+                            
+                            {/* Connecting line */}
+                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            
+                            {/* Section E - Non-clickable for demo */}
+                            <div className="flex items-start gap-4 opacity-60">
+                              <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
+                                E
+                              </div>
+                              <div className="flex-1 pt-2">
+                                <h3 className="font-medium text-gray-600 text-sm">Training Needs &</h3>
+                                <h3 className="font-medium text-gray-600 text-sm">Development</h3>
+                              </div>
+                            </div>
+                            
+                            {/* Connecting line */}
+                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            
+                            {/* Section F - Non-clickable for demo */}
+                            <div className="flex items-start gap-4 opacity-60">
+                              <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
+                                F
+                              </div>
+                              <div className="flex-1 pt-2">
+                                <h3 className="font-medium text-gray-600 text-sm">Summary &</h3>
+                                <h3 className="font-medium text-gray-600 text-sm">Recommendations</h3>
+                              </div>
+                            </div>
+                            
+                            {/* Connecting line */}
+                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            
+                            {/* Section G - Non-clickable for demo */}
+                            <div className="flex items-start gap-4 opacity-60">
+                              <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
+                                G
+                              </div>
+                              <div className="flex-1 pt-2">
+                                <h3 className="font-medium text-gray-600 text-sm">Office Review &</h3>
+                                <h3 className="font-medium text-gray-600 text-sm">Followup</h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Right Content Area - Dynamic based on current section */}
+                        <div className="flex-1 bg-gray-100 overflow-y-auto rounded-br-xl">
+                          <div className="p-8">
+                            {/* White Content Card - Changes based on section */}
+                            <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+                              
+                              {/* Section A Content */}
+                              {currentSection === 'A' && (
+                                <>
+                                  {/* Section Header */}
+                                  <div className="p-6 pb-4">
+                                    <h2 className="text-xl font-medium text-[#4A90E2] mb-2">Part A: Seafarer's Information</h2>
+                                    <p className="text-sm text-[#4A90E2] border-b border-gray-300 pb-2">Enter details as applicable</p>
+                                  </div>
+                                  
+                                  {/* Form Fields */}
+                                  <div className="px-6 pb-6">
+                                    <div className="space-y-6">
+                                      {/* Row 1 */}
+                                      <div className="grid grid-cols-3 gap-6">
+                                        <div className="space-y-2">
+                                          <Label className="text-sm font-medium text-gray-700">Seafarer's Name</Label>
+                                          <Input className="bg-white border-gray-300" defaultValue="James Michael" />
+                                        </div>
+                                        <div className="space-y-2">
+                                          <Label className="text-sm font-medium text-gray-700">Seafarer's Rank</Label>
+                                          <Select>
+                                            <SelectTrigger className="bg-white border-gray-300">
+                                              <SelectValue placeholder="Select rank" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                              <SelectItem value="master">Master</SelectItem>
+                                              <SelectItem value="chief-officer">Chief Officer</SelectItem>
+                                            </SelectContent>
+                                          </Select>
+                                        </div>
+                                        <div className="space-y-2">
+                                          <Label className="text-sm font-medium text-gray-700">Nationality</Label>
+                                          <Select>
+                                            <SelectTrigger className="bg-white border-gray-300">
+                                              <SelectValue placeholder="Select nationality..." />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                              <SelectItem value="british">British</SelectItem>
+                                              <SelectItem value="filipino">Filipino</SelectItem>
+                                            </SelectContent>
+                                          </Select>
+                                        </div>
+                                      </div>
+                                      
+                                      {/* More rows as before... */}
+                                      <div className="grid grid-cols-3 gap-6">
+                                        <div className="space-y-2">
+                                          <Label className="text-sm font-medium text-gray-700">Vessel</Label>
+                                          <Select>
+                                            <SelectTrigger className="bg-white border-gray-300">
+                                              <SelectValue placeholder="Select vessel" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                              <SelectItem value="mv-atlantic">MV Atlantic Star</SelectItem>
+                                              <SelectItem value="mv-pacific">MV Pacific Dawn</SelectItem>
+                                            </SelectContent>
+                                          </Select>
+                                        </div>
+                                        <div className="space-y-2">
+                                          <Label className="text-sm font-medium text-gray-700">Sign On Date</Label>
+                                          <Input type="date" className="bg-white border-gray-300" placeholder="dd/mm/yyyy" />
+                                        </div>
+                                        <div className="space-y-2">
+                                          <Label className="text-sm font-medium text-gray-700">Appraisal Type</Label>
+                                          <Select>
+                                            <SelectTrigger className="bg-white border-gray-300">
+                                              <SelectValue placeholder="Select type" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                              <SelectItem value="initial">Initial Assessment</SelectItem>
+                                              <SelectItem value="mid">Mid Contract</SelectItem>
+                                              <SelectItem value="end">End of Contract</SelectItem>
+                                            </SelectContent>
+                                          </Select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                    {/* Save Button */}
+                                    <div className="flex justify-end mt-8">
+                                      <Button className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white px-6">
+                                        Save
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+
+                              {/* Section B Content - Matches reference image */}
+                              {currentSection === 'B' && (
+                                <>
+                                  {/* Section Header */}
+                                  <div className="p-6 pb-4">
+                                    <h2 className="text-xl font-medium text-[#4A90E2] mb-2">Part B: Information at Start of Appraisal Period</h2>
+                                    <p className="text-sm text-[#4A90E2] border-b border-gray-300 pb-2">Add below at the start of the Appraisal Period except the Evaluation which must be completed at the end of the Appraisal Period</p>
+                                  </div>
+                                  
+                                  {/* Form Content */}
+                                  <div className="px-6 pb-6 space-y-8">
+                                    {/* B1. Trainings Section */}
+                                    <div>
+                                      <div className="flex justify-between items-center mb-4">
+                                        <h3 className="text-lg font-medium text-[#4A90E2]">B1. Trainings conducted prior joining vessel (To Assess Effectiveness)</h3>
+                                        <Button variant="outline" className="text-[#4A90E2] border-[#4A90E2]">
+                                          + Add Training
+                                        </Button>
+                                      </div>
+                                      
+                                      {/* Table Header */}
+                                      <div className="bg-gray-50 border border-gray-200 rounded-t">
+                                        <div className="grid grid-cols-4 gap-4 p-3 text-sm font-medium text-gray-700">
+                                          <div>S.No</div>
+                                          <div>Training</div>
+                                          <div>Evaluation</div>
+                                          <div>Actions</div>
+                                        </div>
+                                      </div>
+                                      
+                                      {/* Empty State */}
+                                      <div className="border border-gray-200 border-t-0 rounded-b bg-white p-8 text-center">
+                                        <p className="text-gray-500">No trainings added yet. Click "Add Training" to get started.</p>
+                                      </div>
+                                    </div>
+
+                                    {/* B2. Target Setting Section */}
+                                    <div>
+                                      <div className="flex justify-between items-center mb-4">
+                                        <h3 className="text-lg font-medium text-[#4A90E2]">B2. Target Setting</h3>
+                                        <Button variant="outline" className="text-[#4A90E2] border-[#4A90E2]">
+                                          + Add Target
+                                        </Button>
+                                      </div>
+                                      
+                                      {/* Table Header */}
+                                      <div className="bg-gray-50 border border-gray-200 rounded-t">
+                                        <div className="grid grid-cols-4 gap-4 p-3 text-sm font-medium text-gray-700">
+                                          <div>S.No</div>
+                                          <div>Target Setting</div>
+                                          <div>Evaluation</div>
+                                          <div>Actions</div>
+                                        </div>
+                                      </div>
+                                      
+                                      {/* Empty State */}
+                                      <div className="border border-gray-200 border-t-0 rounded-b bg-white p-8 text-center">
+                                        <p className="text-gray-500">No targets added yet. Click "Add Target" to get started.</p>
+                                      </div>
+                                    </div>
+                                    
+                                    {/* Action Buttons */}
+                                    <div className="flex justify-end gap-3 mt-8">
+                                      <Button className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white px-6">
+                                        Save
+                                      </Button>
+                                      <Button className="bg-green-600 hover:bg-green-700 text-white px-6">
+                                        Submit
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </TabsContent>
+
+              <TabsContent value="layout" className="space-y-6">
+                {/* Layout Components */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Layout className="h-5 w-5" />
+                      Layout Components
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {/* Cards */}
+                    <div>
+                      <h4 className="font-medium mb-3">Cards</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>Simple Card</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p>This is a simple card with header and content.</p>
+                          </CardContent>
+                        </Card>
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>Vessel Info</CardTitle>
+                            <Badge>Active</Badge>
+                          </CardHeader>
+                          <CardContent>
+                            <p>MV Atlantic Star</p>
+                            <p className="text-sm text-muted-foreground">Oil Tanker</p>
+                          </CardContent>
+                        </Card>
+                        <Card>
+                          <CardContent className="p-6">
+                            <div className="flex items-center space-x-4">
+                              <Avatar>
+                                <AvatarImage src="/figmaAssets/group-3.png" />
+                                <AvatarFallback>JM</AvatarFallback>
+                              </Avatar>
+                              <div>
+                                <p className="text-sm font-medium">James Michael</p>
+                                <p className="text-xs text-muted-foreground">Master</p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Avatars */}
+                    <div>
+                      <h4 className="font-medium mb-3">Avatars</h4>
+                      <div className="flex items-center gap-4">
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage src="/figmaAssets/group-3.png" />
+                          <AvatarFallback>SM</AvatarFallback>
+                        </Avatar>
+                        <Avatar>
+                          <AvatarImage src="/figmaAssets/group-3.png" />
+                          <AvatarFallback>MD</AvatarFallback>
+                        </Avatar>
+                        <Avatar className="h-12 w-12">
+                          <AvatarImage src="/figmaAssets/group-3.png" />
+                          <AvatarFallback>LG</AvatarFallback>
+                        </Avatar>
+                        <Avatar>
+                          <AvatarFallback>FO</AvatarFallback>
+                        </Avatar>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Separator Examples */}
+                    <div>
+                      <h4 className="font-medium mb-3">Separators</h4>
+                      <div className="space-y-4">
+                        <div>
+                          <p>Content above separator</p>
+                          <Separator className="my-2" />
+                          <p>Content below separator</p>
+                        </div>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Skeletons */}
+                    <div>
+                      <h4 className="font-medium mb-3">Skeleton Loading</h4>
+                      <div className="space-y-3">
+                        <Skeleton className="h-4 w-[250px]" />
+                        <Skeleton className="h-4 w-[200px]" />
+                        <Skeleton className="h-4 w-[150px]" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="feedback" className="space-y-6">
+                {/* Feedback Components */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <MessageSquare className="h-5 w-5" />
+                      Feedback Components
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {/* Badges */}
+                    <div>
+                      <h4 className="font-medium mb-3">Badges</h4>
+                      <div className="flex flex-wrap gap-2">
+                        <Badge>Default</Badge>
+                        <Badge variant="secondary">Secondary</Badge>
+                        <Badge variant="destructive">Destructive</Badge>
+                        <Badge variant="outline">Outline</Badge>
+                        <Badge className="bg-blue-100 text-blue-800">Active</Badge>
+                        <Badge className="bg-green-100 text-green-800">Compliant</Badge>
+                        <Badge className="bg-yellow-100 text-yellow-800">Warning</Badge>
+                        <Badge className="bg-red-100 text-red-800">Critical</Badge>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Alerts */}
+                    <div>
+                      <h4 className="font-medium mb-3">Alerts</h4>
+                      <div className="space-y-3">
+                        <Alert>
+                          <AlertTitle>Information</AlertTitle>
+                          <AlertDescription>
+                            This is an informational alert message.
+                          </AlertDescription>
+                        </Alert>
+                        <Alert className="border-yellow-200 bg-yellow-50">
+                          <AlertTitle className="text-yellow-800">Warning</AlertTitle>
+                          <AlertDescription className="text-yellow-700">
+                            This is a warning alert. Please review the information carefully.
+                          </AlertDescription>
+                        </Alert>
+                        <Alert className="border-red-200 bg-red-50">
+                          <AlertTitle className="text-red-800">Error</AlertTitle>
+                          <AlertDescription className="text-red-700">
+                            Something went wrong. Please try again later.
+                          </AlertDescription>
+                        </Alert>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Progress */}
+                    <div>
+                      <h4 className="font-medium mb-3">Progress Indicators</h4>
+                      <div className="space-y-4">
+                        <div>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>TMSA Compliance</span>
+                            <span>75%</span>
+                          </div>
+                          <Progress value={75} />
+                        </div>
+                        <div>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>Safety Training</span>
+                            <span>90%</span>
+                          </div>
+                          <Progress value={90} />
+                        </div>
+                        <div>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>Maintenance</span>
+                            <span>45%</span>
+                          </div>
+                          <Progress value={45} />
+                        </div>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Tooltips */}
+                    <div>
+                      <h4 className="font-medium mb-3">Tooltips</h4>
+                      <div className="flex gap-4">
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button variant="outline">Hover me</Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>This is a tooltip</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge>Info Badge</Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Additional information about this badge</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* Dialogs and Popovers */}
+                    <div>
+                      <h4 className="font-medium mb-3">Interactive Overlays</h4>
+                      <div className="flex gap-4">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="outline">Open Dialog</Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>Vessel Information</DialogTitle>
+                              <DialogDescription>
+                                View detailed information about the selected vessel.
+                              </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                              <p>This is a dialog with vessel information.</p>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button variant="outline">Open Popover</Button>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <div className="space-y-2">
+                              <h4 className="font-medium">Quick Actions</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Select an action below.
+                              </p>
+                              <div className="flex flex-col gap-2">
+                                <Button size="sm" variant="outline">View Details</Button>
+                                <Button size="sm" variant="outline">Edit Information</Button>
+                              </div>
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="destructive">Delete Item</Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete the selected item.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction>Delete</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+};
