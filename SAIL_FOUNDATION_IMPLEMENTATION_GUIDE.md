@@ -404,8 +404,12 @@ npm install @sail/foundation
 import { 
   StandardTopNavigationBar, 
   StandardLeftSidebar,
+  SAILForm,
+  ExampleSAILForm,
   type NavigationItem,
-  type SidebarSection 
+  type SidebarSection,
+  type SAILFormProps,
+  type SAILFormSection
 } from '@sail/foundation';
 ```
 
@@ -530,31 +534,57 @@ function useNavigationState() {
 
 ## Best Practices
 
-### 1. Icon Guidelines
+### 1. SAIL Form Guidelines
+
+#### Form Structure
+- Use descriptive section titles following maritime conventions (e.g., "Part A: Seafarer's Information")
+- Implement logical section progression from basic to detailed information
+- Keep sections focused on specific functional areas
+- Use consistent field groupings within sections
+
+#### Visual Design
+- Follow the maritime color scheme (#4A90E2 for active elements)
+- Use white content cards on gray backgrounds for proper visual hierarchy
+- Maintain consistent spacing and typography across sections
+- Implement proper hover states and visual feedback
+
+#### Data Management
+- Implement proper form validation using React Hook Form and Zod
+- Use meaningful field names that match your data model
+- Handle save and submit operations appropriately
+- Provide clear feedback for user actions
+
+#### Accessibility
+- Ensure all form fields have proper labels
+- Implement keyboard navigation for the stepper
+- Use semantic HTML structure within form content
+- Provide clear error messages and validation feedback
+
+### 2. Icon Guidelines
 - Use consistent icon libraries (recommend `lucide-react`)
 - Icons should be 16px for navigation items
 - Support both static icons and color-function icons
 - Ensure icons are accessible with proper ARIA labels
 
-### 2. Navigation Items
+### 3. Navigation Items
 - Keep navigation item labels concise (1-2 words)
 - Use descriptive IDs that match your routing structure
 - Implement proper click handlers that integrate with your routing solution
 - Maximum of 6-8 navigation items for optimal UX
 
-### 3. Responsive Design
+### 4. Responsive Design
 - The sidebar automatically hides on mobile (`lg:block hidden`)
 - Ensure your main content has proper margins (`lg:ml-[67px]`)
 - Test navigation on mobile devices
 - Consider touch-friendly interaction patterns
 
-### 4. Accessibility
+### 5. Accessibility
 - Provide meaningful alt text for logos
 - Ensure proper ARIA labels for interactive elements
 - Maintain keyboard navigation support
 - Use semantic HTML structure
 
-### 5. Performance
+### 6. Performance
 - Lazy load icons when possible
 - Optimize images (logos) for web delivery
 - Use React.memo for navigation components if needed
@@ -562,7 +592,98 @@ function useNavigationState() {
 
 ## Module Integration Examples
 
-### Example 1: Crew Management Module
+### Example 1: Maritime Form Integration
+```tsx
+import React from 'react';
+import { 
+  StandardTopNavigationBar, 
+  StandardLeftSidebar, 
+  ExampleSAILForm,
+  Button 
+} from '@sail/foundation';
+import { FileText, Users, Settings } from 'lucide-react';
+
+const CrewAppraisalModule = () => {
+  const [showForm, setShowForm] = useState(false);
+  
+  const navigationItems = [
+    {
+      id: 'appraisals',
+      label: 'Appraisals',
+      icon: (color: string) => <FileText size={16} color={color} />,
+      onClick: (id) => navigate(`/crew/${id}`)
+    },
+    {
+      id: 'crew-list',
+      label: 'Crew List', 
+      icon: (color: string) => <Users size={16} color={color} />,
+      onClick: (id) => navigate(`/crew/${id}`)
+    },
+    {
+      id: 'settings',
+      label: 'Settings',
+      icon: (color: string) => <Settings size={16} color={color} />,
+      onClick: (id) => navigate(`/crew/${id}`)
+    }
+  ];
+
+  const handleSaveAppraisal = (data) => {
+    // Handle form save
+    console.log('Saving appraisal:', data);
+  };
+
+  const handleSubmitAppraisal = (data) => {
+    // Handle form submission
+    console.log('Submitting appraisal:', data);
+    setShowForm(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <StandardTopNavigationBar
+        currentModule="crew-appraisals"
+        onModuleChange={handleModuleChange}
+        navigationItems={navigationItems}
+        activeSection="appraisals"
+      />
+      
+      <div className="relative">
+        <StandardLeftSidebar
+          topSection={{
+            icon: <Users size={16} color="white" />,
+            label: "All"
+          }}
+          bottomSection={<AppraisalFilters />}
+        />
+        
+        <main className="lg:ml-[67px] pt-4 px-4">
+          <div className="mb-4">
+            <Button 
+              onClick={() => setShowForm(true)}
+              className="bg-[#5DADE2] hover:bg-[#4A9BD1]"
+            >
+              New Crew Appraisal
+            </Button>
+          </div>
+          
+          {/* Appraisal List */}
+          <AppraisalsList />
+          
+          {/* SAIL Form Modal */}
+          <ExampleSAILForm
+            isOpen={showForm}
+            onClose={() => setShowForm(false)}
+            onSave={handleSaveAppraisal}
+            onSubmit={handleSubmitAppraisal}
+          />
+        </main>
+      </div>
+    </div>
+  );
+};
+```
+
+### Example 2: Crew Management Module
 ```tsx
 import { StandardTopNavigationBar, StandardLeftSidebar } from '@sail/foundation';
 import { Users, UserPlus, FileText, Settings } from 'lucide-react';
@@ -610,7 +731,7 @@ const CrewManagementApp = () => {
 };
 ```
 
-### Example 2: Safety Compliance Module
+### Example 3: Safety Compliance Module
 ```tsx
 import { StandardTopNavigationBar, StandardLeftSidebar } from '@sail/foundation';
 import { Shield, AlertTriangle, CheckCircle, FileText } from 'lucide-react';
@@ -731,8 +852,12 @@ For issues, feature requests, or contributions:
 
 ### v1.0.0
 - Initial release
-- StandardTopNavigationBar component
+- StandardTopNavigationBar component  
 - StandardLeftSidebar component
+- SAIL Form system with popup modals and stepper navigation
+- ExampleSAILForm with complete crew appraisal implementation
+- SAILForm, SAILFormField, and related form components
+- Interactive maritime tables and form elements
 - TypeScript support
 - Full documentation and examples
 
