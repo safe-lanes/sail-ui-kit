@@ -35,7 +35,7 @@ export * from './hooks';
 // export * from './constants';
 
 // ===== STYLES =====
-// import './styles/index.css'; // Disabled for build compatibility
+import './styles/index.css';
 
 // Package metadata
 export const FOUNDATION_VERSION = '1.0.0';

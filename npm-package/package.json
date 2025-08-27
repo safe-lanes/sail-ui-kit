@@ -1,12 +1,14 @@
 {
   "name": "sail-ui-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "style": "dist/index.css",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "rollup -c",

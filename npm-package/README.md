@@ -575,7 +575,7 @@ The package includes complete CSS styling with:
 To use the styles, import the CSS file:
 
 ```jsx
-import 'sail-ui-kit/dist/styles/index.css';
+import 'sail-ui-kit/dist/index.css';
 ```
 
 ## TypeScript Support
