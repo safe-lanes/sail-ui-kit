@@ -1,0 +1,160 @@
+/* SAIL Foundation Styles - Fixed Version */
+/* Maritime UI Components base styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Maritime Color Palette */
+  --maritime-blue: #5DADE2;
+  --maritime-blue-hover: #4A9BD1;
+  --maritime-blue-dark: #2E86AB;
+  --maritime-navy: #16569e;
+  --maritime-gray: #4f5863;
+  --maritime-light-gray: #f8f9fa;
+  
+  /* Tailwind CSS Variables for Component Compatibility */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 210 100% 56%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 84% 4.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 210 100% 56%;
+  --radius: 0.5rem;
+  
+  /* Status Colors */
+  --status-active: #10b981;
+  --status-maintenance: #f59e0b;
+  --status-port: #3b82f6;
+  --status-inactive: #6b7280;
+  
+  /* Compliance Colors */
+  --compliant: #10b981;
+  --non-compliant: #ef4444;
+  --partial-compliant: #f59e0b;
+  --pending: #6b7280;
+  
+  /* Severity Colors */
+  --severity-low: #10b981;
+  --severity-medium: #f59e0b;
+  --severity-high: #f97316;
+  --severity-critical: #ef4444;
+}
+
+/* Maritime Form Styling */
+.maritime-form {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.maritime-form .form-field {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.maritime-form .form-field:focus {
+  outline: none;
+  border-color: var(--maritime-blue);
+  box-shadow: 0 0 0 3px rgba(93, 173, 226, 0.1);
+}
+
+.maritime-form .form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+/* Tailwind CSS Utility Classes for Component Compatibility */
+.bg-primary { background-color: hsl(var(--primary)); }
+.bg-primary\/90 { background-color: hsl(var(--primary) / 0.9); }
+.text-primary { color: hsl(var(--primary)); }
+.text-primary-foreground { color: hsl(var(--primary-foreground)); }
+.bg-secondary { background-color: hsl(var(--secondary)); }
+.bg-secondary\/80 { background-color: hsl(var(--secondary) / 0.8); }
+.text-secondary-foreground { color: hsl(var(--secondary-foreground)); }
+.bg-destructive { background-color: hsl(var(--destructive)); }
+.bg-destructive\/90 { background-color: hsl(var(--destructive) / 0.9); }
+.text-destructive-foreground { color: hsl(var(--destructive-foreground)); }
+.bg-background { background-color: hsl(var(--background)); }
+.text-foreground { color: hsl(var(--foreground)); }
+.bg-accent { background-color: hsl(var(--accent)); }
+.text-accent-foreground { color: hsl(var(--accent-foreground)); }
+.border-input { border-color: hsl(var(--input)); }
+.ring-ring { --tw-ring-color: hsl(var(--ring)); }
+
+/* Base Tailwind Classes */
+.inline-flex { display: inline-flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+.whitespace-nowrap { white-space: nowrap; }
+.rounded-md { border-radius: calc(var(--radius) - 2px); }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.font-medium { font-weight: 500; }
+.transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.focus-visible\:outline-none:focus-visible { outline: 2px solid transparent; outline-offset: 2px; }
+.focus-visible\:ring-1:focus-visible { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); }
+.disabled\:pointer-events-none:disabled { pointer-events: none; }
+.disabled\:opacity-50:disabled { opacity: 0.5; }
+.shadow { --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color); box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+.shadow-sm { --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color); box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+.border { border-width: 1px; }
+.h-9 { height: 2.25rem; }
+.h-8 { height: 2rem; }
+.h-10 { height: 2.5rem; }
+.w-9 { width: 2.25rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.underline-offset-4 { text-underline-offset: 4px; }
+.hover\:underline:hover { text-decoration-line: underline; }
+.hover\:bg-accent:hover { background-color: hsl(var(--accent)); }
+.hover\:text-accent-foreground:hover { color: hsl(var(--accent-foreground)); }
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --maritime-light-gray: #1f2937;
+  }
+  
+  .maritime-layout {
+    background-color: #111827;
+    color: #f9fafb;
+  }
+  
+  .maritime-sidebar {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .maritime-nav {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .maritime-form {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+  
+  .maritime-form .form-field {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+}
