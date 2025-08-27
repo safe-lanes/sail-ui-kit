@@ -1,9 +1,50 @@
-// UI Components - Core components for TMSA modules
-// Note: Only components that are actually implemented are exported
+// UI Components - Complete shadcn/ui component library for TMSA modules
 
-// Placeholder for UI components
-// UI components from the main application should be copied here as needed
-// For now, we're focusing on the standardized navigation components
-
-// TODO: Copy actual UI components from client/src/components/ui/ as needed
-// This is a minimal export to support the navigation components
+export * from "./accordion";
+export * from "./alert-dialog";
+export * from "./alert";
+export * from "./aspect-ratio";
+export * from "./avatar";
+export * from "./badge";
+export * from "./breadcrumb";
+export * from "./button";
+export * from "./calendar";
+export * from "./card";
+export * from "./carousel";
+export * from "./chart";
+export * from "./checkbox";
+export * from "./collapsible";
+export * from "./command";
+export * from "./context-menu";
+export * from "./dialog";
+export * from "./drawer";
+export * from "./dropdown-menu";
+export * from "./form-popup";
+export * from "./form";
+export * from "./hover-card";
+export * from "./input-otp";
+export * from "./input";
+export * from "./label";
+export * from "./menubar";
+export * from "./navigation-menu";
+export * from "./pagination";
+export * from "./popover";
+export * from "./progress";
+export * from "./radio-group";
+export * from "./resizable";
+export * from "./scroll-area";
+export * from "./select";
+export * from "./separator";
+export * from "./sheet";
+export * from "./sidebar";
+export * from "./skeleton";
+export * from "./slider";
+export * from "./switch";
+export * from "./table";
+export * from "./tabs";
+export * from "./textarea";
+export * from "./toast";
+export * from "./toaster";
+export * from "./toggle-group";
+export * from "./toggle";
+export * from "./tooltip";

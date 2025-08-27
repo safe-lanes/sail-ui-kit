@@ -2,13 +2,13 @@
 // Main entry point for SAIL Phase 2 TMSA Modules
 
 // ===== CORE UI COMPONENTS =====
-// export * from './components/ui'; // Temporarily disabled until UI components are implemented
+export * from './components/ui';
 
 // ===== MARITIME COMPONENTS =====
-// export * from './components/maritime'; // Temporarily disabled
+export * from './components/maritime';
 
 // ===== RBAC COMPONENTS =====
-// export * from './components/rbac'; // Temporarily disabled
+export * from './components/rbac';
 
 // ===== LAYOUT COMPONENTS =====
 export * from './components/layout';
@@ -17,19 +17,22 @@ export * from './components/layout';
 export * from './components/forms';
 
 // ===== HOOKS =====
-// export * from './hooks'; // Temporarily disabled
+export * from './hooks';
 
 // ===== SERVICES =====
-// export * from './services'; // Temporarily disabled
+export * from './services';
 
 // ===== TYPES =====
-export * from './types';
+export * from './types/layout';
+export * from './types/maritime';
+export * from './types/rbac';
+export * from './types/services';
 
 // ===== CONSTANTS =====
-// export * from './constants'; // Temporarily disabled
+export * from './constants';
 
 // ===== STYLES =====
-// import './styles/index.css'; // Temporarily disabled for build compatibility
+import './styles/index.css';
 
 // Package metadata
 export const FOUNDATION_VERSION = '1.0.0';
