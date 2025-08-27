@@ -21,7 +21,7 @@ export * from './hooks';
 
 // ===== SERVICES =====
 // Services export their own types to avoid conflicts
-// export * from './services';
+export * from './services';
 
 // ===== TYPES =====
 // Types are already exported by their respective component modules
@@ -32,6 +32,7 @@ export * from './hooks';
 
 // ===== CONSTANTS =====
 // Constants are already exported by their respective component modules
+// Note: Skip constants export to avoid conflicts with maritime components
 // export * from './constants';
 
 // ===== STYLES =====
