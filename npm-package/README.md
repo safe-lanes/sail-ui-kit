@@ -1,10 +1,10 @@
-# @sail/foundation
+# sail-ui-kit
 
 Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules
 
 ## Overview
 
-`@sail/foundation` is a comprehensive NPM package that provides all the necessary components, services, and utilities for building TMSA (Tanker Management Self Assessment) modules in the SAIL Phase 2 maritime ERP system. It serves as the shared foundation across all microfrontend applications.
+`sail-ui-kit` is a comprehensive NPM package that provides all the necessary components, services, and utilities for building TMSA (Tanker Management Self Assessment) modules in the SAIL Phase 2 maritime ERP system. It serves as the shared foundation across all microfrontend applications.
 
 ## Features
 
@@ -35,7 +35,7 @@ Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules
 ## Installation
 
 ```bash
-npm install @sail/foundation
+npm install sail-ui-kit
 ```
 
 ## Peer Dependencies
@@ -58,7 +58,7 @@ import {
   Card, 
   CardContent,
   usePermissions 
-} from '@sail/foundation';
+} from 'sail-ui-kit';
 
 function TechnicalModule() {
   const { can } = usePermissions();
@@ -108,7 +108,7 @@ import {
   VesselStatusIndicator,
   SafetyRatingBadge,
   TMSAComplianceIndicator 
-} from '@sail/foundation';
+} from 'sail-ui-kit';
 
 function MaritimeComponents() {
   return (
@@ -142,7 +142,7 @@ function MaritimeComponents() {
 ### 3. Using Services
 
 ```jsx
-import { useApi, SHARED_SERVICES } from '@sail/foundation';
+import { useApi, SHARED_SERVICES } from 'sail-ui-kit';
 
 function VesselList() {
   const { data: vessels, loading } = useApi('/vessels');
@@ -173,7 +173,7 @@ import {
   ProtectedRoute, 
   PermissionGuard,
   useRBAC 
-} from '@sail/foundation';
+} from 'sail-ui-kit';
 
 function App() {
   return (
@@ -224,7 +224,7 @@ The package includes a standardized "SAIL Form" system based on the Crew Apprais
 
 ```tsx
 import React from 'react';
-import { ExampleSAILForm } from '@sail/foundation';
+import { ExampleSAILForm } from 'sail-ui-kit';
 import { useForm } from 'react-hook-form';
 
 const MyCrewAppraisalForm = () => {
@@ -259,7 +259,7 @@ const MyCrewAppraisalForm = () => {
 ### Custom SAIL Form Implementation
 
 ```tsx
-import { SAILForm, Label, Input, Select, Button } from '@sail/foundation';
+import { SAILForm, Label, Input, Select, Button } from 'sail-ui-kit';
 
 const CustomMaritimeForm = () => {
   const sections = [
@@ -454,7 +454,7 @@ const sections = [
 The package includes `ExampleSAILForm` which provides a complete implementation:
 
 ```tsx
-import { ExampleSAILForm } from '@sail/foundation';
+import { ExampleSAILForm } from 'sail-ui-kit';
 
 // Complete crew appraisal form with:
 // - Part A: Seafarer's Information (all fields)
@@ -503,7 +503,7 @@ import { ExampleSAILForm } from '@sail/foundation';
 
 ### SHARED_SERVICES
 ```jsx
-import { SHARED_SERVICES } from '@sail/foundation';
+import { SHARED_SERVICES } from 'sail-ui-kit';
 
 // API requests
 await SHARED_SERVICES.api.get('/vessels');
@@ -530,7 +530,7 @@ import {
   usePermissions, 
   useApi, 
   useLocalStorage 
-} from '@sail/foundation';
+} from 'sail-ui-kit';
 
 // RBAC and permissions
 const { user, login, logout } = useRBAC();
@@ -551,7 +551,7 @@ import {
   MARITIME_RANKS, 
   TMSA_ELEMENTS,
   DEFAULT_PERMISSIONS 
-} from '@sail/foundation';
+} from 'sail-ui-kit';
 
 // Maritime constants
 console.log(VESSEL_TYPES); // ['Oil Tanker', 'Container', ...]
@@ -575,7 +575,7 @@ The package includes complete CSS styling with:
 To use the styles, import the CSS file:
 
 ```jsx
-import '@sail/foundation/dist/styles/index.css';
+import 'sail-ui-kit/dist/styles/index.css';
 ```
 
 ## TypeScript Support
