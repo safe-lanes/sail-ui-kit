@@ -35,8 +35,19 @@ Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules
 ## Installation
 
 ```bash
-npm install sail-ui-kit
+npm install sail-ui-kit@1.0.5
 ```
+
+## Important: CSS Setup Required
+
+**The package now includes complete Tailwind CSS styling (81KB with 4,145 utilities).** You must import the CSS file for components to display correctly:
+
+```jsx
+import 'sail-ui-kit/dist/index.css';
+```
+
+**Before CSS import:** Components appear as plain HTML with no styling
+**After CSS import:** Components display with proper maritime styling (blue theme, hover effects, responsive design)
 
 ## Peer Dependencies
 
@@ -59,6 +70,7 @@ import {
   CardContent,
   usePermissions 
 } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
 
 function TechnicalModule() {
   const { can } = usePermissions();
@@ -109,6 +121,7 @@ import {
   SafetyRatingBadge,
   TMSAComplianceIndicator 
 } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
 
 function MaritimeComponents() {
   return (
@@ -143,6 +156,7 @@ function MaritimeComponents() {
 
 ```jsx
 import { useApi, SHARED_SERVICES } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
 
 function VesselList() {
   const { data: vessels, loading } = useApi('/vessels');
@@ -174,6 +188,7 @@ import {
   PermissionGuard,
   useRBAC 
 } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
 
 function App() {
   return (
@@ -224,8 +239,8 @@ The package includes a standardized "SAIL Form" system based on the Crew Apprais
 
 ```tsx
 import React from 'react';
-import { ExampleSAILForm } from 'sail-ui-kit';
-import { useForm } from 'react-hook-form';
+import { ExampleSAILForm, Button } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
 
 const MyCrewAppraisalForm = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -260,6 +275,7 @@ const MyCrewAppraisalForm = () => {
 
 ```tsx
 import { SAILForm, Label, Input, Select, Button } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
 
 const CustomMaritimeForm = () => {
   const sections = [
@@ -454,21 +470,37 @@ const sections = [
 The package includes `ExampleSAILForm` which provides a complete implementation:
 
 ```tsx
-import { ExampleSAILForm } from 'sail-ui-kit';
+import { ExampleSAILForm, Button } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
 
 // Complete crew appraisal form with:
-// - Part A: Seafarer's Information (all fields)
+// - Part A: Seafarer's Information (all fields)  
 // - Part B: Training and Target tables
 // - Functional stepper navigation
-// - Proper styling and validation
+// - Proper maritime styling (blue theme)
 // - Save and Submit functionality
 
-<ExampleSAILForm
-  isOpen={isOpen}
-  onClose={() => setIsOpen(false)}
-  onSave={(data) => console.log('Saved:', data)}
-  onSubmit={(data) => console.log('Submitted:', data)}
-/>
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <Button 
+        variant="secondary" 
+        onClick={() => setIsOpen(true)}
+      >
+        Open Crew Appraisal Form
+      </Button>
+
+      <ExampleSAILForm
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onSave={(data) => console.log('Saved:', data)}
+        onSubmit={(data) => console.log('Submitted:', data)}
+      />
+    </div>
+  );
+}
 ```
 
 ## Available Components
@@ -572,11 +604,24 @@ The package includes complete CSS styling with:
 - **Status indicators** with appropriate colors
 - **Typography** using Mulish font family
 
-To use the styles, import the CSS file:
+### ✅ CSS Fixed in Version 1.0.5
+
+**Important:** Always import the CSS file in your application entry point or main component:
 
 ```jsx
 import 'sail-ui-kit/dist/index.css';
 ```
+
+**What's included in the CSS:**
+- **Full Tailwind CSS utilities** (4,145 lines, 81KB)
+- **Maritime color variables** for consistent theming
+- **Component styling** for buttons, forms, and maritime-specific components
+- **Responsive breakpoints** for mobile and desktop
+- **Maritime theme colors:** Primary blue (#5DADE2), Navy (#16569e), and professional grays
+
+**Version History:**
+- **v1.0.4 and earlier:** Basic CSS (320 lines) - components appeared unstyled
+- **v1.0.5:** Complete Tailwind CSS included - properly styled maritime components
 
 ## TypeScript Support
 
