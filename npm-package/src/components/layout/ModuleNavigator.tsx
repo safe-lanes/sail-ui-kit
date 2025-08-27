@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Badge } from '../ui/badge';
 import { 
-  Grid3X3, 
+  LayoutGrid, 
   BarChart3, 
   Users, 
   Wrench, 
@@ -144,7 +144,7 @@ export function ModuleNavigator({
         onClick={() => setShowModuleDialog(true)}
       >
         <div className="w-6 h-6 mb-1">
-          <Grid3X3 className="h-6 w-6 text-[#4f5863]" />
+          <LayoutGrid className="h-6 w-6 text-[#4f5863]" />
         </div>
         <div className="text-[#4f5863] text-[10px] font-normal font-['Mulish',Helvetica]">
           Modules
