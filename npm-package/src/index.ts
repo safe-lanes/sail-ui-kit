@@ -7,6 +7,12 @@ export * from './components/ui';
 // ===== MARITIME COMPONENTS =====
 export * from './components/maritime';
 
+// ===== DASHBOARD COMPONENTS =====
+export * from './components/dashboard';
+
+// ===== FEEDBACK COMPONENTS =====
+export * from './components/feedback';
+
 // ===== RBAC COMPONENTS =====
 export * from './components/rbac';
 

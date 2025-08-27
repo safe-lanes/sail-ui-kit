@@ -1231,6 +1231,751 @@ function SAILTableExample() {
 }
 ```
 
+### 📊 Dashboard Components
+
+Maritime dashboard cards for fleet operations and monitoring.
+
+```jsx
+import { 
+  MetricCard,
+  StatusCard,
+  FleetStatusCard,
+  ComplianceCard,
+  CrewCard,
+  IncidentCard
+} from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
+
+function DashboardExample() {
+  // Sample data for demonstration
+  const fleetVessels = [
+    {
+      id: 'mv-001',
+      name: 'MV Atlantic Star',
+      type: 'Oil Tanker',
+      status: 'active',
+      location: 'North Sea',
+      crew: 25,
+      lastInspection: '2024-01-15',
+      safetyRating: 4.5
+    },
+    {
+      id: 'mv-002',
+      name: 'MV Pacific Dawn',
+      type: 'Container Ship',
+      status: 'in-port',
+      location: 'Port of Rotterdam',
+      crew: 23,
+      lastInspection: '2024-02-10',
+      safetyRating: 4.8
+    },
+    {
+      id: 'mv-003',
+      name: 'MV Northern Light',
+      type: 'Chemical Tanker',
+      status: 'maintenance',
+      location: 'Dry Dock 3',
+      crew: 25,
+      lastInspection: '2024-01-05',
+      safetyRating: 4.0
+    },
+    {
+      id: 'mv-004',
+      name: 'MV Ocean Explorer',
+      type: 'LNG Tanker',
+      status: 'emergency',
+      location: 'Mediterranean',
+      crew: 28,
+      lastInspection: '2024-01-20',
+      safetyRating: 3.5
+    }
+  ];
+
+  const crewMembers = [
+    {
+      id: 'crew-001',
+      name: 'Captain John Smith',
+      rank: 'Master',
+      vessel: 'MV Atlantic Star',
+      status: 'onboard',
+      certificationStatus: 'valid',
+      nextRotation: '2024-06-01'
+    },
+    {
+      id: 'crew-002',
+      name: 'Chief Engineer Maria Rodriguez',
+      rank: 'Chief Engineer',
+      vessel: 'MV Pacific Dawn',
+      status: 'shore-leave',
+      certificationStatus: 'expiring',
+      nextRotation: '2024-05-15'
+    },
+    {
+      id: 'crew-003',
+      name: 'Officer David Chen',
+      rank: '2nd Officer',
+      vessel: 'MV Northern Light',
+      status: 'training',
+      certificationStatus: 'valid',
+      nextRotation: '2024-07-10'
+    }
+  ];
+
+  const tmsaElements = [
+    {
+      id: 'el1',
+      code: 'EL1',
+      name: 'Management & Leadership',
+      status: 'compliant',
+      score: 95,
+      lastAssessment: '2024-01-15'
+    },
+    {
+      id: 'el4',
+      code: 'EL4',
+      name: 'Technical Management',
+      status: 'partial',
+      score: 78,
+      lastAssessment: '2024-02-01'
+    },
+    {
+      id: 'el9',
+      code: 'EL9',
+      name: 'Safety',
+      status: 'non-compliant',
+      score: 45,
+      lastAssessment: '2024-01-20'
+    },
+    {
+      id: 'el12',
+      code: 'EL12',
+      name: 'Audits & Inspections',
+      status: 'not-assessed'
+    }
+  ];
+
+  const incidents = [
+    {
+      id: 'inc-001',
+      title: 'Engine Room Oil Leak',
+      description: 'Minor oil leak detected in engine room during routine inspection',
+      severity: 'medium',
+      type: 'technical',
+      vessel: 'MV Atlantic Star',
+      reportedBy: 'Chief Engineer',
+      reportedAt: '2024-01-20T08:30:00Z',
+      status: 'investigating'
+    },
+    {
+      id: 'inc-002',
+      title: 'Navigation Equipment Malfunction',
+      description: 'GPS system showing intermittent failures',
+      severity: 'high',
+      type: 'operational',
+      vessel: 'MV Pacific Dawn',
+      reportedBy: '2nd Officer',
+      reportedAt: '2024-01-19T14:15:00Z',
+      status: 'resolved'
+    },
+    {
+      id: 'inc-003',
+      title: 'Safety Drill Non-Compliance',
+      description: 'Weekly safety drill not conducted as scheduled',
+      severity: 'low',
+      type: 'safety',
+      vessel: 'MV Northern Light',
+      reportedBy: 'Safety Officer',
+      reportedAt: '2024-01-18T10:00:00Z',
+      status: 'closed'
+    }
+  ];
+
+  return (
+    <div className="space-y-6 p-6">
+      <h1 className="text-2xl font-bold">Maritime Operations Dashboard</h1>
+      
+      {/* Key Metrics Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <MetricCard
+          title="Fleet Status"
+          value={fleetVessels.length}
+          subtitle="1 in port"
+          icon="🚢"
+          trend={{
+            value: 5.2,
+            label: "from last month",
+            direction: "up"
+          }}
+          status="success"
+          onClick={() => console.log('View fleet details')}
+        />
+        
+        <MetricCard
+          title="Incidents"
+          value={incidents.length}
+          subtitle="Past month (1 critical)"
+          icon="⚠"
+          trend={{
+            value: 12.5,
+            label: "from last month",
+            direction: "down"
+          }}
+          status="warning"
+          onClick={() => console.log('View incidents')}
+        />
+        
+        <MetricCard
+          title="TMSA Compliance"
+          value="78%"
+          subtitle="19 elements compliant"
+          icon="📋"
+          progress={78}
+          status="info"
+          onClick={() => console.log('View compliance')}
+        />
+        
+        <MetricCard
+          title="Crew"
+          value={crewMembers.length}
+          subtitle="Total crew members"
+          icon="👥"
+          status="neutral"
+          onClick={() => console.log('View crew')}
+        />
+      </div>
+
+      {/* Detailed Dashboard Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        {/* Fleet Status Card */}
+        <FleetStatusCard
+          vessels={fleetVessels}
+          title="Fleet Status Overview"
+          showDetails={true}
+          onVesselClick={(vessel) => console.log('Selected vessel:', vessel)}
+        />
+
+        {/* TMSA Compliance Card */}
+        <ComplianceCard
+          title="TMSA Compliance Status"
+          elements={tmsaElements}
+          overallScore={78}
+          showElementDetails={true}
+          onElementClick={(element) => console.log('Selected element:', element)}
+        />
+
+        {/* Crew Management Card */}
+        <CrewCard
+          title="Crew Management"
+          crewMembers={crewMembers}
+          showMemberDetails={true}
+          onMemberClick={(member) => console.log('Selected crew member:', member)}
+        />
+
+        {/* Incident Card */}
+        <IncidentCard
+          title="Recent Incidents"
+          incidents={incidents}
+          timeframe="Past month"
+          showIncidentDetails={true}
+          onIncidentClick={(incident) => console.log('Selected incident:', incident)}
+        />
+
+        {/* Status Card - Custom Items */}
+        <StatusCard
+          title="Equipment Status"
+          items={[
+            {
+              id: 'engine-1',
+              name: 'Main Engine',
+              status: 'active',
+              details: { type: 'Diesel', power: '12,000 HP' }
+            },
+            {
+              id: 'nav-1',
+              name: 'Navigation System',
+              status: 'warning',
+              details: { type: 'GPS/ECDIS', lastUpdate: '2024-01-15' }
+            },
+            {
+              id: 'comm-1',
+              name: 'Communication System',
+              status: 'maintenance',
+              details: { type: 'GMDSS', scheduled: '2024-01-25' }
+            }
+          ]}
+          maxDisplayed={3}
+          showCounts={true}
+          onItemClick={(item) => console.log('Selected equipment:', item)}
+          onViewAll={() => console.log('View all equipment')}
+        />
+
+        {/* Additional Metric Cards */}
+        <div className="space-y-4">
+          <MetricCard
+            title="Fuel Efficiency"
+            value="12.5"
+            subtitle="MT/day average"
+            icon="⛽"
+            trend={{
+              value: 3.2,
+              label: "improvement",
+              direction: "up"
+            }}
+            status="success"
+            size="sm"
+          />
+          
+          <MetricCard
+            title="Port Calls"
+            value="8"
+            subtitle="This month"
+            icon="⚓"
+            status="info"
+            size="sm"
+          />
+        </div>
+      </div>
+
+      {/* Full Width Dashboard */}
+      <div className="grid grid-cols-1 gap-6">
+        <StatusCard
+          title="Vessel Operations Overview"
+          items={fleetVessels.map(vessel => ({
+            id: vessel.id,
+            name: vessel.name,
+            status: vessel.status === 'active' ? 'active' : 
+                   vessel.status === 'in-port' ? 'inactive' : 
+                   vessel.status === 'maintenance' ? 'maintenance' : 'emergency',
+            details: {
+              type: vessel.type,
+              location: vessel.location,
+              crew: `${vessel.crew} crew`,
+              safety: `${vessel.safetyRating}/5.0`
+            }
+          }))}
+          showCounts={true}
+          maxDisplayed={6}
+          onItemClick={(item) => console.log('Selected vessel operation:', item)}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+### 💬 Feedback Components
+
+Comprehensive feedback and notification system for maritime operations.
+
+```jsx
+import {
+  AlertNotification,
+  StatusIndicator,
+  AnimatedStatusIndicator,
+  NotificationPanel,
+  FeedbackModal,
+  ProgressIndicator,
+  LinearProgress
+} from 'sail-ui-kit';
+import { useState } from 'react';
+import 'sail-ui-kit/dist/index.css';
+
+function FeedbackExample() {
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [notifications, setNotifications] = useState([
+    {
+      id: 'notif-001',
+      type: 'warning',
+      title: 'Engine Maintenance Due',
+      message: 'MV Atlantic Star main engine scheduled maintenance is overdue by 3 days',
+      timestamp: '2024-01-20T10:30:00Z',
+      read: false,
+      priority: 'high',
+      category: 'maintenance',
+      vessel: 'MV Atlantic Star',
+      actions: [
+        {
+          label: 'Schedule Now',
+          onClick: (notif) => console.log('Scheduling maintenance for:', notif.vessel)
+        },
+        {
+          label: 'View Details',
+          onClick: (notif) => console.log('Viewing details for:', notif.id)
+        }
+      ]
+    },
+    {
+      id: 'notif-002',
+      type: 'error',
+      title: 'Critical Safety Violation',
+      message: 'Fire drill not conducted on schedule - immediate attention required',
+      timestamp: '2024-01-20T08:15:00Z',
+      read: false,
+      priority: 'critical',
+      category: 'safety',
+      vessel: 'MV Pacific Dawn',
+      actions: [
+        {
+          label: 'Investigate',
+          onClick: (notif) => console.log('Investigating:', notif.id)
+        }
+      ]
+    },
+    {
+      id: 'notif-003',
+      type: 'success',
+      title: 'TMSA Compliance Improved',
+      message: 'EL4 Technical Management score increased from 75% to 89%',
+      timestamp: '2024-01-19T16:45:00Z',
+      read: true,
+      priority: 'medium',
+      category: 'compliance',
+      vessel: 'MV Northern Light'
+    },
+    {
+      id: 'notif-004',
+      type: 'info',
+      title: 'Crew Rotation Scheduled',
+      message: 'Captain rotation scheduled for MV Ocean Explorer on March 1st',
+      timestamp: '2024-01-19T14:20:00Z',
+      read: false,
+      priority: 'low',
+      category: 'operational',
+      vessel: 'MV Ocean Explorer'
+    }
+  ]);
+
+  const progressSteps = [
+    {
+      id: 'inspection-prep',
+      label: 'Preparation',
+      status: 'completed',
+      description: 'Document review and checklist preparation',
+      timestamp: '2024-01-15T09:00:00Z'
+    },
+    {
+      id: 'inspection-exec',
+      label: 'Inspection',
+      status: 'completed',
+      description: 'On-site vessel inspection',
+      timestamp: '2024-01-16T10:30:00Z'
+    },
+    {
+      id: 'report-draft',
+      label: 'Report Draft',
+      status: 'current',
+      description: 'Drafting inspection report',
+      timestamp: '2024-01-17T14:00:00Z'
+    },
+    {
+      id: 'review',
+      label: 'Review',
+      status: 'pending',
+      description: 'Management review and approval'
+    },
+    {
+      id: 'submission',
+      label: 'Submission',
+      status: 'pending',
+      description: 'Submit to regulatory authorities'
+    }
+  ];
+
+  const handleFeedbackSubmit = (feedback) => {
+    console.log('Feedback submitted:', feedback);
+    // Here you would typically send the feedback to your backend
+    alert('Thank you for your feedback! We will review it shortly.');
+  };
+
+  const handleNotificationRead = (notificationId) => {
+    setNotifications(prev => 
+      prev.map(notif => 
+        notif.id === notificationId 
+          ? { ...notif, read: true }
+          : notif
+      )
+    );
+  };
+
+  const handleNotificationDismiss = (notificationId) => {
+    setNotifications(prev => 
+      prev.filter(notif => notif.id !== notificationId)
+    );
+  };
+
+  return (
+    <div className="space-y-6 p-6">
+      <h1 className="text-2xl font-bold">Maritime Feedback & Notifications</h1>
+
+      {/* Alert Notifications */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">Alert Notifications</h2>
+        
+        <AlertNotification
+          type="error"
+          title="Critical Engine Failure"
+          message="Main engine failure detected on MV Atlantic Star. Immediate attention required."
+          priority="critical"
+          vessel="MV Atlantic Star"
+          timestamp="2024-01-20T08:30:00Z"
+          dismissible={true}
+          onDismiss={() => console.log('Alert dismissed')}
+          actions={[
+            {
+              label: 'Emergency Response',
+              onClick: () => console.log('Emergency response initiated'),
+              variant: 'destructive'
+            },
+            {
+              label: 'View Details',
+              onClick: () => console.log('Viewing details'),
+              variant: 'secondary'
+            }
+          ]}
+        />
+
+        <AlertNotification
+          type="warning"
+          title="Maintenance Overdue"
+          message="Scheduled maintenance for navigation systems is overdue by 5 days."
+          priority="high"
+          vessel="MV Pacific Dawn"
+          timestamp="2024-01-19T15:45:00Z"
+          dismissible={true}
+          actions={[
+            {
+              label: 'Schedule Now',
+              onClick: () => console.log('Scheduling maintenance')
+            }
+          ]}
+        />
+
+        <AlertNotification
+          type="success"
+          title="Safety Drill Completed"
+          message="Weekly safety drill completed successfully with 100% crew participation."
+          priority="low"
+          vessel="MV Northern Light"
+          timestamp="2024-01-19T11:30:00Z"
+          dismissible={true}
+        />
+
+        <AlertNotification
+          type="info"
+          title="Weather Advisory"
+          message="Heavy weather expected in North Atlantic. Route optimization recommended."
+          priority="medium"
+          timestamp="2024-01-20T06:00:00Z"
+          dismissible={true}
+          actions={[
+            {
+              label: 'View Route',
+              onClick: () => console.log('Viewing route options')
+            },
+            {
+              label: 'Weather Forecast',
+              onClick: () => console.log('Opening weather forecast')
+            }
+          ]}
+        />
+      </div>
+
+      {/* Status Indicators */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">Status Indicators</h2>
+        
+        <div className="flex flex-wrap gap-4">
+          <StatusIndicator status="operational" />
+          <StatusIndicator status="degraded" label="Partial Systems" />
+          <StatusIndicator status="maintenance" showDot={true} />
+          <StatusIndicator status="offline" size="lg" />
+          <StatusIndicator 
+            status="emergency" 
+            label="Critical Alert" 
+            onClick={() => console.log('Emergency status clicked')}
+          />
+        </div>
+
+        {/* Animated Status Indicators */}
+        <div className="flex flex-wrap gap-4">
+          <AnimatedStatusIndicator 
+            status="operational" 
+            isLive={true}
+            pulseAnimation={true}
+            label="Live Status"
+          />
+          <AnimatedStatusIndicator 
+            status="degraded" 
+            isLive={true}
+            label="System Degraded"
+          />
+          <AnimatedStatusIndicator 
+            status="emergency" 
+            isLive={true}
+            pulseAnimation={true}
+            label="Emergency Active"
+          />
+        </div>
+      </div>
+
+      {/* Progress Indicators */}
+      <div className="space-y-6">
+        <h2 className="text-xl font-semibold">Progress Indicators</h2>
+        
+        {/* Vessel Inspection Progress */}
+        <div className="bg-white p-6 rounded-lg border">
+          <h3 className="text-lg font-medium mb-4">Vessel Inspection Progress</h3>
+          <ProgressIndicator
+            steps={progressSteps}
+            showProgress={true}
+            showTimestamps={true}
+            orientation="horizontal"
+          />
+        </div>
+
+        {/* Vertical Progress */}
+        <div className="bg-white p-6 rounded-lg border max-w-md">
+          <h3 className="text-lg font-medium mb-4">Maintenance Workflow</h3>
+          <ProgressIndicator
+            steps={[
+              {
+                id: 'req',
+                label: 'Request',
+                status: 'completed',
+                description: 'Maintenance request submitted'
+              },
+              {
+                id: 'sched',
+                label: 'Schedule',
+                status: 'completed',
+                description: 'Maintenance scheduled'
+              },
+              {
+                id: 'exec',
+                label: 'Execute',
+                status: 'current',
+                description: 'Maintenance in progress'
+              },
+              {
+                id: 'verify',
+                label: 'Verify',
+                status: 'pending',
+                description: 'Quality verification',
+                optional: true
+              }
+            ]}
+            orientation="vertical"
+            size="md"
+          />
+        </div>
+
+        {/* Linear Progress Examples */}
+        <div className="space-y-4">
+          <LinearProgress
+            label="Fuel Consumption"
+            value={750}
+            max={1000}
+            showPercentage={true}
+            showValue={true}
+            color="blue"
+          />
+          
+          <LinearProgress
+            label="Safety Score"
+            value={89}
+            max={100}
+            showPercentage={true}
+            color="green"
+          />
+          
+          <LinearProgress
+            label="Compliance Progress"
+            value={12}
+            max={15}
+            showValue={true}
+            color="yellow"
+            size="lg"
+          />
+        </div>
+      </div>
+
+      {/* Notification Panel */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Notification Panel</h2>
+          <NotificationPanel
+            notifications={notifications}
+            title="Fleet Notifications"
+            onNotificationClick={(notif) => console.log('Notification clicked:', notif)}
+            onMarkAsRead={handleNotificationRead}
+            onMarkAllAsRead={() => {
+              setNotifications(prev => 
+                prev.map(notif => ({ ...notif, read: true }))
+              );
+            }}
+            onDismiss={handleNotificationDismiss}
+            onClearAll={() => setNotifications([])}
+            maxHeight="500px"
+          />
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold">Feedback System</h2>
+          
+          <div className="bg-white p-6 rounded-lg border">
+            <p className="text-gray-600 mb-4">
+              Help us improve the maritime ERP system by providing feedback on features, 
+              reporting bugs, or suggesting enhancements.
+            </p>
+            <button
+              onClick={() => setShowFeedbackModal(true)}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Send Feedback
+            </button>
+          </div>
+
+          {/* System Status Overview */}
+          <div className="bg-white p-6 rounded-lg border">
+            <h3 className="text-lg font-medium mb-4">System Status</h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span>Fleet Management</span>
+                <StatusIndicator status="operational" showDot={true} />
+              </div>
+              <div className="flex items-center justify-between">
+                <span>TMSA Compliance</span>
+                <StatusIndicator status="degraded" showDot={true} />
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Crew Management</span>
+                <StatusIndicator status="operational" showDot={true} />
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Incident Reporting</span>
+                <StatusIndicator status="maintenance" showDot={true} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Feedback Modal */}
+      <FeedbackModal
+        isOpen={showFeedbackModal}
+        onClose={() => setShowFeedbackModal(false)}
+        onSubmit={handleFeedbackSubmit}
+        title="Send Feedback - Maritime ERP"
+        userEmail="captain@maritime.com"
+        currentVessel="MV Atlantic Star"
+        currentModule="EL4 - Technical Management"
+        allowRating={true}
+      />
+    </div>
+  );
+}
+```
+
 ### 🏗️ Layout Components
 
 Complete layout system for TMSA applications.
