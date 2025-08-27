@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger 
 } from '../ui/dropdown-menu';
 import { Bell, Settings, LogOut, User } from 'lucide-react';
-import type { TopNavigationBarProps } from '../types/layout';
+import type { TopNavigationBarProps } from '../../types/layout';
 
 /**
  * Standardized Top Navigation Bar

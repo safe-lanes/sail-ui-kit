@@ -14,7 +14,7 @@ import {
 } from '../ui/sidebar';
 import { Badge } from '../ui/badge';
 import { Ship, Anchor, Settings } from 'lucide-react';
-import type { LeftSidebarProps } from '../types/layout';
+import type { LeftSidebarProps } from '../../types/layout';
 
 /**
  * Standardized Left Sidebar
@@ -49,7 +49,7 @@ export function LeftSidebar({
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => (
+              {menuItems.map((item: any) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton 
                     asChild

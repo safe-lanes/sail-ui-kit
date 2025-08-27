@@ -17,7 +17,7 @@ import {
   Lock,
   FileText
 } from 'lucide-react';
-import type { ModuleNavigatorProps, Module } from '../types/layout';
+import type { ModuleNavigatorProps, Module } from '../../types/layout';
 
 /**
  * Module Navigator Component
@@ -158,7 +158,7 @@ export function ModuleNavigator({
           </DialogHeader>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-            {modules.map((module) => (
+            {modules.map((module: Module) => (
               <Button
                 key={module.id}
                 variant={currentModule === module.id ? "default" : "ghost"}

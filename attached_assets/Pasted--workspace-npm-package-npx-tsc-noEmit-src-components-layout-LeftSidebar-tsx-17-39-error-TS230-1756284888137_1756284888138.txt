@@ -1,0 +1,61 @@
+~/workspace/npm-package$ npx tsc --noEmit
+src/components/layout/LeftSidebar.tsx:17:39 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+17 import type { LeftSidebarProps } from '../types/layout';
+                                         ~~~~~~~~~~~~~~~~~
+
+src/components/layout/LeftSidebar.tsx:52:31 - error TS7006: Parameter 'item' implicitly has an 'any' type.
+
+52               {menuItems.map((item) => (
+                                 ~~~~
+
+src/components/layout/ModuleNavigator.tsx:20:51 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+20 import type { ModuleNavigatorProps, Module } from '../types/layout';
+                                                     ~~~~~~~~~~~~~~~~~
+
+src/components/layout/ModuleNavigator.tsx:161:27 - error TS7006: Parameter 'module' implicitly has an 'any' type.
+
+161             {modules.map((module) => (
+                              ~~~~~~
+
+src/components/layout/TMSAAppLayout.tsx:5:41 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+5 import type { TMSAAppLayoutProps } from '../types/layout';
+                                          ~~~~~~~~~~~~~~~~~
+
+src/components/layout/TopNavigationBar.tsx:14:44 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+14 import type { TopNavigationBarProps } from '../types/layout';
+                                              ~~~~~~~~~~~~~~~~~
+
+src/hooks/usePermissions.ts:12:11 - error TS2339: Property 'permissions' does not exist on type 'RBACContextType'.
+
+12   const { permissions, loading, user } = useRBAC();
+             ~~~~~~~~~~~
+
+src/types/index.ts:4:1 - error TS2308: Module './layout' has already exported a member named 'User'. Consider explicitly re-exporting to resolve the ambiguity.
+
+4 export * from './rbac';
+  ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/types/index.ts:6:1 - error TS2308: Module './rbac' has already exported a member named 'PermissionCheck'. Consider explicitly re-exporting to resolve the ambiguity.
+
+6 export * from './services';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/types/index.ts:6:1 - error TS2308: Module './rbac' has already exported a member named 'UserPermissions'. Consider explicitly re-exporting to resolve the ambiguity.
+
+6 export * from './services';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Found 10 errors in 6 files.
+
+Errors  Files
+     2  src/components/layout/LeftSidebar.tsx:17
+     2  src/components/layout/ModuleNavigator.tsx:20
+     1  src/components/layout/TMSAAppLayout.tsx:5
+     1  src/components/layout/TopNavigationBar.tsx:14
+     1  src/hooks/usePermissions.ts:12
+     3  src/types/index.ts:4

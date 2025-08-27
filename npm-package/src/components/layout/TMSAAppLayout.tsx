@@ -2,7 +2,7 @@ import React from 'react';
 import { SidebarProvider } from '../ui/sidebar';
 import { TopNavigationBar } from './TopNavigationBar';
 import { LeftSidebar } from './LeftSidebar';
-import type { TMSAAppLayoutProps } from '../types/layout';
+import type { TMSAAppLayoutProps } from '../../types/layout';
 
 /**
  * Complete TMSA Application Layout
