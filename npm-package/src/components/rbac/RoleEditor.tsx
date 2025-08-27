@@ -171,7 +171,6 @@ export function RoleEditor({
                     <div className="flex items-center gap-3">
                       <Checkbox
                         checked={allSelected}
-                        indeterminate={someSelected}
                         onCheckedChange={() => toggleCategory(categoryPermissions)}
                         disabled={readonly}
                       />

@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Matrix, Search, Download, Filter } from 'lucide-react';
+import { Grid3X3, Search, Download, Filter } from 'lucide-react';
 
 interface Permission {
   id: string;
@@ -95,7 +95,7 @@ export function PermissionMatrix({
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Matrix className="h-5 w-5" />
+              <Grid3X3 className="h-5 w-5" />
               Permission Matrix
             </div>
             <Button variant="outline" onClick={exportMatrix}>

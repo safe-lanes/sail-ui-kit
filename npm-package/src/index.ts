@@ -32,7 +32,7 @@ export * from './types/services';
 export * from './constants';
 
 // ===== STYLES =====
-import './styles/index.css';
+// import './styles/index.css'; // Disabled for build compatibility
 
 // Package metadata
 export const FOUNDATION_VERSION = '1.0.0';

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { X } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "../../lib/utils"
 
 interface FormPopupProps {
   children: React.ReactNode
@@ -103,6 +103,4 @@ FormPopupContent.displayName = "FormPopupContent"
 
 export {
   StandardFormPopup as FormPopup,
-  FormPopupOverlay,
-  FormPopupContent,
 }

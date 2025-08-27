@@ -1,0 +1,612 @@
+src/components/layout/LeftSidebar.tsx:17:39 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+17 import type { LeftSidebarProps } from '../types/layout';
+                                         ~~~~~~~~~~~~~~~~~
+
+src/components/layout/LeftSidebar.tsx:52:31 - error TS7006: Parameter 'item' implicitly has an 'any' type.
+
+52               {menuItems.map((item) => (
+                                 ~~~~
+
+src/components/layout/ModuleNavigator.tsx:20:51 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+20 import type { ModuleNavigatorProps, Module } from '../types/layout';
+                                                     ~~~~~~~~~~~~~~~~~
+
+src/components/layout/ModuleNavigator.tsx:161:27 - error TS7006: Parameter 'module' implicitly has an 'any' type.
+
+161             {modules.map((module) => (
+                              ~~~~~~
+
+src/components/layout/TMSAAppLayout.tsx:5:41 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+5 import type { TMSAAppLayoutProps } from '../types/layout';
+                                          ~~~~~~~~~~~~~~~~~
+
+src/components/layout/TopNavigationBar.tsx:14:44 - error TS2307: Cannot find module '../types/layout' or its corresponding type declarations.
+
+14 import type { TopNavigationBarProps } from '../types/layout';
+                                              ~~~~~~~~~~~~~~~~~
+
+src/components/rbac/PermissionMatrix.tsx:9:10 - error TS2305: Module '"lucide-react"' has no exported member 'Matrix'.
+
+9 import { Matrix, Search, Download, Filter } from 'lucide-react';
+           ~~~~~~
+
+src/components/rbac/RoleEditor.tsx:174:25 - error TS2322: Type '{ checked: boolean; indeterminate: boolean; onCheckedChange: () => void; disabled: boolean; }' is not assignable to type 'IntrinsicAttributes & Omit<CheckboxProps & RefAttributes<HTMLButtonElement>, "ref"> & RefAttributes<...>'.
+  Property 'indeterminate' does not exist on type 'IntrinsicAttributes & Omit<CheckboxProps & RefAttributes<HTMLButtonElement>, "ref"> & RefAttributes<...>'.
+
+174                         indeterminate={someSelected}
+                            ~~~~~~~~~~~~~
+
+src/components/rbac/index.ts:32:8 - error TS2307: Cannot find module '../types/rbac' or its corresponding type declarations.
+
+32 } from "../types/rbac";
+          ~~~~~~~~~~~~~~~
+
+src/components/ui/accordion.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/alert-dialog.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/alert-dialog.tsx:5:32 - error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+
+5 import { buttonVariants } from "@/components/ui/button"
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/alert.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/avatar.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/breadcrumb.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/calendar.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/calendar.tsx:6:32 - error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+
+6 import { buttonVariants } from "@/components/ui/button"
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/carousel.tsx:7:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+7 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/carousel.tsx:8:24 - error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+
+8 import { Button } from "@/components/ui/button"
+                         ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/chart.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/checkbox.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/command.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/command.tsx:7:39 - error TS2307: Cannot find module '@/components/ui/dialog' or its corresponding type declarations.
+
+7 import { Dialog, DialogContent } from "@/components/ui/dialog"
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/context-menu.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/dialog.tsx:7:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+7 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/drawer.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/dropdown-menu.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/form-popup.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/form-popup.tsx:71:14 - error TS2323: Cannot redeclare exported variable 'FormPopupOverlay'.
+
+71 export const FormPopupOverlay = React.forwardRef<
+                ~~~~~~~~~~~~~~~~
+
+src/components/ui/form-popup.tsx:89:14 - error TS2323: Cannot redeclare exported variable 'FormPopupContent'.
+
+89 export const FormPopupContent = React.forwardRef<
+                ~~~~~~~~~~~~~~~~
+
+src/components/ui/form-popup.tsx:106:3 - error TS2323: Cannot redeclare exported variable 'FormPopupOverlay'.
+
+106   FormPopupOverlay,
+      ~~~~~~~~~~~~~~~~
+
+src/components/ui/form-popup.tsx:106:3 - error TS2484: Export declaration conflicts with exported declaration of 'FormPopupOverlay'.
+
+106   FormPopupOverlay,
+      ~~~~~~~~~~~~~~~~
+
+src/components/ui/form-popup.tsx:107:3 - error TS2323: Cannot redeclare exported variable 'FormPopupContent'.
+
+107   FormPopupContent,
+      ~~~~~~~~~~~~~~~~
+
+src/components/ui/form-popup.tsx:107:3 - error TS2484: Export declaration conflicts with exported declaration of 'FormPopupContent'.
+
+107   FormPopupContent,
+      ~~~~~~~~~~~~~~~~
+
+src/components/ui/form.tsx:15:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+15 import { cn } from "@/lib/utils"
+                      ~~~~~~~~~~~~~
+
+src/components/ui/form.tsx:16:23 - error TS2307: Cannot find module '@/components/ui/label' or its corresponding type declarations.
+
+16 import { Label } from "@/components/ui/label"
+                         ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/hover-card.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/input-otp.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/label.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/menubar.tsx:7:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+7 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/navigation-menu.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/pagination.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/pagination.tsx:5:45 - error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+
+5 import { ButtonProps, buttonVariants } from "@/components/ui/button"
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/pagination.tsx:68:5 - error TS2783: 'size' is specified more than once, so this usage will be overwritten.
+
+68     size="default"
+       ~~~~~~~~~~~~~~
+
+  src/components/ui/pagination.tsx:70:5
+    70     {...props}
+           ~~~~~~~~~~
+    This spread always overwrites this property.
+
+src/components/ui/pagination.tsx:84:5 - error TS2783: 'size' is specified more than once, so this usage will be overwritten.
+
+84     size="default"
+       ~~~~~~~~~~~~~~
+
+  src/components/ui/pagination.tsx:86:5
+    86     {...props}
+           ~~~~~~~~~~
+    This spread always overwrites this property.
+
+src/components/ui/popover.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/progress.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/radio-group.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/resizable.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/scroll-area.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/separator.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/sheet.tsx:8:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+8 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:6:29 - error TS2307: Cannot find module '@/hooks/use-mobile' or its corresponding type declarations.
+
+6 import { useIsMobile } from "@/hooks/use-mobile"
+                              ~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:7:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+7 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:8:24 - error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+
+8 import { Button } from "@/components/ui/button"
+                         ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:9:23 - error TS2307: Cannot find module '@/components/ui/input' or its corresponding type declarations.
+
+9 import { Input } from "@/components/ui/input"
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:10:27 - error TS2307: Cannot find module '@/components/ui/separator' or its corresponding type declarations.
+
+10 import { Separator } from "@/components/ui/separator"
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:17:8 - error TS2307: Cannot find module '@/components/ui/sheet' or its corresponding type declarations.
+
+17 } from "@/components/ui/sheet"
+          ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:18:26 - error TS2307: Cannot find module '@/components/ui/skeleton' or its corresponding type declarations.
+
+18 import { Skeleton } from "@/components/ui/skeleton"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:24:8 - error TS2307: Cannot find module '@/components/ui/tooltip' or its corresponding type declarations.
+
+24 } from "@/components/ui/tooltip"
+          ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/sidebar.tsx:283:17 - error TS7006: Parameter 'event' implicitly has an 'any' type.
+
+283       onClick={(event) => {
+                    ~~~~~
+
+src/components/ui/skeleton.tsx:1:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+1 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/slider.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/switch.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/tabs.tsx:4:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+4 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/textarea.tsx:3:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+3 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/toast.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/toaster.tsx:1:26 - error TS2307: Cannot find module '@/hooks/use-toast' or its corresponding type declarations.
+
+1 import { useToast } from "@/hooks/use-toast"
+                           ~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/toaster.tsx:9:8 - error TS2307: Cannot find module '@/components/ui/toast' or its corresponding type declarations.
+
+9 } from "@/components/ui/toast"
+         ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/toaster.tsx:16:31 - error TS7031: Binding element 'id' implicitly has an 'any' type.
+
+16       {toasts.map(function ({ id, title, description, action, ...props }) {
+                                 ~~
+
+src/components/ui/toaster.tsx:16:35 - error TS7031: Binding element 'title' implicitly has an 'any' type.
+
+16       {toasts.map(function ({ id, title, description, action, ...props }) {
+                                     ~~~~~
+
+src/components/ui/toaster.tsx:16:42 - error TS7031: Binding element 'description' implicitly has an 'any' type.
+
+16       {toasts.map(function ({ id, title, description, action, ...props }) {
+                                            ~~~~~~~~~~~
+
+src/components/ui/toaster.tsx:16:55 - error TS7031: Binding element 'action' implicitly has an 'any' type.
+
+16       {toasts.map(function ({ id, title, description, action, ...props }) {
+                                                         ~~~~~~
+
+src/components/ui/toggle-group.tsx:7:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+7 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/toggle-group.tsx:8:32 - error TS2307: Cannot find module '@/components/ui/toggle' or its corresponding type declarations.
+
+8 import { toggleVariants } from "@/components/ui/toggle"
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/toggle-group.tsx:22:4 - error TS2322: Type '{ children: Element; ref: ForwardedRef<HTMLDivElement>; className: any; } | { children: Element; ref: ForwardedRef<HTMLDivElement>; className: any; }' is not assignable to type 'IntrinsicAttributes & ((ToggleGroupSingleProps | ToggleGroupMultipleProps) & RefAttributes<HTMLDivElement>)'.
+  Type '{ children: Element; ref: ForwardedRef<HTMLDivElement>; className: any; }' is not assignable to type 'IntrinsicAttributes & ((ToggleGroupSingleProps | ToggleGroupMultipleProps) & RefAttributes<HTMLDivElement>)'.
+    Property 'type' is missing in type '{ children: Element; ref: ForwardedRef<HTMLDivElement>; className: any; }' but required in type 'ToggleGroupMultipleProps'.
+
+22   <ToggleGroupPrimitive.Root
+      ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  ../node_modules/@radix-ui/react-toggle-group/dist/index.d.ts:12:5
+    12     type: 'multiple';
+           ~~~~
+    'type' is declared here.
+
+src/components/ui/toggle-group.tsx:43:6 - error TS2741: Property 'value' is missing in type '{ children: any; ref: ForwardedRef<HTMLButtonElement>; className: any; }' but required in type 'Omit<ToggleGroupItemImplProps, "pressed">'.
+
+43     <ToggleGroupPrimitive.Item
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  ../node_modules/@radix-ui/react-toggle-group/dist/index.d.ts:70:5
+    70     value: string;
+           ~~~~~
+    'value' is declared here.
+
+src/components/ui/toggle.tsx:5:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+5 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/components/ui/tooltip.tsx:6:20 - error TS2307: Cannot find module '@/lib/utils' or its corresponding type declarations.
+
+6 import { cn } from "@/lib/utils"
+                     ~~~~~~~~~~~~~
+
+src/hooks/useRBAC.ts:2:10 - error TS2459: Module '"../components/rbac/RBACProvider"' declares 'RBACContext' locally, but it is not exported.
+
+2 import { RBACContext } from '../components/rbac/RBACProvider';
+           ~~~~~~~~~~~
+
+  src/components/rbac/RBACProvider.tsx:21:7
+    21 const RBACContext = createContext<RBACContextType | undefined>(undefined);
+             ~~~~~~~~~~~
+    'RBACContext' is declared here.
+
+src/hooks/useRBAC.ts:16:3 - error TS2740: Type '{}' is missing the following properties from type 'RBACContextType': user, permissions, loading, login, and 3 more.
+
+16   return context;
+     ~~~~~~
+
+src/index.ts:20:1 - error TS2308: Module './components/rbac' has already exported a member named 'useRBAC'. Consider explicitly re-exporting to resolve the ambiguity.
+
+20 export * from './hooks';
+   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:23:1 - error TS2308: Module './components/rbac' has already exported a member named 'PermissionCheck'. Consider explicitly re-exporting to resolve the ambiguity.
+
+23 export * from './services';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:23:1 - error TS2308: Module './components/rbac' has already exported a member named 'UserPermissions'. Consider explicitly re-exporting to resolve the ambiguity.
+
+23 export * from './services';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:26:1 - error TS2308: Module './components/rbac' has already exported a member named 'User'. Consider explicitly re-exporting to resolve the ambiguity.
+
+26 export * from './types/layout';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:27:1 - error TS2308: Module './components/maritime' has already exported a member named 'CompetencyLevel'. Consider explicitly re-exporting to resolve the ambiguity.
+
+27 export * from './types/maritime';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:27:1 - error TS2308: Module './components/maritime' has already exported a member named 'ComplianceStatus'. Consider explicitly re-exporting to resolve the ambiguity.
+
+27 export * from './types/maritime';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:27:1 - error TS2308: Module './components/maritime' has already exported a member named 'SafetyMetrics'. Consider explicitly re-exporting to resolve the ambiguity.
+
+27 export * from './types/maritime';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:27:1 - error TS2308: Module './components/maritime' has already exported a member named 'SafetyRating'. Consider explicitly re-exporting to resolve the ambiguity.
+
+27 export * from './types/maritime';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:27:1 - error TS2308: Module './components/maritime' has already exported a member named 'SeverityLevel'. Consider explicitly re-exporting to resolve the ambiguity.
+
+27 export * from './types/maritime';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:27:1 - error TS2308: Module './components/maritime' has already exported a member named 'TMSAElement'. Consider explicitly re-exporting to resolve the ambiguity.
+
+27 export * from './types/maritime';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:27:1 - error TS2308: Module './components/maritime' has already exported a member named 'VesselStatus'. Consider explicitly re-exporting to resolve the ambiguity.
+
+27 export * from './types/maritime';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:28:1 - error TS2308: Module './components/rbac' has already exported a member named 'Permission'. Consider explicitly re-exporting to resolve the ambiguity.
+
+28 export * from './types/rbac';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:28:1 - error TS2308: Module './components/rbac' has already exported a member named 'PermissionCheck'. Consider explicitly re-exporting to resolve the ambiguity.
+
+28 export * from './types/rbac';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:28:1 - error TS2308: Module './components/rbac' has already exported a member named 'RBACContextType'. Consider explicitly re-exporting to resolve the ambiguity.
+
+28 export * from './types/rbac';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:28:1 - error TS2308: Module './components/rbac' has already exported a member named 'Role'. Consider explicitly re-exporting to resolve the ambiguity.
+
+28 export * from './types/rbac';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:28:1 - error TS2308: Module './components/rbac' has already exported a member named 'User'. Consider explicitly re-exporting to resolve the ambiguity.
+
+28 export * from './types/rbac';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:28:1 - error TS2308: Module './components/rbac' has already exported a member named 'UserPermissions'. Consider explicitly re-exporting to resolve the ambiguity.
+
+28 export * from './types/rbac';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:29:1 - error TS2308: Module './components/rbac' has already exported a member named 'PermissionCheck'. Consider explicitly re-exporting to resolve the ambiguity.
+
+29 export * from './types/services';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:29:1 - error TS2308: Module './components/rbac' has already exported a member named 'UserPermissions'. Consider explicitly re-exporting to resolve the ambiguity.
+
+29 export * from './types/services';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:29:1 - error TS2308: Module './services' has already exported a member named 'ServiceError'. Consider explicitly re-exporting to resolve the ambiguity.
+
+29 export * from './types/services';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:32:1 - error TS2308: Module './components/maritime' has already exported a member named 'INCIDENT_TYPES'. Consider explicitly re-exporting to resolve the ambiguity.
+
+32 export * from './constants';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:32:1 - error TS2308: Module './components/maritime' has already exported a member named 'MARITIME_RANKS'. Consider explicitly re-exporting to resolve the ambiguity.
+
+32 export * from './constants';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:32:1 - error TS2308: Module './components/maritime' has already exported a member named 'SEVERITY_LEVELS'. Consider explicitly re-exporting to resolve the ambiguity.
+
+32 export * from './constants';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:32:1 - error TS2308: Module './components/maritime' has already exported a member named 'TMSA_ELEMENTS'. Consider explicitly re-exporting to resolve the ambiguity.
+
+32 export * from './constants';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/index.ts:32:1 - error TS2308: Module './components/maritime' has already exported a member named 'VESSEL_TYPES'. Consider explicitly re-exporting to resolve the ambiguity.
+
+32 export * from './constants';
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/services/index.ts:17:24 - error TS2552: Cannot find name 'ApiService'. Did you mean 'apiService'?
+
+17 const apiService = new ApiService();
+                          ~~~~~~~~~~
+
+  src/services/index.ts:17:7
+    17 const apiService = new ApiService();
+             ~~~~~~~~~~
+    'apiService' is declared here.
+
+src/services/index.ts:18:25 - error TS2552: Cannot find name 'RBACService'. Did you mean 'rbacService'?
+
+18 const rbacService = new RBACService(apiService);
+                           ~~~~~~~~~~~
+
+  src/services/index.ts:18:7
+    18 const rbacService = new RBACService(apiService);
+             ~~~~~~~~~~~
+    'rbacService' is declared here.
+
+src/services/index.ts:19:30 - error TS2552: Cannot find name 'PersonnelService'. Did you mean 'personnelService'?
+
+19 const personnelService = new PersonnelService(apiService);
+                                ~~~~~~~~~~~~~~~~
+
+  src/services/index.ts:19:7
+    19 const personnelService = new PersonnelService(apiService);
+             ~~~~~~~~~~~~~~~~
+    'personnelService' is declared here.
+
+src/services/index.ts:20:27 - error TS2552: Cannot find name 'VesselService'. Did you mean 'vesselService'?
+
+20 const vesselService = new VesselService(apiService);
+                             ~~~~~~~~~~~~~
+
+  src/services/index.ts:20:7
+    20 const vesselService = new VesselService(apiService);
+             ~~~~~~~~~~~~~
+    'vesselService' is declared here.
+
+src/types/index.ts:4:1 - error TS2308: Module './layout' has already exported a member named 'User'. Consider explicitly re-exporting to resolve the ambiguity.
+
+4 export * from './rbac';
+  ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/types/index.ts:6:1 - error TS2308: Module './rbac' has already exported a member named 'PermissionCheck'. Consider explicitly re-exporting to resolve the ambiguity.
+
+6 export * from './services';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/types/index.ts:6:1 - error TS2308: Module './rbac' has already exported a member named 'UserPermissions'. Consider explicitly re-exporting to resolve the ambiguity.
+
+6 export * from './services';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
