@@ -31,9 +31,12 @@ export default [
       commonjs(),
       postcss({
         extract: 'index.css',
-        minimize: false, // Disable minimize to prevent CSS issues
+        minimize: false,
         sourceMap: true,
-        inject: false, // Ensure CSS is extracted, not injected
+        inject: false,
+        config: {
+          path: './postcss.config.js',
+        },
       }),
       typescript({
         tsconfig: './tsconfig.json',
