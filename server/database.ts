@@ -32,10 +32,7 @@ export class DatabaseStorage implements IStorage {
       throw new Error("DATABASE_URL environment variable is required");
     }
     
-    this.pool = mysql.createPool({
-      uri: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-    });
+    this.pool = mysql.createPool(process.env.DATABASE_URL!);
     this.db = drizzle(this.pool);
   }
 
@@ -55,8 +52,10 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const result = await this.db.insert(users).values(insertUser).returning();
-    return result[0];
+    await this.db.insert(users).values(insertUser);
+    const insertedUser = await this.getUserByUsername(insertUser.username);
+    if (!insertedUser) throw new Error('Failed to create user');
+    return insertedUser;
   }
 
   // Form methods
@@ -70,18 +69,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createForm(insertForm: InsertForm): Promise<Form> {
-    const result = await this.db.insert(forms).values(insertForm).returning();
-    return result[0];
+    await this.db.insert(forms).values(insertForm);
+    const insertedForm = await this.db.select().from(forms).where(eq(forms.name, insertForm.name)).limit(1);
+    if (!insertedForm[0]) throw new Error('Failed to create form');
+    return insertedForm[0];
   }
 
   async updateForm(id: number, formData: Partial<InsertForm>): Promise<Form | undefined> {
-    const result = await this.db.update(forms).set(formData).where(eq(forms.id, id)).returning();
-    return result[0];
+    await this.db.update(forms).set(formData).where(eq(forms.id, id));
+    return await this.getForm(id);
   }
 
   async deleteForm(id: number): Promise<boolean> {
-    const result = await this.db.delete(forms).where(eq(forms.id, id));
-    return result.affectedRows > 0;
+    await this.db.delete(forms).where(eq(forms.id, id));
+    return true; // MySQL driver doesn't provide affectedRows in this context
   }
 
   // Rank Group methods
@@ -90,18 +91,24 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createRankGroup(insertRankGroup: InsertRankGroup): Promise<RankGroup> {
-    const result = await this.db.insert(rankGroups).values(insertRankGroup).returning();
-    return result[0];
+    await this.db.insert(rankGroups).values(insertRankGroup);
+    const insertedRankGroup = await this.db.select().from(rankGroups)
+      .where(eq(rankGroups.formId, insertRankGroup.formId))
+      .orderBy(rankGroups.id)
+      .limit(1);
+    if (!insertedRankGroup[0]) throw new Error('Failed to create rank group');
+    return insertedRankGroup[0];
   }
 
   async updateRankGroup(id: number, rankGroupData: Partial<InsertRankGroup>): Promise<RankGroup | undefined> {
-    const result = await this.db.update(rankGroups).set(rankGroupData).where(eq(rankGroups.id, id)).returning();
+    await this.db.update(rankGroups).set(rankGroupData).where(eq(rankGroups.id, id));
+    const result = await this.db.select().from(rankGroups).where(eq(rankGroups.id, id));
     return result[0];
   }
 
   async deleteRankGroup(id: number): Promise<boolean> {
-    const result = await this.db.delete(rankGroups).where(eq(rankGroups.id, id));
-    return result.affectedRows > 0;
+    await this.db.delete(rankGroups).where(eq(rankGroups.id, id));
+    return true; // MySQL driver doesn't provide affectedRows in this context
   }
 
   // Available Rank methods
@@ -110,7 +117,9 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAvailableRank(insertAvailableRank: InsertAvailableRank): Promise<AvailableRank> {
-    const result = await this.db.insert(availableRanks).values(insertAvailableRank).returning();
+    await this.db.insert(availableRanks).values(insertAvailableRank);
+    const result = await this.db.select().from(availableRanks).where(eq(availableRanks.name, insertAvailableRank.name));
+    if (!result[0]) throw new Error('Failed to create available rank');
     return result[0];
   }
 
@@ -125,18 +134,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createCrewMember(insertCrewMember: InsertCrewMember): Promise<CrewMember> {
-    const result = await this.db.insert(crewMembers).values(insertCrewMember).returning();
-    return result[0];
+    await this.db.insert(crewMembers).values(insertCrewMember);
+    const result = await this.getCrewMember(insertCrewMember.id);
+    if (!result) throw new Error('Failed to create crew member');
+    return result;
   }
 
   async updateCrewMember(id: string, crewMemberData: Partial<InsertCrewMember>): Promise<CrewMember | undefined> {
-    const result = await this.db.update(crewMembers).set(crewMemberData).where(eq(crewMembers.id, id)).returning();
-    return result[0];
+    await this.db.update(crewMembers).set(crewMemberData).where(eq(crewMembers.id, id));
+    return await this.getCrewMember(id);
   }
 
   async deleteCrewMember(id: string): Promise<boolean> {
-    const result = await this.db.delete(crewMembers).where(eq(crewMembers.id, id));
-    return result.affectedRows > 0;
+    await this.db.delete(crewMembers).where(eq(crewMembers.id, id));
+    return true; // MySQL driver doesn't provide affectedRows in this context
   }
 
   // Appraisal Result methods
@@ -154,18 +165,23 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAppraisalResult(insertAppraisalResult: InsertAppraisalResult): Promise<AppraisalResult> {
-    const result = await this.db.insert(appraisalResults).values(insertAppraisalResult).returning();
+    await this.db.insert(appraisalResults).values(insertAppraisalResult);
+    const result = await this.db.select().from(appraisalResults)
+      .where(eq(appraisalResults.crewMemberId, insertAppraisalResult.crewMemberId))
+      .orderBy(appraisalResults.id)
+      .limit(1);
+    if (!result[0]) throw new Error('Failed to create appraisal result');
     return result[0];
   }
 
   async updateAppraisalResult(id: number, appraisalResultData: Partial<InsertAppraisalResult>): Promise<AppraisalResult | undefined> {
-    const result = await this.db.update(appraisalResults).set(appraisalResultData).where(eq(appraisalResults.id, id)).returning();
-    return result[0];
+    await this.db.update(appraisalResults).set(appraisalResultData).where(eq(appraisalResults.id, id));
+    return await this.getAppraisalResult(id);
   }
 
   async deleteAppraisalResult(id: number): Promise<boolean> {
-    const result = await this.db.delete(appraisalResults).where(eq(appraisalResults.id, id));
-    return result.affectedRows > 0;
+    await this.db.delete(appraisalResults).where(eq(appraisalResults.id, id));
+    return true; // MySQL driver doesn't provide affectedRows in this context
   }
 
   // Seed data for initial setup

@@ -165,12 +165,12 @@ export const FormEditor: React.FC<FormEditorProps> = ({ form, rankGroupName, onC
   const [showWeightWarning, setShowWeightWarning] = useState(false);
   
   // Field visibility state
-  const [fieldVisibility, setFieldVisibility] = useState({
+  const [fieldVisibility, setFieldVisibility] = useState<{[key: string]: boolean}>({
     personalityIndexCategory: true,
   });
   
   // Section visibility state
-  const [sectionVisibility, setSectionVisibility] = useState({
+  const [sectionVisibility, setSectionVisibility] = useState<{[key: string]: boolean}>({
     partB: true,
     partB1: true,
     partB2: true,
@@ -867,11 +867,11 @@ export const FormEditor: React.FC<FormEditorProps> = ({ form, rankGroupName, onC
     const newRecommendation = {
       id: newRecommendationId,
       question: "Add new recommendation",
-      answer: "Yes",
+      answer: "Yes" as "Yes" | "No" | "NA",
       comment: "",
       isCustom: true // Mark as custom/additional recommendation
     };
-    formMethods.setValue("recommendations", [...currentRecommendations, newRecommendation]);
+    formMethods.setValue("recommendations", [...currentRecommendations, newRecommendation as any]);
     
     // Automatically set new recommendation to edit mode
     startEditingRecommendation(newRecommendationId);

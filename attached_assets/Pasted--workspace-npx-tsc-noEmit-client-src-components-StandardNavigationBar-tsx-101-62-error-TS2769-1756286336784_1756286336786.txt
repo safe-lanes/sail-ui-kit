@@ -1,0 +1,276 @@
+~/workspace$ npx tsc --noEmit
+client/src/components/StandardNavigationBar.tsx:101:62 - error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Object literal may only specify known properties, and 'fill' does not exist in type 'Partial<unknown> & Attributes'.
+
+101                           return React.cloneElement(child, { fill: iconFill });
+                                                                 ~~~~
+
+  node_modules/@types/react/index.d.ts:597:14
+    597     function cloneElement<P>(
+                     ~~~~~~~~~~~~
+    The last overload is declared here.
+
+client/src/components/ui/form-popup.tsx:71:14 - error TS2323: Cannot redeclare exported variable 'FormPopupOverlay'.
+
+71 export const FormPopupOverlay = React.forwardRef<
+                ~~~~~~~~~~~~~~~~
+
+client/src/components/ui/form-popup.tsx:89:14 - error TS2323: Cannot redeclare exported variable 'FormPopupContent'.
+
+89 export const FormPopupContent = React.forwardRef<
+                ~~~~~~~~~~~~~~~~
+
+client/src/components/ui/form-popup.tsx:106:3 - error TS2323: Cannot redeclare exported variable 'FormPopupOverlay'.
+
+106   FormPopupOverlay,
+      ~~~~~~~~~~~~~~~~
+
+client/src/components/ui/form-popup.tsx:106:3 - error TS2484: Export declaration conflicts with exported declaration of 'FormPopupOverlay'.
+
+106   FormPopupOverlay,
+      ~~~~~~~~~~~~~~~~
+
+client/src/components/ui/form-popup.tsx:107:3 - error TS2323: Cannot redeclare exported variable 'FormPopupContent'.
+
+107   FormPopupContent,
+      ~~~~~~~~~~~~~~~~
+
+client/src/components/ui/form-popup.tsx:107:3 - error TS2484: Export declaration conflicts with exported declaration of 'FormPopupContent'.
+
+107   FormPopupContent,
+      ~~~~~~~~~~~~~~~~
+
+client/src/micro-frontend/index.ts:4:8 - error TS2613: Module '"/home/runner/workspace/client/src/pages/ElementCrewAppraisals"' has no default export. Did you mean to use 'import { ElementCrewAppraisals } from "/home/runner/workspace/client/src/pages/ElementCrewAppraisals"' instead?
+
+4 import ElementCrewAppraisals from '../pages/ElementCrewAppraisals';
+         ~~~~~~~~~~~~~~~~~~~~~
+
+client/src/micro-frontend/index.ts:5:8 - error TS2613: Module '"/home/runner/workspace/client/src/pages/AppraisalForm"' has no default export. Did you mean to use 'import { AppraisalForm } from "/home/runner/workspace/client/src/pages/AppraisalForm"' instead?
+
+5 import AppraisalForm from '../pages/AppraisalForm';
+         ~~~~~~~~~~~~~
+
+client/src/micro-frontend/index.ts:6:8 - error TS2613: Module '"/home/runner/workspace/client/src/pages/AdminModule"' has no default export. Did you mean to use 'import { AdminModule } from "/home/runner/workspace/client/src/pages/AdminModule"' instead?
+
+6 import AdminModule from '../pages/AdminModule';
+         ~~~~~~~~~~~
+
+client/src/micro-frontend/index.ts:7:8 - error TS2613: Module '"/home/runner/workspace/client/src/pages/FormEditor"' has no default export. Did you mean to use 'import { FormEditor } from "/home/runner/workspace/client/src/pages/FormEditor"' instead?
+
+7 import FormEditor from '../pages/FormEditor';
+         ~~~~~~~~~~
+
+client/src/micro-frontend/index.ts:15:10 - error TS2305: Module '"../pages/ElementCrewAppraisals"' has no exported member 'default'.
+
+15 export { default as ElementCrewAppraisals } from '../pages/ElementCrewAppraisals';
+            ~~~~~~~
+
+client/src/micro-frontend/index.ts:16:10 - error TS2305: Module '"../pages/AppraisalForm"' has no exported member 'default'.
+
+16 export { default as AppraisalForm } from '../pages/AppraisalForm';
+            ~~~~~~~
+
+client/src/micro-frontend/index.ts:17:10 - error TS2305: Module '"../pages/AdminModule"' has no exported member 'default'.
+
+17 export { default as AdminModule } from '../pages/AdminModule';
+            ~~~~~~~
+
+client/src/micro-frontend/index.ts:18:10 - error TS2305: Module '"../pages/FormEditor"' has no exported member 'default'.
+
+18 export { default as FormEditor } from '../pages/FormEditor';
+            ~~~~~~~
+
+client/src/pages/AdminModule.tsx:246:59 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'never'.
+
+246                             checked={field.value.includes(rank.name)}
+                                                              ~~~~~~~~~
+
+client/src/pages/AdminModule.tsx:530:11 - error TS2322: Type 'string | null' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+
+530           rankGroupName={editingRankGroup}
+              ~~~~~~~~~~~~~
+
+  client/src/components/FormEditorFactory.tsx:15:3
+    15   rankGroupName?: string;
+         ~~~~~~~~~~~~~
+    The expected type comes from property 'rankGroupName' which is declared here on type 'IntrinsicAttributes & FormEditorFactoryProps'
+
+client/src/pages/ElementCrewAppraisals.tsx:521:20 - error TS2769: No overload matches this call.
+  Overload 2 of 2, '(props: AgGridReactProps<CrewAppraisalData>, context: any): AgGridReact<CrewAppraisalData>', gave the following error.
+    Type '"actions"' is not assignable to type 'NestedFieldPaths<CrewAppraisalData, any, []> | undefined'.
+  Overload 2 of 2, '(props: AgGridReactProps<CrewAppraisalData>, context: any): AgGridReact<CrewAppraisalData>', gave the following error.
+    Type '{ toolPanels: { id: string; labelDefault: string; labelKey: string; iconKey: string; toolPanel: string; }[]; defaultToolPanel: null; }' is not assignable to type 'string | boolean | string[] | SideBarDef | null | undefined'.
+      Types of property 'defaultToolPanel' are incompatible.
+        Type 'null' is not assignable to type 'string | undefined'.
+
+521                   <AgGridReact
+                       ~~~~~~~~~~~
+
+  node_modules/ag-grid-community/dist/types/src/entities/gridOptions.d.ts:51:5
+    51     sideBar?: SideBarDef | string | string[] | boolean | null;
+           ~~~~~~~
+    The expected type comes from property 'sideBar' which is declared here on type 'IntrinsicAttributes & IntrinsicClassAttributes<AgGridReact<CrewAppraisalData>> & Readonly<AgGridReactProps<...>>'
+
+client/src/pages/FormEditor.tsx:184:21 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ personalityIndexCategory: boolean; }'.
+  No index signature with a parameter of type 'string' was found on type '{ personalityIndexCategory: boolean; }'.
+
+184       [fieldName]: !prev[fieldName]
+                        ~~~~~~~~~~~~~~~
+
+client/src/pages/FormEditor.tsx:192:23 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ partB: boolean; partB1: boolean; partB2: boolean; partD: boolean; }'.
+  No index signature with a parameter of type 'string' was found on type '{ partB: boolean; partB1: boolean; partB2: boolean; partD: boolean; }'.
+
+192       [sectionName]: !prev[sectionName]
+                          ~~~~~~~~~~~~~~~~~
+
+client/src/pages/FormEditor.tsx:874:46 - error TS2322: Type '{ id: string; question: string; answer: "Yes" | "No" | "NA"; isCustom: boolean; comment?: string | undefined; } | { id: string; question: string; answer: string; comment: string; isCustom: boolean; }' is not assignable to type '{ id: string; question: string; answer: "Yes" | "No" | "NA"; isCustom: boolean; comment?: string | undefined; }'.
+  Type '{ id: string; question: string; answer: string; comment: string; isCustom: boolean; }' is not assignable to type '{ id: string; question: string; answer: "Yes" | "No" | "NA"; isCustom: boolean; comment?: string | undefined; }'.
+    Types of property 'answer' are incompatible.
+      Type 'string' is not assignable to type '"Yes" | "No" | "NA"'.
+
+874     formMethods.setValue("recommendations", [...currentRecommendations, newRecommendation]);
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+client/src/pages/FormEditor.tsx:874:73 - error TS2322: Type '{ id: string; question: string; answer: string; comment: string; isCustom: boolean; }' is not assignable to type '{ id: string; question: string; answer: "Yes" | "No" | "NA"; isCustom: boolean; comment?: string | undefined; }'.
+  Types of property 'answer' are incompatible.
+    Type 'string' is not assignable to type '"Yes" | "No" | "NA"'.
+
+874     formMethods.setValue("recommendations", [...currentRecommendations, newRecommendation]);
+                                                                            ~~~~~~~~~~~~~~~~~
+
+server/database.ts:35:23 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(connectionUri: string): Pool', gave the following error.
+    Argument of type '{ uri: string; ssl: boolean | { rejectUnauthorized: boolean; }; }' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(config: PoolOptions): Pool', gave the following error.
+    Type 'false | { rejectUnauthorized: false; }' is not assignable to type 'string | SslOptions | undefined'.
+      Type 'false' is not assignable to type 'string | SslOptions | undefined'.
+
+35     this.pool = mysql.createPool({
+                         ~~~~~~~~~~
+
+  node_modules/mysql2/typings/mysql/lib/Connection.d.ts:271:3
+    271   ssl?: string | SslOptions;
+          ~~~
+    The expected type comes from property 'ssl' which is declared here on type 'PoolOptions'
+
+server/database.ts:58:67 - error TS2551: Property 'returning' does not exist on type 'MySqlInsertBase<MySqlTableWithColumns<{ name: "users"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "users"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; notNull: true; hasDefault: true; ... 6 more ...; generated: undefined; }, {}, {}>; username: M...'. Did you mean '$returningId'?
+
+58     const result = await this.db.insert(users).values(insertUser).returning();
+                                                                     ~~~~~~~~~
+
+  node_modules/drizzle-orm/mysql-core/query-builders/insert.d.ts:109:5
+    109     $returningId(): MySqlInsertWithout<MySqlInsertReturning<this, TDynamic>, TDynamic, '$returningId'>;
+            ~~~~~~~~~~~~
+    '$returningId' is declared here.
+
+server/database.ts:73:67 - error TS2551: Property 'returning' does not exist on type 'MySqlInsertBase<MySqlTableWithColumns<{ name: "forms"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "forms"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; notNull: true; hasDefault: true; ... 6 more ...; generated: undefined; }, {}, {}>; ... 4 more ...'. Did you mean '$returningId'?
+
+73     const result = await this.db.insert(forms).values(insertForm).returning();
+                                                                     ~~~~~~~~~
+
+  node_modules/drizzle-orm/mysql-core/query-builders/insert.d.ts:109:5
+    109     $returningId(): MySqlInsertWithout<MySqlInsertReturning<this, TDynamic>, TDynamic, '$returningId'>;
+            ~~~~~~~~~~~~
+    '$returningId' is declared here.
+
+server/database.ts:78:86 - error TS2339: Property 'returning' does not exist on type 'Omit<MySqlUpdateBase<MySqlTableWithColumns<{ name: "forms"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "forms"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; notNull: true; ... 7 more ...; generated: undefined; }, {}, {}>; ... 4 more ...; configur...'.
+
+78     const result = await this.db.update(forms).set(formData).where(eq(forms.id, id)).returning();
+                                                                                        ~~~~~~~~~
+
+server/database.ts:84:19 - error TS2339: Property 'affectedRows' does not exist on type 'MySqlRawQueryResult'.
+
+84     return result.affectedRows > 0;
+                     ~~~~~~~~~~~~
+
+server/database.ts:93:77 - error TS2551: Property 'returning' does not exist on type 'MySqlInsertBase<MySqlTableWithColumns<{ name: "rank_groups"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "rank_groups"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; notNull: true; ... 7 more ...; generated: undefined; }, {}, {}>; formId: MySqlColu...'. Did you mean '$returningId'?
+
+93     const result = await this.db.insert(rankGroups).values(insertRankGroup).returning();
+                                                                               ~~~~~~~~~
+
+  node_modules/drizzle-orm/mysql-core/query-builders/insert.d.ts:109:5
+    109     $returningId(): MySqlInsertWithout<MySqlInsertReturning<this, TDynamic>, TDynamic, '$returningId'>;
+            ~~~~~~~~~~~~
+    '$returningId' is declared here.
+
+server/database.ts:98:101 - error TS2339: Property 'returning' does not exist on type 'Omit<MySqlUpdateBase<MySqlTableWithColumns<{ name: "rank_groups"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "rank_groups"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; ... 8 more ...; generated: undefined; }, {}, {}>; formId: MySqlColumn<...>; n...'.
+
+98     const result = await this.db.update(rankGroups).set(rankGroupData).where(eq(rankGroups.id, id)).returning();
+                                                                                                       ~~~~~~~~~
+
+server/database.ts:104:19 - error TS2339: Property 'affectedRows' does not exist on type 'MySqlRawQueryResult'.
+
+104     return result.affectedRows > 0;
+                      ~~~~~~~~~~~~
+
+server/database.ts:113:85 - error TS2551: Property 'returning' does not exist on type 'MySqlInsertBase<MySqlTableWithColumns<{ name: "available_ranks"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "available_ranks"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; ... 8 more ...; generated: undefined; }, {}, {}>; name: MySqlColumn<...>; ...'. Did you mean '$returningId'?
+
+113     const result = await this.db.insert(availableRanks).values(insertAvailableRank).returning();
+                                                                                        ~~~~~~~~~
+
+  node_modules/drizzle-orm/mysql-core/query-builders/insert.d.ts:109:5
+    109     $returningId(): MySqlInsertWithout<MySqlInsertReturning<this, TDynamic>, TDynamic, '$returningId'>;
+            ~~~~~~~~~~~~
+    '$returningId' is declared here.
+
+server/database.ts:128:79 - error TS2551: Property 'returning' does not exist on type 'MySqlInsertBase<MySqlTableWithColumns<{ name: "crew_members"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "crew_members"; dataType: "string"; columnType: "MySqlText"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, {}>; ... 9 more ...; updated...'. Did you mean '$returningId'?
+
+128     const result = await this.db.insert(crewMembers).values(insertCrewMember).returning();
+                                                                                  ~~~~~~~~~
+
+  node_modules/drizzle-orm/mysql-core/query-builders/insert.d.ts:109:5
+    109     $returningId(): MySqlInsertWithout<MySqlInsertReturning<this, TDynamic>, TDynamic, '$returningId'>;
+            ~~~~~~~~~~~~
+    '$returningId' is declared here.
+
+server/database.ts:133:104 - error TS2339: Property 'returning' does not exist on type 'Omit<MySqlUpdateBase<MySqlTableWithColumns<{ name: "crew_members"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "crew_members"; dataType: "string"; columnType: "MySqlText"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, {}>; ... 9 more ...; up...'.
+
+133     const result = await this.db.update(crewMembers).set(crewMemberData).where(eq(crewMembers.id, id)).returning();
+                                                                                                           ~~~~~~~~~
+
+server/database.ts:139:19 - error TS2339: Property 'affectedRows' does not exist on type 'MySqlRawQueryResult'.
+
+139     return result.affectedRows > 0;
+                      ~~~~~~~~~~~~
+
+server/database.ts:157:89 - error TS2551: Property 'returning' does not exist on type 'MySqlInsertBase<MySqlTableWithColumns<{ name: "appraisal_results"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "appraisal_results"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; ... 8 more ...; generated: undefined; }, {}, {}>; ... 10 more ...; sta...'. Did you mean '$returningId'?
+
+157     const result = await this.db.insert(appraisalResults).values(insertAppraisalResult).returning();
+                                                                                            ~~~~~~~~~
+
+  node_modules/drizzle-orm/mysql-core/query-builders/insert.d.ts:109:5
+    109     $returningId(): MySqlInsertWithout<MySqlInsertReturning<this, TDynamic>, TDynamic, '$returningId'>;
+            ~~~~~~~~~~~~
+    '$returningId' is declared here.
+
+server/database.ts:162:119 - error TS2339: Property 'returning' does not exist on type 'Omit<MySqlUpdateBase<MySqlTableWithColumns<{ name: "appraisal_results"; schema: undefined; columns: { id: MySqlColumn<{ name: "id"; tableName: "appraisal_results"; dataType: "number"; columnType: "MySqlInt"; data: number; driverParam: string | number; ... 8 more ...; generated: undefined; }, {}, {}>; ... 10 more ......'.
+
+162     const result = await this.db.update(appraisalResults).set(appraisalResultData).where(eq(appraisalResults.id, id)).returning();
+                                                                                                                          ~~~~~~~~~
+
+server/database.ts:168:19 - error TS2339: Property 'affectedRows' does not exist on type 'MySqlRawQueryResult'.
+
+168     return result.affectedRows > 0;
+                      ~~~~~~~~~~~~
+
+server/vite.ts:39:5 - error TS2322: Type '{ middlewareMode: boolean; hmr: { server: Server<typeof IncomingMessage, typeof ServerResponse>; }; allowedHosts: boolean; }' is not assignable to type 'ServerOptions'.
+  Types of property 'allowedHosts' are incompatible.
+    Type 'boolean' is not assignable to type 'true | string[] | undefined'.
+
+39     server: serverOptions,
+       ~~~~~~
+
+
+Found 38 errors in 8 files.
+
+Errors  Files
+     1  client/src/components/StandardNavigationBar.tsx:101
+     6  client/src/components/ui/form-popup.tsx:71
+     8  client/src/micro-frontend/index.ts:4
+     2  client/src/pages/AdminModule.tsx:246
+     1  client/src/pages/ElementCrewAppraisals.tsx:521
+     4  client/src/pages/FormEditor.tsx:184
+    15  server/database.ts:35
+     1  server/vite.ts:39

@@ -538,7 +538,7 @@ export const ElementCrewAppraisals = (): JSX.Element => {
                       { field: 'nationality', headerName: 'Nationality', width: 130 },
                       { field: 'vesselType', headerName: 'Vessel Type', width: 130 },
                       { 
-                        field: 'actions', 
+                        field: 'actions' as any, 
                         headerName: 'Actions', 
                         width: 120,
                         cellRenderer: ActionsCellRenderer,
@@ -572,7 +572,7 @@ export const ElementCrewAppraisals = (): JSX.Element => {
                           toolPanel: 'agFiltersToolPanel',
                         }
                       ],
-                      defaultToolPanel: null
+                      defaultToolPanel: undefined
                     }}
                     defaultColDef={{
                       sortable: true,

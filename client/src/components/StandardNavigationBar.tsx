@@ -98,7 +98,7 @@ export const StandardNavigationBar: React.FC<StandardNavigationBarProps> = ({
                     {React.cloneElement(item.icon, {
                       children: React.Children.map(item.icon.props.children, (child: any) => {
                         if (React.isValidElement(child)) {
-                          return React.cloneElement(child, { fill: iconFill });
+                          return React.cloneElement(child as React.ReactElement<any>, { fill: iconFill });
                         }
                         return child;
                       })
