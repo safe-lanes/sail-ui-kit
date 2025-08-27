@@ -20,16 +20,19 @@ export * from './components/forms';
 export * from './hooks';
 
 // ===== SERVICES =====
-export * from './services';
+// Services export their own types to avoid conflicts
+// export * from './services';
 
 // ===== TYPES =====
-export * from './types/layout';
-export * from './types/maritime';
-export * from './types/rbac';
-export * from './types/services';
+// Types are already exported by their respective component modules
+// export * from './types/layout';
+// export * from './types/maritime'; 
+// export * from './types/rbac';
+// export * from './types/services';
 
 // ===== CONSTANTS =====
-export * from './constants';
+// Constants are already exported by their respective component modules
+// export * from './constants';
 
 // ===== STYLES =====
 // import './styles/index.css'; // Disabled for build compatibility

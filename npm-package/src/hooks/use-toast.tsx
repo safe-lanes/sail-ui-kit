@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface Toast {
+export interface ToastHook {
   id: string;
   title?: string;
   description?: string;
@@ -9,8 +9,8 @@ export interface Toast {
 }
 
 export interface ToastContextType {
-  toasts: Toast[];
-  addToast: (toast: Omit<Toast, 'id'>) => void;
+  toasts: ToastHook[];
+  addToast: (toast: Omit<ToastHook, 'id'>) => void;
   removeToast: (id: string) => void;
 }
 
@@ -28,10 +28,10 @@ interface ToastProviderProps {
   children: React.ReactNode;
 }
 
-export function ToastProvider({ children }: ToastProviderProps) {
-  const [toasts, setToasts] = React.useState<Toast[]>([]);
+export function ToastHookProvider({ children }: ToastProviderProps) {
+  const [toasts, setToasts] = React.useState<ToastHook[]>([]);
 
-  const addToast = React.useCallback((toast: Omit<Toast, 'id'>) => {
+  const addToast = React.useCallback((toast: Omit<ToastHook, 'id'>) => {
     const id = Math.random().toString(36).substr(2, 9);
     setToasts(prev => [...prev, { ...toast, id }]);
   }, []);
@@ -48,7 +48,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
 }
 
 // Simple hook implementation for compatibility
-export function toast(options: Omit<Toast, 'id'>) {
+export function toast(options: Omit<ToastHook, 'id'>) {
   // This is a simplified version - in a real app you'd dispatch to the toast context
   console.log('Toast:', options);
 }

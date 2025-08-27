@@ -18,8 +18,7 @@ export { PermissionForm } from "./PermissionForm";
 export { RoleForm } from "./RoleForm";
 
 // RBAC Provider
-export { RBACProvider } from "./RBACProvider";
-export { useRBAC } from "./useRBAC";
+export { RBACProvider, useRBAC } from "./RBACProvider";
 
 // Types
 export type {
@@ -29,4 +28,4 @@ export type {
   RBACContextType,
   PermissionCheck,
   UserPermissions
-} from "../types/rbac";
+} from "../../types/rbac";

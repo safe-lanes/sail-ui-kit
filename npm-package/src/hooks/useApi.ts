@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { SHARED_SERVICES } from '../services';
 import type { ApiRequestOptions } from '../types/services';
 
 /**
  * Hook for API requests with loading states
+ * Note: Service implementation is commented out until SHARED_SERVICES is available
  */
 export function useApi<T = any>(
   endpoint: string,
@@ -18,10 +18,11 @@ export function useApi<T = any>(
     setError(null);
 
     try {
-      const result = await SHARED_SERVICES.api.get<T>(endpoint, {
-        ...options,
-        ...customOptions
-      });
+      // const result = await SHARED_SERVICES.api.get<T>(endpoint, {
+      //   ...options,
+      //   ...customOptions
+      // });
+      const result = {} as T; // Placeholder until service implementation
       setData(result);
       return result;
     } catch (err) {
@@ -44,10 +45,11 @@ export function useApi<T = any>(
     setError(null);
 
     try {
-      const result = await SHARED_SERVICES.api.post<T>(endpoint, data, {
-        ...options,
-        ...customOptions
-      });
+      // const result = await SHARED_SERVICES.api.post<T>(endpoint, data, {
+      //   ...options,
+      //   ...customOptions
+      // });
+      const result = {} as T; // Placeholder until service implementation
       return result;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
@@ -63,10 +65,11 @@ export function useApi<T = any>(
     setError(null);
 
     try {
-      const result = await SHARED_SERVICES.api.put<T>(endpoint, data, {
-        ...options,
-        ...customOptions
-      });
+      // const result = await SHARED_SERVICES.api.put<T>(endpoint, data, {
+      //   ...options,
+      //   ...customOptions
+      // });
+      const result = {} as T; // Placeholder until service implementation
       return result;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
@@ -82,10 +85,11 @@ export function useApi<T = any>(
     setError(null);
 
     try {
-      const result = await SHARED_SERVICES.api.delete<T>(endpoint, {
-        ...options,
-        ...customOptions
-      });
+      // const result = await SHARED_SERVICES.api.delete<T>(endpoint, {
+      //   ...options,
+      //   ...customOptions
+      // });
+      const result = {} as T; // Placeholder until service implementation
       return result;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';

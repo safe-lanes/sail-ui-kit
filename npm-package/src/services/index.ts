@@ -13,19 +13,19 @@ export type { PersonnelFilter, PersonnelSearchResult } from '../types/services';
 export { VesselService } from './VesselService';
 export type { VesselFilter, VesselPerformance, FleetSummary } from '../types/services';
 
-// Service instances
-const apiService = new ApiService();
-const rbacService = new RBACService(apiService);
-const personnelService = new PersonnelService(apiService);
-const vesselService = new VesselService(apiService);
+// Service instances (commented out until service classes are implemented)
+// const apiService = new ApiService();
+// const rbacService = new RBACService(apiService);
+// const personnelService = new PersonnelService(apiService);
+// const vesselService = new VesselService(apiService);
 
-// Service Registry for module integration
-export const SHARED_SERVICES = {
-  api: apiService,
-  rbac: rbacService,
-  personnel: personnelService,
-  vessel: vesselService
-} as const;
+// Service Registry for module integration (commented out until service classes are implemented)
+// export const SHARED_SERVICES = {
+//   api: apiService,
+//   rbac: rbacService,
+//   personnel: personnelService,
+//   vessel: vesselService
+// } as const;
 
 // Service version
 export const SHARED_SERVICES_VERSION = "1.0.0";
@@ -109,18 +109,21 @@ export const Validators = {
 export const ModuleIntegration = {
   isModuleAvailable: async (moduleCode: string): Promise<boolean> => {
     try {
-      const modules = await SHARED_SERVICES.api.get<Array<{ code: string; isActive: boolean }>>("/modules");
-      return modules.some((module: { code: string; isActive: boolean }) => module.code === moduleCode && module.isActive);
+      // const modules = await SHARED_SERVICES.api.get<Array<{ code: string; isActive: boolean }>>("/modules");
+      // return modules.some((module: { code: string; isActive: boolean }) => module.code === moduleCode && module.isActive);
+      return false; // Placeholder until services are implemented
     } catch {
       return false;
     }
   },
 
   getModuleConfig: async (moduleCode: string): Promise<any> => {
-    return SHARED_SERVICES.api.get(`/modules/${moduleCode}/config`);
+    // return SHARED_SERVICES.api.get(`/modules/${moduleCode}/config`);
+    return {}; // Placeholder until services are implemented
   },
 
   sendToModule: async (targetModule: string, endpoint: string, data: any): Promise<any> => {
-    return SHARED_SERVICES.api.post(`/modules/${targetModule}${endpoint}`, data);
+    // return SHARED_SERVICES.api.post(`/modules/${targetModule}${endpoint}`, data);
+    return {}; // Placeholder until services are implemented
   }
 };
