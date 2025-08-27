@@ -1,21 +1,33 @@
-# @sail/foundation Implementation Guide
+# sail-ui-kit Implementation Guide
 
 ## Overview
 
-The `@sail/foundation` package provides standardized navigation components for SAIL Phase 2 TMSA modules. It ensures consistent UI/UX across all maritime applications while maintaining flexibility for module-specific customization.
+The `sail-ui-kit` package provides standardized navigation components and a complete UI foundation for SAIL Phase 2 TMSA modules. It ensures consistent UI/UX across all maritime applications while maintaining flexibility for module-specific customization.
 
 ## Package Information
 
-- **Package Name**: `@sail/foundation`
-- **Version**: `1.0.0`
+- **Package Name**: `sail-ui-kit`
+- **Version**: `1.0.1`
 - **License**: MIT
 - **Author**: SAIL Phase 2 Team
+- **NPM**: https://www.npmjs.com/package/sail-ui-kit
 
 ## Installation
 
 ```bash
-npm install @sail/foundation
+npm install sail-ui-kit
 ```
+
+### **CRITICAL: CSS Import Required**
+
+**You MUST import the CSS file for components to display correctly:**
+
+```javascript
+// Add this import to your main application file (App.js, index.js, etc.)
+import "sail-ui-kit/dist/index.css";
+```
+
+**Without this CSS import, components will render as unstyled HTML elements.**
 
 ### Peer Dependencies
 
@@ -74,7 +86,8 @@ interface SAILFormSection {
 #### Usage Example - Ready-to-Use Form
 ```tsx
 import React from 'react';
-import { ExampleSAILForm } from '@sail/foundation';
+import { ExampleSAILForm } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 
 const CrewAppraisalPage = () => {
   const [isFormOpen, setIsFormOpen] = React.useState(false);
@@ -111,7 +124,8 @@ const CrewAppraisalPage = () => {
 #### Usage Example - Custom Form Implementation
 ```tsx
 import React from 'react';
-import { SAILForm, Label, Input, Select, SelectTrigger, SelectValue, SelectContent, SelectItem, Button } from '@sail/foundation';
+import { SAILForm, Label, Input, Select, SelectTrigger, SelectValue, SelectContent, SelectItem, Button } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 
 const CustomMaritimeForm = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -273,7 +287,8 @@ interface NavigationItem {
 #### Usage Example
 ```tsx
 import React from 'react';
-import { StandardTopNavigationBar, type NavigationItem } from '@sail/foundation';
+import { StandardTopNavigationBar, type NavigationItem } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 import { Users, FileText, Settings, BarChart } from 'lucide-react';
 
 // Define navigation items for your module
@@ -356,7 +371,8 @@ interface SidebarSection {
 #### Usage Example
 ```tsx
 import React from 'react';
-import { StandardLeftSidebar } from '@sail/foundation';
+import { StandardLeftSidebar } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 import { Filter, Users } from 'lucide-react';
 
 function App() {
@@ -396,24 +412,37 @@ function App() {
 
 #### Step 1: Install the Package
 ```bash
-npm install @sail/foundation
+npm install sail-ui-kit
 ```
 
-#### Step 2: Import Components
+#### Step 2: Import CSS (REQUIRED)
+```tsx
+// Add this to your main App.js, index.js, or root component
+import 'sail-ui-kit/dist/index.css';
+```
+
+#### Step 3: Import Components
 ```tsx
 import { 
   StandardTopNavigationBar, 
   StandardLeftSidebar,
   SAILForm,
   ExampleSAILForm,
+  Button,
+  Input,
+  Select,
+  // ... other components
   type NavigationItem,
   type SidebarSection,
   type SAILFormProps,
   type SAILFormSection
-} from '@sail/foundation';
+} from 'sail-ui-kit';
+
+// CSS import (if not in root component)
+import 'sail-ui-kit/dist/index.css';
 ```
 
-#### Step 3: Configure Tailwind CSS
+#### Step 4: Configure Tailwind CSS
 Ensure your `tailwind.config.js` includes the necessary color configurations:
 
 ```javascript
@@ -472,7 +501,8 @@ Each TMSA module should define its navigation structure:
 
 ```tsx
 // config/navigation.ts
-import { NavigationItem } from '@sail/foundation';
+import { NavigationItem } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 import { Icons } from './icons';
 
 export const MODULE_NAVIGATION: NavigationItem[] = [
@@ -590,6 +620,68 @@ function useNavigationState() {
 - Use React.memo for navigation components if needed
 - Minimize re-renders with proper key props
 
+## Troubleshooting
+
+### Common Issues
+
+#### 1. Components Render Without Styling
+
+**Problem**: Components appear as plain HTML without maritime styling, similar to the screenshot you showed.
+
+**Solution**: You must import the CSS file. Add this to your main application file:
+
+```javascript
+import 'sail-ui-kit/dist/index.css';
+```
+
+**Example**: In your `App.js` or `index.js`:
+```javascript
+import React from 'react';
+import { Button, ExampleSAILForm } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // THIS IS REQUIRED
+
+function App() {
+  return (
+    <div>
+      <Button>This button will now have proper styling</Button>
+    </div>
+  );
+}
+```
+
+#### 2. TypeScript Import Errors
+
+**Problem**: TypeScript cannot find module 'sail-ui-kit'.
+
+**Solution**: Ensure you have the correct package name and version:
+```bash
+npm uninstall @sail/foundation  # Remove old package if present
+npm install sail-ui-kit@latest  # Install correct package
+```
+
+#### 3. Missing Components or Types
+
+**Problem**: Cannot import specific components or types.
+
+**Solution**: Check the component is exported from the main package:
+```javascript
+// ✅ Correct
+import { Button, ExampleSAILForm } from 'sail-ui-kit';
+
+// ❌ Incorrect (old package name)
+import { Button } from '@sail/foundation';
+```
+
+### Agent Instructions for TMSA Module Development
+
+When creating new TMSA modules, always:
+
+1. **Install Package**: `npm install sail-ui-kit`
+2. **Import CSS**: Add `import 'sail-ui-kit/dist/index.css';` to main component
+3. **Use Components**: Import from `sail-ui-kit` package
+4. **Follow Maritime Styling**: Use blue color scheme (#5DADE2, #4A90E2)
+5. **Test Styling**: Verify components render with proper maritime styling
+
 ## Module Integration Examples
 
 ### Example 1: Maritime Form Integration
@@ -600,7 +692,8 @@ import {
   StandardLeftSidebar, 
   ExampleSAILForm,
   Button 
-} from '@sail/foundation';
+} from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 import { FileText, Users, Settings } from 'lucide-react';
 
 const CrewAppraisalModule = () => {
@@ -685,7 +778,8 @@ const CrewAppraisalModule = () => {
 
 ### Example 2: Crew Management Module
 ```tsx
-import { StandardTopNavigationBar, StandardLeftSidebar } from '@sail/foundation';
+import { StandardTopNavigationBar, StandardLeftSidebar } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 import { Users, UserPlus, FileText, Settings } from 'lucide-react';
 
 const CrewManagementApp = () => {
@@ -733,7 +827,8 @@ const CrewManagementApp = () => {
 
 ### Example 3: Safety Compliance Module
 ```tsx
-import { StandardTopNavigationBar, StandardLeftSidebar } from '@sail/foundation';
+import { StandardTopNavigationBar, StandardLeftSidebar } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
 import { Shield, AlertTriangle, CheckCircle, FileText } from 'lucide-react';
 
 const SafetyComplianceApp = () => {
@@ -849,6 +944,13 @@ For issues, feature requests, or contributions:
 4. Follow the established coding standards for maritime applications
 
 ## Version History
+
+### v1.0.1 (Current)
+- **CRITICAL FIX**: CSS export issue resolved - components now render with proper styling
+- Updated package name to `sail-ui-kit` 
+- Added comprehensive CSS import documentation
+- Fixed icon import errors (Grid3X3 → LayoutGrid)
+- Updated all examples with correct package name and CSS imports
 
 ### v1.0.0
 - Initial release
