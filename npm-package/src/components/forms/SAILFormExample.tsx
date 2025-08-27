@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import { z } from 'zod';
 import { SAILForm, SAILFormField, SAILFormGrid, SAILFormSectionComponent, SAILFormActions, SAILTable } from './index';
 import { Form } from '../ui/form';
 import { Button } from '../ui/button';
@@ -11,20 +11,31 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import type { SAILFormSection as SAILFormSectionType, SAILTableColumn } from './index';
 
 // Example schema for demonstration - matches showcase implementation
-const exampleSchema = z.object({
-  seafarersName: z.string().min(1, "Seafarer's name is required"),
-  rank: z.string().min(1, "Rank is required"),
-  nationality: z.string().min(1, "Nationality is required"),
-  vessel: z.string().min(1, "Vessel is required"),
-  signOnDate: z.string().min(1, "Sign on date is required"),
-  appraisalType: z.string().min(1, "Appraisal type is required"),
-  appraisalPeriodFrom: z.string().optional(),
-  appraisalPeriodTo: z.string().optional(),
-  primaryAppraiser: z.string().optional(),
-  personalityIndexCategory: z.string().optional(),
-});
+// const exampleSchema = z.object({
+//   seafarersName: z.string().min(1, "Seafarer's name is required"),
+//   rank: z.string().min(1, "Rank is required"),
+//   nationality: z.string().min(1, "Nationality is required"),
+//   vessel: z.string().min(1, "Vessel is required"),
+//   signOnDate: z.string().min(1, "Sign on date is required"),
+//   appraisalType: z.string().min(1, "Appraisal type is required"),
+//   appraisalPeriodFrom: z.string().optional(),
+//   appraisalPeriodTo: z.string().optional(),
+//   primaryAppraiser: z.string().optional(),
+//   personalityIndexCategory: z.string().optional(),
+// });
 
-type ExampleFormData = z.infer<typeof exampleSchema>;
+type ExampleFormData = {
+  seafarersName: string;
+  rank: string;
+  nationality: string;
+  vessel: string;
+  signOnDate: string;
+  appraisalType: string;
+  appraisalPeriodFrom?: string;
+  appraisalPeriodTo?: string;
+  primaryAppraiser?: string;
+  personalityIndexCategory?: string;
+};
 
 interface ExampleSAILFormProps {
   isOpen: boolean;
@@ -45,7 +56,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
   ]);
 
   const form = useForm<ExampleFormData>({
-    resolver: zodResolver(exampleSchema),
+    // resolver: zodResolver(exampleSchema),
     defaultValues: {
       seafarersName: 'James Michael',
       rank: '',

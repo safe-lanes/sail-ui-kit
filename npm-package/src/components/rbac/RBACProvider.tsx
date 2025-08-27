@@ -42,14 +42,14 @@ export function RBACProvider({
     if (!user) return false;
     
     const permissions = Array.isArray(permission) ? permission : [permission];
-    return permissions.some(p => user.permissions.includes(p));
+    return permissions.some((p: string) => user.permissions.indexOf(p) !== -1);
   }, [user]);
 
   const hasRole = React.useCallback((role: string | string[]): boolean => {
     if (!user) return false;
     
     const roles = Array.isArray(role) ? role : [role];
-    return roles.some(r => user.roles.includes(r));
+    return roles.some((r: string) => user.roles.indexOf(r) !== -1);
   }, [user]);
 
   const login = async (credentials: any) => {

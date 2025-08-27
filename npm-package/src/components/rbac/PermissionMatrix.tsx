@@ -63,7 +63,7 @@ export function PermissionMatrix({
 
   const hasPermission = (roleId: string, permissionId: string): boolean => {
     const role = roles.find(r => r.id === roleId);
-    return role?.permissions.includes(permissionId) || false;
+    return role?.permissions.indexOf(permissionId) !== -1 || false;
   };
 
   const togglePermission = (roleId: string, permissionId: string) => {
@@ -72,7 +72,7 @@ export function PermissionMatrix({
     const role = roles.find(r => r.id === roleId);
     if (!role) return;
     
-    const newPermissions = role.permissions.includes(permissionId)
+    const newPermissions = role.permissions.indexOf(permissionId) !== -1
       ? role.permissions.filter(p => p !== permissionId)
       : [...role.permissions, permissionId];
     

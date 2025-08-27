@@ -18,8 +18,8 @@ export function PermissionGuard({
   const permissionArray = Array.isArray(permissions) ? permissions : [permissions];
   
   const hasAccess = requireAll
-    ? permissionArray.every(permission => userPermissions.includes(permission))
-    : permissionArray.some(permission => userPermissions.includes(permission));
+    ? permissionArray.every((permission: string) => userPermissions.indexOf(permission) !== -1)
+    : permissionArray.some((permission: string) => userPermissions.indexOf(permission) !== -1);
 
   if (!hasAccess) {
     return <>{fallback}</>;

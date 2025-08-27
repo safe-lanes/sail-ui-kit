@@ -63,7 +63,7 @@ export function StatusCard({
         {/* Status Counts */}
         {showCounts && (
           <div className="flex flex-wrap gap-2">
-            {Object.entries(statusCounts).map(([status, count]) => (
+            {Object.entries(statusCounts).map(([status, count]: [string, number]) => (
               <Badge
                 key={status}
                 variant="outline"
@@ -91,7 +91,7 @@ export function StatusCard({
                   <p className="text-sm font-medium text-gray-900">
                     {item.name}
                   </p>
-                  {item.details && Object.entries(item.details).slice(0, 2).map(([key, value]) => (
+                  {item.details && Object.entries(item.details).slice(0, 2).map(([key, value]: [string, any]) => (
                     <p key={key} className="text-xs text-gray-500">
                       {key}: {String(value)}
                     </p>

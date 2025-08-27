@@ -125,7 +125,11 @@ export function OperationsDashboard({
                     <p className="text-sm text-gray-500">{vessel.location}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <VesselStatusIndicator status={vessel.status} />
+                    <VesselStatusIndicator vessel={{
+                      name: vessel.name,
+                      vesselType: vessel.type,
+                      status: { status: vessel.status, location: vessel.location }
+                    }} />
                     <SafetyRatingBadge rating={vessel.safetyRating} />
                   </div>
                 </div>
@@ -149,7 +153,7 @@ export function OperationsDashboard({
               {tmsa.slice(0, 5).map((element) => (
                 <TMSAComplianceIndicator 
                   key={element.id} 
-                  element={element} 
+                  elementData={element} 
                   compact={true}
                 />
               ))}

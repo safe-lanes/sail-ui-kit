@@ -124,7 +124,7 @@ export function CrewCard({
               By Rank
             </h4>
             <div className="flex flex-wrap gap-1">
-              {Object.entries(rankCounts).map(([rank, count]) => (
+              {Object.entries(rankCounts).map(([rank, count]: [string, number]) => (
                 <Badge key={rank} variant="outline">
                   {rank}: {count}
                 </Badge>

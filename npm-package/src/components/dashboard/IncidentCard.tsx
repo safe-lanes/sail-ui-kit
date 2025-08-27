@@ -87,7 +87,7 @@ export function IncidentCard({
 
           {/* Severity Distribution */}
           <div className="flex flex-wrap gap-2">
-            {Object.entries(severityCounts).map(([severity, count]) => (
+            {Object.entries(severityCounts).map(([severity, count]: [string, number]) => (
               <Badge
                 key={severity}
                 variant="outline"

@@ -1,0 +1,301 @@
+src/components/dashboard/CrewCard.tsx:127:23 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+127               {Object.entries(rankCounts).map(([rank, count]) => (
+                          ~~~~~~~
+
+src/components/dashboard/CrewCard.tsx:127:49 - error TS7031: Binding element 'rank' implicitly has an 'any' type.
+
+127               {Object.entries(rankCounts).map(([rank, count]) => (
+                                                    ~~~~
+
+src/components/dashboard/CrewCard.tsx:127:55 - error TS7031: Binding element 'count' implicitly has an 'any' type.
+
+127               {Object.entries(rankCounts).map(([rank, count]) => (
+                                                          ~~~~~
+
+src/components/dashboard/IncidentCard.tsx:90:21 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+90             {Object.entries(severityCounts).map(([severity, count]) => (
+                       ~~~~~~~
+
+src/components/dashboard/IncidentCard.tsx:90:51 - error TS7031: Binding element 'severity' implicitly has an 'any' type.
+
+90             {Object.entries(severityCounts).map(([severity, count]) => (
+                                                     ~~~~~~~~
+
+src/components/dashboard/IncidentCard.tsx:90:61 - error TS7031: Binding element 'count' implicitly has an 'any' type.
+
+90             {Object.entries(severityCounts).map(([severity, count]) => (
+                                                               ~~~~~
+
+src/components/dashboard/StatusCard.tsx:66:21 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+66             {Object.entries(statusCounts).map(([status, count]) => (
+                       ~~~~~~~
+
+src/components/dashboard/StatusCard.tsx:66:49 - error TS7031: Binding element 'status' implicitly has an 'any' type.
+
+66             {Object.entries(statusCounts).map(([status, count]) => (
+                                                   ~~~~~~
+
+src/components/dashboard/StatusCard.tsx:66:57 - error TS7031: Binding element 'count' implicitly has an 'any' type.
+
+66             {Object.entries(statusCounts).map(([status, count]) => (
+                                                           ~~~~~
+
+src/components/dashboard/StatusCard.tsx:94:43 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+94                   {item.details && Object.entries(item.details).slice(0, 2).map(([key, value]) => (
+                                             ~~~~~~~
+
+src/components/dashboard/StatusCard.tsx:94:83 - error TS7031: Binding element 'key' implicitly has an 'any' type.
+
+94                   {item.details && Object.entries(item.details).slice(0, 2).map(([key, value]) => (
+                                                                                     ~~~
+
+src/components/dashboard/StatusCard.tsx:94:88 - error TS7031: Binding element 'value' implicitly has an 'any' type.
+
+94                   {item.details && Object.entries(item.details).slice(0, 2).map(([key, value]) => (
+                                                                                          ~~~~~
+
+src/components/forms/SAILFormExample.tsx:3:29 - error TS2307: Cannot find module '@hookform/resolvers/zod' or its corresponding type declarations.
+
+3 import { zodResolver } from '@hookform/resolvers/zod';
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/forms/SAILFormExample.tsx:4:19 - error TS2307: Cannot find module 'zod' or its corresponding type declarations.
+
+4 import { z } from 'zod';
+                    ~~~~~
+
+src/components/maritime/OperationsDashboard.tsx:128:22 - error TS2741: Property 'vessel' is missing in type '{ status: VesselStatus; }' but required in type 'VesselStatusIndicatorProps'.
+
+128                     <VesselStatusIndicator status={vessel.status} />
+                         ~~~~~~~~~~~~~~~~~~~~~
+
+  src/components/maritime/VesselStatusIndicator.tsx:21:3
+    21   vessel: Vessel;
+         ~~~~~~
+    'vessel' is declared here.
+
+src/components/maritime/OperationsDashboard.tsx:152:19 - error TS2322: Type 'TMSAElement' is not assignable to type 'string'.
+
+152                   element={element}
+                      ~~~~~~~
+
+  src/components/maritime/TMSAComplianceIndicator.tsx:19:3
+    19   element?: string;
+         ~~~~~~~
+    The expected type comes from property 'element' which is declared here on type 'IntrinsicAttributes & TMSAComplianceIndicatorProps'
+
+src/components/rbac/PermissionGuard.tsx:21:59 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+21     ? permissionArray.every(permission => userPermissions.includes(permission))
+                                                             ~~~~~~~~
+
+src/components/rbac/PermissionGuard.tsx:22:58 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+22     : permissionArray.some(permission => userPermissions.includes(permission));
+                                                            ~~~~~~~~
+
+src/components/rbac/PermissionMatrix.tsx:66:30 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+66     return role?.permissions.includes(permissionId) || false;
+                                ~~~~~~~~
+
+src/components/rbac/PermissionMatrix.tsx:75:45 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+75     const newPermissions = role.permissions.includes(permissionId)
+                                               ~~~~~~~~
+
+src/components/rbac/RBACProvider.tsx:45:51 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+45     return permissions.some(p => user.permissions.includes(p));
+                                                     ~~~~~~~~
+
+src/components/rbac/RBACProvider.tsx:52:39 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+52     return roles.some(r => user.roles.includes(r));
+                                         ~~~~~~~~
+
+src/components/rbac/RoleBasedAccess.tsx:21:41 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+21     ? roleArray.every(role => userRoles.includes(role))
+                                           ~~~~~~~~
+
+src/components/rbac/RoleBasedAccess.tsx:22:40 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+22     : roleArray.some(role => userRoles.includes(role));
+                                          ~~~~~~~~
+
+src/components/rbac/RoleEditor.tsx:162:21 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+162             {Object.entries(permissionCategories).map(([category, categoryPermissions]) => {
+                        ~~~~~~~
+
+src/components/rbac/RoleEditor.tsx:162:57 - error TS7031: Binding element 'category' implicitly has an 'any' type.
+
+162             {Object.entries(permissionCategories).map(([category, categoryPermissions]) => {
+                                                            ~~~~~~~~
+
+src/components/rbac/RoleEditor.tsx:162:67 - error TS7031: Binding element 'categoryPermissions' implicitly has an 'any' type.
+
+162             {Object.entries(permissionCategories).map(([category, categoryPermissions]) => {
+                                                                      ~~~~~~~~~~~~~~~~~~~
+
+src/components/rbac/RoleEditor.tsx:163:59 - error TS7006: Parameter 'p' implicitly has an 'any' type.
+
+163               const categoryIds = categoryPermissions.map(p => p.id);
+                                                              ~
+
+src/components/rbac/RoleEditor.tsx:164:56 - error TS7006: Parameter 'id' implicitly has an 'any' type.
+
+164               const selectedCount = categoryIds.filter(id => selectedPermissions.has(id)).length;
+                                                           ~~
+
+src/components/rbac/RoleEditor.tsx:185:47 - error TS7006: Parameter 'permission' implicitly has an 'any' type.
+
+185                     {categoryPermissions.map((permission) => (
+                                                  ~~~~~~~~~~
+
+src/components/ui/aspect-ratio.tsx:1:39 - error TS2307: Cannot find module '@radix-ui/react-aspect-ratio' or its corresponding type declarations.
+
+1 import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio"
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/calendar.tsx:55:9 - error TS2353: Object literal may only specify known properties, and 'IconLeft' does not exist in type 'Partial<CustomComponents>'.
+
+55         IconLeft: ({ className, ...props }) => (
+           ~~~~~~~~
+
+  node_modules/react-day-picker/dist/cjs/types/props.d.ts:283:5
+    283     components?: Partial<CustomComponents>;
+            ~~~~~~~~~~
+    The expected type comes from property 'components' which is declared here on type 'IntrinsicAttributes & DayPickerProps'
+
+src/components/ui/calendar.tsx:55:22 - error TS7031: Binding element 'className' implicitly has an 'any' type.
+
+55         IconLeft: ({ className, ...props }) => (
+                        ~~~~~~~~~
+
+src/components/ui/calendar.tsx:58:23 - error TS7031: Binding element 'className' implicitly has an 'any' type.
+
+58         IconRight: ({ className, ...props }) => (
+                         ~~~~~~~~~
+
+src/components/ui/carousel.tsx:4:8 - error TS2307: Cannot find module 'embla-carousel-react' or its corresponding type declarations.
+
+4 } from "embla-carousel-react"
+         ~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/chart.tsx:4:36 - error TS2307: Cannot find module 'recharts' or its corresponding type declarations.
+
+4 import * as RechartsPrimitive from "recharts"
+                                     ~~~~~~~~~~
+
+src/components/ui/chart.tsx:71:30 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+71   const colorConfig = Object.entries(config).filter(
+                                ~~~~~~~
+
+src/components/ui/chart.tsx:72:9 - error TS7031: Binding element 'config' implicitly has an 'any' type.
+
+72     ([, config]) => config.theme || config.color
+           ~~~~~~
+
+src/components/ui/chart.tsx:82:24 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+82         __html: Object.entries(THEMES)
+                          ~~~~~~~
+
+src/components/ui/chart.tsx:84:15 - error TS7031: Binding element 'theme' implicitly has an 'any' type.
+
+84             ([theme, prefix]) => `
+                 ~~~~~
+
+src/components/ui/chart.tsx:84:22 - error TS7031: Binding element 'prefix' implicitly has an 'any' type.
+
+84             ([theme, prefix]) => `
+                        ~~~~~~
+
+src/components/ui/chart.tsx:87:10 - error TS7031: Binding element 'key' implicitly has an 'any' type.
+
+87   .map(([key, itemConfig]) => {
+            ~~~
+
+src/components/ui/chart.tsx:87:15 - error TS7031: Binding element 'itemConfig' implicitly has an 'any' type.
+
+87   .map(([key, itemConfig]) => {
+                 ~~~~~~~~~~
+
+src/components/ui/chart.tsx:188:25 - error TS7006: Parameter 'item' implicitly has an 'any' type.
+
+188           {payload.map((item, index) => {
+                            ~~~~
+
+src/components/ui/chart.tsx:188:31 - error TS7006: Parameter 'index' implicitly has an 'any' type.
+
+188           {payload.map((item, index) => {
+                                  ~~~~~
+
+src/components/ui/chart.tsx:288:23 - error TS7006: Parameter 'item' implicitly has an 'any' type.
+
+288         {payload.map((item) => {
+                          ~~~~
+
+src/constants/rbac.ts:63:25 - error TS2550: Property 'values' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+63     permissions: Object.values(DEFAULT_PERMISSIONS)
+                           ~~~~~~
+
+src/constants/rbac.ts:76:17 - error TS2550: Property 'values' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+76       ...Object.values(DEFAULT_PERMISSIONS).filter(p => p.resource.startsWith('tmsa-'))
+                   ~~~~~~
+
+src/constants/rbac.ts:76:52 - error TS7006: Parameter 'p' implicitly has an 'any' type.
+
+76       ...Object.values(DEFAULT_PERMISSIONS).filter(p => p.resource.startsWith('tmsa-'))
+                                                      ~
+
+src/services/ApiService.ts:39:14 - error TS2550: Property 'entries' does not exist on type 'ObjectConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2017' or later.
+
+39       Object.entries(options.params).forEach(([key, value]) => {
+                ~~~~~~~
+
+src/services/ApiService.ts:39:48 - error TS7031: Binding element 'key' implicitly has an 'any' type.
+
+39       Object.entries(options.params).forEach(([key, value]) => {
+                                                  ~~~
+
+src/services/ApiService.ts:39:53 - error TS7031: Binding element 'value' implicitly has an 'any' type.
+
+39       Object.entries(options.params).forEach(([key, value]) => {
+                                                       ~~~~~
+
+src/services/RBACService.ts:183:26 - error TS2550: Property 'includes' does not exist on type 'string[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2016' or later.
+
+183         return roleNames.includes(roleName);
+                             ~~~~~~~~
+
+
+Found 53 errors in 17 files.
+
+Errors  Files
+     3  src/components/dashboard/CrewCard.tsx:127
+     3  src/components/dashboard/IncidentCard.tsx:90
+     6  src/components/dashboard/StatusCard.tsx:66
+     2  src/components/forms/SAILFormExample.tsx:3
+     2  src/components/maritime/OperationsDashboard.tsx:128
+     2  src/components/rbac/PermissionGuard.tsx:21
+     2  src/components/rbac/PermissionMatrix.tsx:66
+     2  src/components/rbac/RBACProvider.tsx:45
+     2  src/components/rbac/RoleBasedAccess.tsx:21
+     6  src/components/rbac/RoleEditor.tsx:162
+     1  src/components/ui/aspect-ratio.tsx:1
+     3  src/components/ui/calendar.tsx:55
+     1  src/components/ui/carousel.tsx:4
+    11  src/components/ui/chart.tsx:4
+     3  src/constants/rbac.ts:63
+     3  src/services/ApiService.ts:39
+     1  src/services/RBACService.ts:183

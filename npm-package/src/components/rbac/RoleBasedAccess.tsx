@@ -18,8 +18,8 @@ export function RoleBasedAccess({
   const roleArray = Array.isArray(roles) ? roles : [roles];
   
   const hasAccess = requireAll
-    ? roleArray.every(role => userRoles.includes(role))
-    : roleArray.some(role => userRoles.includes(role));
+    ? roleArray.every((role: string) => userRoles.indexOf(role) !== -1)
+    : roleArray.some((role: string) => userRoles.indexOf(role) !== -1);
 
   if (!hasAccess) {
     return <>{fallback}</>;
