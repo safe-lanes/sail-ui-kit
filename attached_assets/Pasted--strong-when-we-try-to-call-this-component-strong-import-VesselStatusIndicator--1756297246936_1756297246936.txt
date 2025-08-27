@@ -1,0 +1,76 @@
+<strong>when we try to call this component  </strong>
+
+
+"
+import { 
+  VesselStatusIndicator,
+  SafetyRatingBadge,
+  TMSAComplianceIndicator 
+} from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
+
+export default function App() {
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      <VesselStatusIndicator 
+        vessel={{
+          name: "MV Atlantic Star",
+          vesselType: "Oil Tanker",
+          status: { status: "active", location: "Port of Rotterdam" }
+        }}
+        size="md"
+        showDetails={true}
+      />
+
+      <SafetyRatingBadge 
+        rating={4}
+        type="vessel"
+        showDetails={true}
+      />
+
+      <TMSAComplianceIndicator 
+        element="EL4"
+        status="compliant"
+        score={95}
+      />
+    </div>
+  );
+}
+"
+
+
+
+<strong>then it's  throwing error</strong> "
+
+The above error occurred in the <VesselStatusIndicator> component:
+
+VesselStatusIndicator@http://localhost:5173/node_modules/.vite/deps/sail-ui-kit.js?v=49871d8a:33445:31
+div
+App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. <anonymous code>:1:147461
+17:48:28.053
+The above error occurred in the <SafetyRatingBadge> component:
+
+SafetyRatingBadge@http://localhost:5173/node_modules/.vite/deps/sail-ui-kit.js?v=49871d8a:33476:27
+div
+App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. <anonymous code>:1:147461
+17:48:28.053
+The above error occurred in the <TMSAComplianceIndicator> component:
+
+TMSAComplianceIndicator@http://localhost:5173/node_modules/.vite/deps/sail-ui-kit.js?v=49871d8a:33502:33
+div
+App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. <anonymous code>:1:147461
+17:48:28.054
+Uncaught TypeError: can't access property "color", config is undefined
+    VesselStatusIndicator http://localhost:5173/node_modules/.vite/deps/sail-ui-kit.js?v=49871d8a:33447
+    renderWithHooks
+"
+ 

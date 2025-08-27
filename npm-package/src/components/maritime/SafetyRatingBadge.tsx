@@ -12,7 +12,9 @@ export interface SafetyMetrics {
 }
 
 interface SafetyRatingBadgeProps {
-  rating: SafetyRating;
+  rating: SafetyRating | number;
+  type?: 'vessel' | 'crew' | 'company';
+  showDetails?: boolean;
   metrics?: SafetyMetrics;
   className?: string;
   showTooltip?: boolean;
@@ -46,29 +48,89 @@ const ratingConfig = {
   }
 };
 
+// Convert numeric rating (1-5) to letter grade (A-E)
+function convertRating(rating: SafetyRating | number): SafetyRating {
+  if (typeof rating === 'string') return rating;
+  
+  // Convert 1-5 scale to A-E (5=A, 4=B, 3=C, 2=D, 1=E)
+  const ratingMap: Record<number, SafetyRating> = {
+    5: 'A',
+    4: 'B', 
+    3: 'C',
+    2: 'D',
+    1: 'E'
+  };
+  
+  return ratingMap[rating] || 'E';
+}
+
 export function SafetyRatingBadge({ 
   rating, 
+  type = 'vessel',
+  showDetails = false,
   metrics, 
   className = '', 
   showTooltip = true 
 }: SafetyRatingBadgeProps) {
-  const config = ratingConfig[rating];
+  const letterRating = convertRating(rating);
+  const config = ratingConfig[letterRating];
+  
+  if (!config) {
+    return <div className="text-red-500">Invalid rating: {rating}</div>;
+  }
+  
+  if (!showDetails) {
+    return (
+      <div className="relative inline-block">
+        <Badge 
+          variant="outline" 
+          className={`${config.color} font-semibold ${className}`}
+          title={showTooltip ? config.description : undefined}
+        >
+          {config.label}
+        </Badge>
+        
+        {metrics && showTooltip && (
+          <div className="absolute z-10 invisible group-hover:visible bg-black text-white text-xs rounded p-2 -top-8 left-0 whitespace-nowrap">
+            <div>Score: {metrics.score}/100</div>
+            <div>Incidents: {metrics.incidentCount}</div>
+            <div>Compliance: {metrics.complianceScore}%</div>
+          </div>
+        )}
+      </div>
+    );
+  }
   
   return (
-    <div className="relative inline-block">
-      <Badge 
-        variant="outline" 
-        className={`${config.color} font-semibold ${className}`}
-        title={showTooltip ? config.description : undefined}
-      >
-        {config.label}
-      </Badge>
+    <div className={`space-y-2 p-3 border rounded-lg ${className}`}>
+      <div className="flex items-center justify-between">
+        <div>
+          <h4 className="font-medium text-sm">Safety Rating</h4>
+          <p className="text-xs text-gray-500 capitalize">{type}</p>
+        </div>
+        <Badge 
+          variant="outline" 
+          className={`${config.color} font-semibold`}
+        >
+          {config.label}
+        </Badge>
+      </div>
+      <p className="text-xs text-gray-600">{config.description}</p>
       
-      {metrics && showTooltip && (
-        <div className="absolute z-10 invisible group-hover:visible bg-black text-white text-xs rounded p-2 -top-8 left-0 whitespace-nowrap">
-          <div>Score: {metrics.score}/100</div>
-          <div>Incidents: {metrics.incidentCount}</div>
-          <div>Compliance: {metrics.complianceScore}%</div>
+      {metrics && (
+        <div className="space-y-1 text-xs">
+          <div className="flex justify-between">
+            <span>Score:</span>
+            <span>{metrics.score}/100</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Incidents:</span>
+            <span>{metrics.incidentCount}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Compliance:</span>
+            <span>{metrics.complianceScore}%</span>
+          </div>
         </div>
       )}
     </div>

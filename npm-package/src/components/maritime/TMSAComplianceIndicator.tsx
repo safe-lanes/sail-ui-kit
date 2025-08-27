@@ -15,7 +15,12 @@ export interface TMSAElement {
 }
 
 interface TMSAComplianceIndicatorProps {
-  element: TMSAElement;
+  // New simplified props format (from README)
+  element?: string;
+  status?: ComplianceStatus;
+  score?: number;
+  // Original complex props format for backward compatibility
+  elementData?: TMSAElement;
   showProgress?: boolean;
   compact?: boolean;
   className?: string;
@@ -44,13 +49,48 @@ const statusConfig = {
   }
 };
 
+const TMSA_ELEMENT_NAMES: Record<string, string> = {
+  'EL1': 'Management & Leadership',
+  'EL2': 'Shore HR Management', 
+  'EL3': 'Crewing Management',
+  'EL4': 'Technical Management',
+  'EL5': 'Navigation',
+  'EL6': 'Cargo Operations',
+  'EL6A': 'Mooring Operations',
+  'EL7': 'Management of Change',
+  'EL8': 'Incident Investigation',
+  'EL9': 'Safety',
+  'EL10': 'Environment & Energy Management',
+  'EL11': 'Emergency Management',
+  'EL12': 'Audits & Inspections',
+  'EL13': 'Security & Cyber Security'
+};
+
 export function TMSAComplianceIndicator({ 
-  element, 
+  // New props format
+  element: elementCode,
+  status: elementStatus,
+  score: elementScore,
+  // Legacy props format
+  elementData, 
   showProgress = true, 
   compact = false,
   className = '' 
 }: TMSAComplianceIndicatorProps) {
+  // Handle both new and legacy prop formats
+  const element = elementData || {
+    id: elementCode || 'Unknown',
+    name: elementCode ? TMSA_ELEMENT_NAMES[elementCode] || elementCode : 'Unknown Element',
+    code: elementCode || 'Unknown',
+    status: elementStatus || 'not-assessed',
+    score: elementScore
+  };
+  
   const config = statusConfig[element.status];
+  
+  if (!config) {
+    return <div className="text-red-500">Invalid status: {element.status}</div>;
+  }
   
   if (compact) {
     return (
@@ -65,7 +105,7 @@ export function TMSAComplianceIndicator({
   }
   
   return (
-    <div className={`space-y-2 ${className}`}>
+    <div className={`space-y-2 p-3 border rounded-lg ${className}`}>
       <div className="flex items-center justify-between">
         <div>
           <h4 className="font-medium text-sm">{element.name}</h4>
@@ -90,9 +130,9 @@ export function TMSAComplianceIndicator({
         </div>
       )}
       
-      {element.lastAssessment && (
+      {elementData?.lastAssessment && (
         <p className="text-xs text-gray-500">
-          Last assessed: {new Date(element.lastAssessment).toLocaleDateString()}
+          Last assessed: {new Date(elementData.lastAssessment).toLocaleDateString()}
         </p>
       )}
     </div>
