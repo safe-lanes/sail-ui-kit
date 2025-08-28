@@ -91,7 +91,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
+        <Card className="bg-[#ffffff]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Fleet Status</CardTitle>
             <Ship className="h-4 w-4 text-muted-foreground" />
@@ -104,7 +104,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#ffffff]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Incidents</CardTitle>
             <AlertTriangle className="h-4 w-4 text-muted-foreground" />
@@ -117,7 +117,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#ffffff]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">TMSA Compliance</CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
@@ -132,7 +132,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#ffffff]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Crew</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -157,7 +157,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
         </TabsList>
 
         <TabsContent value="fleet" className="space-y-4">
-          <Card>
+          <Card className="bg-[#ffffff]">
             <CardHeader>
               <CardTitle>Fleet Status Overview</CardTitle>
             </CardHeader>
@@ -166,7 +166,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
                 {vessels.map((vessel) => (
                   <Card 
                     key={vessel.id} 
-                    className={`cursor-pointer transition-colors ${
+                    className={`bg-[#ffffff] cursor-pointer transition-colors ${
                       selectedVessel === vessel.id ? "ring-2 ring-primary" : ""
                     }`}
                     onClick={() => setSelectedVessel(selectedVessel === vessel.id ? null : vessel.id)}
@@ -216,14 +216,14 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
         </TabsContent>
 
         <TabsContent value="compliance" className="space-y-4">
-          <Card>
+          <Card className="bg-[#ffffff]">
             <CardHeader>
               <CardTitle>TMSA Elements Compliance Status</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {tmsakElements.map(({ element, status }) => (
-                  <Card key={element.id}>
+                  <Card key={element.id} className="bg-[#ffffff]">
                     <CardContent className="pt-6">
                       <TMSAComplianceIndicator
                         element={element}
@@ -240,7 +240,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
         </TabsContent>
 
         <TabsContent value="incidents" className="space-y-4">
-          <Card>
+          <Card className="bg-[#ffffff]">
             <CardHeader>
               <CardTitle>Incident Summary</CardTitle>
             </CardHeader>
@@ -272,7 +272,7 @@ export const OperationsDashboard: React.FC<OperationsDashboardProps> = ({
         </TabsContent>
 
         <TabsContent value="safety" className="space-y-4">
-          <Card>
+          <Card className="bg-[#ffffff]">
             <CardHeader>
               <CardTitle>Fleet Safety Overview</CardTitle>
             </CardHeader>
