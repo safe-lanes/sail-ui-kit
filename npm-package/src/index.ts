@@ -1,4 +1,4 @@
-// sail-ui-kit - Maritime UI Components and Shared Foundation
+// scomp - Maritime UI Components and Shared Foundation
 // Main entry point for SAIL Phase 2 TMSA Modules
 
 // ===== CORE UI COMPONENTS =====
