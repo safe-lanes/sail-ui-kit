@@ -104,9 +104,9 @@ export const SAILForm: React.FC<SAILFormProps> = ({
         
         {/* Body - Responsive split layout */}
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-          {/* Left Sidebar - Compact on mobile, full on desktop */}
-          <div className="w-full md:w-80 bg-gray-50 p-2 md:p-6 border-b md:border-b-0 md:border-r border-gray-200">
-            <div className="space-y-1 md:space-y-1">
+          {/* Left Sidebar - Very compact on mobile, full on desktop */}
+          <div className="w-full md:w-80 bg-gray-50 p-1 md:p-6 max-h-20 md:max-h-none overflow-hidden md:overflow-visible border-b md:border-b-0 md:border-r border-gray-200">
+            <div className="flex md:flex-col md:space-y-1 space-x-1 md:space-x-0 overflow-x-auto md:overflow-x-visible">
               {sectionsWithLetters.map((section, index) => {
                 const isActive = activeSection === section.id;
                 const isCompleted = section.isCompleted || false;
@@ -115,7 +115,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                   <div key={section.id}>
                     {/* Section Item - Clickable */}
                     <div 
-                      className="flex items-start gap-2 md:gap-4 cursor-pointer hover:bg-gray-100 p-1 md:p-2 rounded"
+                      className="flex items-center md:items-start gap-1 md:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-2 rounded flex-shrink-0"
                       onClick={() => setActiveSection(section.id)}
                     >
                       <div className={`w-12 h-12 ${isActive ? 'bg-[#16569e]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
@@ -128,9 +128,9 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                       </div>
                     </div>
                     
-                    {/* Connecting line */}
+                    {/* Connecting line - Hidden on mobile, visible on desktop */}
                     {index < sectionsWithLetters.length - 1 && (
-                      <div className="ml-8 w-0.5 h-4 bg-gray-300"></div>
+                      <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                     )}
                   </div>
                 );
