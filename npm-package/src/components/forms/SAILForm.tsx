@@ -64,7 +64,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-1">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-[4px]">
       {/* Modal Card with shadow and rounded corners */}
       <div className={`bg-white rounded-xl shadow-2xl w-full h-[90vh] flex flex-col relative ${className}`}>
         {/* Header - Exact match to reference */}
