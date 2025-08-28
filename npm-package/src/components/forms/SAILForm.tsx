@@ -147,7 +147,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                   <>
                     {/* Section Header */}
                     <div className="p-6 pb-4">
-                      <h2 className="text-xl font-medium text-[#16569e] mb-2">{currentSection.title}</h2>
+                      <h2 className="text-xl font-semibold text-[#16569e] mb-2">{currentSection.title}</h2>
                       {currentSection.description && (
                         <p className="text-sm text-[#16569e] border-b-2 border-[#16569e] pb-2">{currentSection.description}</p>
                       )}

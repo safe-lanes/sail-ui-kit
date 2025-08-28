@@ -967,7 +967,7 @@ export const ComponentShowcase: React.FC = () => {
                                 <>
                                   {/* Section Header */}
                                   <div className="p-6 pb-4">
-                                    <h2 className="text-xl font-medium mb-2 text-[#16569e]">Part A: Seafarer's Information</h2>
+                                    <h2 className="text-xl font-semibold mb-2 text-[#16569e]">Part A: Seafarer's Information</h2>
                                     <p className="text-sm text-[#16569e] border-b-2 border-[#16569e] pb-2">Enter details as applicable</p>
                                   </div>
                                   
@@ -1055,7 +1055,7 @@ export const ComponentShowcase: React.FC = () => {
                                 <>
                                   {/* Section Header */}
                                   <div className="p-6 pb-4">
-                                    <h2 className="text-xl font-medium text-[#16569e] mb-2">Part B: Information at Start of Appraisal Period</h2>
+                                    <h2 className="text-xl font-semibold text-[#16569e] mb-2">Part B: Information at Start of Appraisal Period</h2>
                                     <p className="text-sm text-[#16569e] border-b-2 border-[#16569e] pb-2">Add below at the start of the Appraisal Period except the Evaluation which must be completed at the end of the Appraisal Period</p>
                                   </div>
                                   
