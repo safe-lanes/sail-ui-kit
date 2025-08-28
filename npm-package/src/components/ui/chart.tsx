@@ -268,7 +268,8 @@ const ChartLegendContent = React.forwardRef<
         className
       )}
     >
-      {payload.map(item => {
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      {payload.map((item: any) => {
         const key = `${nameKey || item.dataKey || 'value'}`;
         const itemConfig = getPayloadConfigFromPayload(config, item, key);
 

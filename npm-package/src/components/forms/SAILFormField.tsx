@@ -48,7 +48,8 @@ export const SAILFormField: React.FC<SAILFormFieldProps> = ({
     <FormField
       control={control}
       name={name}
-      render={({ field }) => (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      render={({ field }: { field: any }) => (
         <FormItem className={className}>
           {label && (
             <FormLabel className="text-xs text-gray-500 tracking-wide">
