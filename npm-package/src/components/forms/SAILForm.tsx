@@ -106,7 +106,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
         <div className="flex-1 flex overflow-hidden">
           {/* Left Sidebar - Complete stepper navigation */}
           <div className="w-80 bg-gray-50 p-6">
-            <div className="space-y-4">
+            <div className="space-y-1">
               {sectionsWithLetters.map((section, index) => {
                 const isActive = activeSection === section.id;
                 const isCompleted = section.isCompleted || false;
@@ -130,7 +130,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                     
                     {/* Connecting line */}
                     {index < sectionsWithLetters.length - 1 && (
-                      <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                      <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                     )}
                   </div>
                 );

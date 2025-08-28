@@ -851,7 +851,7 @@ export const ComponentShowcase: React.FC = () => {
                       <div className="flex-1 flex overflow-hidden">
                         {/* Left Sidebar - Complete stepper navigation */}
                         <div className="w-80 bg-gray-50 p-6">
-                          <div className="space-y-4">
+                          <div className="space-y-1">
                             {/* Section A - Clickable */}
                             <div 
                               className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
@@ -866,7 +866,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line */}
-                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section B - Clickable */}
                             <div 
@@ -883,7 +883,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line */}
-                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section C - Non-clickable for demo */}
                             <div className="flex items-start gap-4 opacity-60">
@@ -898,7 +898,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line */}
-                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section D - Non-clickable for demo */}
                             <div className="flex items-start gap-4 opacity-60">
@@ -913,7 +913,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line */}
-                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section E - Non-clickable for demo */}
                             <div className="flex items-start gap-4 opacity-60">
@@ -927,7 +927,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line */}
-                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section F - Non-clickable for demo */}
                             <div className="flex items-start gap-4 opacity-60">
@@ -941,7 +941,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line */}
-                            <div className="ml-6 w-0.5 h-6 bg-gray-300"></div>
+                            <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section G - Non-clickable for demo */}
                             <div className="flex items-start gap-4 opacity-60">
