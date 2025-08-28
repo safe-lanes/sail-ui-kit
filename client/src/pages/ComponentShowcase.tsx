@@ -826,7 +826,7 @@ export const ComponentShowcase: React.FC = () => {
 
                 {/* SAIL Form Demo Popup - Proper Modal Overlay */}
                 {showSAILFormDemo && (
-                  <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                  <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2">
                     {/* Modal Card with shadow and rounded corners */}
                     <div className="bg-white rounded-xl shadow-2xl max-w-7xl w-full h-[90vh] flex flex-col relative">
                       {/* Header - Exact match to reference */}
@@ -957,7 +957,7 @@ export const ComponentShowcase: React.FC = () => {
                         </div>
                         
                         {/* Right Content Area - Dynamic based on current section */}
-                        <div className="flex-1 bg-gray-100 overflow-y-auto rounded-br-xl">
+                        <div className="flex-1 bg-gray-50 overflow-y-auto rounded-br-xl">
                           <div className="p-8">
                             {/* White Content Card - Changes based on section */}
                             <div className="bg-white rounded-lg shadow-sm border border-gray-200">
