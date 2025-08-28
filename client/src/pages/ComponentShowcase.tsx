@@ -886,7 +886,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section C - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60">
+                            <div className="flex items-start gap-4 opacity-60 p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 C
                               </div>
@@ -901,7 +901,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section D - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60">
+                            <div className="flex items-start gap-4 opacity-60 p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 D
                               </div>
@@ -916,7 +916,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section E - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60">
+                            <div className="flex items-start gap-4 opacity-60 p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 E
                               </div>
@@ -930,7 +930,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section F - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60">
+                            <div className="flex items-start gap-4 opacity-60 p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 F
                               </div>
@@ -944,7 +944,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
                             
                             {/* Section G - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60">
+                            <div className="flex items-start gap-4 opacity-60 p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 G
                               </div>
