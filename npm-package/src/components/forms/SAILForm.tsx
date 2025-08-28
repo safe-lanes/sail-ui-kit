@@ -68,7 +68,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
       {/* Modal Card with shadow and rounded corners */}
       <div className={`bg-white rounded-xl shadow-2xl w-full h-[90vh] flex flex-col relative ${className}`}>
         {/* Header - Exact match to reference */}
-        <div className="bg-white border-b border-gray-200 p-4 flex justify-between items-center rounded-t-xl">
+        <div className="bg-white border-b border-gray-200 p-3 md:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 rounded-t-xl">
           <div className="flex items-center gap-3">
             <Button 
               variant="ghost" 
@@ -102,10 +102,10 @@ export const SAILForm: React.FC<SAILFormProps> = ({
           </div>
         </div>
         
-        {/* Body - Split layout exactly like reference */}
-        <div className="flex-1 flex overflow-hidden">
-          {/* Left Sidebar - Complete stepper navigation */}
-          <div className="w-80 bg-gray-50 p-6">
+        {/* Body - Responsive split layout */}
+        <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+          {/* Left Sidebar - Responsive stepper navigation */}
+          <div className="w-full md:w-80 bg-gray-50 p-4 md:p-6 border-b md:border-b-0 md:border-r border-gray-200">
             <div className="space-y-1">
               {sectionsWithLetters.map((section, index) => {
                 const isActive = activeSection === section.id;
@@ -138,9 +138,9 @@ export const SAILForm: React.FC<SAILFormProps> = ({
             </div>
           </div>
           
-          {/* Right Content Area - With proper card styling */}
-          <div className="flex-1 bg-gray-50 overflow-y-auto rounded-br-xl">
-            <div className="p-8">
+          {/* Right Content Area - Responsive styling */}
+          <div className="flex-1 bg-gray-50 overflow-y-auto">
+            <div className="p-4 md:p-8">
               {/* White Content Card - This matches the reference */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200">
                 {currentSection && (

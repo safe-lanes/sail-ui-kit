@@ -124,7 +124,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
       content: (
         <div className="space-y-6">
           {/* Row 1 */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="space-y-2">
               <Label className="text-sm font-medium text-gray-700">Seafarer's Name</Label>
               <Input 
@@ -164,7 +164,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
           </div>
           
           {/* Row 2 */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="space-y-2">
               <Label className="text-sm font-medium text-gray-700">Vessel</Label>
               <Select>
@@ -203,7 +203,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
           </div>
           
           {/* Row 3 */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="space-y-2">
               <Label className="text-sm font-medium text-gray-700">Appraisal Period From</Label>
               <Input 
@@ -238,7 +238,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
           </div>
           
           {/* Row 4 */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="space-y-2">
               <Label className="text-sm font-medium text-gray-700">Personality Index (PI) Category</Label>
               <Select>
@@ -288,7 +288,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
             
             {/* Table Header */}
             <div className="bg-gray-50 border border-gray-200 rounded-t">
-              <div className="grid grid-cols-4 gap-4 p-3 text-sm font-medium text-gray-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 p-3 text-sm font-medium text-gray-700">
                 <div>S.No</div>
                 <div>Training</div>
                 <div>Evaluation</div>
@@ -304,7 +304,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
             ) : (
               <div className="border border-gray-200 border-t-0 rounded-b bg-white">
                 {tableData.map((item, index) => (
-                  <div key={item.id} className="grid grid-cols-4 gap-4 p-3 border-b border-gray-100 last:border-b-0">
+                  <div key={item.id} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 p-3 border-b border-gray-100 last:border-b-0">
                     <div className="text-sm text-gray-700">{index + 1}</div>
                     <div className="text-sm text-gray-700">{item.training}</div>
                     <div className="text-sm text-gray-700">{item.evaluation}</div>
@@ -334,7 +334,7 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
             
             {/* Table Header */}
             <div className="bg-gray-50 border border-gray-200 rounded-t">
-              <div className="grid grid-cols-4 gap-4 p-3 text-sm font-medium text-gray-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 p-3 text-sm font-medium text-gray-700">
                 <div>S.No</div>
                 <div>Target Setting</div>
                 <div>Evaluation</div>

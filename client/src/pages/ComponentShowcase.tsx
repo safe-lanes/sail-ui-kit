@@ -830,7 +830,7 @@ export const ComponentShowcase: React.FC = () => {
                     {/* Modal Card with shadow and rounded corners */}
                     <div className="bg-white rounded-xl shadow-2xl w-full h-[90vh] flex flex-col relative">
                       {/* Header - Exact match to reference */}
-                      <div className="bg-white border-b border-gray-200 p-4 flex justify-between items-center rounded-t-xl">
+                      <div className="bg-white border-b border-gray-200 p-3 md:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 rounded-t-xl">
                         <div className="flex items-center gap-3">
                           <Button 
                             variant="ghost" 
@@ -847,10 +847,10 @@ export const ComponentShowcase: React.FC = () => {
                         </Button>
                       </div>
                       
-                      {/* Body - Split layout exactly like reference */}
-                      <div className="flex-1 flex overflow-hidden">
-                        {/* Left Sidebar - Complete stepper navigation */}
-                        <div className="w-80 bg-gray-50 p-6">
+                      {/* Body - Responsive split layout */}
+                      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+                        {/* Left Sidebar - Responsive stepper navigation */}
+                        <div className="w-full md:w-80 bg-gray-50 p-4 md:p-6 border-b md:border-b-0 md:border-r border-gray-200">
                           <div className="space-y-1">
                             {/* Section A - Clickable */}
                             <div 
@@ -956,9 +956,9 @@ export const ComponentShowcase: React.FC = () => {
                           </div>
                         </div>
                         
-                        {/* Right Content Area - Dynamic based on current section */}
-                        <div className="flex-1 bg-gray-50 overflow-y-auto rounded-br-xl">
-                          <div className="p-8">
+                        {/* Right Content Area - Responsive dynamic content */}
+                        <div className="flex-1 bg-gray-50 overflow-y-auto">
+                          <div className="p-4 md:p-8">
                             {/* White Content Card - Changes based on section */}
                             <div className="bg-white rounded-lg shadow-sm border border-gray-200">
                               
@@ -974,8 +974,8 @@ export const ComponentShowcase: React.FC = () => {
                                   {/* Form Fields */}
                                   <div className="px-6 pb-6">
                                     <div className="space-y-6">
-                                      {/* Row 1 */}
-                                      <div className="grid grid-cols-3 gap-6">
+                                      {/* Row 1 - Responsive grid */}
+                                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                                         <div className="space-y-2">
                                           <Label className="text-sm font-medium text-gray-700">Seafarer's Name</Label>
                                           <Input className="bg-white border-gray-300" defaultValue="James Michael" />
@@ -1007,7 +1007,7 @@ export const ComponentShowcase: React.FC = () => {
                                       </div>
                                       
                                       {/* More rows as before... */}
-                                      <div className="grid grid-cols-3 gap-6">
+                                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                                         <div className="space-y-2">
                                           <Label className="text-sm font-medium text-gray-700">Vessel</Label>
                                           <Select>
@@ -1072,7 +1072,7 @@ export const ComponentShowcase: React.FC = () => {
                                       
                                       {/* Table Header */}
                                       <div className="bg-gray-50 border border-gray-200 rounded-t">
-                                        <div className="grid grid-cols-4 gap-4 p-3 text-sm font-medium text-gray-700">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 p-3 text-sm font-medium text-gray-700">
                                           <div>S.No</div>
                                           <div>Training</div>
                                           <div>Evaluation</div>
@@ -1097,7 +1097,7 @@ export const ComponentShowcase: React.FC = () => {
                                       
                                       {/* Table Header */}
                                       <div className="bg-gray-50 border border-gray-200 rounded-t">
-                                        <div className="grid grid-cols-4 gap-4 p-3 text-sm font-medium text-gray-700">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 p-3 text-sm font-medium text-gray-700">
                                           <div>S.No</div>
                                           <div>Target Setting</div>
                                           <div>Evaluation</div>
