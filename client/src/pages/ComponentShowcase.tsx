@@ -57,6 +57,7 @@ import {
   TooltipProvider, 
   TooltipTrigger 
 } from "@/components/ui/tooltip";
+import FormTable, { TableColumn, TableRow } from "@/components/ui/form-table";
 import { 
   Dialog,
   DialogContent,
@@ -90,6 +91,12 @@ export const ComponentShowcase: React.FC = () => {
   const [location, navigate] = useLocation();
   const [showSAILFormDemo, setShowSAILFormDemo] = useState(false);
   const [currentSection, setCurrentSection] = useState('A');
+  
+  // FormTable demo data
+  const [trainingData, setTrainingData] = useState<TableRow[]>([
+    { id: '1', training: 'Bridge Resource Management', evaluation: '4-meets-expectations' },
+    { id: '2', training: 'STCW Basic Safety Training', evaluation: '5-exceeded-expectations' }
+  ]);
 
   const handleModuleChange = (moduleId: string) => {
     switch (moduleId) {
@@ -1130,6 +1137,62 @@ export const ComponentShowcase: React.FC = () => {
                     </div>
                   </div>
                 )}
+
+                {/* Form Table Component */}
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Package className="h-5 w-5" />
+                      Form Table Component
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                      <h5 className="text-sm font-medium text-blue-900 mb-2">Dynamic Form Tables</h5>
+                      <p className="text-sm text-blue-800 mb-3">
+                        Reusable table component with add/delete rows, inline editing, comments, dropdowns, and 
+                        configurable columns. Perfect for training records, assessments, and dynamic data entry.
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        <Badge variant="secondary">Add/Delete Rows</Badge>
+                        <Badge variant="secondary">Inline Editing</Badge>
+                        <Badge variant="secondary">Comments</Badge>
+                        <Badge variant="secondary">Dropdowns</Badge>
+                        <Badge variant="secondary">Configurable</Badge>
+                      </div>
+                    </div>
+
+                    {/* Training Table Demo */}
+                    <div>
+                      <FormTable
+                        title="B1. Trainings conducted prior joining vessel (To Assess Effectiveness)"
+                        columns={[
+                          { id: 'sno', header: 'S.No', type: 'readonly', width: '60px' },
+                          { id: 'training', header: 'Training', type: 'text', placeholder: 'Enter training name' },
+                          { 
+                            id: 'evaluation', 
+                            header: 'Evaluation', 
+                            type: 'select',
+                            placeholder: 'Select Rating',
+                            options: [
+                              { value: '5-exceeded-expectations', label: '5- Exceeded Expectations' },
+                              { value: '4-meets-expectations', label: '4- Meets Expectations' },
+                              { value: '3-somewhat-meets-expectations', label: '3- Somewhat Meets Expectations' },
+                              { value: '2-below-expectations', label: '2- Below Expectations' },
+                              { value: '1-significantly-below-expectations', label: '1- Significantly Below Expectations' }
+                            ]
+                          }
+                        ]}
+                        data={trainingData}
+                        onDataChange={setTrainingData}
+                        addButtonText="Add Training"
+                        emptyMessage="No trainings added yet. Click 'Add Training' to get started."
+                        showActions={true}
+                        showComments={true}
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
 
               <TabsContent value="layout" className="space-y-6">
