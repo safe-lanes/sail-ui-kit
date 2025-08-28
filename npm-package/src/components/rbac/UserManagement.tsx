@@ -29,11 +29,7 @@ interface UserManagementProps {
   className?: string;
 }
 
-export function UserManagement({
-  users,
-  onDeleteUser,
-  className = '',
-}: UserManagementProps) {
+export function UserManagement({ users, onDeleteUser, className = '' }: UserManagementProps) {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [statusFilter, setStatusFilter] = React.useState<string>('all');
 

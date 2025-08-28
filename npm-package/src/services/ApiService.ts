@@ -57,7 +57,11 @@ export class ApiService {
   /**
    * Make a POST request
    */
-  async post<T = unknown>(endpoint: string, data?: unknown, options?: ApiRequestOptions): Promise<T> {
+  async post<T = unknown>(
+    endpoint: string,
+    data?: unknown,
+    options?: ApiRequestOptions
+  ): Promise<T> {
     const response = await fetch(`${this.baseURL}${endpoint}`, {
       method: 'POST',
       headers: {
@@ -73,7 +77,11 @@ export class ApiService {
   /**
    * Make a PUT request
    */
-  async put<T = unknown>(endpoint: string, data?: unknown, options?: ApiRequestOptions): Promise<T> {
+  async put<T = unknown>(
+    endpoint: string,
+    data?: unknown,
+    options?: ApiRequestOptions
+  ): Promise<T> {
     const response = await fetch(`${this.baseURL}${endpoint}`, {
       method: 'PUT',
       headers: {

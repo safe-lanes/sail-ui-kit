@@ -176,7 +176,9 @@ export function RoleEditor({
                       <div className="flex items-center gap-3">
                         <Checkbox
                           checked={allSelected}
-                          onCheckedChange={() => toggleCategory(categoryPermissions)}
+                          onCheckedChange={() =>
+                            toggleCategory(categoryPermissions as Permission[])
+                          }
                           disabled={readonly}
                         />
                         <h4 className="font-medium">{category}</h4>
@@ -187,7 +189,7 @@ export function RoleEditor({
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ml-6">
-                      {(categoryPermissions as { id: string; name: string; description: string }[]).map((permission) => (
+                      {(categoryPermissions as Permission[]).map(permission => (
                         <div key={permission.id} className="flex items-start gap-2">
                           <Checkbox
                             checked={selectedPermissions.has(permission.id)}

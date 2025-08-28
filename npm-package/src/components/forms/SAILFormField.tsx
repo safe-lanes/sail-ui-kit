@@ -182,14 +182,14 @@ export const SAILTable: React.FC<SAILTableProps> = ({
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {data.map((row, index) => (
-                  <React.Fragment key={row.id || index}>
+                  <React.Fragment key={String(row.id || index)}>
                     <tr className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       {columns.map(column => (
                         <td key={column.key} className="px-3 py-3">
                           {column.type === 'select' ? (
                             <Select
-                              value={row[column.key] || ''}
-                              onValueChange={value => onUpdate(row.id, column.key, value)}
+                              value={String(row[column.key] || '')}
+                              onValueChange={value => onUpdate(String(row.id), column.key, value)}
                             >
                               <SelectTrigger className="w-full text-xs">
                                 <SelectValue placeholder={`Select ${column.label.toLowerCase()}`} />
@@ -204,16 +204,16 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                             </Select>
                           ) : column.type === 'textarea' ? (
                             <Textarea
-                              value={row[column.key] || ''}
-                              onChange={e => onUpdate(row.id, column.key, e.target.value)}
+                              value={String(row[column.key] || '')}
+                              onChange={e => onUpdate(String(row.id), column.key, e.target.value)}
                               rows={2}
                               className="text-xs"
                             />
                           ) : (
                             <Input
                               type={column.type || 'text'}
-                              value={row[column.key] || ''}
-                              onChange={e => onUpdate(row.id, column.key, e.target.value)}
+                              value={String(row[column.key] || '')}
+                              onChange={e => onUpdate(String(row.id), column.key, e.target.value)}
                               className="text-xs"
                             />
                           )}
@@ -228,7 +228,9 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                               size="icon"
                               className="h-6 w-6"
                               onClick={() =>
-                                setEditingComment(editingComment === row.id ? null : row.id)
+                                setEditingComment(
+                                  editingComment === String(row.id) ? null : String(row.id)
+                                )
                               }
                             >
                               <MessageSquare className="h-[18px] w-[18px] text-blue-500" />
@@ -239,21 +241,21 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                             variant="ghost"
                             size="icon"
                             className="h-6 w-6"
-                            onClick={() => onDelete(row.id)}
+                            onClick={() => onDelete(String(row.id))}
                           >
                             <Trash2 className="h-[18px] w-[18px] text-gray-500" />
                           </Button>
                         </div>
                       </td>
                     </tr>
-                    {enableComments && editingComment === row.id && (
+                    {enableComments && editingComment === String(row.id) && (
                       <tr>
                         <td colSpan={columns.length + 1} className="px-3 py-3 bg-gray-50">
                           <Textarea
-                            value={row[commentField] || ''}
+                            value={String(row[commentField] || '')}
                             onChange={e => {
-                              onUpdate(row.id, commentField, e.target.value);
-                              onCommentUpdate?.(row.id, e.target.value);
+                              onUpdate(String(row.id), commentField, e.target.value);
+                              onCommentUpdate?.(String(row.id), e.target.value);
                             }}
                             onBlur={() => setEditingComment(null)}
                             placeholder="Add your comment here..."

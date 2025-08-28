@@ -102,12 +102,17 @@ export const FormTable: React.FC<FormTableProps> = ({
     switch (column.type) {
       case 'readonly':
         return (
-          <span className="text-[#4f5863] text-[13px] font-normal">{value || `${index + 1}.`}</span>
+          <span className="text-[#4f5863] text-[13px] font-normal">
+            {String(value) || `${index + 1}.`}
+          </span>
         );
 
       case 'select':
         return (
-          <Select value={value} onValueChange={newValue => updateRow(row.id, column.id, newValue)}>
+          <Select
+            value={String(value)}
+            onValueChange={newValue => updateRow(row.id, column.id, newValue)}
+          >
             <SelectTrigger className="border-0 bg-transparent p-0 focus-visible:ring-0 text-[#4f5863] text-[13px] font-normal h-6">
               <SelectValue placeholder={column.placeholder || 'Select...'} />
             </SelectTrigger>
@@ -125,7 +130,7 @@ export const FormTable: React.FC<FormTableProps> = ({
         return (
           <Input
             type="number"
-            value={value}
+            value={String(value)}
             onChange={e => updateRow(row.id, column.id, e.target.value)}
             placeholder={column.placeholder}
             className="border-0 bg-transparent p-0 focus-visible:ring-0 text-[#4f5863] text-[13px] font-normal h-6"
@@ -135,7 +140,7 @@ export const FormTable: React.FC<FormTableProps> = ({
       default: // 'text'
         return (
           <Input
-            value={value}
+            value={String(value)}
             onChange={e => updateRow(row.id, column.id, e.target.value)}
             placeholder={column.placeholder}
             className="border-0 bg-transparent p-0 focus-visible:ring-0 text-[#4f5863] text-[13px] font-normal h-6"

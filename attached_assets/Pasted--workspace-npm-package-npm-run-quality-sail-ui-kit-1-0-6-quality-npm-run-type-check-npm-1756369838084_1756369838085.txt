@@ -1,0 +1,205 @@
+~/workspace/npm-package$ npm run quality
+
+> sail-ui-kit@1.0.6 quality
+> npm run type-check && npm run lint && npm run format:check
+
+
+> sail-ui-kit@1.0.6 type-check
+> tsc --noEmit
+
+src/components/forms/SAILFormField.tsx:185:35 - error TS2322: Type '{}' is not assignable to type 'Key | null | undefined'.
+
+185                   <React.Fragment key={row.id || index}>
+                                      ~~~
+
+  ../node_modules/@types/react/index.d.ts:261:9
+    261         key?: Key | null | undefined;
+                ~~~
+    The expected type comes from property 'key' which is declared here on type 'IntrinsicAttributes & { children?: ReactNode; }'
+
+src/components/forms/SAILFormField.tsx:191:31 - error TS2322: Type '{}' is not assignable to type 'string'.
+
+191                               value={row[column.key] || ''}
+                                  ~~~~~
+
+  ../node_modules/@radix-ui/react-select/dist/index.d.ts:13:5
+    13     value?: string;
+           ~~~~~
+    The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & SelectProps'
+
+src/components/forms/SAILFormField.tsx:192:64 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+
+192                               onValueChange={value => onUpdate(row.id, column.key, value)}
+                                                                   ~~~~~~
+
+src/components/forms/SAILFormField.tsx:207:31 - error TS2322: Type '{}' is not assignable to type 'string | number | readonly string[] | undefined'.
+
+207                               value={row[column.key] || ''}
+                                  ~~~~~
+
+  ../node_modules/@types/react/index.d.ts:3590:9
+    3590         value?: string | readonly string[] | number | undefined;
+                 ~~~~~
+    The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & Omit<DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, "ref"> & RefAttributes<...>'
+
+src/components/forms/SAILFormField.tsx:208:55 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+
+208                               onChange={e => onUpdate(row.id, column.key, e.target.value)}
+                                                          ~~~~~~
+
+src/components/forms/SAILFormField.tsx:215:31 - error TS2322: Type '{}' is not assignable to type 'string | number | readonly string[] | undefined'.
+
+215                               value={row[column.key] || ''}
+                                  ~~~~~
+
+  ../node_modules/@types/react/index.d.ts:3391:9
+    3391         value?: string | readonly string[] | number | undefined;
+                 ~~~~~
+    The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref"> & RefAttributes<...>'
+
+src/components/forms/SAILFormField.tsx:216:55 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+
+216                               onChange={e => onUpdate(row.id, column.key, e.target.value)}
+                                                          ~~~~~~
+
+src/components/forms/SAILFormField.tsx:231:51 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<string | null>'.
+
+231                                 setEditingComment(editingComment === row.id ? null : row.id)
+                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/forms/SAILFormField.tsx:242:53 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+
+242                             onClick={() => onDelete(row.id)}
+                                                        ~~~~~~
+
+src/components/forms/SAILFormField.tsx:253:29 - error TS2322: Type '{}' is not assignable to type 'string | number | readonly string[] | undefined'.
+
+253                             value={row[commentField] || ''}
+                                ~~~~~
+
+  ../node_modules/@types/react/index.d.ts:3590:9
+    3590         value?: string | readonly string[] | number | undefined;
+                 ~~~~~
+    The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & Omit<DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, "ref"> & RefAttributes<...>'
+
+src/components/forms/SAILFormField.tsx:255:40 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+
+255                               onUpdate(row.id, commentField, e.target.value);
+                                           ~~~~~~
+
+src/components/forms/SAILFormField.tsx:256:49 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+
+256                               onCommentUpdate?.(row.id, e.target.value);
+                                                    ~~~~~~
+
+src/components/rbac/RoleEditor.tsx:179:65 - error TS2345: Argument of type 'unknown[]' is not assignable to parameter of type 'Permission[]'.
+  Type 'unknown' is not assignable to type 'Permission'.
+
+179                           onCheckedChange={() => toggleCategory(categoryPermissions)}
+                                                                    ~~~~~~~~~~~~~~~~~~~
+
+src/components/rbac/RoleEditor.tsx:202:43 - error TS2339: Property 'resource' does not exist on type '{ id: string; name: string; description: string; }'.
+
+202                               {permission.resource}:{permission.action}
+                                              ~~~~~~~~
+
+src/components/rbac/RoleEditor.tsx:202:65 - error TS2339: Property 'action' does not exist on type '{ id: string; name: string; description: string; }'.
+
+202                               {permission.resource}:{permission.action}
+                                                                    ~~~~~~
+
+src/components/ui/chart.tsx:172:24 - error TS2345: Argument of type '(item: { name?: string; dataKey?: string; value?: unknown; payload?: { fill?: string; }; color?: string; }, index: number) => JSX.Element' is not assignable to parameter of type '(value: Payload<ValueType, NameType>, index: number, array: Payload<ValueType, NameType>[]) => Element'.
+  Types of parameters 'item' and 'value' are incompatible.
+    Type 'Payload<ValueType, NameType>' is not assignable to type '{ name?: string | undefined; dataKey?: string | undefined; value?: unknown; payload?: { fill?: string | undefined; } | undefined; color?: string | undefined; }'.
+      Types of property 'name' are incompatible.
+        Type 'NameType | undefined' is not assignable to type 'string | undefined'.
+          Type 'number' is not assignable to type 'string'.
+
+172           {payload.map((item: { name?: string; dataKey?: string; value?: unknown; payload?: { fill?: string }; color?: string }, index: number) => {
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/chart.tsx:175:45 - error TS18048: 'item.payload' is possibly 'undefined'.
+
+175             const indicatorColor = color || item.payload.fill || item.color;
+                                                ~~~~~~~~~~~~
+
+src/components/ui/chart.tsx:186:29 - error TS2345: Argument of type '{} | null' is not assignable to parameter of type 'ValueType'.
+  Type 'null' is not assignable to type 'ValueType'.
+
+186                   formatter(item.value, item.name, item, index, item.payload)
+                                ~~~~~~~~~~
+
+src/components/ui/chart.tsx:225:23 - error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+
+225                       {item.value && (
+                          ~~~~~~~~~~~~~~~~
+226                         <span className="font-mono font-medium tabular-nums text-foreground">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+228                         </span>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+229                       )}
+    ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/ui/form-table.tsx:105:68 - error TS2322: Type '{}' is not assignable to type 'ReactNode'.
+
+105           <span className="text-[#4f5863] text-[13px] font-normal">{value || `${index + 1}.`}</span>
+                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  ../node_modules/@types/react/index.d.ts:2385:9
+    2385         children?: ReactNode | undefined;
+                 ~~~~~~~~
+    The expected type comes from property 'children' which is declared here on type 'DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>'
+
+src/components/ui/form-table.tsx:110:19 - error TS2322: Type '{}' is not assignable to type 'string'.
+
+110           <Select value={value} onValueChange={newValue => updateRow(row.id, column.id, newValue)}>
+                      ~~~~~
+
+  ../node_modules/@radix-ui/react-select/dist/index.d.ts:13:5
+    13     value?: string;
+           ~~~~~
+    The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & SelectProps'
+
+src/components/ui/form-table.tsx:128:13 - error TS2322: Type '{}' is not assignable to type 'string | number | readonly string[] | undefined'.
+
+128             value={value}
+                ~~~~~
+
+  ../node_modules/@types/react/index.d.ts:3391:9
+    3391         value?: string | readonly string[] | number | undefined;
+                 ~~~~~
+    The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref"> & RefAttributes<...>'
+
+src/components/ui/form-table.tsx:138:13 - error TS2322: Type '{}' is not assignable to type 'string | number | readonly string[] | undefined'.
+
+138             value={value}
+                ~~~~~
+
+  ../node_modules/@types/react/index.d.ts:3391:9
+    3391         value?: string | readonly string[] | number | undefined;
+                 ~~~~~
+    The expected type comes from property 'value' which is declared here on type 'IntrinsicAttributes & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref"> & RefAttributes<...>'
+
+src/services/PersonnelService.ts:20:7 - error TS2322: Type 'PersonnelFilter' is not assignable to type 'Record<string, unknown>'.
+  Index signature for type 'string' is missing in type 'PersonnelFilter'.
+
+20       params: filters,
+         ~~~~~~
+
+src/services/VesselService.ts:20:7 - error TS2322: Type 'VesselFilter' is not assignable to type 'Record<string, unknown>'.
+  Index signature for type 'string' is missing in type 'VesselFilter'.
+
+20       params: filters,
+         ~~~~~~
+
+
+Found 25 errors in 6 files.
+
+Errors  Files
+    12  src/components/forms/SAILFormField.tsx:185
+     3  src/components/rbac/RoleEditor.tsx:179
+     4  src/components/ui/chart.tsx:172
+     4  src/components/ui/form-table.tsx:105
+     1  src/services/PersonnelService.ts:20
+     1  src/services/VesselService.ts:20

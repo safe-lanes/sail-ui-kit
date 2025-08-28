@@ -45,6 +45,7 @@ export interface PersonnelFilter {
   nationality?: string;
   status?: string;
   search?: string;
+  [key: string]: unknown;
 }
 
 export interface PersonnelSearchResult {
@@ -62,6 +63,7 @@ export interface VesselFilter {
   status?: string;
   flag?: string;
   search?: string;
+  [key: string]: unknown;
 }
 
 export interface VesselPerformance {

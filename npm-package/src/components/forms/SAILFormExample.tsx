@@ -69,7 +69,6 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
     },
   });
 
-
   const handleTableAdd = () => {
     const newItem = {
       id: Date.now().toString(),
@@ -79,7 +78,6 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
     };
     setTableData([...tableData, newItem]);
   };
-
 
   const handleTableDelete = (id: string) => {
     setTableData(prev => prev.filter(item => item.id !== id));

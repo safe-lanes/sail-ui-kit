@@ -61,7 +61,6 @@ export function ProgressIndicator({
   const totalSteps = steps.length;
   const progressPercentage = totalSteps > 0 ? (completedSteps / totalSteps) * 100 : 0;
 
-
   const sizeConfig = {
     sm: {
       iconSize: 'h-4 w-4',
