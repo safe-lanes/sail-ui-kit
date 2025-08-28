@@ -130,7 +130,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                     
                     {/* Connecting line */}
                     {index < sectionsWithLetters.length - 1 && (
-                      <div className="ml-[22px] w-0.5 h-2 bg-gray-300"></div>
+                      <div className="ml-8 w-0.5 h-4 bg-gray-300"></div>
                     )}
                   </div>
                 );
