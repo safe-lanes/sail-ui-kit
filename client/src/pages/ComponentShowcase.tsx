@@ -849,106 +849,106 @@ export const ComponentShowcase: React.FC = () => {
                       
                       {/* Body - Responsive split layout */}
                       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-                        {/* Left Sidebar - Very compact on mobile, full on desktop */}
-                        <div className="w-full md:w-80 bg-gray-50 p-1 md:p-6 max-h-20 md:max-h-none overflow-hidden md:overflow-visible border-b md:border-b-0 md:border-r border-gray-200">
+                        {/* Left Sidebar - Mobile: compact horizontal, Tablet: vertical circles only, Desktop: full with text */}
+                        <div className="w-full md:w-20 lg:w-80 bg-gray-50 p-1 md:p-2 lg:p-6 max-h-20 md:max-h-none overflow-hidden md:overflow-visible border-b md:border-b-0 md:border-r border-gray-200">
                           <div className="flex md:flex-col md:space-y-1 space-x-1 md:space-x-0 overflow-x-auto md:overflow-x-visible">
                             {/* Section A - Clickable */}
                             <div 
-                              className="flex items-center md:items-start gap-1 md:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-2 rounded flex-shrink-0"
+                              className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-1 lg:p-2 rounded flex-shrink-0"
                               onClick={() => setCurrentSection('A')}
                             >
                               <div className={`w-12 h-12 ${currentSection === 'A' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                                 A
                               </div>
-                              <div className="flex-1 pt-2 hidden md:block">
+                              <div className="flex-1 pt-2 hidden lg:block">
                                 <h3 className={`font-medium text-sm ${currentSection === 'A' ? 'text-[#16569e]' : 'text-gray-600'}`}>Seafarer's Information</h3>
                               </div>
                             </div>
                             
-                            {/* Connecting line - Hidden on mobile, visible on desktop */}
-                            <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                            {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
+                            <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section B - Clickable */}
                             <div 
-                              className="flex items-center md:items-start gap-1 md:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-2 rounded flex-shrink-0"
+                              className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-1 lg:p-2 rounded flex-shrink-0"
                               onClick={() => setCurrentSection('B')}
                             >
                               <div className={`w-12 h-12 ${currentSection === 'B' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                                 B
                               </div>
-                              <div className="flex-1 pt-2 hidden md:block">
+                              <div className="flex-1 pt-2 hidden lg:block">
                                 <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#16569e]' : 'text-gray-600'}`}>Information at Start of</h3>
                                 <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#16569e]' : 'text-gray-600'}`}>Appraisal Period</h3>
                               </div>
                             </div>
                             
-                            {/* Connecting line - Hidden on mobile, visible on desktop */}
-                            <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                            {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
+                            <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section C - Non-clickable for demo */}
-                            <div className="flex items-center md:items-start gap-1 md:gap-4 opacity-60 p-0.5 md:p-2 flex-shrink-0">
+                            <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 C
                               </div>
-                              <div className="flex-1 pt-2 hidden md:block">
+                              <div className="flex-1 pt-2 hidden lg:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Competence</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Assessment</h3>
                                 <p className="text-xs text-gray-500">(Professional Knowledge & Skills)</p>
                               </div>
                             </div>
                             
-                            {/* Connecting line - Hidden on mobile, visible on desktop */}
-                            <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                            {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
+                            <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section D - Non-clickable for demo */}
-                            <div className="flex items-center md:items-start gap-1 md:gap-4 opacity-60 p-0.5 md:p-2 flex-shrink-0">
+                            <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 D
                               </div>
-                              <div className="flex-1 pt-2 hidden md:block">
+                              <div className="flex-1 pt-2 hidden lg:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Behavioural</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Assessment (Soft</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Skills)</h3>
                               </div>
                             </div>
                             
-                            {/* Connecting line - Hidden on mobile, visible on desktop */}
-                            <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                            {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
+                            <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section E - Non-clickable for demo */}
-                            <div className="flex items-center md:items-start gap-1 md:gap-4 opacity-60 p-0.5 md:p-2 flex-shrink-0">
+                            <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 E
                               </div>
-                              <div className="flex-1 pt-2 hidden md:block">
+                              <div className="flex-1 pt-2 hidden lg:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Training Needs &</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Development</h3>
                               </div>
                             </div>
                             
-                            {/* Connecting line - Hidden on mobile, visible on desktop */}
-                            <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                            {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
+                            <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section F - Non-clickable for demo */}
-                            <div className="flex items-center md:items-start gap-1 md:gap-4 opacity-60 p-0.5 md:p-2 flex-shrink-0">
+                            <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 F
                               </div>
-                              <div className="flex-1 pt-2 hidden md:block">
+                              <div className="flex-1 pt-2 hidden lg:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Summary &</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Recommendations</h3>
                               </div>
                             </div>
                             
-                            {/* Connecting line - Hidden on mobile, visible on desktop */}
-                            <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                            {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
+                            <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section G - Non-clickable for demo */}
-                            <div className="flex items-center md:items-start gap-1 md:gap-4 opacity-60 p-0.5 md:p-2 flex-shrink-0">
+                            <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 G
                               </div>
-                              <div className="flex-1 pt-2 hidden md:block">
+                              <div className="flex-1 pt-2 hidden lg:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Office Review &</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Followup</h3>
                               </div>

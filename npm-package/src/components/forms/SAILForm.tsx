@@ -104,8 +104,8 @@ export const SAILForm: React.FC<SAILFormProps> = ({
         
         {/* Body - Responsive split layout */}
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-          {/* Left Sidebar - Very compact on mobile, full on desktop */}
-          <div className="w-full md:w-80 bg-gray-50 p-1 md:p-6 max-h-20 md:max-h-none overflow-hidden md:overflow-visible border-b md:border-b-0 md:border-r border-gray-200">
+          {/* Left Sidebar - Mobile: compact horizontal, Tablet: vertical circles only, Desktop: full with text */}
+          <div className="w-full md:w-20 lg:w-80 bg-gray-50 p-1 md:p-2 lg:p-6 max-h-20 md:max-h-none overflow-hidden md:overflow-visible border-b md:border-b-0 md:border-r border-gray-200">
             <div className="flex md:flex-col md:space-y-1 space-x-1 md:space-x-0 overflow-x-auto md:overflow-x-visible">
               {sectionsWithLetters.map((section, index) => {
                 const isActive = activeSection === section.id;
@@ -115,22 +115,22 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                   <div key={section.id}>
                     {/* Section Item - Clickable */}
                     <div 
-                      className="flex items-center md:items-start gap-1 md:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-2 rounded flex-shrink-0"
+                      className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-1 lg:p-2 rounded flex-shrink-0"
                       onClick={() => setActiveSection(section.id)}
                     >
                       <div className={`w-12 h-12 ${isActive ? 'bg-[#16569e]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                         {section.letter}
                       </div>
-                      <div className="flex-1 pt-2 hidden md:block">
+                      <div className="flex-1 pt-2 hidden lg:block">
                         <h3 className={`font-medium text-sm ${isActive ? 'text-[#16569e]' : 'text-gray-600'}`}>
                           {section.title.replace(/^Part [A-Z]: /, "").split(/(?=[A-Z])/).join('\n')}
                         </h3>
                       </div>
                     </div>
                     
-                    {/* Connecting line - Hidden on mobile, visible on desktop */}
+                    {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
                     {index < sectionsWithLetters.length - 1 && (
-                      <div className="hidden md:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                      <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
                     )}
                   </div>
                 );
