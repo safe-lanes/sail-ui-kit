@@ -31,9 +31,6 @@ interface UserManagementProps {
 
 export function UserManagement({
   users,
-  roles,
-  onCreateUser,
-  onUpdateUser,
   onDeleteUser,
   className = '',
 }: UserManagementProps) {

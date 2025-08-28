@@ -1,0 +1,166 @@
+~/workspace/npm-package$ npm run quality
+
+> sail-ui-kit@1.0.6 quality
+> npm run type-check && npm run lint && npm run format:check
+
+
+> sail-ui-kit@1.0.6 type-check
+> tsc --noEmit
+
+
+> sail-ui-kit@1.0.6 lint
+> eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0
+
+
+/home/runner/workspace/npm-package/src/components/dashboard/ComplianceCard.tsx
+  70:9  warning  'getProgressColor' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/dashboard/StatusCard.tsx
+  11:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  99:52  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/feedback/FeedbackModal.tsx
+  16:22  warning  'X' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/feedback/ProgressIndicator.tsx
+  65:9  warning  'currentStepIndex' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/forms/SAILForm.tsx
+  2:21  warning  'Save' is defined but never used         @typescript-eslint/no-unused-vars
+  2:27  warning  'Send' is defined but never used         @typescript-eslint/no-unused-vars
+  4:10  warning  'Card' is defined but never used         @typescript-eslint/no-unused-vars
+  4:16  warning  'CardContent' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/forms/SAILFormExample.tsx
+    6:10  warning  'SAILFormField' is defined but never used               @typescript-eslint/no-unused-vars
+    6:25  warning  'SAILTable' is defined but never used                   @typescript-eslint/no-unused-vars
+    7:10  warning  'SAILFormGrid' is defined but never used                @typescript-eslint/no-unused-vars
+    7:24  warning  'SAILFormSection' is defined but never used             @typescript-eslint/no-unused-vars
+    7:41  warning  'SAILFormActions' is defined but never used             @typescript-eslint/no-unused-vars
+    8:10  warning  'Form' is defined but never used                        @typescript-eslint/no-unused-vars
+   75:9   warning  'tableColumns' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  100:9   warning  'handleTableUpdate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/forms/SAILFormField.tsx
+   10:24  warning  'Edit2' is defined but never used         @typescript-eslint/no-unused-vars
+   13:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  131:9   warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  134:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/layout/LeftSidebar.tsx
+  47:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/maritime/IncidentReportForm.tsx
+  75:60  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/rbac/PermissionMatrix.tsx
+  9:40  warning  'Filter' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/rbac/RBACProvider.tsx
+  16:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  61:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/rbac/RoleEditor.tsx
+  166:58  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  167:65  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  172:23  warning  'someSelected' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  191:61  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/rbac/UserManagement.tsx
+  34:3   warning  'roles' is defined but never used                  @typescript-eslint/no-unused-vars
+  35:3   warning  'onCreateUser' is defined but never used           @typescript-eslint/no-unused-vars
+  36:3   warning  'onUpdateUser' is defined but never used           @typescript-eslint/no-unused-vars
+  42:10  warning  'selectedUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/rbac/UserRoleAssignment.tsx
+  7:10  warning  'Select' is defined but never used         @typescript-eslint/no-unused-vars
+  7:18  warning  'SelectContent' is defined but never used  @typescript-eslint/no-unused-vars
+  7:33  warning  'SelectItem' is defined but never used     @typescript-eslint/no-unused-vars
+  7:45  warning  'SelectTrigger' is defined but never used  @typescript-eslint/no-unused-vars
+  7:60  warning  'SelectValue' is defined but never used    @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/components/ui/calendar.tsx
+  48:82  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  51:83  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/ui/chart.tsx
+   68:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   80:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   83:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  172:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/components/ui/form-table.tsx
+  19:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/hooks/useApi.ts
+   8:28  warning  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  17:12  warning  'customOptions' is defined but never used  @typescript-eslint/no-unused-vars
+  47:12  warning  'data' is defined but never used           @typescript-eslint/no-unused-vars
+  47:18  warning  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  47:23  warning  'customOptions' is defined but never used  @typescript-eslint/no-unused-vars
+  70:12  warning  'data' is defined but never used           @typescript-eslint/no-unused-vars
+  70:18  warning  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  70:23  warning  'customOptions' is defined but never used  @typescript-eslint/no-unused-vars
+  93:12  warning  'customOptions' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/services/ApiService.ts
+    1:15  warning  'ApiResponse' is defined but never used   @typescript-eslint/no-unused-vars
+   35:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   76:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   76:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   92:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  120:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/services/PersonnelService.ts
+   96:60  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  103:64  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  110:62  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/services/RBACService.ts
+   2:32  warning  'PermissionCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  43:14  warning  'error' is defined but never used            @typescript-eslint/no-unused-vars
+
+/home/runner/workspace/npm-package/src/services/VesselService.ts
+   18:57  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   19:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   27:44  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   73:57  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   80:57  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   87:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   94:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  101:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:52  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/services/index.ts
+   59:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   61:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   62:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  149:29  warning  'moduleCode' is defined but never used    @typescript-eslint/no-unused-vars
+  159:27  warning  'moduleCode' is defined but never used    @typescript-eslint/no-unused-vars
+  159:56  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  164:24  warning  'targetModule' is defined but never used  @typescript-eslint/no-unused-vars
+  164:46  warning  'endpoint' is defined but never used      @typescript-eslint/no-unused-vars
+  164:64  warning  'data' is defined but never used          @typescript-eslint/no-unused-vars
+  164:70  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  164:84  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/types/rbac.ts
+  10:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/runner/workspace/npm-package/src/types/services.ts
+   4:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  11:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  23:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  32:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  38:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 99 problems (0 errors, 99 warnings)
+
+ESLint found too many warnings (maximum: 0).

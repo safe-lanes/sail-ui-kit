@@ -1,5 +1,5 @@
 import type { ApiService } from './ApiService';
-import type { UserPermissions, PermissionCheck } from '../types/services';
+import type { UserPermissions } from '../types/services';
 import type { User, Role, Permission } from '../types/rbac';
 
 /**
@@ -40,7 +40,7 @@ export class RBACService {
       }
 
       return response;
-    } catch (error) {
+    } catch {
       return { success: false };
     }
   }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Save, Send } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Button } from '../ui/button';
-import { Card, CardContent } from '../ui/card';
 
 export interface SAILFormSection {
   id: string;

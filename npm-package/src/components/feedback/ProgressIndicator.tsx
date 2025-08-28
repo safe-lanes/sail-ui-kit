@@ -62,9 +62,6 @@ export function ProgressIndicator({
   const totalSteps = steps.length;
   const progressPercentage = totalSteps > 0 ? (completedSteps / totalSteps) * 100 : 0;
 
-  const currentStepIndex = currentStep
-    ? steps.findIndex(step => step.id === currentStep)
-    : steps.findIndex(step => step.status === 'current');
 
   const sizeConfig = {
     sm: {

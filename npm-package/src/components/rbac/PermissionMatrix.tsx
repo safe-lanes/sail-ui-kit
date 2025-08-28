@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Checkbox } from '../ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { LayoutGrid, Search, Download, Filter } from 'lucide-react';
+import { LayoutGrid, Search, Download } from 'lucide-react';
 
 interface Permission {
   id: string;

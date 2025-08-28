@@ -1,4 +1,4 @@
-import type { ApiResponse, PaginatedResponse, ApiRequestOptions } from '../types/services';
+import type { PaginatedResponse, ApiRequestOptions } from '../types/services';
 
 /**
  * API Service for making HTTP requests

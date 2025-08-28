@@ -13,7 +13,7 @@ import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Badge } from '../ui/badge';
-import { Star, Send, X } from 'lucide-react';
+import { Star, Send } from 'lucide-react';
 
 export interface FeedbackData {
   type: 'bug' | 'feature' | 'improvement' | 'compliment' | 'question';

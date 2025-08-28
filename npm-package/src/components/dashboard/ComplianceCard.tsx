@@ -67,11 +67,6 @@ export function ComplianceCard({
     return 'text-red-600';
   };
 
-  const getProgressColor = (score: number) => {
-    if (score >= 90) return 'bg-green-500';
-    if (score >= 70) return 'bg-yellow-500';
-    return 'bg-red-500';
-  };
 
   return (
     <Card className={className}>

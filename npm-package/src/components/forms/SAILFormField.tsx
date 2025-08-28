@@ -7,7 +7,7 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Checkbox } from '../ui/checkbox';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
-import { Plus, Trash2, Edit2, MessageSquare } from 'lucide-react';
+import { Plus, Trash2, MessageSquare } from 'lucide-react';
 
 export interface SAILFormFieldProps {
   control: any;

@@ -169,7 +169,6 @@ export function RoleEditor({
                   selectedPermissions.has(id)
                 ).length;
                 const allSelected = selectedCount === categoryIds.length;
-                const someSelected = selectedCount > 0 && selectedCount < categoryIds.length;
 
                 return (
                   <div key={category} className="border rounded-lg p-4">

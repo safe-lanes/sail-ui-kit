@@ -3,9 +3,6 @@ import { useForm } from 'react-hook-form';
 // import { zodResolver } from '@hookform/resolvers/zod';
 // import { z } from 'zod';
 import { SAILForm, type SAILFormSection as SAILFormSectionType } from './SAILForm';
-import { SAILFormField, SAILTable, type SAILTableColumn } from './SAILFormField';
-import { SAILFormGrid, SAILFormSection, SAILFormActions } from './SAILFormGrid';
-import { Form } from '../ui/form';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -72,20 +69,6 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
     },
   });
 
-  const tableColumns: SAILTableColumn[] = [
-    { key: 'training', label: 'Training', type: 'text', required: true },
-    {
-      key: 'evaluation',
-      label: 'Evaluation',
-      type: 'select',
-      options: [
-        { value: 'excellent', label: 'Excellent' },
-        { value: 'good', label: 'Good' },
-        { value: 'average', label: 'Average' },
-        { value: 'poor', label: 'Poor' },
-      ],
-    },
-  ];
 
   const handleTableAdd = () => {
     const newItem = {
@@ -97,9 +80,6 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
     setTableData([...tableData, newItem]);
   };
 
-  const handleTableUpdate = (id: string, field: string, value: string) => {
-    setTableData(prev => prev.map(item => (item.id === id ? { ...item, [field]: value } : item)));
-  };
 
   const handleTableDelete = (id: string) => {
     setTableData(prev => prev.filter(item => item.id !== id));
