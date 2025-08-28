@@ -121,7 +121,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                       <div className={`w-12 h-12 ${isActive ? 'bg-[#16569e]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                         {section.letter}
                       </div>
-                      <div className="flex-1 pt-2">
+                      <div className="flex-1 pt-2 hidden md:block">
                         <h3 className={`font-medium text-sm ${isActive ? 'text-[#16569e]' : 'text-gray-600'}`}>
                           {section.title.replace(/^Part [A-Z]: /, "").split(/(?=[A-Z])/).join('\n')}
                         </h3>

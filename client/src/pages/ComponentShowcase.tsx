@@ -860,7 +860,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div className={`w-12 h-12 ${currentSection === 'A' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                                 A
                               </div>
-                              <div className="flex-1 pt-2">
+                              <div className="flex-1 pt-2 hidden md:block">
                                 <h3 className={`font-medium text-sm ${currentSection === 'A' ? 'text-[#16569e]' : 'text-gray-600'}`}>Seafarer's Information</h3>
                               </div>
                             </div>
@@ -876,7 +876,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div className={`w-12 h-12 ${currentSection === 'B' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                                 B
                               </div>
-                              <div className="flex-1 pt-2">
+                              <div className="flex-1 pt-2 hidden md:block">
                                 <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#16569e]' : 'text-gray-600'}`}>Information at Start of</h3>
                                 <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#16569e]' : 'text-gray-600'}`}>Appraisal Period</h3>
                               </div>
@@ -890,7 +890,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 C
                               </div>
-                              <div className="flex-1 pt-2">
+                              <div className="flex-1 pt-2 hidden md:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Competence</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Assessment</h3>
                                 <p className="text-xs text-gray-500">(Professional Knowledge & Skills)</p>
@@ -905,7 +905,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 D
                               </div>
-                              <div className="flex-1 pt-2">
+                              <div className="flex-1 pt-2 hidden md:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Behavioural</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Assessment (Soft</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Skills)</h3>
@@ -920,7 +920,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 E
                               </div>
-                              <div className="flex-1 pt-2">
+                              <div className="flex-1 pt-2 hidden md:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Training Needs &</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Development</h3>
                               </div>
@@ -934,7 +934,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 F
                               </div>
-                              <div className="flex-1 pt-2">
+                              <div className="flex-1 pt-2 hidden md:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Summary &</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Recommendations</h3>
                               </div>
@@ -948,7 +948,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 G
                               </div>
-                              <div className="flex-1 pt-2">
+                              <div className="flex-1 pt-2 hidden md:block">
                                 <h3 className="font-medium text-gray-600 text-sm">Office Review &</h3>
                                 <h3 className="font-medium text-gray-600 text-sm">Followup</h3>
                               </div>
