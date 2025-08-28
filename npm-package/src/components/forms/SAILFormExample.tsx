@@ -276,10 +276,10 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
           {/* B1. Trainings Section */}
           <div>
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-medium text-[#4A90E2]">B1. Trainings conducted prior joining vessel (To Assess Effectiveness)</h3>
+              <h3 className="text-lg font-medium text-[#16569e]">B1. Trainings conducted prior joining vessel (To Assess Effectiveness)</h3>
               <Button 
                 variant="outline" 
-                className="text-[#4A90E2] border-[#4A90E2]"
+                className="text-[#16569e] border-[#16569e]"
                 onClick={handleTableAdd}
               >
                 + Add Training
@@ -326,8 +326,8 @@ export const ExampleSAILForm: React.FC<ExampleSAILFormProps> = ({
           {/* B2. Target Setting Section */}
           <div>
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-medium text-[#4A90E2]">B2. Target Setting</h3>
-              <Button variant="outline" className="text-[#4A90E2] border-[#4A90E2]">
+              <h3 className="text-lg font-medium text-[#16569e]">B2. Target Setting</h3>
+              <Button variant="outline" className="text-[#16569e] border-[#16569e]">
                 + Add Target
               </Button>
             </div>

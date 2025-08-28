@@ -857,11 +857,11 @@ export const ComponentShowcase: React.FC = () => {
                               className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
                               onClick={() => setCurrentSection('A')}
                             >
-                              <div className={`w-12 h-12 ${currentSection === 'A' ? 'bg-[#4A90E2]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
+                              <div className={`w-12 h-12 ${currentSection === 'A' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                                 A
                               </div>
                               <div className="flex-1 pt-2">
-                                <h3 className={`font-medium text-sm ${currentSection === 'A' ? 'text-[#4A90E2]' : 'text-gray-600'}`}>Seafarer's Information</h3>
+                                <h3 className={`font-medium text-sm ${currentSection === 'A' ? 'text-[#16569e]' : 'text-gray-600'}`}>Seafarer's Information</h3>
                               </div>
                             </div>
                             
@@ -873,12 +873,12 @@ export const ComponentShowcase: React.FC = () => {
                               className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
                               onClick={() => setCurrentSection('B')}
                             >
-                              <div className={`w-12 h-12 ${currentSection === 'B' ? 'bg-[#4A90E2]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
+                              <div className={`w-12 h-12 ${currentSection === 'B' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                                 B
                               </div>
                               <div className="flex-1 pt-2">
-                                <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#4A90E2]' : 'text-gray-600'}`}>Information at Start of</h3>
-                                <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#4A90E2]' : 'text-gray-600'}`}>Appraisal Period</h3>
+                                <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#16569e]' : 'text-gray-600'}`}>Information at Start of</h3>
+                                <h3 className={`font-medium text-sm ${currentSection === 'B' ? 'text-[#16569e]' : 'text-gray-600'}`}>Appraisal Period</h3>
                               </div>
                             </div>
                             
@@ -968,7 +968,7 @@ export const ComponentShowcase: React.FC = () => {
                                   {/* Section Header */}
                                   <div className="p-6 pb-4">
                                     <h2 className="text-xl font-medium mb-2 text-[#16569e]">Part A: Seafarer's Information</h2>
-                                    <p className="text-sm text-[#4A90E2] border-b border-gray-300 pb-2">Enter details as applicable</p>
+                                    <p className="text-sm text-[#16569e] border-b border-gray-300 pb-2">Enter details as applicable</p>
                                   </div>
                                   
                                   {/* Form Fields */}
@@ -1055,8 +1055,8 @@ export const ComponentShowcase: React.FC = () => {
                                 <>
                                   {/* Section Header */}
                                   <div className="p-6 pb-4">
-                                    <h2 className="text-xl font-medium text-[#4A90E2] mb-2">Part B: Information at Start of Appraisal Period</h2>
-                                    <p className="text-sm text-[#4A90E2] border-b border-gray-300 pb-2">Add below at the start of the Appraisal Period except the Evaluation which must be completed at the end of the Appraisal Period</p>
+                                    <h2 className="text-xl font-medium text-[#16569e] mb-2">Part B: Information at Start of Appraisal Period</h2>
+                                    <p className="text-sm text-[#16569e] border-b border-gray-300 pb-2">Add below at the start of the Appraisal Period except the Evaluation which must be completed at the end of the Appraisal Period</p>
                                   </div>
                                   
                                   {/* Form Content */}
@@ -1064,8 +1064,8 @@ export const ComponentShowcase: React.FC = () => {
                                     {/* B1. Trainings Section */}
                                     <div>
                                       <div className="flex justify-between items-center mb-4">
-                                        <h3 className="text-lg font-medium text-[#4A90E2]">B1. Trainings conducted prior joining vessel (To Assess Effectiveness)</h3>
-                                        <Button variant="outline" className="text-[#4A90E2] border-[#4A90E2]">
+                                        <h3 className="text-lg font-medium text-[#16569e]">B1. Trainings conducted prior joining vessel (To Assess Effectiveness)</h3>
+                                        <Button variant="outline" className="text-[#16569e] border-[#16569e]">
                                           + Add Training
                                         </Button>
                                       </div>
@@ -1089,8 +1089,8 @@ export const ComponentShowcase: React.FC = () => {
                                     {/* B2. Target Setting Section */}
                                     <div>
                                       <div className="flex justify-between items-center mb-4">
-                                        <h3 className="text-lg font-medium text-[#4A90E2]">B2. Target Setting</h3>
-                                        <Button variant="outline" className="text-[#4A90E2] border-[#4A90E2]">
+                                        <h3 className="text-lg font-medium text-[#16569e]">B2. Target Setting</h3>
+                                        <Button variant="outline" className="text-[#16569e] border-[#16569e]">
                                           + Add Target
                                         </Button>
                                       </div>

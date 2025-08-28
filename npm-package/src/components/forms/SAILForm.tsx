@@ -118,11 +118,11 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                       className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
                       onClick={() => setActiveSection(section.id)}
                     >
-                      <div className={`w-12 h-12 ${isActive ? 'bg-[#4A90E2]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
+                      <div className={`w-12 h-12 ${isActive ? 'bg-[#16569e]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
                         {section.letter}
                       </div>
                       <div className="flex-1 pt-2">
-                        <h3 className={`font-medium text-sm ${isActive ? 'text-[#4A90E2]' : 'text-gray-600'}`}>
+                        <h3 className={`font-medium text-sm ${isActive ? 'text-[#16569e]' : 'text-gray-600'}`}>
                           {section.title.replace(/^Part [A-Z]: /, "").split(/(?=[A-Z])/).join('\n')}
                         </h3>
                       </div>
@@ -147,9 +147,9 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                   <>
                     {/* Section Header */}
                     <div className="p-6 pb-4">
-                      <h2 className="text-xl font-medium text-[#4A90E2] mb-2">{currentSection.title}</h2>
+                      <h2 className="text-xl font-medium text-[#16569e] mb-2">{currentSection.title}</h2>
                       {currentSection.description && (
-                        <p className="text-sm text-[#4A90E2] border-b border-gray-300 pb-2">{currentSection.description}</p>
+                        <p className="text-sm text-[#16569e] border-b border-gray-300 pb-2">{currentSection.description}</p>
                       )}
                     </div>
                     
