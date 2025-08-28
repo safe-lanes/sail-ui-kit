@@ -967,7 +967,7 @@ export const ComponentShowcase: React.FC = () => {
                                 <>
                                   {/* Section Header */}
                                   <div className="p-6 pb-4">
-                                    <h2 className="text-xl font-medium text-[#4A90E2] mb-2">Part A: Seafarer's Information</h2>
+                                    <h2 className="text-xl font-medium mb-2 text-[#16569e]">Part A: Seafarer's Information</h2>
                                     <p className="text-sm text-[#4A90E2] border-b border-gray-300 pb-2">Enter details as applicable</p>
                                   </div>
                                   
