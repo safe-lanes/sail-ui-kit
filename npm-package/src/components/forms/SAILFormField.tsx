@@ -13,7 +13,16 @@ export interface SAILFormFieldProps {
   control: any;
   name: string;
   label?: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'date' | 'textarea' | 'select' | 'radio' | 'checkbox';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'number'
+    | 'date'
+    | 'textarea'
+    | 'select'
+    | 'radio'
+    | 'checkbox';
   placeholder?: string;
   options?: { value: string; label: string }[];
   rows?: number;
@@ -47,12 +56,12 @@ export const SAILFormField: React.FC<SAILFormFieldProps> = ({
           )}
           <FormControl>
             {type === 'textarea' ? (
-              <Textarea 
-                {...field} 
+              <Textarea
+                {...field}
                 placeholder={placeholder}
                 rows={rows}
                 disabled={disabled}
-                className="bg-[#ffffff]" 
+                className="bg-[#ffffff]"
               />
             ) : type === 'select' ? (
               <Select onValueChange={field.onChange} value={field.value} disabled={disabled}>
@@ -60,7 +69,7 @@ export const SAILFormField: React.FC<SAILFormFieldProps> = ({
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>
-                  {options.map((option) => (
+                  {options.map(option => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}
                     </SelectItem>
@@ -68,13 +77,13 @@ export const SAILFormField: React.FC<SAILFormFieldProps> = ({
                 </SelectContent>
               </Select>
             ) : type === 'radio' ? (
-              <RadioGroup 
-                onValueChange={field.onChange} 
+              <RadioGroup
+                onValueChange={field.onChange}
                 value={field.value}
                 disabled={disabled}
                 className="flex flex-wrap gap-4"
               >
-                {options.map((option) => (
+                {options.map(option => (
                   <div key={option.value} className="flex items-center space-x-2">
                     <RadioGroupItem value={option.value} id={`${name}-${option.value}`} />
                     <Label htmlFor={`${name}-${option.value}`}>{option.label}</Label>
@@ -92,12 +101,12 @@ export const SAILFormField: React.FC<SAILFormFieldProps> = ({
                 <Label htmlFor={name}>{placeholder}</Label>
               </div>
             ) : (
-              <Input 
-                {...field} 
+              <Input
+                {...field}
                 type={type}
                 placeholder={placeholder}
                 disabled={disabled}
-                className="bg-[#ffffff]" 
+                className="bg-[#ffffff]"
               />
             )}
           </FormControl>
@@ -138,10 +147,10 @@ export const SAILTable: React.FC<SAILTableProps> = ({
   onAdd,
   onUpdate,
   onDelete,
-  addButtonText = "Add Item",
-  className = "",
+  addButtonText = 'Add Item',
+  className = '',
   enableComments = false,
-  commentField = "comment",
+  commentField = 'comment',
   onCommentUpdate,
 }) => {
   const [editingComment, setEditingComment] = React.useState<string | null>(null);
@@ -149,14 +158,14 @@ export const SAILTable: React.FC<SAILTableProps> = ({
   return (
     <div className={`space-y-4 ${className}`}>
       {title && <h4 className="font-semibold text-gray-800">{title}</h4>}
-      
+
       <div className="overflow-x-auto">
         <div className="inline-block min-w-full align-middle">
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg">
             <table className="min-w-full divide-y divide-gray-300 bg-white text-sm">
               <thead className="bg-[#52baf3]">
                 <tr>
-                  {columns.map((column) => (
+                  {columns.map(column => (
                     <th
                       key={column.key}
                       className="px-3 py-3 text-left text-xs font-medium text-white tracking-wider"
@@ -174,18 +183,18 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                 {data.map((row, index) => (
                   <React.Fragment key={row.id || index}>
                     <tr className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      {columns.map((column) => (
+                      {columns.map(column => (
                         <td key={column.key} className="px-3 py-3">
                           {column.type === 'select' ? (
-                            <Select 
-                              value={row[column.key] || ''} 
-                              onValueChange={(value) => onUpdate(row.id, column.key, value)}
+                            <Select
+                              value={row[column.key] || ''}
+                              onValueChange={value => onUpdate(row.id, column.key, value)}
                             >
                               <SelectTrigger className="w-full text-xs">
                                 <SelectValue placeholder={`Select ${column.label.toLowerCase()}`} />
                               </SelectTrigger>
                               <SelectContent>
-                                {column.options?.map((option) => (
+                                {column.options?.map(option => (
                                   <SelectItem key={option.value} value={option.value}>
                                     {option.label}
                                   </SelectItem>
@@ -195,7 +204,7 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                           ) : column.type === 'textarea' ? (
                             <Textarea
                               value={row[column.key] || ''}
-                              onChange={(e) => onUpdate(row.id, column.key, e.target.value)}
+                              onChange={e => onUpdate(row.id, column.key, e.target.value)}
                               rows={2}
                               className="text-xs"
                             />
@@ -203,7 +212,7 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                             <Input
                               type={column.type || 'text'}
                               value={row[column.key] || ''}
-                              onChange={(e) => onUpdate(row.id, column.key, e.target.value)}
+                              onChange={e => onUpdate(row.id, column.key, e.target.value)}
                               className="text-xs"
                             />
                           )}
@@ -217,7 +226,9 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                               variant="ghost"
                               size="icon"
                               className="h-6 w-6"
-                              onClick={() => setEditingComment(editingComment === row.id ? null : row.id)}
+                              onClick={() =>
+                                setEditingComment(editingComment === row.id ? null : row.id)
+                              }
                             >
                               <MessageSquare className="h-[18px] w-[18px] text-blue-500" />
                             </Button>
@@ -239,7 +250,7 @@ export const SAILTable: React.FC<SAILTableProps> = ({
                         <td colSpan={columns.length + 1} className="px-3 py-3 bg-gray-50">
                           <Textarea
                             value={row[commentField] || ''}
-                            onChange={(e) => {
+                            onChange={e => {
                               onUpdate(row.id, commentField, e.target.value);
                               onCommentUpdate?.(row.id, e.target.value);
                             }}
@@ -259,7 +270,7 @@ export const SAILTable: React.FC<SAILTableProps> = ({
           </div>
         </div>
       </div>
-      
+
       <Button
         type="button"
         variant="outline"

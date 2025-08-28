@@ -32,21 +32,20 @@ interface UserRoleAssignmentProps {
   readonly?: boolean;
 }
 
-export function UserRoleAssignment({ 
-  user, 
-  availableRoles, 
-  onUpdateUserRoles, 
+export function UserRoleAssignment({
+  user,
+  availableRoles,
+  onUpdateUserRoles,
   onCancel,
-  readonly = false 
+  readonly = false,
 }: UserRoleAssignmentProps) {
-  const [selectedRoles, setSelectedRoles] = React.useState<Set<string>>(
-    new Set(user.currentRoles)
-  );
+  const [selectedRoles, setSelectedRoles] = React.useState<Set<string>>(new Set(user.currentRoles));
   const [searchTerm, setSearchTerm] = React.useState('');
 
-  const filteredRoles = availableRoles.filter(role =>
-    role.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    role.description.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredRoles = availableRoles.filter(
+    role =>
+      role.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      role.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -56,7 +55,7 @@ export function UserRoleAssignment({
 
   const toggleRole = (roleId: string) => {
     if (readonly) return;
-    
+
     const newSelected = new Set(selectedRoles);
     if (newSelected.has(roleId)) {
       newSelected.delete(roleId);
@@ -69,10 +68,10 @@ export function UserRoleAssignment({
   const getRoleChanges = () => {
     const current = new Set(user.currentRoles);
     const selected = selectedRoles;
-    
+
     const added = Array.from(selected).filter(role => !current.has(role));
     const removed = Array.from(current).filter(role => !selected.has(role));
-    
+
     return { added, removed };
   };
 
@@ -87,11 +86,15 @@ export function UserRoleAssignment({
           Role Assignment
         </CardTitle>
         <div className="text-sm text-gray-600">
-          <div className="font-medium">{user.firstName} {user.lastName}</div>
-          <div>@{user.username} • {user.email}</div>
+          <div className="font-medium">
+            {user.firstName} {user.lastName}
+          </div>
+          <div>
+            @{user.username} • {user.email}
+          </div>
         </div>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Search */}
@@ -100,7 +103,7 @@ export function UserRoleAssignment({
             <Input
               placeholder="Search roles..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="pl-10"
             />
           </div>
@@ -128,7 +131,7 @@ export function UserRoleAssignment({
           <div>
             <h3 className="font-medium mb-3">Available Roles</h3>
             <div className="space-y-3 max-h-60 overflow-y-auto">
-              {filteredRoles.map((role) => (
+              {filteredRoles.map(role => (
                 <div key={role.id} className="flex items-start gap-3 p-3 border rounded-lg">
                   <Checkbox
                     checked={selectedRoles.has(role.id)}
@@ -162,19 +165,23 @@ export function UserRoleAssignment({
               {added.length > 0 && (
                 <div className="mb-2">
                   <span className="text-sm text-green-700 font-medium">Adding: </span>
-                  {added.map(roleId => {
-                    const role = availableRoles.find(r => r.id === roleId);
-                    return role?.name;
-                  }).join(', ')}
+                  {added
+                    .map(roleId => {
+                      const role = availableRoles.find(r => r.id === roleId);
+                      return role?.name;
+                    })
+                    .join(', ')}
                 </div>
               )}
               {removed.length > 0 && (
                 <div>
                   <span className="text-sm text-red-700 font-medium">Removing: </span>
-                  {removed.map(roleId => {
-                    const role = availableRoles.find(r => r.id === roleId);
-                    return role?.name;
-                  }).join(', ')}
+                  {removed
+                    .map(roleId => {
+                      const role = availableRoles.find(r => r.id === roleId);
+                      return role?.name;
+                    })
+                    .join(', ')}
                 </div>
               )}
             </div>
@@ -186,8 +193,8 @@ export function UserRoleAssignment({
                 <X className="h-4 w-4 mr-2" />
                 Cancel
               </Button>
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="bg-[#5DADE2] hover:bg-[#4A9BD1]"
                 disabled={!hasChanges}
               >

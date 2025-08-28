@@ -27,30 +27,36 @@ interface RBACProviderProps {
   onLogout?: () => void;
 }
 
-export function RBACProvider({ 
-  children, 
+export function RBACProvider({
+  children,
   initialUser = null,
   onLogin,
-  onLogout 
+  onLogout,
 }: RBACProviderProps) {
   const [user, setUser] = React.useState<User | null>(initialUser);
   const [loading, setLoading] = React.useState(false);
 
   const isAuthenticated = !!user;
 
-  const hasPermission = React.useCallback((permission: string | string[]): boolean => {
-    if (!user) return false;
-    
-    const permissions = Array.isArray(permission) ? permission : [permission];
-    return permissions.some((p: string) => user.permissions.indexOf(p) !== -1);
-  }, [user]);
+  const hasPermission = React.useCallback(
+    (permission: string | string[]): boolean => {
+      if (!user) return false;
 
-  const hasRole = React.useCallback((role: string | string[]): boolean => {
-    if (!user) return false;
-    
-    const roles = Array.isArray(role) ? role : [role];
-    return roles.some((r: string) => user.roles.indexOf(r) !== -1);
-  }, [user]);
+      const permissions = Array.isArray(permission) ? permission : [permission];
+      return permissions.some((p: string) => user.permissions.indexOf(p) !== -1);
+    },
+    [user]
+  );
+
+  const hasRole = React.useCallback(
+    (role: string | string[]): boolean => {
+      if (!user) return false;
+
+      const roles = Array.isArray(role) ? role : [role];
+      return roles.some((r: string) => user.roles.indexOf(r) !== -1);
+    },
+    [user]
+  );
 
   const login = async (credentials: any) => {
     setLoading(true);
@@ -78,14 +84,10 @@ export function RBACProvider({
     hasRole,
     login,
     logout,
-    loading
+    loading,
   };
 
-  return (
-    <RBACContext.Provider value={value}>
-      {children}
-    </RBACContext.Provider>
-  );
+  return <RBACContext.Provider value={value}>{children}</RBACContext.Provider>;
 }
 
 export function useRBAC(): RBACContextType {

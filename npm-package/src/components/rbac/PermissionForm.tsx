@@ -26,14 +26,14 @@ interface PermissionFormProps {
   readonly?: boolean;
 }
 
-export function PermissionForm({ 
-  permission, 
+export function PermissionForm({
+  permission,
   categories,
   resources,
   actions,
-  onSave, 
-  onCancel, 
-  readonly = false 
+  onSave,
+  onCancel,
+  readonly = false,
 }: PermissionFormProps) {
   const [formData, setFormData] = React.useState<Permission>({
     name: '',
@@ -41,7 +41,7 @@ export function PermissionForm({
     category: '',
     resource: '',
     action: '',
-    ...permission
+    ...permission,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -61,7 +61,7 @@ export function PermissionForm({
           {permission?.id ? 'Edit Permission' : 'Create New Permission'}
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -70,18 +70,18 @@ export function PermissionForm({
               <Input
                 id="name"
                 value={formData.name}
-                onChange={(e) => updateField('name', e.target.value)}
+                onChange={e => updateField('name', e.target.value)}
                 placeholder="Enter permission name"
                 required
                 readOnly={readonly}
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="category">Category *</Label>
-              <Select 
-                value={formData.category} 
-                onValueChange={(value) => updateField('category', value)}
+              <Select
+                value={formData.category}
+                onValueChange={value => updateField('category', value)}
                 disabled={readonly}
               >
                 <SelectTrigger>
@@ -89,7 +89,9 @@ export function PermissionForm({
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map(category => (
-                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                    <SelectItem key={category} value={category}>
+                      {category}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -101,7 +103,7 @@ export function PermissionForm({
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => updateField('description', e.target.value)}
+              onChange={e => updateField('description', e.target.value)}
               placeholder="Describe what this permission allows..."
               rows={3}
               readOnly={readonly}
@@ -111,9 +113,9 @@ export function PermissionForm({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="resource">Resource *</Label>
-              <Select 
-                value={formData.resource} 
-                onValueChange={(value) => updateField('resource', value)}
+              <Select
+                value={formData.resource}
+                onValueChange={value => updateField('resource', value)}
                 disabled={readonly}
               >
                 <SelectTrigger>
@@ -121,17 +123,19 @@ export function PermissionForm({
                 </SelectTrigger>
                 <SelectContent>
                   {resources.map(resource => (
-                    <SelectItem key={resource} value={resource}>{resource}</SelectItem>
+                    <SelectItem key={resource} value={resource}>
+                      {resource}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="action">Action *</Label>
-              <Select 
-                value={formData.action} 
-                onValueChange={(value) => updateField('action', value)}
+              <Select
+                value={formData.action}
+                onValueChange={value => updateField('action', value)}
                 disabled={readonly}
               >
                 <SelectTrigger>
@@ -139,7 +143,9 @@ export function PermissionForm({
                 </SelectTrigger>
                 <SelectContent>
                   {actions.map(action => (
-                    <SelectItem key={action} value={action}>{action}</SelectItem>
+                    <SelectItem key={action} value={action}>
+                      {action}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>

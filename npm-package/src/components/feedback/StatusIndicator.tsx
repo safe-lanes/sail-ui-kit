@@ -17,44 +17,44 @@ const statusConfig = {
     color: 'bg-green-100 text-green-800 border-green-200',
     dot: 'bg-green-500',
     label: 'Operational',
-    icon: '●'
+    icon: '●',
   },
   degraded: {
     color: 'bg-yellow-100 text-yellow-800 border-yellow-200',
     dot: 'bg-yellow-500',
     label: 'Degraded',
-    icon: '⚠'
+    icon: '⚠',
   },
   maintenance: {
     color: 'bg-blue-100 text-blue-800 border-blue-200',
     dot: 'bg-blue-500',
     label: 'Maintenance',
-    icon: '🔧'
+    icon: '🔧',
   },
   offline: {
     color: 'bg-gray-100 text-gray-800 border-gray-200',
     dot: 'bg-gray-500',
     label: 'Offline',
-    icon: '○'
+    icon: '○',
   },
   emergency: {
     color: 'bg-red-100 text-red-800 border-red-200',
     dot: 'bg-red-500',
     label: 'Emergency',
-    icon: '🚨'
-  }
+    icon: '🚨',
+  },
 };
 
 const sizeConfig = {
   sm: 'text-xs px-2 py-1',
   md: 'text-sm px-2.5 py-1',
-  lg: 'text-base px-3 py-1.5'
+  lg: 'text-base px-3 py-1.5',
 };
 
 const dotSizeConfig = {
   sm: 'h-2 w-2',
   md: 'h-2.5 w-2.5',
-  lg: 'h-3 w-3'
+  lg: 'h-3 w-3',
 };
 
 export function StatusIndicator({
@@ -63,7 +63,7 @@ export function StatusIndicator({
   showDot = false,
   size = 'md',
   className = '',
-  onClick
+  onClick,
 }: StatusIndicatorProps) {
   const config = statusConfig[status];
   const displayLabel = label || config.label;
@@ -98,13 +98,15 @@ export function AnimatedStatusIndicator({
   ...props
 }: AnimatedStatusIndicatorProps) {
   const config = statusConfig[props.status];
-  
+
   return (
     <div className="relative">
       <StatusIndicator {...props} />
       {isLive && (
         <div className="absolute -top-1 -right-1">
-          <div className={`h-3 w-3 ${config.dot} rounded-full ${pulseAnimation ? 'animate-pulse' : ''}`}>
+          <div
+            className={`h-3 w-3 ${config.dot} rounded-full ${pulseAnimation ? 'animate-pulse' : ''}`}
+          >
             <div className={`h-3 w-3 ${config.dot} rounded-full animate-ping absolute`} />
           </div>
         </div>

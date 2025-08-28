@@ -1,16 +1,16 @@
 import React from 'react';
-import { 
-  Sidebar, 
-  SidebarContent, 
-  SidebarFooter, 
-  SidebarGroup, 
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu, 
-  SidebarMenuItem, 
+  SidebarMenu,
+  SidebarMenuItem,
   SidebarMenuButton,
-  SidebarSeparator
+  SidebarSeparator,
 } from '../ui/sidebar';
 import { Badge } from '../ui/badge';
 import { Ship, Anchor, Settings } from 'lucide-react';
@@ -20,12 +20,7 @@ import type { LeftSidebarProps } from '../../types/layout';
  * Standardized Left Sidebar
  * Provides module-specific navigation menu
  */
-export function LeftSidebar({ 
-  menuItems, 
-  moduleName,
-  footer,
-  className = ""
-}: LeftSidebarProps) {
+export function LeftSidebar({ menuItems, moduleName, footer, className = '' }: LeftSidebarProps) {
   return (
     <Sidebar className={className}>
       {/* Sidebar Header */}
@@ -51,30 +46,17 @@ export function LeftSidebar({
             <SidebarMenu>
               {menuItems.map((item: any) => (
                 <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton 
-                    asChild
-                    isActive={item.isActive}
-                    tooltip={item.tooltip}
-                  >
-                    <a 
-                      href={item.path} 
-                      className="flex items-center gap-3 px-3 py-2"
-                    >
+                  <SidebarMenuButton asChild isActive={item.isActive} tooltip={item.tooltip}>
+                    <a href={item.path} className="flex items-center gap-3 px-3 py-2">
                       {item.icon}
                       <span className="flex-1">{item.label}</span>
                       {item.badge && (
-                        <Badge 
-                          variant={item.badge.variant || 'secondary'}
-                          className="ml-auto h-5"
-                        >
+                        <Badge variant={item.badge.variant || 'secondary'} className="ml-auto h-5">
                           {item.badge.text}
                         </Badge>
                       )}
                       {item.count !== undefined && (
-                        <Badge 
-                          variant="secondary"
-                          className="ml-auto h-5 min-w-5 justify-center"
-                        >
+                        <Badge variant="secondary" className="ml-auto h-5 min-w-5 justify-center">
                           {item.count}
                         </Badge>
                       )}

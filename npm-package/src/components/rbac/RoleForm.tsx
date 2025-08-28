@@ -20,16 +20,11 @@ interface RoleFormProps {
   readonly?: boolean;
 }
 
-export function RoleForm({ 
-  role, 
-  onSave, 
-  onCancel, 
-  readonly = false 
-}: RoleFormProps) {
+export function RoleForm({ role, onSave, onCancel, readonly = false }: RoleFormProps) {
   const [formData, setFormData] = React.useState<Role>({
     name: '',
     description: '',
-    ...role
+    ...role,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -49,7 +44,7 @@ export function RoleForm({
           {role?.id ? 'Edit Role' : 'Create New Role'}
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
@@ -57,7 +52,7 @@ export function RoleForm({
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) => updateField('name', e.target.value)}
+              onChange={e => updateField('name', e.target.value)}
               placeholder="Enter role name"
               required
               readOnly={readonly || formData.isSystemRole}
@@ -69,7 +64,7 @@ export function RoleForm({
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => updateField('description', e.target.value)}
+              onChange={e => updateField('description', e.target.value)}
               placeholder="Describe what this role is for..."
               rows={4}
               readOnly={readonly || formData.isSystemRole}

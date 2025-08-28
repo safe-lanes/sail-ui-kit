@@ -13,26 +13,29 @@ export function useApi<T = any>(
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const execute = useCallback(async (customOptions?: ApiRequestOptions) => {
-    setLoading(true);
-    setError(null);
+  const execute = useCallback(
+    async (customOptions?: ApiRequestOptions) => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      // const result = await SHARED_SERVICES.api.get<T>(endpoint, {
-      //   ...options,
-      //   ...customOptions
-      // });
-      const result = {} as T; // Placeholder until service implementation
-      setData(result);
-      return result;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, [endpoint, options]);
+      try {
+        // const result = await SHARED_SERVICES.api.get<T>(endpoint, {
+        //   ...options,
+        //   ...customOptions
+        // });
+        const result = {} as T; // Placeholder until service implementation
+        setData(result);
+        return result;
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [endpoint, options]
+  );
 
   useEffect(() => {
     if (options?.immediate !== false) {
@@ -40,65 +43,74 @@ export function useApi<T = any>(
     }
   }, [execute, options?.immediate]);
 
-  const post = useCallback(async (data: any, customOptions?: ApiRequestOptions) => {
-    setLoading(true);
-    setError(null);
+  const post = useCallback(
+    async (data: any, customOptions?: ApiRequestOptions) => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      // const result = await SHARED_SERVICES.api.post<T>(endpoint, data, {
-      //   ...options,
-      //   ...customOptions
-      // });
-      const result = {} as T; // Placeholder until service implementation
-      return result;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, [endpoint, options]);
+      try {
+        // const result = await SHARED_SERVICES.api.post<T>(endpoint, data, {
+        //   ...options,
+        //   ...customOptions
+        // });
+        const result = {} as T; // Placeholder until service implementation
+        return result;
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [endpoint, options]
+  );
 
-  const put = useCallback(async (data: any, customOptions?: ApiRequestOptions) => {
-    setLoading(true);
-    setError(null);
+  const put = useCallback(
+    async (data: any, customOptions?: ApiRequestOptions) => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      // const result = await SHARED_SERVICES.api.put<T>(endpoint, data, {
-      //   ...options,
-      //   ...customOptions
-      // });
-      const result = {} as T; // Placeholder until service implementation
-      return result;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, [endpoint, options]);
+      try {
+        // const result = await SHARED_SERVICES.api.put<T>(endpoint, data, {
+        //   ...options,
+        //   ...customOptions
+        // });
+        const result = {} as T; // Placeholder until service implementation
+        return result;
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [endpoint, options]
+  );
 
-  const del = useCallback(async (customOptions?: ApiRequestOptions) => {
-    setLoading(true);
-    setError(null);
+  const del = useCallback(
+    async (customOptions?: ApiRequestOptions) => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      // const result = await SHARED_SERVICES.api.delete<T>(endpoint, {
-      //   ...options,
-      //   ...customOptions
-      // });
-      const result = {} as T; // Placeholder until service implementation
-      return result;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, [endpoint, options]);
+      try {
+        // const result = await SHARED_SERVICES.api.delete<T>(endpoint, {
+        //   ...options,
+        //   ...customOptions
+        // });
+        const result = {} as T; // Placeholder until service implementation
+        return result;
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [endpoint, options]
+  );
 
   return {
     data,
@@ -108,6 +120,6 @@ export function useApi<T = any>(
     post,
     put,
     delete: del,
-    refetch: execute
+    refetch: execute,
   };
 }

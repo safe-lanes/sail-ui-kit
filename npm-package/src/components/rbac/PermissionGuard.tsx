@@ -8,15 +8,15 @@ interface PermissionGuardProps {
   children: React.ReactNode;
 }
 
-export function PermissionGuard({ 
-  permissions, 
-  requireAll = false, 
-  userPermissions, 
+export function PermissionGuard({
+  permissions,
+  requireAll = false,
+  userPermissions,
   fallback = null,
-  children 
+  children,
 }: PermissionGuardProps) {
   const permissionArray = Array.isArray(permissions) ? permissions : [permissions];
-  
+
   const hasAccess = requireAll
     ? permissionArray.every((permission: string) => userPermissions.indexOf(permission) !== -1)
     : permissionArray.some((permission: string) => userPermissions.indexOf(permission) !== -1);

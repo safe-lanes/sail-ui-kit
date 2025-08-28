@@ -32,7 +32,7 @@ export * from './services';
 // ===== TYPES =====
 // Types are already exported by their respective component modules
 // export * from './types/layout';
-// export * from './types/maritime'; 
+// export * from './types/maritime';
 // export * from './types/rbac';
 // export * from './types/services';
 

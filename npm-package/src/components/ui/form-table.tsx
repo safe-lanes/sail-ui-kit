@@ -36,11 +36,11 @@ export const FormTable: React.FC<FormTableProps> = ({
   columns,
   data,
   onDataChange,
-  addButtonText = "Add Row",
+  addButtonText = 'Add Row',
   showActions = true,
   showComments = true,
-  emptyMessage = "No items added yet.",
-  className = ""
+  emptyMessage = 'No items added yet.',
+  className = '',
 }) => {
   const [comments, setComments] = useState<Record<string, string>>({});
   const [editingComment, setEditingComment] = useState<string | null>(null);
@@ -48,15 +48,13 @@ export const FormTable: React.FC<FormTableProps> = ({
   const addRow = () => {
     const newRow: FormTableRow = {
       id: Date.now().toString(),
-      ...columns.reduce((acc, col) => ({ ...acc, [col.id]: '' }), {})
+      ...columns.reduce((acc, col) => ({ ...acc, [col.id]: '' }), {}),
     };
     onDataChange([...data, newRow]);
   };
 
   const updateRow = (id: string, field: string, value: string) => {
-    const updatedData = data.map(row =>
-      row.id === id ? { ...row, [field]: value } : row
-    );
+    const updatedData = data.map(row => (row.id === id ? { ...row, [field]: value } : row));
     onDataChange(updatedData);
   };
 
@@ -79,7 +77,7 @@ export const FormTable: React.FC<FormTableProps> = ({
     } else {
       setComments(prev => ({
         ...prev,
-        [id]: ""
+        [id]: '',
       }));
     }
   };
@@ -87,7 +85,7 @@ export const FormTable: React.FC<FormTableProps> = ({
   const updateComment = (id: string, value: string) => {
     setComments(prev => ({
       ...prev,
-      [id]: value
+      [id]: value,
     }));
   };
 
@@ -104,19 +102,14 @@ export const FormTable: React.FC<FormTableProps> = ({
     switch (column.type) {
       case 'readonly':
         return (
-          <span className="text-[#4f5863] text-[13px] font-normal">
-            {value || `${index + 1}.`}
-          </span>
+          <span className="text-[#4f5863] text-[13px] font-normal">{value || `${index + 1}.`}</span>
         );
-      
+
       case 'select':
         return (
-          <Select
-            value={value}
-            onValueChange={(newValue) => updateRow(row.id, column.id, newValue)}
-          >
+          <Select value={value} onValueChange={newValue => updateRow(row.id, column.id, newValue)}>
             <SelectTrigger className="border-0 bg-transparent p-0 focus-visible:ring-0 text-[#4f5863] text-[13px] font-normal h-6">
-              <SelectValue placeholder={column.placeholder || "Select..."} />
+              <SelectValue placeholder={column.placeholder || 'Select...'} />
             </SelectTrigger>
             <SelectContent>
               {column.options?.map(option => (
@@ -127,23 +120,23 @@ export const FormTable: React.FC<FormTableProps> = ({
             </SelectContent>
           </Select>
         );
-      
+
       case 'number':
         return (
           <Input
             type="number"
             value={value}
-            onChange={(e) => updateRow(row.id, column.id, e.target.value)}
+            onChange={e => updateRow(row.id, column.id, e.target.value)}
             placeholder={column.placeholder}
             className="border-0 bg-transparent p-0 focus-visible:ring-0 text-[#4f5863] text-[13px] font-normal h-6"
           />
         );
-      
+
       default: // 'text'
         return (
           <Input
             value={value}
-            onChange={(e) => updateRow(row.id, column.id, e.target.value)}
+            onChange={e => updateRow(row.id, column.id, e.target.value)}
             placeholder={column.placeholder}
             className="border-0 bg-transparent p-0 focus-visible:ring-0 text-[#4f5863] text-[13px] font-normal h-6"
           />
@@ -177,7 +170,7 @@ export const FormTable: React.FC<FormTableProps> = ({
             <thead className="bg-gray-100">
               <tr>
                 {columns.map(column => (
-                  <th 
+                  <th
                     key={column.id}
                     className="text-gray-600 text-xs font-normal py-2 px-4 text-left"
                     style={column.width ? { width: column.width } : {}}
@@ -186,9 +179,7 @@ export const FormTable: React.FC<FormTableProps> = ({
                   </th>
                 ))}
                 {showActions && (
-                  <th className="text-gray-600 text-xs font-normal py-2 px-4 text-left">
-                    Actions
-                  </th>
+                  <th className="text-gray-600 text-xs font-normal py-2 px-4 text-left">Actions</th>
                 )}
               </tr>
             </thead>
@@ -215,7 +206,7 @@ export const FormTable: React.FC<FormTableProps> = ({
                               <MessageSquare className="h-[18px] w-[18px] text-gray-500" />
                             </Button>
                           )}
-                          
+
                           <Button
                             type="button"
                             variant="ghost"
@@ -229,7 +220,7 @@ export const FormTable: React.FC<FormTableProps> = ({
                       </td>
                     )}
                   </tr>
-                  
+
                   {/* Comment Row */}
                   {showComments && comments[row.id] !== undefined && (
                     <tr>
@@ -238,7 +229,7 @@ export const FormTable: React.FC<FormTableProps> = ({
                         {editingComment === row.id ? (
                           <Textarea
                             value={comments[row.id]}
-                            onChange={(e) => updateComment(row.id, e.target.value)}
+                            onChange={e => updateComment(row.id, e.target.value)}
                             onBlur={() => setEditingComment(null)}
                             placeholder="Comment: Add your observations here..."
                             className="text-blue-600 italic border-blue-200"
@@ -247,11 +238,11 @@ export const FormTable: React.FC<FormTableProps> = ({
                           />
                         ) : (
                           <div className="flex justify-between items-start">
-                            <div 
+                            <div
                               className="flex-1 text-blue-600 italic cursor-pointer p-2 rounded hover:bg-gray-50"
                               onClick={() => setEditingComment(row.id)}
                             >
-                              {comments[row.id] || "Click to add comment..."}
+                              {comments[row.id] || 'Click to add comment...'}
                             </div>
                             <div className="ml-2">
                               <Button
@@ -270,11 +261,14 @@ export const FormTable: React.FC<FormTableProps> = ({
                   )}
                 </React.Fragment>
               ))}
-              
+
               {/* Empty State */}
               {data.length === 0 && (
                 <tr>
-                  <td colSpan={columns.length + (showActions ? 1 : 0)} className="p-8 text-center text-gray-500">
+                  <td
+                    colSpan={columns.length + (showActions ? 1 : 0)}
+                    className="p-8 text-center text-gray-500"
+                  >
                     {emptyMessage}
                   </td>
                 </tr>

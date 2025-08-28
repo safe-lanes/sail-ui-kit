@@ -9,13 +9,13 @@
 
 :root {
   /* Maritime Color Palette */
-  --maritime-blue: #5DADE2;
-  --maritime-blue-hover: #4A9BD1;
-  --maritime-blue-dark: #2E86AB;
+  --maritime-blue: #5dade2;
+  --maritime-blue-hover: #4a9bd1;
+  --maritime-blue-dark: #2e86ab;
   --maritime-navy: #16569e;
   --maritime-gray: #4f5863;
   --maritime-light-gray: #f8f9fa;
-  
+
   /* Tailwind CSS Variables for Component Compatibility */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -33,19 +33,19 @@
   --input: 214.3 31.8% 91.4%;
   --ring: 210 100% 56%;
   --radius: 0.5rem;
-  
+
   /* Status Colors */
   --status-active: #10b981;
   --status-maintenance: #f59e0b;
   --status-port: #3b82f6;
   --status-inactive: #6b7280;
-  
+
   /* Compliance Colors */
   --compliant: #10b981;
   --non-compliant: #ef4444;
   --partial-compliant: #f59e0b;
   --pending: #6b7280;
-  
+
   /* Severity Colors */
   --severity-low: #10b981;
   --severity-medium: #f59e0b;
@@ -165,7 +165,13 @@
 
 /* Maritime Layout */
 .maritime-layout {
-  font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Mulish',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   min-height: 100vh;
   background-color: var(--maritime-light-gray);
 }
@@ -236,39 +242,38 @@
   .maritime-form {
     padding: 1rem;
   }
-  
+
   .maritime-content {
     padding: 1rem;
   }
 }
-
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   :root {
     --maritime-light-gray: #1f2937;
   }
-  
+
   .maritime-layout {
     background-color: #111827;
     color: #f9fafb;
   }
-  
+
   .maritime-sidebar {
     background-color: #1f2937;
     border-color: #374151;
   }
-  
+
   .maritime-nav {
     background-color: #1f2937;
     border-color: #374151;
   }
-  
+
   .maritime-form {
     background-color: #1f2937;
     border-color: #374151;
   }
-  
+
   .maritime-form .form-field {
     background-color: #374151;
     border-color: #4b5563;

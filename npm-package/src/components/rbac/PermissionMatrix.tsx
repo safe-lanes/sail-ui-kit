@@ -33,12 +33,12 @@ interface PermissionMatrixProps {
   className?: string;
 }
 
-export function PermissionMatrix({ 
-  roles, 
-  permissions, 
-  onUpdateRolePermissions, 
+export function PermissionMatrix({
+  roles,
+  permissions,
+  onUpdateRolePermissions,
   readonly = false,
-  className = '' 
+  className = '',
 }: PermissionMatrixProps) {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [categoryFilter, setCategoryFilter] = React.useState<string>('all');
@@ -47,13 +47,13 @@ export function PermissionMatrix({
   const categories = [...new Set(permissions.map(p => p.category))];
 
   const filteredPermissions = permissions.filter(permission => {
-    const matchesSearch = 
+    const matchesSearch =
       permission.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       permission.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       permission.resource.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesCategory = categoryFilter === 'all' || permission.category === categoryFilter;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -68,14 +68,15 @@ export function PermissionMatrix({
 
   const togglePermission = (roleId: string, permissionId: string) => {
     if (readonly) return;
-    
+
     const role = roles.find(r => r.id === roleId);
     if (!role) return;
-    
-    const newPermissions = role.permissions.indexOf(permissionId) !== -1
-      ? role.permissions.filter(p => p !== permissionId)
-      : [...role.permissions, permissionId];
-    
+
+    const newPermissions =
+      role.permissions.indexOf(permissionId) !== -1
+        ? role.permissions.filter(p => p !== permissionId)
+        : [...role.permissions, permissionId];
+
     onUpdateRolePermissions(roleId, newPermissions);
   };
 
@@ -104,7 +105,7 @@ export function PermissionMatrix({
             </Button>
           </CardTitle>
         </CardHeader>
-        
+
         <CardContent>
           {/* Filters */}
           <div className="flex gap-4 mb-6">
@@ -113,7 +114,7 @@ export function PermissionMatrix({
               <Input
                 placeholder="Search permissions..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={e => setSearchTerm(e.target.value)}
                 className="pl-10"
               />
             </div>
@@ -124,7 +125,9 @@ export function PermissionMatrix({
               <SelectContent>
                 <SelectItem value="all">All Categories</SelectItem>
                 {categories.map(category => (
-                  <SelectItem key={category} value={category}>{category}</SelectItem>
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -135,7 +138,9 @@ export function PermissionMatrix({
               <SelectContent>
                 <SelectItem value="all">All Roles</SelectItem>
                 {roles.map(role => (
-                  <SelectItem key={role.id} value={role.id}>{role.name}</SelectItem>
+                  <SelectItem key={role.id} value={role.id}>
+                    {role.name}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -146,33 +151,27 @@ export function PermissionMatrix({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[300px] sticky left-0 bg-white">
-                    Permission
-                  </TableHead>
-                  {filteredRoles.map((role) => (
+                  <TableHead className="w-[300px] sticky left-0 bg-white">Permission</TableHead>
+                  {filteredRoles.map(role => (
                     <TableHead key={role.id} className="text-center min-w-[120px]">
                       <div className="space-y-1">
                         <div className="font-medium">{role.name}</div>
                         <Badge variant="outline" className="text-xs">
                           {getPermissionCount(role.id)} perms
                         </Badge>
-                        <div className="text-xs text-gray-500">
-                          {role.userCount} users
-                        </div>
+                        <div className="text-xs text-gray-500">{role.userCount} users</div>
                       </div>
                     </TableHead>
                   ))}
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredPermissions.map((permission) => (
+                {filteredPermissions.map(permission => (
                   <TableRow key={permission.id}>
                     <TableCell className="sticky left-0 bg-white">
                       <div>
                         <div className="font-medium">{permission.name}</div>
-                        <div className="text-sm text-gray-500">
-                          {permission.description}
-                        </div>
+                        <div className="text-sm text-gray-500">{permission.description}</div>
                         <div className="flex gap-2 mt-1">
                           <Badge variant="outline" className="text-xs">
                             {permission.category}
@@ -183,7 +182,7 @@ export function PermissionMatrix({
                         </div>
                       </div>
                     </TableCell>
-                    {filteredRoles.map((role) => (
+                    {filteredRoles.map(role => (
                       <TableCell key={role.id} className="text-center">
                         <Checkbox
                           checked={hasPermission(role.id, permission.id)}

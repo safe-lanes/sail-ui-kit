@@ -40,11 +40,16 @@ export interface FeedbackModalProps {
 }
 
 const feedbackTypes = [
-  { value: 'bug', label: 'Bug Report', icon: '🐛', description: 'Something is not working correctly' },
+  {
+    value: 'bug',
+    label: 'Bug Report',
+    icon: '🐛',
+    description: 'Something is not working correctly',
+  },
   { value: 'feature', label: 'Feature Request', icon: '✨', description: 'Request a new feature' },
   { value: 'improvement', label: 'Improvement', icon: '📈', description: 'Suggest an enhancement' },
   { value: 'compliment', label: 'Compliment', icon: '👍', description: 'Share positive feedback' },
-  { value: 'question', label: 'Question', icon: '❓', description: 'Ask about functionality' }
+  { value: 'question', label: 'Question', icon: '❓', description: 'Ask about functionality' },
 ];
 
 const categories = [
@@ -52,19 +57,19 @@ const categories = [
   { value: 'performance', label: 'Performance' },
   { value: 'functionality', label: 'Functionality' },
   { value: 'data', label: 'Data & Reports' },
-  { value: 'other', label: 'Other' }
+  { value: 'other', label: 'Other' },
 ];
 
 export function FeedbackModal({
   isOpen,
   onClose,
   onSubmit,
-  title = "Send Feedback",
+  title = 'Send Feedback',
   userEmail,
   currentVessel,
   currentModule,
   allowRating = true,
-  className = ''
+  className = '',
 }: FeedbackModalProps) {
   const [feedback, setFeedback] = useState<Partial<FeedbackData>>({
     type: 'improvement',
@@ -75,20 +80,20 @@ export function FeedbackModal({
     vessel: currentVessel,
     module: currentModule,
     userEmail: userEmail,
-    rating: undefined
+    rating: undefined,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!feedback.title || !feedback.description || !feedback.type || !feedback.category) {
       return;
     }
 
     setIsSubmitting(true);
-    
+
     try {
       await onSubmit(feedback as FeedbackData);
       onClose();
@@ -102,7 +107,7 @@ export function FeedbackModal({
         vessel: currentVessel,
         module: currentModule,
         userEmail: userEmail,
-        rating: undefined
+        rating: undefined,
       });
     } catch (error) {
       console.error('Failed to submit feedback:', error);
@@ -132,10 +137,12 @@ export function FeedbackModal({
             <Label className="text-sm font-medium">What type of feedback is this?</Label>
             <RadioGroup
               value={feedback.type}
-              onValueChange={(value) => setFeedback(prev => ({ ...prev, type: value as FeedbackData['type'] }))}
+              onValueChange={value =>
+                setFeedback(prev => ({ ...prev, type: value as FeedbackData['type'] }))
+              }
             >
               <div className="grid grid-cols-1 gap-3">
-                {feedbackTypes.map((type) => (
+                {feedbackTypes.map(type => (
                   <div key={type.value} className="flex items-center space-x-3">
                     <RadioGroupItem value={type.value} id={type.value} />
                     <Label
@@ -159,7 +166,7 @@ export function FeedbackModal({
             <div className="space-y-3">
               <Label className="text-sm font-medium">How would you rate your experience?</Label>
               <div className="flex items-center space-x-1">
-                {[1, 2, 3, 4, 5].map((star) => (
+                {[1, 2, 3, 4, 5].map(star => (
                   <button
                     key={star}
                     type="button"
@@ -187,16 +194,20 @@ export function FeedbackModal({
           {/* Category and Priority */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="category" className="text-sm font-medium">Category</Label>
+              <Label htmlFor="category" className="text-sm font-medium">
+                Category
+              </Label>
               <Select
                 value={feedback.category}
-                onValueChange={(value) => setFeedback(prev => ({ ...prev, category: value as FeedbackData['category'] }))}
+                onValueChange={value =>
+                  setFeedback(prev => ({ ...prev, category: value as FeedbackData['category'] }))
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map((category) => (
+                  {categories.map(category => (
                     <SelectItem key={category.value} value={category.value}>
                       {category.label}
                     </SelectItem>
@@ -206,10 +217,14 @@ export function FeedbackModal({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="priority" className="text-sm font-medium">Priority</Label>
+              <Label htmlFor="priority" className="text-sm font-medium">
+                Priority
+              </Label>
               <Select
                 value={feedback.priority}
-                onValueChange={(value) => setFeedback(prev => ({ ...prev, priority: value as FeedbackData['priority'] }))}
+                onValueChange={value =>
+                  setFeedback(prev => ({ ...prev, priority: value as FeedbackData['priority'] }))
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select priority" />
@@ -234,7 +249,7 @@ export function FeedbackModal({
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder={`Brief ${selectedType?.label.toLowerCase()} title...`}
               value={feedback.title}
-              onChange={(e) => setFeedback(prev => ({ ...prev, title: e.target.value }))}
+              onChange={e => setFeedback(prev => ({ ...prev, title: e.target.value }))}
               required
             />
           </div>
@@ -249,7 +264,7 @@ export function FeedbackModal({
               className="min-h-[100px]"
               placeholder={`Please provide detailed information about your ${feedback.type}...`}
               value={feedback.description}
-              onChange={(e) => setFeedback(prev => ({ ...prev, description: e.target.value }))}
+              onChange={e => setFeedback(prev => ({ ...prev, description: e.target.value }))}
               required
             />
           </div>
@@ -257,26 +272,30 @@ export function FeedbackModal({
           {/* Context Information */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="vessel" className="text-sm font-medium">Vessel (Optional)</Label>
+              <Label htmlFor="vessel" className="text-sm font-medium">
+                Vessel (Optional)
+              </Label>
               <input
                 id="vessel"
                 type="text"
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Vessel name"
                 value={feedback.vessel || ''}
-                onChange={(e) => setFeedback(prev => ({ ...prev, vessel: e.target.value }))}
+                onChange={e => setFeedback(prev => ({ ...prev, vessel: e.target.value }))}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="module" className="text-sm font-medium">Module (Optional)</Label>
+              <Label htmlFor="module" className="text-sm font-medium">
+                Module (Optional)
+              </Label>
               <input
                 id="module"
                 type="text"
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="TMSA module"
                 value={feedback.module || ''}
-                onChange={(e) => setFeedback(prev => ({ ...prev, module: e.target.value }))}
+                onChange={e => setFeedback(prev => ({ ...prev, module: e.target.value }))}
               />
             </div>
           </div>
@@ -291,24 +310,13 @@ export function FeedbackModal({
               <Badge variant="outline">
                 {categories.find(c => c.value === feedback.category)?.label}
               </Badge>
-              <Badge variant="outline">
-                Priority: {feedback.priority}
-              </Badge>
-              {feedback.rating && (
-                <Badge variant="outline">
-                  ⭐ {feedback.rating}/5
-                </Badge>
-              )}
+              <Badge variant="outline">Priority: {feedback.priority}</Badge>
+              {feedback.rating && <Badge variant="outline">⭐ {feedback.rating}/5</Badge>}
             </div>
           </div>
 
           <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              disabled={isSubmitting}
-            >
+            <Button type="button" variant="outline" onClick={onClose} disabled={isSubmitting}>
               Cancel
             </Button>
             <Button

@@ -27,26 +27,26 @@ const statusConfig = {
     icon: Clock,
     color: 'text-gray-400',
     bgColor: 'bg-gray-100',
-    borderColor: 'border-gray-200'
+    borderColor: 'border-gray-200',
   },
   current: {
     icon: Clock,
     color: 'text-blue-600',
     bgColor: 'bg-blue-100',
-    borderColor: 'border-blue-500'
+    borderColor: 'border-blue-500',
   },
   completed: {
     icon: CheckCircle,
     color: 'text-green-600',
     bgColor: 'bg-green-100',
-    borderColor: 'border-green-500'
+    borderColor: 'border-green-500',
   },
   error: {
     icon: AlertTriangle,
     color: 'text-red-600',
     bgColor: 'bg-red-100',
-    borderColor: 'border-red-500'
-  }
+    borderColor: 'border-red-500',
+  },
 };
 
 export function ProgressIndicator({
@@ -56,13 +56,13 @@ export function ProgressIndicator({
   showTimestamps = false,
   orientation = 'horizontal',
   size = 'md',
-  className = ''
+  className = '',
 }: ProgressIndicatorProps) {
   const completedSteps = steps.filter(step => step.status === 'completed').length;
   const totalSteps = steps.length;
   const progressPercentage = totalSteps > 0 ? (completedSteps / totalSteps) * 100 : 0;
 
-  const currentStepIndex = currentStep 
+  const currentStepIndex = currentStep
     ? steps.findIndex(step => step.id === currentStep)
     : steps.findIndex(step => step.status === 'current');
 
@@ -71,20 +71,20 @@ export function ProgressIndicator({
       iconSize: 'h-4 w-4',
       padding: 'p-1.5',
       textSize: 'text-xs',
-      badgeSize: 'text-xs px-2 py-0.5'
+      badgeSize: 'text-xs px-2 py-0.5',
     },
     md: {
       iconSize: 'h-5 w-5',
       padding: 'p-2',
       textSize: 'text-sm',
-      badgeSize: 'text-sm px-2.5 py-0.5'
+      badgeSize: 'text-sm px-2.5 py-0.5',
     },
     lg: {
       iconSize: 'h-6 w-6',
       padding: 'p-3',
       textSize: 'text-base',
-      badgeSize: 'text-sm px-3 py-1'
-    }
+      badgeSize: 'text-sm px-3 py-1',
+    },
   };
 
   if (orientation === 'vertical') {
@@ -114,22 +114,20 @@ export function ProgressIndicator({
             return (
               <div key={step.id} className="relative">
                 {/* Connection Line */}
-                {!isLast && (
-                  <div className="absolute left-4 top-8 w-0.5 h-8 bg-gray-200" />
-                )}
+                {!isLast && <div className="absolute left-4 top-8 w-0.5 h-8 bg-gray-200" />}
 
                 <div className="flex items-start space-x-3">
                   {/* Icon */}
-                  <div className={`${sizeConfig[size].padding} rounded-full ${config.bgColor} ${config.borderColor} border-2 flex-shrink-0`}>
+                  <div
+                    className={`${sizeConfig[size].padding} rounded-full ${config.bgColor} ${config.borderColor} border-2 flex-shrink-0`}
+                  >
                     <Icon className={`${sizeConfig[size].iconSize} ${config.color}`} />
                   </div>
 
                   {/* Content */}
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center space-x-2">
-                      <h4 className={`font-medium ${sizeConfig[size].textSize}`}>
-                        {step.label}
-                      </h4>
+                      <h4 className={`font-medium ${sizeConfig[size].textSize}`}>{step.label}</h4>
                       {step.optional && (
                         <Badge variant="outline" className="text-xs">
                           Optional
@@ -144,9 +142,7 @@ export function ProgressIndicator({
                     </div>
 
                     {step.description && (
-                      <p className="text-sm text-gray-600">
-                        {step.description}
-                      </p>
+                      <p className="text-sm text-gray-600">{step.description}</p>
                     )}
 
                     {showTimestamps && step.timestamp && (
@@ -189,7 +185,9 @@ export function ProgressIndicator({
             <div key={step.id} className="flex items-center flex-1">
               <div className="flex flex-col items-center space-y-2">
                 {/* Icon */}
-                <div className={`${sizeConfig[size].padding} rounded-full ${config.bgColor} ${config.borderColor} border-2`}>
+                <div
+                  className={`${sizeConfig[size].padding} rounded-full ${config.bgColor} ${config.borderColor} border-2`}
+                >
                   <Icon className={`${sizeConfig[size].iconSize} ${config.color}`} />
                 </div>
 
@@ -199,9 +197,7 @@ export function ProgressIndicator({
                     {step.label}
                   </p>
                   {step.description && (
-                    <p className="text-xs text-gray-500 truncate">
-                      {step.description}
-                    </p>
+                    <p className="text-xs text-gray-500 truncate">{step.description}</p>
                   )}
                   {showTimestamps && step.timestamp && (
                     <p className="text-xs text-gray-400">
@@ -212,9 +208,7 @@ export function ProgressIndicator({
               </div>
 
               {/* Connection Line */}
-              {!isLast && (
-                <div className="flex-1 h-0.5 bg-gray-200 mx-2" />
-              )}
+              {!isLast && <div className="flex-1 h-0.5 bg-gray-200 mx-2" />}
             </div>
           );
         })}
@@ -243,21 +237,21 @@ export function LinearProgress({
   showValue = false,
   size = 'md',
   color = 'blue',
-  className = ''
+  className = '',
 }: LinearProgressProps) {
   const percentage = Math.min((value / max) * 100, 100);
 
   const sizeConfig = {
     sm: 'h-1',
     md: 'h-2',
-    lg: 'h-3'
+    lg: 'h-3',
   };
 
   const colorConfig = {
     blue: 'bg-blue-500',
     green: 'bg-green-500',
     yellow: 'bg-yellow-500',
-    red: 'bg-red-500'
+    red: 'bg-red-500',
   };
 
   return (
@@ -266,7 +260,11 @@ export function LinearProgress({
         <div className="flex justify-between text-sm">
           {label && <span>{label}</span>}
           <div className="flex items-center space-x-2">
-            {showValue && <span>{value}/{max}</span>}
+            {showValue && (
+              <span>
+                {value}/{max}
+              </span>
+            )}
             {showPercentage && <span>{Math.round(percentage)}%</span>}
           </div>
         </div>

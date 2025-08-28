@@ -22,28 +22,44 @@ export interface ComplianceCardProps {
 }
 
 const statusConfig = {
-  'compliant': { color: 'bg-green-100 text-green-800 border-green-200', icon: '✓', label: 'Compliant' },
-  'partial': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: '⚠', label: 'Partial' },
-  'non-compliant': { color: 'bg-red-100 text-red-800 border-red-200', icon: '✗', label: 'Non-Compliant' },
-  'not-assessed': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: '?', label: 'Not Assessed' }
+  compliant: {
+    color: 'bg-green-100 text-green-800 border-green-200',
+    icon: '✓',
+    label: 'Compliant',
+  },
+  partial: {
+    color: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    icon: '⚠',
+    label: 'Partial',
+  },
+  'non-compliant': {
+    color: 'bg-red-100 text-red-800 border-red-200',
+    icon: '✗',
+    label: 'Non-Compliant',
+  },
+  'not-assessed': {
+    color: 'bg-gray-100 text-gray-800 border-gray-200',
+    icon: '?',
+    label: 'Not Assessed',
+  },
 };
 
 export function ComplianceCard({
-  title = "TMSA Compliance",
+  title = 'TMSA Compliance',
   elements,
   overallScore,
   showElementDetails = false,
   onElementClick,
-  className = ''
+  className = '',
 }: ComplianceCardProps) {
   const compliantCount = elements.filter(e => e.status === 'compliant').length;
   const partialCount = elements.filter(e => e.status === 'partial').length;
   const nonCompliantCount = elements.filter(e => e.status === 'non-compliant').length;
   const notAssessedCount = elements.filter(e => e.status === 'not-assessed').length;
 
-  const calculatedScore = overallScore || (
-    elements.length > 0 ? Math.round((compliantCount / elements.length) * 100) : 0
-  );
+  const calculatedScore =
+    overallScore ||
+    (elements.length > 0 ? Math.round((compliantCount / elements.length) * 100) : 0);
 
   const getScoreColor = (score: number) => {
     if (score >= 90) return 'text-green-600';
@@ -60,9 +76,7 @@ export function ComplianceCard({
   return (
     <Card className={className}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
         <div className="text-lg">📋</div>
       </CardHeader>
       <CardContent>
@@ -117,7 +131,7 @@ export function ComplianceCard({
                 Element Status
               </h4>
               <div className="space-y-1 max-h-48 overflow-y-auto">
-                {elements.map((element) => (
+                {elements.map(element => (
                   <div
                     key={element.id}
                     className={`flex items-center justify-between p-2 rounded-lg border hover:bg-gray-50 ${
@@ -126,29 +140,18 @@ export function ComplianceCard({
                     onClick={() => onElementClick?.(element)}
                   >
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm">
-                        {statusConfig[element.status]?.icon}
-                      </span>
+                      <span className="text-sm">{statusConfig[element.status]?.icon}</span>
                       <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          {element.code}
-                        </p>
-                        <p className="text-xs text-gray-500 truncate max-w-32">
-                          {element.name}
-                        </p>
+                        <p className="text-sm font-medium text-gray-900">{element.code}</p>
+                        <p className="text-xs text-gray-500 truncate max-w-32">{element.name}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <Badge
-                        variant="outline"
-                        className={statusConfig[element.status]?.color}
-                      >
+                      <Badge variant="outline" className={statusConfig[element.status]?.color}>
                         {statusConfig[element.status]?.label}
                       </Badge>
                       {element.score && (
-                        <p className="text-xs text-gray-500 mt-1">
-                          {element.score}%
-                        </p>
+                        <p className="text-xs text-gray-500 mt-1">{element.score}%</p>
                       )}
                     </div>
                   </div>

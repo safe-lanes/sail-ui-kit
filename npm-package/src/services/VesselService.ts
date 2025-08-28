@@ -17,7 +17,7 @@ export class VesselService {
    */
   async getVessels(filters: VesselFilter = {}): Promise<any[]> {
     return this.apiService.get<any[]>('/vessels', {
-      params: filters
+      params: filters,
     });
   }
 
@@ -63,7 +63,7 @@ export class VesselService {
   async updateVesselStatus(vesselId: string, status: string, location?: string): Promise<void> {
     return this.apiService.put(`/vessels/${vesselId}/status`, {
       status,
-      location
+      location,
     });
   }
 

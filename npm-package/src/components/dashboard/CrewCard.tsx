@@ -22,25 +22,37 @@ export interface CrewCardProps {
 }
 
 const statusConfig = {
-  'onboard': { color: 'bg-green-100 text-green-800 border-green-200', icon: '🚢', label: 'Onboard' },
-  'shore-leave': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: '🏖', label: 'Shore Leave' },
-  'training': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: '📚', label: 'Training' },
-  'medical-leave': { color: 'bg-red-100 text-red-800 border-red-200', icon: '🏥', label: 'Medical' },
-  'available': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: '✓', label: 'Available' }
+  onboard: { color: 'bg-green-100 text-green-800 border-green-200', icon: '🚢', label: 'Onboard' },
+  'shore-leave': {
+    color: 'bg-blue-100 text-blue-800 border-blue-200',
+    icon: '🏖',
+    label: 'Shore Leave',
+  },
+  training: {
+    color: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    icon: '📚',
+    label: 'Training',
+  },
+  'medical-leave': {
+    color: 'bg-red-100 text-red-800 border-red-200',
+    icon: '🏥',
+    label: 'Medical',
+  },
+  available: { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: '✓', label: 'Available' },
 };
 
 const certificationConfig = {
-  'valid': { color: 'bg-green-100 text-green-800 border-green-200', label: 'Valid' },
-  'expiring': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', label: 'Expiring' },
-  'expired': { color: 'bg-red-100 text-red-800 border-red-200', label: 'Expired' }
+  valid: { color: 'bg-green-100 text-green-800 border-green-200', label: 'Valid' },
+  expiring: { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', label: 'Expiring' },
+  expired: { color: 'bg-red-100 text-red-800 border-red-200', label: 'Expired' },
 };
 
 export function CrewCard({
-  title = "Crew",
+  title = 'Crew',
   crewMembers,
   showMemberDetails = false,
   onMemberClick,
-  className = ''
+  className = '',
 }: CrewCardProps) {
   const totalCrew = crewMembers.length;
   const onboardCount = crewMembers.filter(c => c.status === 'onboard').length;
@@ -49,32 +61,33 @@ export function CrewCard({
   const medicalLeaveCount = crewMembers.filter(c => c.status === 'medical-leave').length;
 
   const validCertifications = crewMembers.filter(c => c.certificationStatus === 'valid').length;
-  const expiringCertifications = crewMembers.filter(c => c.certificationStatus === 'expiring').length;
+  const expiringCertifications = crewMembers.filter(
+    c => c.certificationStatus === 'expiring'
+  ).length;
   const expiredCertifications = crewMembers.filter(c => c.certificationStatus === 'expired').length;
 
   const certificationCompliance = totalCrew > 0 ? (validCertifications / totalCrew) * 100 : 0;
 
   // Group by ranks
-  const rankCounts = crewMembers.reduce((acc, member) => {
-    acc[member.rank] = (acc[member.rank] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const rankCounts = crewMembers.reduce(
+    (acc, member) => {
+      acc[member.rank] = (acc[member.rank] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   return (
     <Card className={className}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
         <div className="text-lg">👥</div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {/* Total Crew */}
           <div>
-            <div className="text-2xl font-bold text-gray-900">
-              {totalCrew}
-            </div>
+            <div className="text-2xl font-bold text-gray-900">{totalCrew}</div>
             <p className="text-xs text-gray-500">
               {onboardCount} onboard, {availableCount} available
             </p>
@@ -120,9 +133,7 @@ export function CrewCard({
 
           {/* Rank Distribution */}
           <div className="space-y-2">
-            <h4 className="text-xs font-medium text-gray-600 uppercase tracking-wide">
-              By Rank
-            </h4>
+            <h4 className="text-xs font-medium text-gray-600 uppercase tracking-wide">By Rank</h4>
             <div className="flex flex-wrap gap-1">
               {Object.entries(rankCounts).map(([rank, count]: [string, number]) => (
                 <Badge key={rank} variant="outline">
@@ -139,7 +150,7 @@ export function CrewCard({
                 Crew Members
               </h4>
               <div className="space-y-1 max-h-48 overflow-y-auto">
-                {crewMembers.slice(0, 10).map((member) => (
+                {crewMembers.slice(0, 10).map(member => (
                   <div
                     key={member.id}
                     className={`flex items-center justify-between p-2 rounded-lg border hover:bg-gray-50 ${
@@ -148,13 +159,9 @@ export function CrewCard({
                     onClick={() => onMemberClick?.(member)}
                   >
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm">
-                        {statusConfig[member.status]?.icon}
-                      </span>
+                      <span className="text-sm">{statusConfig[member.status]?.icon}</span>
                       <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          {member.name}
-                        </p>
+                        <p className="text-sm font-medium text-gray-900">{member.name}</p>
                         <p className="text-xs text-gray-500">
                           {member.rank}
                           {member.vessel && ` • ${member.vessel}`}
@@ -162,10 +169,7 @@ export function CrewCard({
                       </div>
                     </div>
                     <div className="text-right">
-                      <Badge
-                        variant="outline"
-                        className={statusConfig[member.status]?.color}
-                      >
+                      <Badge variant="outline" className={statusConfig[member.status]?.color}>
                         {statusConfig[member.status]?.label}
                       </Badge>
                       <Badge

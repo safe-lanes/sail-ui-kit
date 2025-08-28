@@ -22,33 +22,33 @@ interface User {
 
 interface UserManagementProps {
   users: User[];
-  roles: Array<{ id: string; name: string; }>;
+  roles: Array<{ id: string; name: string }>;
   onCreateUser: (user: Omit<User, 'id' | 'createdAt'>) => void;
   onUpdateUser: (id: string, user: Partial<User>) => void;
   onDeleteUser: (id: string) => void;
   className?: string;
 }
 
-export function UserManagement({ 
-  users, 
-  roles, 
-  onCreateUser, 
-  onUpdateUser, 
+export function UserManagement({
+  users,
+  roles,
+  onCreateUser,
+  onUpdateUser,
   onDeleteUser,
-  className = '' 
+  className = '',
 }: UserManagementProps) {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [statusFilter, setStatusFilter] = React.useState<string>('all');
   const [selectedUser, setSelectedUser] = React.useState<User | null>(null);
 
   const filteredUsers = users.filter(user => {
-    const matchesSearch = 
+    const matchesSearch =
       user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
-    
+
     return matchesSearch && matchesStatus;
   });
 
@@ -93,7 +93,7 @@ export function UserManagement({
             </Dialog>
           </CardTitle>
         </CardHeader>
-        
+
         <CardContent>
           {/* Filters */}
           <div className="flex gap-4 mb-6">
@@ -102,7 +102,7 @@ export function UserManagement({
               <Input
                 placeholder="Search users..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={e => setSearchTerm(e.target.value)}
                 className="pl-10"
               />
             </div>
@@ -132,18 +132,20 @@ export function UserManagement({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredUsers.map((user) => (
+              {filteredUsers.map(user => (
                 <TableRow key={user.id}>
                   <TableCell>
                     <div>
-                      <div className="font-medium">{user.firstName} {user.lastName}</div>
+                      <div className="font-medium">
+                        {user.firstName} {user.lastName}
+                      </div>
                       <div className="text-sm text-gray-500">@{user.username}</div>
                     </div>
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
                     <div className="flex flex-wrap gap-1">
-                      {user.roles.map((role) => (
+                      {user.roles.map(role => (
                         <Badge key={role} variant="outline" className="text-xs">
                           {role}
                         </Badge>
@@ -152,23 +154,16 @@ export function UserManagement({
                   </TableCell>
                   <TableCell>{getStatusBadge(user.status)}</TableCell>
                   <TableCell>
-                    {user.lastLogin 
-                      ? new Date(user.lastLogin).toLocaleDateString()
-                      : 'Never'
-                    }
+                    {user.lastLogin ? new Date(user.lastLogin).toLocaleDateString() : 'Never'}
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => setSelectedUser(user)}
-                      >
+                      <Button variant="outline" size="sm" onClick={() => setSelectedUser(user)}>
                         <Edit className="h-3 w-3" />
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
+                      <Button
+                        variant="outline"
+                        size="sm"
                         onClick={() => onDeleteUser(user.id)}
                         className="text-red-600 hover:text-red-700"
                       >

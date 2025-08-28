@@ -18,7 +18,10 @@ export class RBACService {
   /**
    * Login user
    */
-  async login(username: string, password: string): Promise<{ success: boolean; token?: string; user?: User }> {
+  async login(
+    username: string,
+    password: string
+  ): Promise<{ success: boolean; token?: string; user?: User }> {
     try {
       const response = await this.apiService.post<{
         success: boolean;
@@ -30,7 +33,7 @@ export class RBACService {
         this.apiService.setAuthToken(response.token);
         this.currentUser = response.user;
         this.userPermissions = this.buildUserPermissions(response.user);
-        
+
         // Store in localStorage
         localStorage.setItem('sail_auth_token', response.token);
         localStorage.setItem('sail_current_user', JSON.stringify(response.user));
@@ -49,7 +52,7 @@ export class RBACService {
     this.apiService.clearAuthToken();
     this.currentUser = null;
     this.userPermissions = null;
-    
+
     localStorage.removeItem('sail_auth_token');
     localStorage.removeItem('sail_current_user');
   }
@@ -183,7 +186,7 @@ export class RBACService {
         return roleNames.includes(roleName);
       },
       getRoles: () => roleNames,
-      getPermissions: () => allPermissions
+      getPermissions: () => allPermissions,
     };
   }
 

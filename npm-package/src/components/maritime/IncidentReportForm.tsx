@@ -43,14 +43,14 @@ const INCIDENT_TYPES = [
   'Grounding',
   'Cargo Related',
   'Near Miss',
-  'Other'
+  'Other',
 ];
 
-export function IncidentReportForm({ 
-  incident = {}, 
-  onSave, 
-  onCancel, 
-  readonly = false 
+export function IncidentReportForm({
+  incident = {},
+  onSave,
+  onCancel,
+  readonly = false,
 }: IncidentReportFormProps) {
   const [formData, setFormData] = React.useState<Partial<IncidentReport>>({
     title: '',
@@ -64,7 +64,7 @@ export function IncidentReportForm({
     personnelInvolved: [],
     immediateActions: '',
     status: 'draft',
-    ...incident
+    ...incident,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -82,14 +82,14 @@ export function IncidentReportForm({
         <CardTitle className="flex items-center justify-between">
           <span>Incident Report Form</span>
           {formData.severity && (
-            <IncidentSeverityIndicator 
-              severity={formData.severity} 
+            <IncidentSeverityIndicator
+              severity={formData.severity}
               incidentType={formData.incidentType}
             />
           )}
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Basic Information */}
@@ -99,18 +99,18 @@ export function IncidentReportForm({
               <Input
                 id="title"
                 value={formData.title || ''}
-                onChange={(e) => updateField('title', e.target.value)}
+                onChange={e => updateField('title', e.target.value)}
                 placeholder="Brief description of incident"
                 required
                 readOnly={readonly}
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="incidentType">Incident Type *</Label>
-              <Select 
-                value={formData.incidentType || ''} 
-                onValueChange={(value) => updateField('incidentType', value)}
+              <Select
+                value={formData.incidentType || ''}
+                onValueChange={value => updateField('incidentType', value)}
                 disabled={readonly}
               >
                 <SelectTrigger>
@@ -118,7 +118,9 @@ export function IncidentReportForm({
                 </SelectTrigger>
                 <SelectContent>
                   {INCIDENT_TYPES.map(type => (
-                    <SelectItem key={type} value={type}>{type}</SelectItem>
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -128,8 +130,8 @@ export function IncidentReportForm({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label htmlFor="severity">Severity *</Label>
-              <Select 
-                value={formData.severity || 'medium'} 
+              <Select
+                value={formData.severity || 'medium'}
                 onValueChange={(value: SeverityLevel) => updateField('severity', value)}
                 disabled={readonly}
               >
@@ -145,26 +147,26 @@ export function IncidentReportForm({
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="location">Location *</Label>
               <Input
                 id="location"
                 value={formData.location || ''}
-                onChange={(e) => updateField('location', e.target.value)}
+                onChange={e => updateField('location', e.target.value)}
                 placeholder="Incident location"
                 required
                 readOnly={readonly}
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="dateTime">Date & Time *</Label>
               <Input
                 id="dateTime"
                 type="datetime-local"
                 value={formData.dateTime || ''}
-                onChange={(e) => updateField('dateTime', e.target.value)}
+                onChange={e => updateField('dateTime', e.target.value)}
                 required
                 readOnly={readonly}
               />
@@ -176,7 +178,7 @@ export function IncidentReportForm({
             <Textarea
               id="description"
               value={formData.description || ''}
-              onChange={(e) => updateField('description', e.target.value)}
+              onChange={e => updateField('description', e.target.value)}
               placeholder="Detailed description of what happened..."
               rows={4}
               required
@@ -189,7 +191,7 @@ export function IncidentReportForm({
             <Textarea
               id="immediateActions"
               value={formData.immediateActions || ''}
-              onChange={(e) => updateField('immediateActions', e.target.value)}
+              onChange={e => updateField('immediateActions', e.target.value)}
               placeholder="Actions taken immediately after the incident..."
               rows={3}
               readOnly={readonly}
@@ -202,18 +204,18 @@ export function IncidentReportForm({
               <Input
                 id="reportedBy"
                 value={formData.reportedBy || ''}
-                onChange={(e) => updateField('reportedBy', e.target.value)}
+                onChange={e => updateField('reportedBy', e.target.value)}
                 placeholder="Name of person reporting"
                 required
                 readOnly={readonly}
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>
-              <Select 
-                value={formData.status || 'draft'} 
-                onValueChange={(value) => updateField('status', value)}
+              <Select
+                value={formData.status || 'draft'}
+                onValueChange={value => updateField('status', value)}
                 disabled={readonly}
               >
                 <SelectTrigger>

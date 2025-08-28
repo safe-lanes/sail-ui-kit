@@ -43,12 +43,12 @@ interface OperationsDashboardProps {
   className?: string;
 }
 
-export function OperationsDashboard({ 
-  fleetSummary, 
-  vessels, 
-  tmsa, 
+export function OperationsDashboard({
+  fleetSummary,
+  vessels,
+  tmsa,
   incidents = [],
-  className = '' 
+  className = '',
 }: OperationsDashboardProps) {
   return (
     <div className={`space-y-6 ${className}`}>
@@ -85,9 +85,7 @@ export function OperationsDashboard({
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{fleetSummary.totalCrew}</div>
-            <p className="text-xs text-muted-foreground">
-              across all vessels
-            </p>
+            <p className="text-xs text-muted-foreground">across all vessels</p>
           </CardContent>
         </Card>
 
@@ -98,9 +96,7 @@ export function OperationsDashboard({
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{fleetSummary.openIncidents}</div>
-            <p className="text-xs text-muted-foreground">
-              requiring attention
-            </p>
+            <p className="text-xs text-muted-foreground">requiring attention</p>
           </CardContent>
         </Card>
       </div>
@@ -113,7 +109,7 @@ export function OperationsDashboard({
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {vessels.slice(0, 6).map((vessel) => (
+              {vessels.slice(0, 6).map(vessel => (
                 <div key={vessel.id} className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
@@ -125,11 +121,13 @@ export function OperationsDashboard({
                     <p className="text-sm text-gray-500">{vessel.location}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <VesselStatusIndicator vessel={{
-                      name: vessel.name,
-                      vesselType: vessel.type,
-                      status: { status: vessel.status, location: vessel.location }
-                    }} />
+                    <VesselStatusIndicator
+                      vessel={{
+                        name: vessel.name,
+                        vesselType: vessel.type,
+                        status: { status: vessel.status, location: vessel.location },
+                      }}
+                    />
                     <SafetyRatingBadge rating={vessel.safetyRating} />
                   </div>
                 </div>
@@ -150,12 +148,8 @@ export function OperationsDashboard({
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {tmsa.slice(0, 5).map((element) => (
-                <TMSAComplianceIndicator 
-                  key={element.id} 
-                  elementData={element} 
-                  compact={true}
-                />
+              {tmsa.slice(0, 5).map(element => (
+                <TMSAComplianceIndicator key={element.id} elementData={element} compact={true} />
               ))}
             </div>
           </CardContent>
@@ -170,7 +164,7 @@ export function OperationsDashboard({
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {incidents.slice(0, 5).map((incident) => (
+              {incidents.slice(0, 5).map(incident => (
                 <div key={incident.id} className="flex items-center justify-between">
                   <div>
                     <h4 className="font-medium">{incident.title}</h4>
@@ -178,14 +172,14 @@ export function OperationsDashboard({
                       {new Date(incident.date).toLocaleDateString()}
                     </p>
                   </div>
-                  <Badge 
-                    variant="outline" 
+                  <Badge
+                    variant="outline"
                     className={
-                      incident.severity === 'critical' 
+                      incident.severity === 'critical'
                         ? 'bg-red-50 text-red-700 border-red-200'
                         : incident.severity === 'high'
-                        ? 'bg-orange-50 text-orange-700 border-orange-200'
-                        : 'bg-yellow-50 text-yellow-700 border-yellow-200'
+                          ? 'bg-orange-50 text-orange-700 border-orange-200'
+                          : 'bg-yellow-50 text-yellow-700 border-yellow-200'
                     }
                   >
                     {incident.severity}

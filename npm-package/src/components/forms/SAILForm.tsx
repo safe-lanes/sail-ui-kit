@@ -37,14 +37,14 @@ export const SAILForm: React.FC<SAILFormProps> = ({
   onSubmit,
   showSaveButton = true,
   showSubmitButton = true,
-  saveButtonText = "Save Draft",
-  submitButtonText = "Submit",
+  saveButtonText = 'Save Draft',
+  submitButtonText = 'Submit',
   initialSection,
-  className = ""
+  className = '',
 }) => {
   // Filter visible sections
   const visibleSections = sections.filter(section => section.isVisible !== false);
-  
+
   // Set initial active section
   const [activeSection, setActiveSection] = useState(() => {
     if (initialSection && visibleSections.find(s => s.id === initialSection)) {
@@ -56,7 +56,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
   // Auto-generate letters if not provided
   const sectionsWithLetters = visibleSections.map((section, index) => ({
     ...section,
-    letter: section.letter || String.fromCharCode(65 + index) // A, B, C, etc.
+    letter: section.letter || String.fromCharCode(65 + index), // A, B, C, etc.
   }));
 
   const currentSection = sectionsWithLetters.find(section => section.id === activeSection);
@@ -66,12 +66,14 @@ export const SAILForm: React.FC<SAILFormProps> = ({
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-[4px]">
       {/* Modal Card with shadow and rounded corners */}
-      <div className={`bg-white rounded-xl shadow-2xl w-full h-[90vh] flex flex-col relative ${className}`}>
+      <div
+        className={`bg-white rounded-xl shadow-2xl w-full h-[90vh] flex flex-col relative ${className}`}
+      >
         {/* Header - Exact match to reference */}
         <div className="bg-white border-b border-gray-200 p-3 md:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 rounded-t-xl">
           <div className="flex items-center gap-3">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
               onClick={onClose}
               className="text-gray-600 hover:bg-gray-100 h-8 w-8 p-0"
@@ -80,19 +82,16 @@ export const SAILForm: React.FC<SAILFormProps> = ({
             </Button>
             <h1 className="text-lg font-medium text-gray-900">{title}</h1>
           </div>
-          
+
           <div className="flex gap-2">
             {showSaveButton && onSave && (
-              <Button 
-                onClick={onSave}
-                className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white px-4"
-              >
+              <Button onClick={onSave} className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white px-4">
                 {saveButtonText}
               </Button>
             )}
-            
+
             {showSubmitButton && onSubmit && (
-              <Button 
+              <Button
                 onClick={onSubmit}
                 className="bg-green-600 hover:bg-green-700 text-white px-4"
               >
@@ -101,7 +100,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
             )}
           </div>
         </div>
-        
+
         {/* Body - Responsive split layout */}
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
           {/* Left Sidebar - Mobile: compact horizontal, Tablet: vertical circles only, Desktop: full with text */}
@@ -110,34 +109,44 @@ export const SAILForm: React.FC<SAILFormProps> = ({
               {sectionsWithLetters.map((section, index) => {
                 const isActive = activeSection === section.id;
                 const isCompleted = section.isCompleted || false;
-                
+
                 return (
                   <div key={section.id}>
                     {/* Section Item - Clickable */}
-                    <div 
+                    <div
                       className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 cursor-pointer hover:bg-gray-100 p-0.5 md:p-1 lg:p-2 rounded flex-shrink-0"
                       onClick={() => setActiveSection(section.id)}
                     >
-                      <div className={`w-12 h-12 ${isActive ? 'bg-[#16569e]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
+                      <div
+                        className={`w-12 h-12 ${isActive ? 'bg-[#16569e]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}
+                      >
                         {section.letter}
                       </div>
                       <div className="flex-1 pt-2 hidden lg:block">
-                        <h3 className={`font-medium text-sm ${isActive ? 'text-[#16569e]' : 'text-gray-600'}`}>
-                          {section.title.replace(/^Part [A-Z]: /, "").split(/(?=[A-Z])/).join('\n')}
+                        <h3
+                          className={`font-medium text-sm ${isActive ? 'text-[#16569e]' : 'text-gray-600'}`}
+                        >
+                          {section.title
+                            .replace(/^Part [A-Z]: /, '')
+                            .split(/(?=[A-Z])/)
+                            .join('\n')}
                         </h3>
                       </div>
                     </div>
-                    
+
                     {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
                     {index < sectionsWithLetters.length - 1 && (
-                      <div className="hidden lg:block w-0.5 h-4 bg-gray-300" style={{marginLeft: 'calc(0.5rem + 1.5rem)'}}></div>
+                      <div
+                        className="hidden lg:block w-0.5 h-4 bg-gray-300"
+                        style={{ marginLeft: 'calc(0.5rem + 1.5rem)' }}
+                      ></div>
                     )}
                   </div>
                 );
               })}
             </div>
           </div>
-          
+
           {/* Right Content Area - Responsive styling */}
           <div className="flex-1 bg-gray-50 overflow-y-auto">
             <div className="p-4 md:p-8">
@@ -147,16 +156,18 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                   <>
                     {/* Section Header */}
                     <div className="p-6 pb-4">
-                      <h2 className="text-xl font-semibold text-[#16569e] mb-2">{currentSection.title}</h2>
+                      <h2 className="text-xl font-semibold text-[#16569e] mb-2">
+                        {currentSection.title}
+                      </h2>
                       {currentSection.description && (
-                        <p className="text-sm text-[#16569e] border-b-2 border-[#16569e] pb-2">{currentSection.description}</p>
+                        <p className="text-sm text-[#16569e] border-b-2 border-[#16569e] pb-2">
+                          {currentSection.description}
+                        </p>
                       )}
                     </div>
-                    
+
                     {/* Form Fields - Inside the card */}
-                    <div className="px-6 pb-6">
-                      {currentSection.content}
-                    </div>
+                    <div className="px-6 pb-6">{currentSection.content}</div>
                   </>
                 )}
               </div>

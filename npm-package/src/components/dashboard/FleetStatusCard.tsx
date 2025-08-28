@@ -23,19 +23,19 @@ export interface FleetStatusCardProps {
 }
 
 const statusConfig = {
-  'active': { color: 'bg-green-100 text-green-800 border-green-200', icon: '●' },
+  active: { color: 'bg-green-100 text-green-800 border-green-200', icon: '●' },
   'in-port': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: '⚓' },
   'at-sea': { color: 'bg-cyan-100 text-cyan-800 border-cyan-200', icon: '🌊' },
-  'maintenance': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: '⚠' },
-  'emergency': { color: 'bg-red-100 text-red-800 border-red-200', icon: '🚨' }
+  maintenance: { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: '⚠' },
+  emergency: { color: 'bg-red-100 text-red-800 border-red-200', icon: '🚨' },
 };
 
 export function FleetStatusCard({
   vessels,
-  title = "Fleet Status",
+  title = 'Fleet Status',
   showDetails = false,
   onVesselClick,
-  className = ''
+  className = '',
 }: FleetStatusCardProps) {
   const totalVessels = vessels.length;
   const inPortCount = vessels.filter(v => v.status === 'in-port').length;
@@ -43,25 +43,21 @@ export function FleetStatusCard({
   const maintenanceCount = vessels.filter(v => v.status === 'maintenance').length;
   const emergencyCount = vessels.filter(v => v.status === 'emergency').length;
 
-  const averageSafetyRating = vessels
-    .filter(v => v.safetyRating)
-    .reduce((sum, v) => sum + (v.safetyRating || 0), 0) / vessels.filter(v => v.safetyRating).length;
+  const averageSafetyRating =
+    vessels.filter(v => v.safetyRating).reduce((sum, v) => sum + (v.safetyRating || 0), 0) /
+    vessels.filter(v => v.safetyRating).length;
 
   return (
     <Card className={className}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
         <div className="text-lg">🚢</div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {/* Summary */}
           <div>
-            <div className="text-2xl font-bold text-gray-900">
-              {totalVessels}
-            </div>
+            <div className="text-2xl font-bold text-gray-900">{totalVessels}</div>
             <p className="text-xs text-gray-500">
               {inPortCount} in port, {activeCount} operational
             </p>
@@ -105,7 +101,7 @@ export function FleetStatusCard({
                 Fleet Overview
               </h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
-                {vessels.map((vessel) => (
+                {vessels.map(vessel => (
                   <div
                     key={vessel.id}
                     className={`flex items-center justify-between p-2 rounded-lg border hover:bg-gray-50 ${
@@ -114,28 +110,19 @@ export function FleetStatusCard({
                     onClick={() => onVesselClick?.(vessel)}
                   >
                     <div className="flex items-center space-x-3">
-                      <span className="text-sm">
-                        {statusConfig[vessel.status]?.icon}
-                      </span>
+                      <span className="text-sm">{statusConfig[vessel.status]?.icon}</span>
                       <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          {vessel.name}
-                        </p>
+                        <p className="text-sm font-medium text-gray-900">{vessel.name}</p>
                         <p className="text-xs text-gray-500">
                           {vessel.type} • {vessel.crew} crew
                         </p>
                         {vessel.location && (
-                          <p className="text-xs text-gray-500">
-                            📍 {vessel.location}
-                          </p>
+                          <p className="text-xs text-gray-500">📍 {vessel.location}</p>
                         )}
                       </div>
                     </div>
                     <div className="text-right">
-                      <Badge
-                        variant="outline"
-                        className={statusConfig[vessel.status]?.color}
-                      >
+                      <Badge variant="outline" className={statusConfig[vessel.status]?.color}>
                         {vessel.status}
                       </Badge>
                       {vessel.safetyRating && (

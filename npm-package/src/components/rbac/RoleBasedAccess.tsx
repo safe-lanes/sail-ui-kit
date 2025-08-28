@@ -8,15 +8,15 @@ interface RoleBasedAccessProps {
   children: React.ReactNode;
 }
 
-export function RoleBasedAccess({ 
-  roles, 
-  requireAll = false, 
-  userRoles, 
+export function RoleBasedAccess({
+  roles,
+  requireAll = false,
+  userRoles,
   fallback = null,
-  children 
+  children,
 }: RoleBasedAccessProps) {
   const roleArray = Array.isArray(roles) ? roles : [roles];
-  
+
   const hasAccess = requireAll
     ? roleArray.every((role: string) => userRoles.indexOf(role) !== -1)
     : roleArray.some((role: string) => userRoles.indexOf(role) !== -1);

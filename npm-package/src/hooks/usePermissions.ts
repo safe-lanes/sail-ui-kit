@@ -10,13 +10,13 @@ export function usePermissions(): UserPermissions & {
   isAuthenticated: boolean;
 } {
   const { user, loading, hasPermission, hasRole } = useRBAC();
-  
+
   return {
     can: hasPermission || (() => false),
     hasRole: hasRole || (() => false),
     getRoles: () => user?.roles || [],
     getPermissions: () => [],
     loading,
-    isAuthenticated: !!user
+    isAuthenticated: !!user,
   };
 }

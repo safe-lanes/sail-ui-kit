@@ -35,43 +35,46 @@ interface RoleEditorProps {
   readonly?: boolean;
 }
 
-export function RoleEditor({ 
-  role, 
-  permissions, 
-  onSave, 
-  onCancel, 
-  readonly = false 
+export function RoleEditor({
+  role,
+  permissions,
+  onSave,
+  onCancel,
+  readonly = false,
 }: RoleEditorProps) {
   const [formData, setFormData] = React.useState<Role>({
     name: '',
     description: '',
     permissions: [],
-    ...role
+    ...role,
   });
 
   const [selectedPermissions, setSelectedPermissions] = React.useState<Set<string>>(
     new Set(role?.permissions || [])
   );
 
-  const permissionCategories = permissions.reduce((acc, permission) => {
-    if (!acc[permission.category]) {
-      acc[permission.category] = [];
-    }
-    acc[permission.category].push(permission);
-    return acc;
-  }, {} as Record<string, Permission[]>);
+  const permissionCategories = permissions.reduce(
+    (acc, permission) => {
+      if (!acc[permission.category]) {
+        acc[permission.category] = [];
+      }
+      acc[permission.category].push(permission);
+      return acc;
+    },
+    {} as Record<string, Permission[]>
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave({
       ...formData,
-      permissions: Array.from(selectedPermissions)
+      permissions: Array.from(selectedPermissions),
     });
   };
 
   const togglePermission = (permissionId: string) => {
     if (readonly) return;
-    
+
     const newSelected = new Set(selectedPermissions);
     if (newSelected.has(permissionId)) {
       newSelected.delete(permissionId);
@@ -83,10 +86,10 @@ export function RoleEditor({
 
   const toggleCategory = (categoryPermissions: Permission[]) => {
     if (readonly) return;
-    
+
     const categoryIds = categoryPermissions.map(p => p.id);
     const allSelected = categoryIds.every(id => selectedPermissions.has(id));
-    
+
     const newSelected = new Set(selectedPermissions);
     if (allSelected) {
       categoryIds.forEach(id => newSelected.delete(id));
@@ -109,7 +112,7 @@ export function RoleEditor({
           )}
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Basic Information */}
@@ -119,13 +122,13 @@ export function RoleEditor({
               <Input
                 id="name"
                 value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
                 placeholder="Enter role name"
                 required
                 readOnly={readonly || formData.isSystemRole}
               />
             </div>
-            
+
             {formData.userCount !== undefined && (
               <div className="space-y-2">
                 <Label>Users with this role</Label>
@@ -141,7 +144,7 @@ export function RoleEditor({
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+              onChange={e => setFormData(prev => ({ ...prev, description: e.target.value }))}
               placeholder="Describe what this role can do..."
               rows={3}
               readOnly={readonly || formData.isSystemRole}
@@ -159,52 +162,54 @@ export function RoleEditor({
               </Badge>
             </div>
 
-            {Object.entries(permissionCategories).map(([category, categoryPermissions]: [string, any]) => {
-              const categoryIds = categoryPermissions.map((p: any) => p.id);
-              const selectedCount = categoryIds.filter((id: string) => selectedPermissions.has(id)).length;
-              const allSelected = selectedCount === categoryIds.length;
-              const someSelected = selectedCount > 0 && selectedCount < categoryIds.length;
+            {Object.entries(permissionCategories).map(
+              ([category, categoryPermissions]: [string, any]) => {
+                const categoryIds = categoryPermissions.map((p: any) => p.id);
+                const selectedCount = categoryIds.filter((id: string) =>
+                  selectedPermissions.has(id)
+                ).length;
+                const allSelected = selectedCount === categoryIds.length;
+                const someSelected = selectedCount > 0 && selectedCount < categoryIds.length;
 
-              return (
-                <div key={category} className="border rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <Checkbox
-                        checked={allSelected}
-                        onCheckedChange={() => toggleCategory(categoryPermissions)}
-                        disabled={readonly}
-                      />
-                      <h4 className="font-medium">{category}</h4>
-                    </div>
-                    <Badge variant="outline" className="text-xs">
-                      {selectedCount}/{categoryIds.length}
-                    </Badge>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ml-6">
-                    {categoryPermissions.map((permission: any) => (
-                      <div key={permission.id} className="flex items-start gap-2">
+                return (
+                  <div key={category} className="border rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
                         <Checkbox
-                          checked={selectedPermissions.has(permission.id)}
-                          onCheckedChange={() => togglePermission(permission.id)}
+                          checked={allSelected}
+                          onCheckedChange={() => toggleCategory(categoryPermissions)}
                           disabled={readonly}
-                          className="mt-1"
                         />
-                        <div className="flex-1">
-                          <div className="font-medium text-sm">{permission.name}</div>
-                          <div className="text-xs text-gray-500">
-                            {permission.description}
-                          </div>
-                          <div className="text-xs text-gray-400 mt-1">
-                            {permission.resource}:{permission.action}
+                        <h4 className="font-medium">{category}</h4>
+                      </div>
+                      <Badge variant="outline" className="text-xs">
+                        {selectedCount}/{categoryIds.length}
+                      </Badge>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ml-6">
+                      {categoryPermissions.map((permission: any) => (
+                        <div key={permission.id} className="flex items-start gap-2">
+                          <Checkbox
+                            checked={selectedPermissions.has(permission.id)}
+                            onCheckedChange={() => togglePermission(permission.id)}
+                            disabled={readonly}
+                            className="mt-1"
+                          />
+                          <div className="flex-1">
+                            <div className="font-medium text-sm">{permission.name}</div>
+                            <div className="text-xs text-gray-500">{permission.description}</div>
+                            <div className="text-xs text-gray-400 mt-1">
+                              {permission.resource}:{permission.action}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
 
           {!readonly && !formData.isSystemRole && (

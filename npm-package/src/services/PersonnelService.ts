@@ -17,7 +17,7 @@ export class PersonnelService {
    */
   async searchPersonnel(filters: PersonnelFilter = {}): Promise<PersonnelSearchResult[]> {
     return this.apiService.get<PersonnelSearchResult[]>('/personnel/search', {
-      params: filters
+      params: filters,
     });
   }
 
@@ -40,7 +40,7 @@ export class PersonnelService {
    */
   async getPersonnelByRank(rank: string): Promise<PersonnelSearchResult[]> {
     return this.apiService.get<PersonnelSearchResult[]>('/personnel/search', {
-      params: { rank }
+      params: { rank },
     });
   }
 
@@ -67,14 +67,19 @@ export class PersonnelService {
   /**
    * Create personnel record
    */
-  async createPersonnel(personnelData: Partial<PersonnelSearchResult>): Promise<PersonnelSearchResult> {
+  async createPersonnel(
+    personnelData: Partial<PersonnelSearchResult>
+  ): Promise<PersonnelSearchResult> {
     return this.apiService.post<PersonnelSearchResult>('/personnel', personnelData);
   }
 
   /**
    * Update personnel record
    */
-  async updatePersonnel(id: string, personnelData: Partial<PersonnelSearchResult>): Promise<PersonnelSearchResult> {
+  async updatePersonnel(
+    id: string,
+    personnelData: Partial<PersonnelSearchResult>
+  ): Promise<PersonnelSearchResult> {
     return this.apiService.put<PersonnelSearchResult>(`/personnel/${id}`, personnelData);
   }
 

@@ -38,14 +38,14 @@ const typeConfig = {
   info: { icon: Info, color: 'text-blue-600', bgColor: 'bg-blue-50' },
   success: { icon: CheckCheck, color: 'text-green-600', bgColor: 'bg-green-50' },
   warning: { icon: AlertTriangle, color: 'text-yellow-600', bgColor: 'bg-yellow-50' },
-  error: { icon: XCircle, color: 'text-red-600', bgColor: 'bg-red-50' }
+  error: { icon: XCircle, color: 'text-red-600', bgColor: 'bg-red-50' },
 };
 
 const priorityConfig = {
   low: { color: 'bg-gray-100 text-gray-800', label: 'Low' },
   medium: { color: 'bg-blue-100 text-blue-800', label: 'Medium' },
   high: { color: 'bg-orange-100 text-orange-800', label: 'High' },
-  critical: { color: 'bg-red-100 text-red-800', label: 'Critical' }
+  critical: { color: 'bg-red-100 text-red-800', label: 'Critical' },
 };
 
 const categoryConfig = {
@@ -53,26 +53,26 @@ const categoryConfig = {
   safety: { icon: '🦺', label: 'Safety' },
   maintenance: { icon: '🔧', label: 'Maintenance' },
   operational: { icon: '🚢', label: 'Operational' },
-  compliance: { icon: '📋', label: 'Compliance' }
+  compliance: { icon: '📋', label: 'Compliance' },
 };
 
 export function NotificationPanel({
   notifications,
-  title = "Notifications",
+  title = 'Notifications',
   showUnreadOnly = false,
   onNotificationClick,
   onMarkAsRead,
   onMarkAllAsRead,
   onDismiss,
   onClearAll,
-  maxHeight = "400px",
-  className = ''
+  maxHeight = '400px',
+  className = '',
 }: NotificationPanelProps) {
   const [filter, setFilter] = useState<'all' | 'unread' | 'critical'>('all');
-  
+
   const filteredNotifications = notifications.filter(notification => {
     if (showUnreadOnly && notification.read) return false;
-    
+
     switch (filter) {
       case 'unread':
         return !notification.read;
@@ -110,22 +110,12 @@ export function NotificationPanel({
           </div>
           <div className="flex items-center space-x-2">
             {onMarkAllAsRead && unreadCount > 0 && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onMarkAllAsRead}
-                className="text-xs"
-              >
+              <Button variant="ghost" size="sm" onClick={onMarkAllAsRead} className="text-xs">
                 Mark all read
               </Button>
             )}
             {onClearAll && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onClearAll}
-                className="text-xs"
-              >
+              <Button variant="ghost" size="sm" onClick={onClearAll} className="text-xs">
                 Clear all
               </Button>
             )}
@@ -164,14 +154,12 @@ export function NotificationPanel({
       <CardContent className="p-0">
         <ScrollArea className="h-full" style={{ maxHeight }}>
           {filteredNotifications.length === 0 ? (
-            <div className="p-4 text-center text-gray-500 text-sm">
-              No notifications to display
-            </div>
+            <div className="p-4 text-center text-gray-500 text-sm">No notifications to display</div>
           ) : (
             <div className="divide-y">
-              {filteredNotifications.map((notification) => {
+              {filteredNotifications.map(notification => {
                 const TypeIcon = typeConfig[notification.type].icon;
-                
+
                 return (
                   <div
                     key={notification.id}
@@ -191,7 +179,7 @@ export function NotificationPanel({
                         variant="ghost"
                         size="sm"
                         className="absolute top-2 right-2 h-6 w-6 p-0 opacity-50 hover:opacity-100"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           onDismiss(notification.id);
                         }}
@@ -201,12 +189,16 @@ export function NotificationPanel({
                     )}
 
                     <div className="flex items-start space-x-3 pr-8">
-                      <TypeIcon className={`h-4 w-4 mt-1 ${typeConfig[notification.type].color} flex-shrink-0`} />
-                      
+                      <TypeIcon
+                        className={`h-4 w-4 mt-1 ${typeConfig[notification.type].color} flex-shrink-0`}
+                      />
+
                       <div className="flex-1 space-y-2">
                         {/* Header */}
                         <div className="flex items-center space-x-2 flex-wrap">
-                          <h4 className={`text-sm font-medium ${!notification.read ? 'text-gray-900' : 'text-gray-700'}`}>
+                          <h4
+                            className={`text-sm font-medium ${!notification.read ? 'text-gray-900' : 'text-gray-700'}`}
+                          >
                             {notification.title}
                           </h4>
                           <Badge
@@ -217,23 +209,20 @@ export function NotificationPanel({
                           </Badge>
                           {notification.category && (
                             <Badge variant="outline" className="text-xs">
-                              {categoryConfig[notification.category]?.icon} {categoryConfig[notification.category]?.label}
+                              {categoryConfig[notification.category]?.icon}{' '}
+                              {categoryConfig[notification.category]?.label}
                             </Badge>
                           )}
                         </div>
 
                         {/* Message */}
-                        <p className="text-sm text-gray-600 line-clamp-2">
-                          {notification.message}
-                        </p>
+                        <p className="text-sm text-gray-600 line-clamp-2">{notification.message}</p>
 
                         {/* Metadata */}
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 text-xs text-gray-500">
                             {notification.vessel && (
-                              <span className="flex items-center">
-                                🚢 {notification.vessel}
-                              </span>
+                              <span className="flex items-center">🚢 {notification.vessel}</span>
                             )}
                             <span>{new Date(notification.timestamp).toLocaleString()}</span>
                           </div>
@@ -247,7 +236,7 @@ export function NotificationPanel({
                                 key={index}
                                 variant="outline"
                                 size="sm"
-                                onClick={(e) => {
+                                onClick={e => {
                                   e.stopPropagation();
                                   action.onClick(notification);
                                 }}

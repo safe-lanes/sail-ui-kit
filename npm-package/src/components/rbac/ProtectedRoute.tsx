@@ -9,12 +9,12 @@ interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
-export function ProtectedRoute({ 
-  permissions, 
-  requireAll = false, 
-  userPermissions, 
+export function ProtectedRoute({
+  permissions,
+  requireAll = false,
+  userPermissions,
   unauthorizedComponent,
-  children 
+  children,
 }: ProtectedRouteProps) {
   const defaultUnauthorized = (
     <div className="flex items-center justify-center min-h-screen">

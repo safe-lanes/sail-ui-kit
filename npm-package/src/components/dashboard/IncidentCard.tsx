@@ -24,62 +24,77 @@ export interface IncidentCardProps {
 }
 
 const severityConfig = {
-  'low': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: 'ℹ', label: 'Low' },
-  'medium': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: '⚠', label: 'Medium' },
-  'high': { color: 'bg-orange-100 text-orange-800 border-orange-200', icon: '⚠', label: 'High' },
-  'critical': { color: 'bg-red-100 text-red-800 border-red-200', icon: '🚨', label: 'Critical' }
+  low: { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: 'ℹ', label: 'Low' },
+  medium: { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: '⚠', label: 'Medium' },
+  high: { color: 'bg-orange-100 text-orange-800 border-orange-200', icon: '⚠', label: 'High' },
+  critical: { color: 'bg-red-100 text-red-800 border-red-200', icon: '🚨', label: 'Critical' },
 };
 
 const typeConfig = {
-  'safety': { color: 'bg-red-100 text-red-800 border-red-200', icon: '🦺', label: 'Safety' },
-  'environmental': { color: 'bg-green-100 text-green-800 border-green-200', icon: '🌍', label: 'Environmental' },
-  'security': { color: 'bg-purple-100 text-purple-800 border-purple-200', icon: '🔒', label: 'Security' },
-  'operational': { color: 'bg-blue-100 text-blue-800 border-blue-200', icon: '⚙', label: 'Operational' },
-  'technical': { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: '🔧', label: 'Technical' }
+  safety: { color: 'bg-red-100 text-red-800 border-red-200', icon: '🦺', label: 'Safety' },
+  environmental: {
+    color: 'bg-green-100 text-green-800 border-green-200',
+    icon: '🌍',
+    label: 'Environmental',
+  },
+  security: {
+    color: 'bg-purple-100 text-purple-800 border-purple-200',
+    icon: '🔒',
+    label: 'Security',
+  },
+  operational: {
+    color: 'bg-blue-100 text-blue-800 border-blue-200',
+    icon: '⚙',
+    label: 'Operational',
+  },
+  technical: { color: 'bg-gray-100 text-gray-800 border-gray-200', icon: '🔧', label: 'Technical' },
 };
 
 const statusConfig = {
-  'reported': { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', label: 'Reported' },
-  'investigating': { color: 'bg-blue-100 text-blue-800 border-blue-200', label: 'Investigating' },
-  'resolved': { color: 'bg-green-100 text-green-800 border-green-200', label: 'Resolved' },
-  'closed': { color: 'bg-gray-100 text-gray-800 border-gray-200', label: 'Closed' }
+  reported: { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', label: 'Reported' },
+  investigating: { color: 'bg-blue-100 text-blue-800 border-blue-200', label: 'Investigating' },
+  resolved: { color: 'bg-green-100 text-green-800 border-green-200', label: 'Resolved' },
+  closed: { color: 'bg-gray-100 text-gray-800 border-gray-200', label: 'Closed' },
 };
 
 export function IncidentCard({
-  title = "Incidents",
+  title = 'Incidents',
   incidents,
-  timeframe = "Past month",
+  timeframe = 'Past month',
   showIncidentDetails = false,
   onIncidentClick,
-  className = ''
+  className = '',
 }: IncidentCardProps) {
   const totalIncidents = incidents.length;
   const criticalCount = incidents.filter(i => i.severity === 'critical').length;
   const highCount = incidents.filter(i => i.severity === 'high').length;
-  const resolvedCount = incidents.filter(i => i.status === 'resolved' || i.status === 'closed').length;
-  const activeCount = incidents.filter(i => i.status === 'reported' || i.status === 'investigating').length;
+  const resolvedCount = incidents.filter(
+    i => i.status === 'resolved' || i.status === 'closed'
+  ).length;
+  const activeCount = incidents.filter(
+    i => i.status === 'reported' || i.status === 'investigating'
+  ).length;
 
   // Get severity breakdown
-  const severityCounts = incidents.reduce((acc, incident) => {
-    acc[incident.severity] = (acc[incident.severity] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const severityCounts = incidents.reduce(
+    (acc, incident) => {
+      acc[incident.severity] = (acc[incident.severity] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   return (
     <Card className={className}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
         <div className="text-lg">⚠</div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {/* Total Incidents */}
           <div>
-            <div className="text-2xl font-bold text-gray-900">
-              {totalIncidents}
-            </div>
+            <div className="text-2xl font-bold text-gray-900">{totalIncidents}</div>
             <p className="text-xs text-gray-500">
               {timeframe} • {criticalCount} critical
             </p>
@@ -93,7 +108,8 @@ export function IncidentCard({
                 variant="outline"
                 className={severityConfig[severity as keyof typeof severityConfig]?.color}
               >
-                {severityConfig[severity as keyof typeof severityConfig]?.icon} {count} {severityConfig[severity as keyof typeof severityConfig]?.label}
+                {severityConfig[severity as keyof typeof severityConfig]?.icon} {count}{' '}
+                {severityConfig[severity as keyof typeof severityConfig]?.label}
               </Badge>
             ))}
           </div>
@@ -121,7 +137,7 @@ export function IncidentCard({
                 Recent Incidents
               </h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
-                {incidents.slice(0, 5).map((incident) => (
+                {incidents.slice(0, 5).map(incident => (
                   <div
                     key={incident.id}
                     className={`p-3 rounded-lg border hover:bg-gray-50 ${
@@ -136,18 +152,14 @@ export function IncidentCard({
                             variant="outline"
                             className={severityConfig[incident.severity]?.color}
                           >
-                            {severityConfig[incident.severity]?.icon} {severityConfig[incident.severity]?.label}
+                            {severityConfig[incident.severity]?.icon}{' '}
+                            {severityConfig[incident.severity]?.label}
                           </Badge>
-                          <Badge
-                            variant="outline"
-                            className={typeConfig[incident.type]?.color}
-                          >
+                          <Badge variant="outline" className={typeConfig[incident.type]?.color}>
                             {typeConfig[incident.type]?.icon} {typeConfig[incident.type]?.label}
                           </Badge>
                         </div>
-                        <p className="text-sm font-medium text-gray-900 mb-1">
-                          {incident.title}
-                        </p>
+                        <p className="text-sm font-medium text-gray-900 mb-1">{incident.title}</p>
                         <p className="text-xs text-gray-500 mb-2 line-clamp-2">
                           {incident.description}
                         </p>
@@ -159,10 +171,7 @@ export function IncidentCard({
                           <span>{new Date(incident.reportedAt).toLocaleDateString()}</span>
                         </div>
                       </div>
-                      <Badge
-                        variant="outline"
-                        className={statusConfig[incident.status]?.color}
-                      >
+                      <Badge variant="outline" className={statusConfig[incident.status]?.color}>
                         {statusConfig[incident.status]?.label}
                       </Badge>
                     </div>

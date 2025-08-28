@@ -53,16 +53,16 @@ export const DEFAULT_PERMISSIONS = {
   // System Administration
   SYSTEM_CONFIG: { resource: 'system', action: 'configure' },
   SYSTEM_BACKUP: { resource: 'system', action: 'backup' },
-  SYSTEM_AUDIT: { resource: 'system', action: 'audit' }
+  SYSTEM_AUDIT: { resource: 'system', action: 'audit' },
 } as const;
 
 export const DEFAULT_ROLES = {
   SUPER_ADMIN: {
     name: 'Super Administrator',
     description: 'Full system access with all permissions',
-    permissions: Object.values(DEFAULT_PERMISSIONS)
+    permissions: Object.values(DEFAULT_PERMISSIONS),
   },
-  
+
   FLEET_MANAGER: {
     name: 'Fleet Manager',
     description: 'Manages vessels and fleet operations',
@@ -73,8 +73,8 @@ export const DEFAULT_ROLES = {
       DEFAULT_PERMISSIONS.PERSONNEL_UPDATE,
       DEFAULT_PERMISSIONS.REPORTS_VIEW,
       DEFAULT_PERMISSIONS.ANALYTICS_VIEW,
-      ...Object.values(DEFAULT_PERMISSIONS).filter(p => p.resource.startsWith('tmsa-'))
-    ]
+      ...Object.values(DEFAULT_PERMISSIONS).filter(p => p.resource.startsWith('tmsa-')),
+    ],
   },
 
   CREWING_MANAGER: {
@@ -86,8 +86,8 @@ export const DEFAULT_ROLES = {
       DEFAULT_PERMISSIONS.PERSONNEL_UPDATE,
       DEFAULT_PERMISSIONS.VESSEL_READ,
       DEFAULT_PERMISSIONS.TMSA_EL3_ACCESS,
-      DEFAULT_PERMISSIONS.REPORTS_VIEW
-    ]
+      DEFAULT_PERMISSIONS.REPORTS_VIEW,
+    ],
   },
 
   TECHNICAL_MANAGER: {
@@ -98,8 +98,8 @@ export const DEFAULT_ROLES = {
       DEFAULT_PERMISSIONS.VESSEL_UPDATE,
       DEFAULT_PERMISSIONS.TMSA_EL4_ACCESS,
       DEFAULT_PERMISSIONS.REPORTS_VIEW,
-      DEFAULT_PERMISSIONS.ANALYTICS_VIEW
-    ]
+      DEFAULT_PERMISSIONS.ANALYTICS_VIEW,
+    ],
   },
 
   SAFETY_OFFICER: {
@@ -110,8 +110,8 @@ export const DEFAULT_ROLES = {
       DEFAULT_PERMISSIONS.PERSONNEL_READ,
       DEFAULT_PERMISSIONS.TMSA_EL8_ACCESS,
       DEFAULT_PERMISSIONS.TMSA_EL9_ACCESS,
-      DEFAULT_PERMISSIONS.REPORTS_VIEW
-    ]
+      DEFAULT_PERMISSIONS.REPORTS_VIEW,
+    ],
   },
 
   MARITIME_OFFICER: {
@@ -120,9 +120,9 @@ export const DEFAULT_ROLES = {
     permissions: [
       DEFAULT_PERMISSIONS.VESSEL_READ,
       DEFAULT_PERMISSIONS.PERSONNEL_READ,
-      DEFAULT_PERMISSIONS.REPORTS_VIEW
-    ]
-  }
+      DEFAULT_PERMISSIONS.REPORTS_VIEW,
+    ],
+  },
 } as const;
 
 export const PERMISSION_CATEGORIES = {
@@ -131,5 +131,5 @@ export const PERMISSION_CATEGORIES = {
   PERSONNEL_MANAGEMENT: 'Personnel Management',
   TMSA_COMPLIANCE: 'TMSA Compliance',
   REPORTING: 'Reporting & Analytics',
-  SYSTEM_ADMIN: 'System Administration'
+  SYSTEM_ADMIN: 'System Administration',
 } as const;

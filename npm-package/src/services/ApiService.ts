@@ -34,7 +34,7 @@ export class ApiService {
    */
   async get<T = any>(endpoint: string, options?: ApiRequestOptions): Promise<T> {
     const url = new URL(`${this.baseURL}${endpoint}`, window.location.origin);
-    
+
     if (options?.params) {
       Object.entries(options.params).forEach(([key, value]) => {
         if (value !== null && value !== undefined) {
@@ -118,15 +118,15 @@ export class ApiService {
    * Get paginated data
    */
   async getPaginated<T = any>(
-    endpoint: string, 
-    page: number = 1, 
+    endpoint: string,
+    page: number = 1,
     limit: number = 10,
     options?: ApiRequestOptions
   ): Promise<PaginatedResponse<T>> {
     const params = {
       page: page.toString(),
       limit: limit.toString(),
-      ...options?.params
+      ...options?.params,
     };
 
     return this.get<PaginatedResponse<T>>(endpoint, { ...options, params });

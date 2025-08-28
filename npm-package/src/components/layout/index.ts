@@ -15,5 +15,5 @@ export type {
   StandardTopNavigationBarProps,
   StandardLeftSidebarProps,
   NavigationItem,
-  SidebarSection
+  SidebarSection,
 } from '../../types/layout';

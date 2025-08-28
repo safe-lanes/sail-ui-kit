@@ -27,36 +27,36 @@ const alertConfig = {
     className: 'border-green-200 bg-green-50',
     iconColor: 'text-green-600',
     titleColor: 'text-green-800',
-    messageColor: 'text-green-700'
+    messageColor: 'text-green-700',
   },
   warning: {
     icon: AlertTriangle,
     className: 'border-yellow-200 bg-yellow-50',
     iconColor: 'text-yellow-600',
     titleColor: 'text-yellow-800',
-    messageColor: 'text-yellow-700'
+    messageColor: 'text-yellow-700',
   },
   error: {
     icon: XCircle,
     className: 'border-red-200 bg-red-50',
     iconColor: 'text-red-600',
     titleColor: 'text-red-800',
-    messageColor: 'text-red-700'
+    messageColor: 'text-red-700',
   },
   info: {
     icon: Info,
     className: 'border-blue-200 bg-blue-50',
     iconColor: 'text-blue-600',
     titleColor: 'text-blue-800',
-    messageColor: 'text-blue-700'
-  }
+    messageColor: 'text-blue-700',
+  },
 };
 
 const priorityConfig = {
   low: { color: 'bg-gray-100 text-gray-800 border-gray-200', label: 'Low' },
   medium: { color: 'bg-blue-100 text-blue-800 border-blue-200', label: 'Medium' },
   high: { color: 'bg-orange-100 text-orange-800 border-orange-200', label: 'High' },
-  critical: { color: 'bg-red-100 text-red-800 border-red-200', label: 'Critical' }
+  critical: { color: 'bg-red-100 text-red-800 border-red-200', label: 'Critical' },
 };
 
 export function AlertNotification({
@@ -69,7 +69,7 @@ export function AlertNotification({
   dismissible = false,
   onDismiss,
   actions = [],
-  className = ''
+  className = '',
 }: AlertNotificationProps) {
   const config = alertConfig[type];
   const Icon = config.icon;
@@ -90,7 +90,7 @@ export function AlertNotification({
 
       <div className="flex items-start space-x-3">
         <Icon className={`h-5 w-5 ${config.iconColor} mt-0.5 flex-shrink-0`} />
-        
+
         <div className="flex-1 space-y-2">
           {/* Header */}
           <div className="flex items-center space-x-2">
@@ -114,16 +114,8 @@ export function AlertNotification({
           {/* Metadata */}
           {(vessel || timestamp) && (
             <div className="flex items-center space-x-4 text-xs text-gray-500">
-              {vessel && (
-                <span className="flex items-center">
-                  🚢 {vessel}
-                </span>
-              )}
-              {timestamp && (
-                <span>
-                  {new Date(timestamp).toLocaleString()}
-                </span>
-              )}
+              {vessel && <span className="flex items-center">🚢 {vessel}</span>}
+              {timestamp && <span>{new Date(timestamp).toLocaleString()}</span>}
             </div>
           )}
 

@@ -2,23 +2,23 @@
 // Authentication and authorization components
 
 // RBAC Management Components
-export { UserManagement } from "./UserManagement";
-export { RoleEditor } from "./RoleEditor";
-export { PermissionMatrix } from "./PermissionMatrix";
-export { RBACDashboard } from "./RBACDashboard";
+export { UserManagement } from './UserManagement';
+export { RoleEditor } from './RoleEditor';
+export { PermissionMatrix } from './PermissionMatrix';
+export { RBACDashboard } from './RBACDashboard';
 
 // Permission Components
-export { PermissionGuard } from "./PermissionGuard";
-export { ProtectedRoute } from "./ProtectedRoute";
-export { RoleBasedAccess } from "./RoleBasedAccess";
+export { PermissionGuard } from './PermissionGuard';
+export { ProtectedRoute } from './ProtectedRoute';
+export { RoleBasedAccess } from './RoleBasedAccess';
 
 // User Assignment Components
-export { UserRoleAssignment } from "./UserRoleAssignment";
-export { PermissionForm } from "./PermissionForm";
-export { RoleForm } from "./RoleForm";
+export { UserRoleAssignment } from './UserRoleAssignment';
+export { PermissionForm } from './PermissionForm';
+export { RoleForm } from './RoleForm';
 
 // RBAC Provider
-export { RBACProvider, useRBAC } from "./RBACProvider";
+export { RBACProvider, useRBAC } from './RBACProvider';
 
 // Types
 export type {
@@ -27,5 +27,5 @@ export type {
   User,
   RBACContextType,
   PermissionCheck,
-  UserPermissions
-} from "../../types/rbac";
+  UserPermissions,
+} from '../../types/rbac';

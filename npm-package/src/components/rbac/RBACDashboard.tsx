@@ -42,12 +42,12 @@ interface RBACDashboardProps {
   className?: string;
 }
 
-export function RBACDashboard({ 
-  stats, 
-  activities, 
-  alerts, 
+export function RBACDashboard({
+  stats,
+  activities,
+  alerts,
   onViewDetails,
-  className = '' 
+  className = '',
 }: RBACDashboardProps) {
   const activeUserPercentage = (stats.activeUsers / stats.totalUsers) * 100;
   const failedLoginRate = (stats.failedLogins / (stats.recentLogins + stats.failedLogins)) * 100;
@@ -122,9 +122,7 @@ export function RBACDashboard({
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.recentLogins}</div>
-            <p className="text-xs text-muted-foreground">
-              successful logins today
-            </p>
+            <p className="text-xs text-muted-foreground">successful logins today</p>
           </CardContent>
         </Card>
 
@@ -134,10 +132,10 @@ export function RBACDashboard({
             <AlertTriangle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-red-600">{alerts.filter(a => !a.resolved).length}</div>
-            <p className="text-xs text-muted-foreground">
-              unresolved alerts
-            </p>
+            <div className="text-2xl font-bold text-red-600">
+              {alerts.filter(a => !a.resolved).length}
+            </div>
+            <p className="text-xs text-muted-foreground">unresolved alerts</p>
           </CardContent>
         </Card>
       </div>
@@ -148,18 +146,14 @@ export function RBACDashboard({
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <span>Recent Activity</span>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => onViewDetails('activity')}
-              >
+              <Button variant="outline" size="sm" onClick={() => onViewDetails('activity')}>
                 View All
               </Button>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {activities.slice(0, 5).map((activity) => (
+              {activities.slice(0, 5).map(activity => (
                 <div key={activity.id} className="flex items-start gap-3">
                   {getActivityIcon(activity.type)}
                   <div className="flex-1 min-w-0">
@@ -180,35 +174,32 @@ export function RBACDashboard({
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <span>Security Alerts</span>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => onViewDetails('alerts')}
-              >
+              <Button variant="outline" size="sm" onClick={() => onViewDetails('alerts')}>
                 View All
               </Button>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {alerts.filter(a => !a.resolved).slice(0, 5).map((alert) => (
-                <div key={alert.id} className="flex items-start gap-3">
-                  <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium">{alert.title}</p>
-                    <p className="text-xs text-gray-500">{alert.description}</p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      {new Date(alert.timestamp).toLocaleString()}
-                    </p>
+              {alerts
+                .filter(a => !a.resolved)
+                .slice(0, 5)
+                .map(alert => (
+                  <div key={alert.id} className="flex items-start gap-3">
+                    <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium">{alert.title}</p>
+                      <p className="text-xs text-gray-500">{alert.description}</p>
+                      <p className="text-xs text-gray-400 mt-1">
+                        {new Date(alert.timestamp).toLocaleString()}
+                      </p>
+                    </div>
+                    {getSeverityBadge(alert.severity)}
                   </div>
-                  {getSeverityBadge(alert.severity)}
-                </div>
-              ))}
-              
+                ))}
+
               {alerts.filter(a => !a.resolved).length === 0 && (
-                <div className="text-center py-4 text-gray-500">
-                  No active security alerts
-                </div>
+                <div className="text-center py-4 text-gray-500">No active security alerts</div>
               )}
             </div>
           </CardContent>
@@ -232,18 +223,16 @@ export function RBACDashboard({
                 {stats.activeUsers} of {stats.totalUsers} users active
               </p>
             </div>
-            
+
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>Failed Login Rate</span>
                 <span>{failedLoginRate.toFixed(1)}%</span>
               </div>
               <Progress value={failedLoginRate} />
-              <p className="text-xs text-gray-500">
-                {stats.failedLogins} failed attempts today
-              </p>
+              <p className="text-xs text-gray-500">{stats.failedLogins} failed attempts today</p>
             </div>
-            
+
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>Privileged Users</span>

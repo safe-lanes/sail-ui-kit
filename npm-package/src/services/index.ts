@@ -43,12 +43,12 @@ export const createSharedServices = () => {
   const rbacService = new RBACService(apiService);
   const personnelService = new PersonnelService(apiService);
   const vesselService = new VesselService(apiService);
-  
+
   return {
     api: apiService,
     rbac: rbacService,
     personnel: personnelService,
-    vessel: vesselService
+    vessel: vesselService,
   } as const;
 };
 
@@ -59,20 +59,20 @@ export const SHARED_SERVICES = {
   api: {} as any,
   rbac: {} as any,
   personnel: {} as any,
-  vessel: {} as any
+  vessel: {} as any,
 } as const;
 
 // Service version
-export const SHARED_SERVICES_VERSION = "1.0.0";
+export const SHARED_SERVICES_VERSION = '1.0.0';
 
 // Common error handling
 export class ServiceError extends Error {
   public readonly code: string;
   public readonly statusCode?: number;
 
-  constructor(message: string, code: string = "UNKNOWN_ERROR", statusCode?: number) {
+  constructor(message: string, code: string = 'UNKNOWN_ERROR', statusCode?: number) {
     super(message);
-    this.name = "ServiceError";
+    this.name = 'ServiceError';
     this.code = code;
     this.statusCode = statusCode;
   }
@@ -80,7 +80,7 @@ export class ServiceError extends Error {
 
 // Common data transformation utilities
 export const DataTransformers = {
-  formatDate: (dateString: string, locale: string = "en-US"): string => {
+  formatDate: (dateString: string, locale: string = 'en-US'): string => {
     try {
       return new Date(dateString).toLocaleDateString(locale);
     } catch {
@@ -88,7 +88,7 @@ export const DataTransformers = {
     }
   },
 
-  formatDateTime: (dateTimeString: string, locale: string = "en-US"): string => {
+  formatDateTime: (dateTimeString: string, locale: string = 'en-US'): string => {
     try {
       return new Date(dateTimeString).toLocaleString(locale);
     } catch {
@@ -96,14 +96,18 @@ export const DataTransformers = {
     }
   },
 
-  formatNumber: (value: number, locale: string = "en-US", options?: Intl.NumberFormatOptions): string => {
+  formatNumber: (
+    value: number,
+    locale: string = 'en-US',
+    options?: Intl.NumberFormatOptions
+  ): string => {
     return new Intl.NumberFormat(locale, options).format(value);
   },
 
-  formatCurrency: (value: number, currency: string = "USD", locale: string = "en-US"): string => {
+  formatCurrency: (value: number, currency: string = 'USD', locale: string = 'en-US'): string => {
     return new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency: currency
+      style: 'currency',
+      currency: currency,
     }).format(value);
   },
 
@@ -118,7 +122,7 @@ export const DataTransformers = {
       return `${(value / 1000).toFixed(1)}K MT`;
     }
     return `${value} MT`;
-  }
+  },
 };
 
 // Common validation utilities
@@ -137,7 +141,7 @@ export const Validators = {
 
   isValidCrewMemberID: (id: string): boolean => {
     return /^\d{4}-\d{2}-\d{2}(-\d+)?$/.test(id);
-  }
+  },
 };
 
 // Module integration helpers
@@ -160,5 +164,5 @@ export const ModuleIntegration = {
   sendToModule: async (targetModule: string, endpoint: string, data: any): Promise<any> => {
     // return SHARED_SERVICES.api.post(`/modules/${targetModule}${endpoint}`, data);
     return {}; // Placeholder until services are implemented
-  }
+  },
 };

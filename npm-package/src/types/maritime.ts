@@ -14,7 +14,7 @@ export interface VesselStatus {
   deadweight?: number;
 }
 
-export type VesselType = typeof import('../constants/maritime').VESSEL_TYPES[number];
+export type VesselType = (typeof import('../constants/maritime').VESSEL_TYPES)[number];
 
 // Safety Rating
 export interface SafetyRating {
@@ -59,7 +59,7 @@ export interface SeverityLevel {
 }
 
 // Maritime Ranks
-export type MaritimeRank = 
+export type MaritimeRank =
   | 'Master'
   | 'Chief Officer'
   | 'Chief Engineer'
@@ -81,7 +81,7 @@ export type MaritimeRank =
   | 'Steward';
 
 // Incident Types
-export type IncidentType = 
+export type IncidentType =
   | 'Near Miss'
   | 'Personal Injury'
   | 'Environmental Incident'
