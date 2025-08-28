@@ -104,9 +104,9 @@ export const SAILForm: React.FC<SAILFormProps> = ({
         
         {/* Body - Responsive split layout */}
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-          {/* Left Sidebar - Responsive stepper navigation */}
-          <div className="w-full md:w-80 bg-gray-50 p-4 md:p-6 border-b md:border-b-0 md:border-r border-gray-200">
-            <div className="space-y-1">
+          {/* Left Sidebar - Compact on mobile, full on desktop */}
+          <div className="w-full md:w-80 bg-gray-50 p-2 md:p-6 border-b md:border-b-0 md:border-r border-gray-200">
+            <div className="space-y-1 md:space-y-1">
               {sectionsWithLetters.map((section, index) => {
                 const isActive = activeSection === section.id;
                 const isCompleted = section.isCompleted || false;
@@ -115,7 +115,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                   <div key={section.id}>
                     {/* Section Item - Clickable */}
                     <div 
-                      className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+                      className="flex items-start gap-2 md:gap-4 cursor-pointer hover:bg-gray-100 p-1 md:p-2 rounded"
                       onClick={() => setActiveSection(section.id)}
                     >
                       <div className={`w-12 h-12 ${isActive ? 'bg-[#16569e]' : isCompleted ? 'bg-green-500' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>

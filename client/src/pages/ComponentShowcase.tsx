@@ -849,12 +849,12 @@ export const ComponentShowcase: React.FC = () => {
                       
                       {/* Body - Responsive split layout */}
                       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-                        {/* Left Sidebar - Responsive stepper navigation */}
-                        <div className="w-full md:w-80 bg-gray-50 p-4 md:p-6 border-b md:border-b-0 md:border-r border-gray-200">
-                          <div className="space-y-1">
+                        {/* Left Sidebar - Compact on mobile, full on desktop */}
+                        <div className="w-full md:w-80 bg-gray-50 p-2 md:p-6 border-b md:border-b-0 md:border-r border-gray-200">
+                          <div className="space-y-1 md:space-y-1">
                             {/* Section A - Clickable */}
                             <div 
-                              className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+                              className="flex items-start gap-2 md:gap-4 cursor-pointer hover:bg-gray-100 p-1 md:p-2 rounded"
                               onClick={() => setCurrentSection('A')}
                             >
                               <div className={`w-12 h-12 ${currentSection === 'A' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
@@ -870,7 +870,7 @@ export const ComponentShowcase: React.FC = () => {
                             
                             {/* Section B - Clickable */}
                             <div 
-                              className="flex items-start gap-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+                              className="flex items-start gap-2 md:gap-4 cursor-pointer hover:bg-gray-100 p-1 md:p-2 rounded"
                               onClick={() => setCurrentSection('B')}
                             >
                               <div className={`w-12 h-12 ${currentSection === 'B' ? 'bg-[#16569e]' : 'bg-gray-400'} text-white rounded-full flex items-center justify-center text-lg font-medium`}>
@@ -886,7 +886,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section C - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60 p-2">
+                            <div className="flex items-start gap-2 md:gap-4 opacity-60 p-1 md:p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 C
                               </div>
@@ -901,7 +901,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section D - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60 p-2">
+                            <div className="flex items-start gap-2 md:gap-4 opacity-60 p-1 md:p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 D
                               </div>
@@ -916,7 +916,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section E - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60 p-2">
+                            <div className="flex items-start gap-2 md:gap-4 opacity-60 p-1 md:p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 E
                               </div>
@@ -930,7 +930,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section F - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60 p-2">
+                            <div className="flex items-start gap-2 md:gap-4 opacity-60 p-1 md:p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 F
                               </div>
@@ -944,7 +944,7 @@ export const ComponentShowcase: React.FC = () => {
                             <div className="ml-8 w-0.5 h-4 bg-gray-300"></div>
                             
                             {/* Section G - Non-clickable for demo */}
-                            <div className="flex items-start gap-4 opacity-60 p-2">
+                            <div className="flex items-start gap-2 md:gap-4 opacity-60 p-1 md:p-2">
                               <div className="w-12 h-12 bg-gray-400 text-white rounded-full flex items-center justify-center text-lg font-medium">
                                 G
                               </div>
