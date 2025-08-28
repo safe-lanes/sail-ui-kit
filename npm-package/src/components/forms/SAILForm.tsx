@@ -105,7 +105,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
         {/* Body - Split layout exactly like reference */}
         <div className="flex-1 flex overflow-hidden">
           {/* Left Sidebar - Complete stepper navigation */}
-          <div className="w-80 bg-gray-50 border-r border-gray-200 p-6">
+          <div className="w-80 bg-gray-50 p-6">
             <div className="space-y-4">
               {sectionsWithLetters.map((section, index) => {
                 const isActive = activeSection === section.id;
