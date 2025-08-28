@@ -35,7 +35,7 @@ Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules
 ## Installation
 
 ```bash
-npm install sail-ui-kit@1.0.5
+npm install sail-ui-kit@1.0.6
 ```
 
 ## Important: CSS Setup Required
@@ -224,12 +224,12 @@ The package includes a standardized "SAIL Form" system based on the Crew Apprais
 
 ### Features
 
-- **📱 Responsive Design**: Optimized for both desktop and mobile devices with adaptive modal sizing
-- **🔄 Functional Stepper Navigation**: Click-to-navigate between form sections with visual feedback
-- **🎨 Maritime Theme**: Professional blue color scheme (#4A90E2) matching maritime industry standards
+- **📱 Responsive Design**: Three-breakpoint system (Mobile: default, Tablet: md:768px-1024px, Desktop: lg:1024px+) with adaptive layouts
+- **🔄 Functional Stepper Navigation**: Click-to-navigate between form sections with perfectly aligned connecting lines
+- **🎨 Maritime Theme**: Professional blue color scheme (#16569e) with consistent styling across all components
 - **🖼️ Popup Modal Design**: Full-screen popup with proper overlay, shadows, and card-based content
 - **📝 Complete Form Templates**: Ready-to-use Seafarer Information and Appraisal Period sections
-- **📊 Interactive Tables**: Built-in training and target setting tables with add/edit/delete functionality
+- **📊 Interactive Tables**: Built-in FormTable component with add/edit/delete functionality and comment system
 - **💾 Auto-save Support**: Built-in save draft and submit functionality with proper button styling
 - **♿ Accessibility**: Full keyboard navigation and screen reader support
 - **🔧 TypeScript**: Complete type safety and IntelliSense support
@@ -379,7 +379,30 @@ Responsive grid layout for form fields.
 - `columns?: 1 | 2 | 3 | 4 | 6` - Number of columns
 - `gap?: 2 | 3 | 4 | 6 | 8` - Grid gap size
 
-#### SAILTable
+#### FormTable (New Component)
+Advanced interactive table component for dynamic data entry across maritime applications.
+
+**Features:**
+- Configurable columns (text, select, number, readonly)
+- Add/delete rows dynamically
+- Inline editing with auto-save
+- Expandable comment system
+- Action buttons (comment, delete)
+- Empty state messaging
+- Responsive design with horizontal scroll
+- Maritime styling consistency
+
+**Props:**
+- `title?: string` - Table title with add button
+- `columns: TableColumn[]` - Column configuration array
+- `data: TableRow[]` - Current table data
+- `onDataChange: (data: TableRow[]) => void` - Data change handler
+- `addButtonText?: string` - Custom add button text
+- `showActions?: boolean` - Show/hide action columns
+- `showComments?: boolean` - Enable comment functionality
+- `emptyMessage?: string` - Custom empty state message
+
+### SAILTable (Legacy - Use FormTable Instead)
 Interactive table for data entry with add/edit/delete functionality.
 
 **Features:**
@@ -464,6 +487,186 @@ const sections = [
   }
 ];
 ```
+
+## FormTable Component - Dynamic Data Tables
+
+The FormTable component provides standardized table functionality for dynamic data entry across all maritime applications. It's built based on the Crew Appraisal Form structure and designed for maximum flexibility.
+
+### Basic FormTable Usage
+
+```tsx
+import React, { useState } from 'react';
+import { FormTable, TableColumn, TableRow } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css';
+
+function TrainingRecordsTable() {
+  const [trainingData, setTrainingData] = useState<TableRow[]>([
+    { id: '1', training: 'Bridge Resource Management', evaluation: '4-meets-expectations' }
+  ]);
+
+  const columns: TableColumn[] = [
+    { id: 'sno', header: 'S.No', type: 'readonly', width: '60px' },
+    { id: 'training', header: 'Training', type: 'text', placeholder: 'Enter training name' },
+    { 
+      id: 'evaluation', 
+      header: 'Evaluation', 
+      type: 'select',
+      placeholder: 'Select Rating',
+      options: [
+        { value: '5-exceeded-expectations', label: '5- Exceeded Expectations' },
+        { value: '4-meets-expectations', label: '4- Meets Expectations' },
+        { value: '3-somewhat-meets-expectations', label: '3- Somewhat Meets Expectations' },
+        { value: '2-below-expectations', label: '2- Below Expectations' },
+        { value: '1-significantly-below-expectations', label: '1- Significantly Below Expectations' }
+      ]
+    }
+  ];
+
+  return (
+    <FormTable
+      title="B1. Trainings conducted prior joining vessel (To Assess Effectiveness)"
+      columns={columns}
+      data={trainingData}
+      onDataChange={setTrainingData}
+      addButtonText="Add Training"
+      emptyMessage="No trainings added yet. Click 'Add Training' to get started."
+      showActions={true}
+      showComments={true}
+    />
+  );
+}
+```
+
+### Advanced FormTable - 5 Column Assessment
+
+```tsx
+function CompetenceAssessmentTable() {
+  const [assessmentData, setAssessmentData] = useState<TableRow[]>([]);
+
+  const columns: TableColumn[] = [
+    { id: 'sno', header: 'S.No', type: 'readonly', width: '60px' },
+    { id: 'criteria', header: 'Assessment Criteria', type: 'text', placeholder: 'Enter criteria' },
+    { id: 'weight', header: 'Weight %', type: 'number', placeholder: '0', width: '100px' },
+    { 
+      id: 'effectiveness', 
+      header: 'Effectiveness', 
+      type: 'select',
+      placeholder: 'Select Rating',
+      options: [
+        { value: '5-exceeds-expectations', label: '5- Exceeds Expectations' },
+        { value: '4-meets-expectations', label: '4- Meets Expectations' },
+        { value: '3-somewhat-meets-expectations', label: '3- Somewhat Meets Expectations' },
+        { value: '2-below-expectations', label: '2- Below Expectations' },
+        { value: '1-significantly-below-expectations', label: '1- Significantly Below Expectations' }
+      ]
+    },
+    { id: 'score', header: 'Score', type: 'number', placeholder: '0-100', width: '80px' }
+  ];
+
+  return (
+    <FormTable
+      title="Part C: Competence Assessment (Professional Knowledge & Skills)"
+      columns={columns}
+      data={assessmentData}
+      onDataChange={setAssessmentData}
+      addButtonText="Add Criteria"
+      emptyMessage="No assessment criteria added yet."
+      showActions={true}
+      showComments={true}
+    />
+  );
+}
+```
+
+### FormTable Flexibility Features
+
+**Use Cases Across SAIL Phase 2:**
+- **Crew Management**: Training records, certifications, appraisals
+- **Safety Management**: Incident logs, inspection checklists, audit findings
+- **Technical Management**: Maintenance schedules, equipment records
+- **Operations**: Port calls, cargo manifests, compliance tracking
+- **Admin**: User management, configuration tables
+
+**Responsive Design:**
+- **Desktop**: Full table layout with all columns visible
+- **Tablet**: Horizontal scroll for wide tables
+- **Mobile**: Condensed view with horizontal scroll
+
+**Integration with SAIL Forms:**
+- Use within SAIL Form sections for structured data entry
+- Consistent maritime styling with #16569e color scheme
+- Auto-saves data through parent form handlers
+
+## SAIL Phase 2 Responsive Design Standards
+
+All components in sail-ui-kit follow a standardized three-breakpoint responsive system designed specifically for maritime applications:
+
+### Breakpoint System
+- **Mobile**: Default (0px-767px) - Compact layouts, stacked navigation, horizontal scrolling tables
+- **Tablet**: md: (768px-1023px) - Medium layouts, condensed navigation, partial table visibility  
+- **Desktop**: lg: (1024px+) - Full layouts, complete navigation with text, full table layouts
+
+### SAIL Form Responsive Behavior
+```css
+/* Mobile (default) */
+.sail-form-stepper {
+  /* Horizontal compact layout, max-height 80px */
+  flex-direction: row;
+  max-height: 5rem;
+  overflow-x: auto;
+}
+
+/* Tablet (md:) */
+@media (min-width: 768px) {
+  .sail-form-stepper {
+    /* Vertical circles only, 80px width */
+    flex-direction: column;
+    width: 5rem;
+    max-height: none;
+  }
+}
+
+/* Desktop (lg:) */
+@media (min-width: 1024px) {
+  .sail-form-stepper {
+    /* Full stepper with text and connecting lines */
+    width: 20rem;
+  }
+  .stepper-connecting-line {
+    margin-left: calc(0.5rem + 1.5rem); /* Perfect alignment */
+  }
+}
+```
+
+### FormTable Responsive Behavior
+```css
+/* All screen sizes */
+.form-table {
+  /* Horizontal scroll for wide tables */
+  overflow-x: auto;
+  min-width: 600px;
+}
+
+/* Mobile optimization */
+@media (max-width: 767px) {
+  .form-table-actions {
+    /* Compact action buttons */
+    gap: 0.25rem;
+  }
+}
+```
+
+### Color Standards
+- **Primary Maritime Blue**: #16569e (headers, active states, borders)
+- **Secondary Blue**: #5DADE2 (action buttons, save buttons)
+- **Success Green**: #20c43f (submit buttons, success states)
+- **Text Colors**: #4f5863 (body text), #6b7280 (secondary text)
+
+### Layout Standards
+- **Container Padding**: p-4 (16px) on mobile, p-6 (24px) on desktop
+- **Modal Spacing**: p-[4px] container with rounded-xl cards
+- **Grid Systems**: 1 column mobile, 2-3 columns tablet, 3-6 columns desktop
+- **Form Spacing**: space-y-4 for form groups, space-y-2 for individual fields
 
 ### Ready-to-Use Example Component
 

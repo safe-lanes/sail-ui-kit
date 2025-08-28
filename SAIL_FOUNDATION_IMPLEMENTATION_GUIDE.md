@@ -7,7 +7,7 @@ The `sail-ui-kit` package provides standardized navigation components and a comp
 ## Package Information
 
 - **Package Name**: `sail-ui-kit`
-- **Version**: `1.0.1`
+- **Version**: `1.0.6`
 - **License**: MIT
 - **Author**: SAIL Phase 2 Team
 - **NPM**: https://www.npmjs.com/package/sail-ui-kit
@@ -46,14 +46,57 @@ A comprehensive form system designed specifically for maritime applications, fea
 #### Features
 - **📱 Responsive Design**: Optimized for both desktop and mobile devices with adaptive modal sizing
 - **🔄 Functional Stepper Navigation**: Click-to-navigate between form sections with visual feedback
-- **🎨 Maritime Theme**: Professional blue color scheme (#4A90E2) matching maritime industry standards
+- **🎨 Maritime Theme**: Professional blue color scheme (#16569e) matching maritime industry standards
 - **🖼️ Popup Modal Design**: Full-screen popup with proper overlay, shadows, and card-based content
 - **📝 Complete Form Templates**: Ready-to-use Seafarer Information and Appraisal Period sections
-- **📊 Interactive Tables**: Built-in training and target setting tables with add/edit/delete functionality
+- **📊 Interactive Tables**: Built-in FormTable component with add/edit/delete functionality and comment system
 - **💾 Auto-save Support**: Built-in save draft and submit functionality with proper button styling
 - **♿ Accessibility**: Full keyboard navigation and screen reader support
 - **🔧 TypeScript**: Complete type safety and IntelliSense support
 - **🎯 Maritime-Specific Fields**: Pre-built fields for ranks, vessels, nationalities, and appraisal types
+
+#### FormTable Component (NEW in v1.0.6)
+
+The FormTable component provides standardized table functionality for dynamic data entry across all maritime applications.
+
+**Key Features:**
+- Configurable columns (text, select, number, readonly)
+- Add/delete rows dynamically
+- Inline editing with auto-save
+- Expandable comment system
+- Action buttons (comment, delete)
+- Empty state messaging
+- Responsive design with horizontal scroll
+- Maritime styling consistency
+
+**Basic Usage:**
+```tsx
+import { FormTable, TableColumn, TableRow } from 'sail-ui-kit';
+
+const columns: TableColumn[] = [
+  { id: 'sno', header: 'S.No', type: 'readonly', width: '60px' },
+  { id: 'training', header: 'Training', type: 'text', placeholder: 'Enter training name' },
+  { 
+    id: 'evaluation', 
+    header: 'Evaluation', 
+    type: 'select',
+    options: [
+      { value: '5-exceeded', label: '5- Exceeded Expectations' },
+      { value: '4-meets', label: '4- Meets Expectations' }
+    ]
+  }
+];
+
+<FormTable
+  title="Training Records"
+  columns={columns}
+  data={trainingData}
+  onDataChange={setTrainingData}
+  addButtonText="Add Training"
+  showActions={true}
+  showComments={true}
+/>
+```
 
 #### Props Interface
 ```typescript
