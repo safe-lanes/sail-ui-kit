@@ -866,7 +866,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
-                            <div className="hidden lg:block ml-6 w-0.5 h-4 bg-gray-300"></div>
+                            <div className="hidden lg:block w-0.5 h-4 bg-gray-300" style={{marginLeft: 'calc(0.5rem + 1.5rem)'}}></div>
                             
                             {/* Section B - Clickable */}
                             <div 
@@ -883,7 +883,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
-                            <div className="hidden lg:block ml-6 w-0.5 h-4 bg-gray-300"></div>
+                            <div className="hidden lg:block w-0.5 h-4 bg-gray-300" style={{marginLeft: 'calc(0.5rem + 1.5rem)'}}></div>
                             
                             {/* Section C - Non-clickable for demo */}
                             <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
@@ -898,7 +898,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
-                            <div className="hidden lg:block ml-6 w-0.5 h-4 bg-gray-300"></div>
+                            <div className="hidden lg:block w-0.5 h-4 bg-gray-300" style={{marginLeft: 'calc(0.5rem + 1.5rem)'}}></div>
                             
                             {/* Section D - Non-clickable for demo */}
                             <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
@@ -913,7 +913,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
-                            <div className="hidden lg:block ml-6 w-0.5 h-4 bg-gray-300"></div>
+                            <div className="hidden lg:block w-0.5 h-4 bg-gray-300" style={{marginLeft: 'calc(0.5rem + 1.5rem)'}}></div>
                             
                             {/* Section E - Non-clickable for demo */}
                             <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
@@ -927,7 +927,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
-                            <div className="hidden lg:block ml-6 w-0.5 h-4 bg-gray-300"></div>
+                            <div className="hidden lg:block w-0.5 h-4 bg-gray-300" style={{marginLeft: 'calc(0.5rem + 1.5rem)'}}></div>
                             
                             {/* Section F - Non-clickable for demo */}
                             <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
@@ -941,7 +941,7 @@ export const ComponentShowcase: React.FC = () => {
                             </div>
                             
                             {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
-                            <div className="hidden lg:block ml-6 w-0.5 h-4 bg-gray-300"></div>
+                            <div className="hidden lg:block w-0.5 h-4 bg-gray-300" style={{marginLeft: 'calc(0.5rem + 1.5rem)'}}></div>
                             
                             {/* Section G - Non-clickable for demo */}
                             <div className="flex items-center md:items-center lg:items-start gap-1 md:gap-1 lg:gap-4 opacity-60 p-0.5 md:p-1 lg:p-2 flex-shrink-0">
