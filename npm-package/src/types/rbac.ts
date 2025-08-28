@@ -7,7 +7,7 @@ export interface Permission {
   description?: string;
   resource: string;
   action: string;
-  conditions?: Record<string, any>;
+  conditions?: Record<string, unknown>;
 }
 
 // Role Definition

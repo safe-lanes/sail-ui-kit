@@ -44,7 +44,7 @@ export function LeftSidebar({ menuItems, moduleName, footer, className = '' }: L
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item: any) => (
+              {menuItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton asChild isActive={item.isActive} tooltip={item.tooltip}>
                     <a href={item.path} className="flex items-center gap-3 px-3 py-2">

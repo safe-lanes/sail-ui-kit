@@ -163,8 +163,8 @@ export function RoleEditor({
             </div>
 
             {Object.entries(permissionCategories).map(
-              ([category, categoryPermissions]: [string, any]) => {
-                const categoryIds = categoryPermissions.map((p: any) => p.id);
+              ([category, categoryPermissions]: [string, unknown[]]) => {
+                const categoryIds = (categoryPermissions as { id: string }[]).map(p => p.id);
                 const selectedCount = categoryIds.filter((id: string) =>
                   selectedPermissions.has(id)
                 ).length;
@@ -187,7 +187,7 @@ export function RoleEditor({
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ml-6">
-                      {categoryPermissions.map((permission: any) => (
+                      {(categoryPermissions as { id: string; name: string; description: string }[]).map((permission) => (
                         <div key={permission.id} className="flex items-start gap-2">
                           <Checkbox
                             checked={selectedPermissions.has(permission.id)}

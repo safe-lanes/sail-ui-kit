@@ -51,7 +51,6 @@ const statusConfig = {
 
 export function ProgressIndicator({
   steps,
-  currentStep,
   showProgress = true,
   showTimestamps = false,
   orientation = 'horizontal',

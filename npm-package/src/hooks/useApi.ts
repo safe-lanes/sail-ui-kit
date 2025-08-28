@@ -5,7 +5,7 @@ import type { ApiRequestOptions } from '../types/services';
  * Hook for API requests with loading states
  * Note: Service implementation is commented out until SHARED_SERVICES is available
  */
-export function useApi<T = any>(
+export function useApi<T = unknown>(
   endpoint: string,
   options?: ApiRequestOptions & { immediate?: boolean }
 ) {
@@ -14,7 +14,7 @@ export function useApi<T = any>(
   const [error, setError] = useState<string | null>(null);
 
   const execute = useCallback(
-    async (customOptions?: ApiRequestOptions) => {
+    async () => {
       setLoading(true);
       setError(null);
 
@@ -44,7 +44,7 @@ export function useApi<T = any>(
   }, [execute, options?.immediate]);
 
   const post = useCallback(
-    async (data: any, customOptions?: ApiRequestOptions) => {
+    async () => {
       setLoading(true);
       setError(null);
 
@@ -67,7 +67,7 @@ export function useApi<T = any>(
   );
 
   const put = useCallback(
-    async (data: any, customOptions?: ApiRequestOptions) => {
+    async () => {
       setLoading(true);
       setError(null);
 
@@ -90,7 +90,7 @@ export function useApi<T = any>(
   );
 
   const del = useCallback(
-    async (customOptions?: ApiRequestOptions) => {
+    async () => {
       setLoading(true);
       setError(null);
 

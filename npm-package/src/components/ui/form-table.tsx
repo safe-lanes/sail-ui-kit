@@ -16,7 +16,7 @@ export interface TableColumn {
 
 export interface FormTableRow {
   id: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface FormTableProps {

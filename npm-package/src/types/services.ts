@@ -1,14 +1,14 @@
 // Service layer type definitions
 
 // API Service Types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data: T;
   message?: string;
   success: boolean;
   timestamp?: string;
 }
 
-export interface PaginatedResponse<T = any> {
+export interface PaginatedResponse<T = unknown> {
   data: T[];
   pagination: {
     page: number;
@@ -20,7 +20,7 @@ export interface PaginatedResponse<T = any> {
 
 export interface ApiRequestOptions {
   headers?: Record<string, string>;
-  params?: Record<string, any>;
+  params?: Record<string, unknown>;
   timeout?: number;
 }
 
@@ -29,13 +29,13 @@ export interface UserPermissions {
   can: (resource: string, action?: string) => boolean;
   hasRole: (roleName: string) => boolean;
   getRoles: () => string[];
-  getPermissions: () => any[];
+  getPermissions: () => unknown[];
 }
 
 export interface PermissionCheck {
   resource: string;
   action?: string;
-  conditions?: Record<string, any>;
+  conditions?: Record<string, unknown>;
 }
 
 // Personnel Service Types

@@ -72,7 +72,7 @@ export function IncidentReportForm({
     onSave(formData as IncidentReport);
   };
 
-  const updateField = (field: keyof IncidentReport, value: any) => {
+  const updateField = (field: keyof IncidentReport, value: unknown) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 

@@ -15,8 +15,8 @@ export class VesselService {
   /**
    * Get all vessels with optional filtering
    */
-  async getVessels(filters: VesselFilter = {}): Promise<any[]> {
-    return this.apiService.get<any[]>('/vessels', {
+  async getVessels(filters: VesselFilter = {}): Promise<unknown[]> {
+    return this.apiService.get<unknown[]>('/vessels', {
       params: filters,
     });
   }
@@ -24,7 +24,7 @@ export class VesselService {
   /**
    * Get vessel by ID
    */
-  async getVesselById(id: string): Promise<any> {
+  async getVesselById(id: string): Promise<unknown> {
     return this.apiService.get(`/vessels/${id}`);
   }
 
@@ -70,49 +70,49 @@ export class VesselService {
   /**
    * Get vessel maintenance records
    */
-  async getVesselMaintenance(vesselId: string): Promise<any[]> {
+  async getVesselMaintenance(vesselId: string): Promise<unknown[]> {
     return this.apiService.get(`/vessels/${vesselId}/maintenance`);
   }
 
   /**
    * Get vessel inspections
    */
-  async getVesselInspections(vesselId: string): Promise<any[]> {
+  async getVesselInspections(vesselId: string): Promise<unknown[]> {
     return this.apiService.get(`/vessels/${vesselId}/inspections`);
   }
 
   /**
    * Get vessel certificates
    */
-  async getVesselCertificates(vesselId: string): Promise<any[]> {
+  async getVesselCertificates(vesselId: string): Promise<unknown[]> {
     return this.apiService.get(`/vessels/${vesselId}/certificates`);
   }
 
   /**
    * Get vessel crew
    */
-  async getVesselCrew(vesselId: string): Promise<any[]> {
+  async getVesselCrew(vesselId: string): Promise<unknown[]> {
     return this.apiService.get(`/vessels/${vesselId}/crew`);
   }
 
   /**
    * Get vessel voyage data
    */
-  async getVesselVoyages(vesselId: string): Promise<any[]> {
+  async getVesselVoyages(vesselId: string): Promise<unknown[]> {
     return this.apiService.get(`/vessels/${vesselId}/voyages`);
   }
 
   /**
    * Create vessel record
    */
-  async createVessel(vesselData: any): Promise<any> {
+  async createVessel(vesselData: unknown): Promise<unknown> {
     return this.apiService.post('/vessels', vesselData);
   }
 
   /**
    * Update vessel record
    */
-  async updateVessel(vesselId: string, vesselData: any): Promise<any> {
+  async updateVessel(vesselId: string, vesselData: unknown): Promise<unknown> {
     return this.apiService.put(`/vessels/${vesselId}`, vesselData);
   }
 

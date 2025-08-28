@@ -56,10 +56,10 @@ export const createSharedServices = () => {
 export const SHARED_SERVICES = {
   // Note: Applications should use createSharedServices() to get actual instances
   // These are placeholders for type compatibility
-  api: {} as any,
-  rbac: {} as any,
-  personnel: {} as any,
-  vessel: {} as any,
+  api: {} as ApiService,
+  rbac: {} as RBACService,
+  personnel: {} as PersonnelService,
+  vessel: {} as VesselService,
 } as const;
 
 // Service version
@@ -146,7 +146,7 @@ export const Validators = {
 
 // Module integration helpers
 export const ModuleIntegration = {
-  isModuleAvailable: async (moduleCode: string): Promise<boolean> => {
+  isModuleAvailable: async (): Promise<boolean> => {
     try {
       // const modules = await SHARED_SERVICES.api.get<Array<{ code: string; isActive: boolean }>>("/modules");
       // return modules.some((module: { code: string; isActive: boolean }) => module.code === moduleCode && module.isActive);
@@ -156,12 +156,12 @@ export const ModuleIntegration = {
     }
   },
 
-  getModuleConfig: async (moduleCode: string): Promise<any> => {
+  getModuleConfig: async (): Promise<Record<string, unknown>> => {
     // return SHARED_SERVICES.api.get(`/modules/${moduleCode}/config`);
     return {}; // Placeholder until services are implemented
   },
 
-  sendToModule: async (targetModule: string, endpoint: string, data: any): Promise<any> => {
+  sendToModule: async (): Promise<Record<string, unknown>> => {
     // return SHARED_SERVICES.api.post(`/modules/${targetModule}${endpoint}`, data);
     return {}; // Placeholder until services are implemented
   },

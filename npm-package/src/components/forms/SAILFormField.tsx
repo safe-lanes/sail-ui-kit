@@ -10,6 +10,7 @@ import { Button } from '../ui/button';
 import { Plus, Trash2, MessageSquare } from 'lucide-react';
 
 export interface SAILFormFieldProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
   name: string;
   label?: string;
@@ -128,10 +129,10 @@ export interface SAILTableColumn {
 
 export interface SAILTableProps {
   title?: string;
-  data: any[];
+  data: Record<string, unknown>[];
   columns: SAILTableColumn[];
   onAdd: () => void;
-  onUpdate: (id: string, field: string, value: any) => void;
+  onUpdate: (id: string, field: string, value: unknown) => void;
   onDelete: (id: string) => void;
   addButtonText?: string;
   className?: string;

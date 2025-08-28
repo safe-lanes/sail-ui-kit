@@ -8,7 +8,7 @@ export interface StatusItem {
   id: string;
   name: string;
   status: StatusType;
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
 }
 
 export interface StatusCardProps {
@@ -96,7 +96,7 @@ export function StatusCard({
                   {item.details &&
                     Object.entries(item.details)
                       .slice(0, 2)
-                      .map(([key, value]: [string, any]) => (
+                      .map(([key, value]: [string, unknown]) => (
                         <p key={key} className="text-xs text-gray-500">
                           {key}: {String(value)}
                         </p>

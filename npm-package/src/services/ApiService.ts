@@ -32,7 +32,7 @@ export class ApiService {
   /**
    * Make a GET request
    */
-  async get<T = any>(endpoint: string, options?: ApiRequestOptions): Promise<T> {
+  async get<T = unknown>(endpoint: string, options?: ApiRequestOptions): Promise<T> {
     const url = new URL(`${this.baseURL}${endpoint}`, window.location.origin);
 
     if (options?.params) {
@@ -57,7 +57,7 @@ export class ApiService {
   /**
    * Make a POST request
    */
-  async post<T = any>(endpoint: string, data?: any, options?: ApiRequestOptions): Promise<T> {
+  async post<T = unknown>(endpoint: string, data?: unknown, options?: ApiRequestOptions): Promise<T> {
     const response = await fetch(`${this.baseURL}${endpoint}`, {
       method: 'POST',
       headers: {
@@ -73,7 +73,7 @@ export class ApiService {
   /**
    * Make a PUT request
    */
-  async put<T = any>(endpoint: string, data?: any, options?: ApiRequestOptions): Promise<T> {
+  async put<T = unknown>(endpoint: string, data?: unknown, options?: ApiRequestOptions): Promise<T> {
     const response = await fetch(`${this.baseURL}${endpoint}`, {
       method: 'PUT',
       headers: {
@@ -89,7 +89,7 @@ export class ApiService {
   /**
    * Make a DELETE request
    */
-  async delete<T = any>(endpoint: string, options?: ApiRequestOptions): Promise<T> {
+  async delete<T = unknown>(endpoint: string, options?: ApiRequestOptions): Promise<T> {
     const response = await fetch(`${this.baseURL}${endpoint}`, {
       method: 'DELETE',
       headers: {
@@ -117,7 +117,7 @@ export class ApiService {
   /**
    * Get paginated data
    */
-  async getPaginated<T = any>(
+  async getPaginated<T = unknown>(
     endpoint: string,
     page: number = 1,
     limit: number = 10,

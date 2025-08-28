@@ -93,21 +93,21 @@ export class PersonnelService {
   /**
    * Get personnel training records
    */
-  async getPersonnelTraining(personnelId: string): Promise<any[]> {
+  async getPersonnelTraining(personnelId: string): Promise<unknown[]> {
     return this.apiService.get(`/personnel/${personnelId}/training`);
   }
 
   /**
    * Get personnel certificates
    */
-  async getPersonnelCertificates(personnelId: string): Promise<any[]> {
+  async getPersonnelCertificates(personnelId: string): Promise<unknown[]> {
     return this.apiService.get(`/personnel/${personnelId}/certificates`);
   }
 
   /**
    * Get personnel appraisal history
    */
-  async getPersonnelAppraisals(personnelId: string): Promise<any[]> {
+  async getPersonnelAppraisals(personnelId: string): Promise<unknown[]> {
     return this.apiService.get(`/personnel/${personnelId}/appraisals`);
   }
 }

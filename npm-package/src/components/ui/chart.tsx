@@ -65,7 +65,7 @@ ChartContainer.displayName = 'Chart';
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
-    ([, config]: [string, any]) => config.theme || config.color
+    ([, config]: [string, { theme?: Record<string, string>; color?: string }]) => config.theme || config.color
   );
 
   if (!colorConfig.length) {
@@ -77,10 +77,10 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
           .map(
-            ([theme, prefix]: [string, any]) => `
+            ([theme, prefix]: [string, string]) => `
 ${prefix} [data-chart=${id}] {
 ${colorConfig
-  .map(([key, itemConfig]: [string, any]) => {
+  .map(([key, itemConfig]: [string, { theme?: Record<string, string>; color?: string }]) => {
     const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
     return color ? `  --color-${key}: ${color};` : null;
   })
@@ -169,7 +169,7 @@ const ChartTooltipContent = React.forwardRef<
       >
         {!nestLabel ? tooltipLabel : null}
         <div className="grid gap-1.5">
-          {payload.map((item: any, index: number) => {
+          {payload.map((item: { name?: string; dataKey?: string; value?: unknown; payload?: { fill?: string }; color?: string }, index: number) => {
             const key = `${nameKey || item.name || item.dataKey || 'value'}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
             const indicatorColor = color || item.payload.fill || item.color;

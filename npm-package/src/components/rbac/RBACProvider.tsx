@@ -13,7 +13,7 @@ interface RBACContextType {
   isAuthenticated: boolean;
   hasPermission: (permission: string | string[]) => boolean;
   hasRole: (role: string | string[]) => boolean;
-  login: (credentials: any) => Promise<void>;
+  login: (credentials: Record<string, unknown>) => Promise<void>;
   logout: () => void;
   loading: boolean;
 }
@@ -23,7 +23,7 @@ const RBACContext = createContext<RBACContextType | undefined>(undefined);
 interface RBACProviderProps {
   children: React.ReactNode;
   initialUser?: User | null;
-  onLogin?: (credentials: any) => Promise<User>;
+  onLogin?: (credentials: Record<string, unknown>) => Promise<User>;
   onLogout?: () => void;
 }
 
@@ -58,7 +58,7 @@ export function RBACProvider({
     [user]
   );
 
-  const login = async (credentials: any) => {
+  const login = async (credentials: Record<string, unknown>) => {
     setLoading(true);
     try {
       if (onLogin) {

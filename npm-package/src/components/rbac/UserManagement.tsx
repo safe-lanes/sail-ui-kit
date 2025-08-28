@@ -36,7 +36,6 @@ export function UserManagement({
 }: UserManagementProps) {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [statusFilter, setStatusFilter] = React.useState<string>('all');
-  const [selectedUser, setSelectedUser] = React.useState<User | null>(null);
 
   const filteredUsers = users.filter(user => {
     const matchesSearch =
@@ -155,7 +154,7 @@ export function UserManagement({
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={() => setSelectedUser(user)}>
+                      <Button variant="outline" size="sm">
                         <Edit className="h-3 w-3" />
                       </Button>
                       <Button
