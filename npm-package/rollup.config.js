@@ -42,6 +42,16 @@ export default [
         tsconfig: './tsconfig.json',
         declaration: false,
       }),
+      // Suppress "use client" directive warnings
+      {
+        name: 'suppress-use-client',
+        transform(code, id) {
+          if (code.includes('"use client"') || code.includes("'use client'")) {
+            return code.replace(/["']use client["'];?\s*\n?/g, '');
+          }
+          return null;
+        }
+      },
     ],
     external: ['react', 'react-dom'],
   },

@@ -2,13 +2,14 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 // import { zodResolver } from '@hookform/resolvers/zod';
 // import { z } from 'zod';
-import { SAILForm, SAILFormField, SAILFormGrid, SAILFormSectionComponent, SAILFormActions, SAILTable } from './index';
+import { SAILForm, type SAILFormSection as SAILFormSectionType } from './SAILForm';
+import { SAILFormField, SAILTable, type SAILTableColumn } from './SAILFormField';
+import { SAILFormGrid, SAILFormSection, SAILFormActions } from './SAILFormGrid';
 import { Form } from '../ui/form';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import type { SAILFormSection as SAILFormSectionType, SAILTableColumn } from './index';
 
 // Example schema for demonstration - matches showcase implementation
 // const exampleSchema = z.object({

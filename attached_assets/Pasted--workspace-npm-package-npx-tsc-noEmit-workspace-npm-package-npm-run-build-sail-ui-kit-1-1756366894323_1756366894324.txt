@@ -1,0 +1,319 @@
+~/workspace/npm-package$ npx tsc --noEmit
+~/workspace/npm-package$ npm run build
+
+> sail-ui-kit@1.0.6 build
+> rollup -c
+
+(node:9639) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/workspace/npm-package/rollup.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/workspace/npm-package/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+src/index.ts → dist/index.js, dist/index.esm.js...
+(!) src/components/ui/avatar.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/avatar.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/avatar.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/collapsible.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/collapsible.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/collapsible.tsx:1:0
+1: "use client";
+   ^
+2: import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
+3: const Collapsible = CollapsiblePrimitive.Root;
+(!) src/components/ui/chart.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/chart.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/chart.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/dialog.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/dialog.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/dialog.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/drawer.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/drawer.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/drawer.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/form-popup.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/form-popup.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/form-popup.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/form.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/form.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/form.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/hover-card.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/hover-card.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/hover-card.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/menubar.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/menubar.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/menubar.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/progress.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/progress.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/progress.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/resizable.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/resizable.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/resizable.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx } from "react/jsx-runtime";
+3: import { GripVertical } from "lucide-react";
+(!) src/components/ui/select.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/select.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/select.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+3: import * as SelectPrimitive from "@radix-ui/react-select";
+(!) src/components/ui/sheet.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/sheet.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/sheet.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/toggle-group.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/toggle-group.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/toggle-group.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) src/components/ui/tooltip.tsx (1:0): Module level directives cause errors when bundled, "use client" in "src/components/ui/tooltip.tsx" was ignored.
+/home/runner/workspace/npm-package/src/components/ui/tooltip.tsx:1:0
+1: "use client";
+   ^
+2: import { jsx as _jsx } from "react/jsx-runtime";
+3: import * as React from "react";
+(!) ../node_modules/cmdk/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/cmdk/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/cmdk/dist/index.mjs:1:0
+1: "use client";import{a as ae}from"./chunk-NZJY6EH4.mjs";import*as w from"@radix-ui/react-dialog";import*as t from"reac...
+   ^
+(!) ../node_modules/vaul/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/vaul/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/vaul/dist/index.mjs:1:0
+1: 'use client';
+   ^
+2: function __insertCSS(code) {
+3:   if (!code || typeof document == 'undefined') return
+(!) ../node_modules/@radix-ui/react-avatar/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-avatar/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-avatar/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/avatar/src/avatar.tsx
+(!) ../node_modules/@radix-ui/react-accordion/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-accordion/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-accordion/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/accordion/src/accordion.tsx
+(!) ../node_modules/@radix-ui/react-collapsible/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-collapsible/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-collapsible/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/collapsible/src/collapsible.tsx
+(!) ../node_modules/@radix-ui/react-alert-dialog/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-alert-dialog/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-alert-dialog/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/alert-dialog/src/alert-dialog.tsx
+(!) ../node_modules/@radix-ui/react-label/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-label/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-label/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/label/src/label.tsx
+(!) ../node_modules/@radix-ui/react-checkbox/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-checkbox/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-checkbox/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/checkbox/src/checkbox.tsx
+(!) ../node_modules/@radix-ui/react-context-menu/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-context-menu/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-context-menu/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/context-menu/src/context-menu.tsx
+(!) ../node_modules/@radix-ui/react-dialog/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-dialog/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-dialog/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/dialog/src/dialog.tsx
+(!) ../node_modules/@radix-ui/react-menubar/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-menubar/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-menubar/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/menubar/src/menubar.tsx
+(!) ../node_modules/@radix-ui/react-navigation-menu/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-navigation-menu/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-navigation-menu/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/navigation-menu/src/navigation-menu.tsx
+(!) ../node_modules/@radix-ui/react-hover-card/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-hover-card/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-hover-card/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/hover-card/src/hover-card.tsx
+(!) ../node_modules/@radix-ui/react-progress/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-progress/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-progress/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/progress/src/progress.tsx
+(!) ../node_modules/@radix-ui/react-radio-group/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-radio-group/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-radio-group/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/radio-group/src/radio-group.tsx
+(!) ../node_modules/@radix-ui/react-toggle-group/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-toggle-group/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-toggle-group/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/toggle-group/src/toggle-group.tsx
+(!) ../node_modules/@radix-ui/react-popover/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-popover/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-popover/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/popover/src/popover.tsx
+(!) ../node_modules/@radix-ui/react-scroll-area/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-scroll-area/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-scroll-area/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/scroll-area/src/scroll-area.tsx
+(!) ../node_modules/@radix-ui/react-toast/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-toast/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-toast/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/toast/src/toast.tsx
+(!) ../node_modules/@radix-ui/react-toggle/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-toggle/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-toggle/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/toggle/src/toggle.tsx
+(!) ../node_modules/@radix-ui/react-select/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-select/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-select/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/select/src/select.tsx
+(!) ../node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/dropdown-menu/src/dropdown-menu.tsx
+(!) ../node_modules/@radix-ui/react-tooltip/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-tooltip/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-tooltip/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/tooltip/src/tooltip.tsx
+(!) ../node_modules/@radix-ui/react-tabs/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-tabs/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-tabs/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/tabs/src/tabs.tsx
+(!) ../node_modules/@radix-ui/react-slider/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-slider/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-slider/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/slider/src/slider.tsx
+(!) ../node_modules/@radix-ui/react-switch/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-switch/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-switch/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/switch/src/switch.tsx
+(!) ../node_modules/@radix-ui/react-portal/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-portal/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-portal/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/portal/src/portal.tsx
+(!) ../node_modules/@radix-ui/react-collection/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-collection/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-collection/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/collection/src/collection.tsx
+(!) ../node_modules/@radix-ui/react-presence/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-presence/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-presence/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/presence/src/presence.tsx
+(!) ../node_modules/@radix-ui/react-focus-guards/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-focus-guards/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-focus-guards/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/focus-guards/src/focus-guards.tsx
+(!) ../node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-dismissable-layer/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/dismissable-layer/src/dismissable-layer.tsx
+(!) ../node_modules/@radix-ui/react-focus-scope/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-focus-scope/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-focus-scope/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/focus-scope/src/focus-scope.tsx
+(!) ../node_modules/@radix-ui/react-roving-focus/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-roving-focus/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-roving-focus/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/roving-focus/src/roving-focus-group.tsx
+(!) ../node_modules/@radix-ui/react-popper/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-popper/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-popper/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/popper/src/popper.tsx
+(!) ../node_modules/@radix-ui/react-menu/dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "../node_modules/@radix-ui/react-menu/dist/index.mjs" was ignored.
+/home/runner/workspace/node_modules/@radix-ui/react-menu/dist/index.mjs:1:0
+1: "use client";
+   ^
+2: 
+3: // packages/react/menu/src/menu.tsx
+(!) Circular dependencies
+../node_modules/d3-interpolate/src/value.js -> ../node_modules/d3-interpolate/src/array.js -> ../node_modules/d3-interpolate/src/value.js
+../node_modules/d3-interpolate/src/value.js -> ../node_modules/d3-interpolate/src/object.js -> ../node_modules/d3-interpolate/src/value.js
+../node_modules/recharts/es6/util/ChartUtils.js -> ../node_modules/recharts/es6/util/getLegendProps.js -> ../node_modules/recharts/es6/util/ChartUtils.js
+src/components/forms/index.ts -> src/components/forms/SAILFormExample.tsx -> src/components/forms/index.ts
+created dist/index.js, dist/index.esm.js in 42.5s
+
+src/index.ts → dist/index.d.ts...
+created dist/index.d.ts in 6.9s
