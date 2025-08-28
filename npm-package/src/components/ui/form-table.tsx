@@ -14,7 +14,7 @@ export interface TableColumn {
   width?: string;
 }
 
-export interface TableRow {
+export interface FormTableRow {
   id: string;
   [key: string]: any;
 }
@@ -22,8 +22,8 @@ export interface TableRow {
 export interface FormTableProps {
   title?: string;
   columns: TableColumn[];
-  data: TableRow[];
-  onDataChange: (data: TableRow[]) => void;
+  data: FormTableRow[];
+  onDataChange: (data: FormTableRow[]) => void;
   addButtonText?: string;
   showActions?: boolean;
   showComments?: boolean;
@@ -46,7 +46,7 @@ export const FormTable: React.FC<FormTableProps> = ({
   const [editingComment, setEditingComment] = useState<string | null>(null);
 
   const addRow = () => {
-    const newRow: TableRow = {
+    const newRow: FormTableRow = {
       id: Date.now().toString(),
       ...columns.reduce((acc, col) => ({ ...acc, [col.id]: '' }), {})
     };
@@ -98,7 +98,7 @@ export const FormTable: React.FC<FormTableProps> = ({
     setEditingComment(null);
   };
 
-  const renderCell = (row: TableRow, column: TableColumn, index: number) => {
+  const renderCell = (row: FormTableRow, column: TableColumn, index: number) => {
     const value = row[column.id] || '';
 
     switch (column.type) {

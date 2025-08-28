@@ -496,11 +496,11 @@ The FormTable component provides standardized table functionality for dynamic da
 
 ```tsx
 import React, { useState } from 'react';
-import { FormTable, TableColumn, TableRow } from 'sail-ui-kit';
+import { FormTable, TableColumn, FormTableRow } from 'sail-ui-kit';
 import 'sail-ui-kit/dist/index.css';
 
 function TrainingRecordsTable() {
-  const [trainingData, setTrainingData] = useState<TableRow[]>([
+  const [trainingData, setTrainingData] = useState<FormTableRow[]>([
     { id: '1', training: 'Bridge Resource Management', evaluation: '4-meets-expectations' }
   ]);
 
@@ -541,7 +541,7 @@ function TrainingRecordsTable() {
 
 ```tsx
 function CompetenceAssessmentTable() {
-  const [assessmentData, setAssessmentData] = useState<TableRow[]>([]);
+  const [assessmentData, setAssessmentData] = useState<FormTableRow[]>([]);
 
   const columns: TableColumn[] = [
     { id: 'sno', header: 'S.No', type: 'readonly', width: '60px' },
