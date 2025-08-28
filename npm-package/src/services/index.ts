@@ -136,7 +136,7 @@ export const Validators = {
   },
 
   isValidPhone: (phone: string): boolean => {
-    return /^[\+]?[\d\s\-\(\)]{7,15}$/.test(phone);
+    return /^[+]?[\d\s\-()]{7,15}$/.test(phone);
   },
 
   isValidCrewMemberID: (id: string): boolean => {
