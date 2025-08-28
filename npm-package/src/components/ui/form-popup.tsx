@@ -37,7 +37,7 @@ export const StandardFormPopup = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "bg-white rounded-lg shadow-lg w-full h-[calc(100vh-2rem)] flex flex-col overflow-hidden",
+          "bg-white rounded-lg shadow-lg w-full h-[calc(100vh-8px)] flex flex-col overflow-hidden",
           className
         )}
         {...props}
@@ -93,7 +93,7 @@ export const FormPopupContent = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-white rounded-lg shadow-lg w-full h-[calc(100vh-2rem)] flex flex-col overflow-hidden",
+      "bg-white rounded-lg shadow-lg w-full h-[calc(100vh-8px)] flex flex-col overflow-hidden",
       className
     )}
     {...props}
