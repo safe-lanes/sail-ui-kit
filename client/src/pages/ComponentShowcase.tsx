@@ -98,6 +98,15 @@ export const ComponentShowcase: React.FC = () => {
     { id: '2', training: 'STCW Basic Safety Training', evaluation: '5-exceeded-expectations' }
   ]);
 
+  // Different table configurations for demonstrations
+  const [assessmentData, setAssessmentData] = useState<TableRow[]>([
+    { id: '1', criteria: 'Navigation Skills', weight: '25', effectiveness: '4-meets-expectations', score: '85' }
+  ]);
+
+  const [incidentData, setIncidentData] = useState<TableRow[]>([
+    { id: '1', date: '2024-01-15', type: 'Near Miss', severity: 'low', status: 'closed' }
+  ]);
+
   const handleModuleChange = (moduleId: string) => {
     switch (moduleId) {
       case "crewing":
@@ -1162,8 +1171,9 @@ export const ComponentShowcase: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Training Table Demo */}
-                    <div>
+                    {/* Training Table Demo - 3 Columns */}
+                    <div className="mb-8">
+                      <h5 className="text-sm font-medium mb-3 text-gray-700">3-Column Configuration: Training Records</h5>
                       <FormTable
                         title="B1. Trainings conducted prior joining vessel (To Assess Effectiveness)"
                         columns={[
@@ -1190,6 +1200,92 @@ export const ComponentShowcase: React.FC = () => {
                         showActions={true}
                         showComments={true}
                       />
+                    </div>
+
+                    {/* Assessment Table Demo - 5 Columns */}
+                    <div className="mb-8">
+                      <h5 className="text-sm font-medium mb-3 text-gray-700">5-Column Configuration: Competence Assessment</h5>
+                      <FormTable
+                        title="Part C: Competence Assessment (Professional Knowledge & Skills)"
+                        columns={[
+                          { id: 'sno', header: 'S.No', type: 'readonly', width: '60px' },
+                          { id: 'criteria', header: 'Assessment Criteria', type: 'text', placeholder: 'Enter criteria' },
+                          { id: 'weight', header: 'Weight %', type: 'number', placeholder: '0', width: '100px' },
+                          { 
+                            id: 'effectiveness', 
+                            header: 'Effectiveness', 
+                            type: 'select',
+                            placeholder: 'Select Rating',
+                            options: [
+                              { value: '5-exceeds-expectations', label: '5- Exceeds Expectations' },
+                              { value: '4-meets-expectations', label: '4- Meets Expectations' },
+                              { value: '3-somewhat-meets-expectations', label: '3- Somewhat Meets Expectations' },
+                              { value: '2-below-expectations', label: '2- Below Expectations' },
+                              { value: '1-significantly-below-expectations', label: '1- Significantly Below Expectations' }
+                            ]
+                          },
+                          { id: 'score', header: 'Score', type: 'number', placeholder: '0-100', width: '80px' }
+                        ]}
+                        data={assessmentData}
+                        onDataChange={setAssessmentData}
+                        addButtonText="Add Criteria"
+                        emptyMessage="No assessment criteria added yet."
+                        showActions={true}
+                        showComments={true}
+                      />
+                    </div>
+
+                    {/* Incident Table Demo - 4 Columns */}
+                    <div className="mb-6">
+                      <h5 className="text-sm font-medium mb-3 text-gray-700">4-Column Configuration: Incident Tracking</h5>
+                      <FormTable
+                        title="Safety Incident Log"
+                        columns={[
+                          { id: 'date', header: 'Date', type: 'text', placeholder: 'YYYY-MM-DD', width: '120px' },
+                          { id: 'type', header: 'Incident Type', type: 'text', placeholder: 'Describe incident type' },
+                          { 
+                            id: 'severity', 
+                            header: 'Severity', 
+                            type: 'select',
+                            placeholder: 'Select severity',
+                            options: [
+                              { value: 'high', label: 'High' },
+                              { value: 'medium', label: 'Medium' },
+                              { value: 'low', label: 'Low' }
+                            ]
+                          },
+                          { 
+                            id: 'status', 
+                            header: 'Status', 
+                            type: 'select',
+                            placeholder: 'Select status',
+                            options: [
+                              { value: 'open', label: 'Open' },
+                              { value: 'investigating', label: 'Investigating' },
+                              { value: 'closed', label: 'Closed' }
+                            ]
+                          }
+                        ]}
+                        data={incidentData}
+                        onDataChange={setIncidentData}
+                        addButtonText="Add Incident"
+                        emptyMessage="No incidents recorded."
+                        showActions={true}
+                        showComments={false}
+                      />
+                    </div>
+
+                    {/* Flexibility Information */}
+                    <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                      <h5 className="text-sm font-medium text-green-900 mb-2">Component Flexibility Features</h5>
+                      <div className="text-sm text-green-800 space-y-2">
+                        <div><strong>Dynamic Columns:</strong> Support for 2-10+ columns with configurable widths</div>
+                        <div><strong>Column Types:</strong> text, select (dropdown), number, readonly</div>
+                        <div><strong>Configurable Options:</strong> Custom dropdowns, placeholders, validation</div>
+                        <div><strong>Optional Features:</strong> Comments, actions, custom empty messages</div>
+                        <div><strong>Data Agnostic:</strong> Works with any data structure matching column IDs</div>
+                        <div><strong>Responsive:</strong> Horizontal scroll on mobile, full layout on desktop</div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
