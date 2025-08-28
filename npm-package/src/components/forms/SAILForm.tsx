@@ -130,7 +130,7 @@ export const SAILForm: React.FC<SAILFormProps> = ({
                     
                     {/* Connecting line - Hidden on mobile/tablet, visible on desktop */}
                     {index < sectionsWithLetters.length - 1 && (
-                      <div className="hidden lg:block ml-8 w-0.5 h-4 bg-gray-300"></div>
+                      <div className="hidden lg:block ml-6 w-0.5 h-4 bg-gray-300"></div>
                     )}
                   </div>
                 );
