@@ -12,7 +12,7 @@ export function StandardLeftSidebar({
   width = 67,
   topOffset = 66,
   className = '',
-  hidden = 'lg:block hidden' // Default responsive behavior
+  hidden = 'hidden md:block' // Default responsive behavior - hide on mobile, show on tablet+
 }: StandardLeftSidebarProps) {
   const sidebarHeight = `calc(100vh - ${topOffset}px)`;
 

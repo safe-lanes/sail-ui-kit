@@ -43,8 +43,8 @@ export const StandardFormPopup = React.forwardRef<
         {...props}
       >
         {title && (
-          <div className="sticky top-0 bg-white border-b p-3 sm:p-4 flex items-center justify-between">
-            <h1 className="text-lg sm:text-xl font-bold">{title}</h1>
+          <div className="sticky top-0 bg-white border-b p-2 md:p-3 lg:p-4 flex items-center justify-between">
+            <h1 className="text-base md:text-lg lg:text-xl font-bold">{title}</h1>
             {onClose && (
               <button
                 onClick={onClose}
