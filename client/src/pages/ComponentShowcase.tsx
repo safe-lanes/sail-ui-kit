@@ -1464,10 +1464,40 @@ export const ComponentShowcase: React.FC = () => {
                                     { id: 'vessel', type: 'select', placeholder: 'Select vessel...', label: 'Vessel' }
                                   ]}
                                   columnDefs={[
-                                    { field: 'id', headerName: 'Crew ID' },
-                                    { field: 'name', headerName: 'Name' },
-                                    { field: 'rank', headerName: 'Rank' },
-                                    { field: 'vessel', headerName: 'Vessel' }
+                                    { field: 'id', headerName: 'Crew ID', width: 120, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'name', headerName: 'Name', width: 150, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'rank', headerName: 'Rank', width: 130, filter: 'agSetColumnFilter', sortable: true },
+                                    { field: 'vessel', headerName: 'Vessel', width: 140, filter: 'agTextColumnFilter', sortable: true },
+                                    {
+                                      field: 'actions',
+                                      headerName: 'Actions',
+                                      width: 120,
+                                      sortable: false,
+                                      filter: false,
+                                      resizable: false,
+                                      cellRenderer: () => {
+                                        return `
+                                          <div class="flex items-center gap-2 justify-center py-1">
+                                            <button class="p-1 hover:bg-gray-100 rounded" title="View">
+                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                              </svg>
+                                            </button>
+                                            <button class="p-1 hover:bg-gray-100 rounded" title="Edit">
+                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                              </svg>
+                                            </button>
+                                            <button class="p-1 hover:bg-gray-100 rounded text-red-600" title="Delete">
+                                              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                              </svg>
+                                            </button>
+                                          </div>
+                                        `;
+                                      }
+                                    }
                                   ]}
                                   sampleData={[
                                     { id: '2025-05-14', name: 'James Michael', rank: 'Master', vessel: 'MT Sail One' },
@@ -1511,11 +1541,54 @@ export const ComponentShowcase: React.FC = () => {
                                     { id: 'dateTo', type: 'date', label: 'To Date' }
                                   ]}
                                   columnDefs={[
-                                    { field: 'inspectionId', headerName: 'Inspection ID' },
-                                    { field: 'vessel', headerName: 'Vessel' },
-                                    { field: 'port', headerName: 'Port' },
-                                    { field: 'status', headerName: 'Status' },
-                                    { field: 'date', headerName: 'Date' }
+                                    { field: 'inspectionId', headerName: 'Inspection ID', width: 140, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'vessel', headerName: 'Vessel', width: 150, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'port', headerName: 'Port', width: 120, filter: 'agSetColumnFilter', sortable: true },
+                                    { 
+                                      field: 'status', 
+                                      headerName: 'Status', 
+                                      width: 130, 
+                                      filter: 'agSetColumnFilter', 
+                                      sortable: true,
+                                      cellRenderer: (params: any) => {
+                                        const status = params.value;
+                                        const colorClass = status === 'Passed' ? 'bg-green-100 text-green-800' : 
+                                                          status === 'Deficiencies' ? 'bg-yellow-100 text-yellow-800' : 
+                                                          'bg-red-100 text-red-800';
+                                        return `<span class="px-2 py-1 rounded-full text-xs font-medium ${colorClass}">${status}</span>`;
+                                      }
+                                    },
+                                    { field: 'date', headerName: 'Date', width: 120, filter: 'agDateColumnFilter', sortable: true },
+                                    {
+                                      field: 'actions',
+                                      headerName: 'Actions',
+                                      width: 120,
+                                      sortable: false,
+                                      filter: false,
+                                      resizable: false,
+                                      cellRenderer: () => {
+                                        return `
+                                          <div class="flex items-center gap-2 justify-center py-1">
+                                            <button class="p-1 hover:bg-gray-100 rounded" title="View">
+                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                              </svg>
+                                            </button>
+                                            <button class="p-1 hover:bg-gray-100 rounded" title="Edit">
+                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                              </svg>
+                                            </button>
+                                            <button class="p-1 hover:bg-gray-100 rounded text-red-600" title="Delete">
+                                              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                              </svg>
+                                            </button>
+                                          </div>
+                                        `;
+                                      }
+                                    }
                                   ]}
                                   sampleData={[
                                     { inspectionId: 'PSC-2025-001', vessel: 'MT Atlantic Star', port: 'Hamburg', status: 'Passed', date: '2025-01-15' },
