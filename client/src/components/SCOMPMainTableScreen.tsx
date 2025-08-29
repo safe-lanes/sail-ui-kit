@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { FilterIcon, SearchIcon, PlusIcon } from "lucide-react";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 // Filter Types for the demo
 interface FilterConfig {
@@ -71,6 +74,7 @@ export function SCOMPMainTableScreen({
 }: SCOMPMainTableScreenProps) {
   
   const [filterValues, setFilterValues] = useState<Record<string, string>>({});
+  const [showFiltersState, setShowFilters] = useState(showFilters);
   
   // Default navigation items if none provided
   const defaultNavItems = [
@@ -97,49 +101,40 @@ export function SCOMPMainTableScreen({
     switch (filter.type) {
       case 'search':
         return (
-          <div key={filter.id} className="flex flex-col gap-1">
-            {filter.label && <label className="text-sm font-medium text-gray-700">{filter.label}</label>}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder={filter.placeholder}
-                className={`bg-white border border-gray-300 rounded-md px-3 py-2 pl-8 text-sm ${filter.width || 'min-w-[180px]'}`}
-                value={value}
-                onChange={(e) => setFilterValues({...filterValues, [filter.id]: e.target.value})}
-              />
-              <SearchIcon className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
-            </div>
+          <div key={filter.id} className="relative">
+            <Input
+              className="h-8 pl-10 text-[#8798ad] text-xs w-full"
+              placeholder={filter.placeholder || 'Search'}
+              value={value}
+              onChange={(e) => setFilterValues({...filterValues, [filter.id]: e.target.value})}
+            />
+            <SearchIcon className="w-4 h-4 absolute left-3 top-2 text-[#8798ad]" />
           </div>
         );
         
       case 'select':
         return (
-          <div key={filter.id} className="flex flex-col gap-1">
-            {filter.label && <label className="text-sm font-medium text-gray-700">{filter.label}</label>}
-            <select 
-              className={`bg-white border border-gray-300 rounded-md px-3 py-2 text-sm ${filter.width || 'min-w-[180px]'}`}
-              value={value}
-              onChange={(e) => setFilterValues({...filterValues, [filter.id]: e.target.value})}
-            >
-              <option value="">{filter.placeholder || 'Select...'}</option>
+          <Select key={filter.id} value={value} onValueChange={(value) => setFilterValues({...filterValues, [filter.id]: value})}>
+            <SelectTrigger className="h-8 bg-white text-[#8a8a8a] text-xs w-full">
+              <SelectValue placeholder={filter.placeholder || 'Select'} />
+            </SelectTrigger>
+            <SelectContent>
               {filter.options?.map(option => (
-                <option key={option.value} value={option.value}>{option.label}</option>
+                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
               ))}
-            </select>
-          </div>
+            </SelectContent>
+          </Select>
         );
         
       case 'date':
         return (
-          <div key={filter.id} className="flex flex-col gap-1">
-            {filter.label && <label className="text-sm font-medium text-gray-700">{filter.label}</label>}
-            <input
-              type="date"
-              className={`bg-white border border-gray-300 rounded-md px-3 py-2 text-sm ${filter.width || 'min-w-[180px]'}`}
-              value={value}
-              onChange={(e) => setFilterValues({...filterValues, [filter.id]: e.target.value})}
-            />
-          </div>
+          <Input
+            key={filter.id}
+            type="date"
+            className="h-8 bg-white text-[#8a8a8a] text-xs w-full"
+            value={value}
+            onChange={(e) => setFilterValues({...filterValues, [filter.id]: e.target.value})}
+          />
         );
         
       default:
@@ -219,32 +214,40 @@ export function SCOMPMainTableScreen({
       
       {/* Main Content Area */}
       <main className={`${previewMode ? 'ml-0' : 'ml-[67px]'} p-6 ${previewMode ? 'overflow-hidden' : ''}`} style={{ height: 'calc(600px - 67px)', overflow: previewMode ? 'hidden' : 'auto' }}>
-        {/* Screen Title and Primary Action */}
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">{screenTitle}</h1>
-          {primaryAction && (
-            <button className="inline-flex items-center gap-2 px-4 py-2 bg-[#5DADE2] text-white rounded-md hover:bg-[#4A9BD1] transition-colors text-sm">
-              {primaryAction.icon}
-              {primaryAction.label}
-            </button>
-          )}
+        {/* Screen Title and Filters Button */}
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+          <h1 className="font-['Mulish',Helvetica] font-bold text-black text-lg sm:text-xl lg:text-[22px] px-2 sm:px-4">
+            {screenTitle}
+          </h1>
+          <div className="flex items-center gap-3">
+            {primaryAction && (
+              <button className="inline-flex items-center gap-2 px-4 py-2 bg-[#5DADE2] text-white rounded-md hover:bg-[#4A9BD1] transition-colors text-sm">
+                {primaryAction.icon}
+                {primaryAction.label}
+              </button>
+            )}
+            {filters.length > 0 && (
+              <Button
+                variant="outline"
+                className="h-10 border-[#e1e8ed] text-[#16569e] flex items-center gap-2 px-4 self-start sm:self-auto"
+                onClick={() => setShowFilters(!showFiltersState)}
+              >
+                <FilterIcon className="w-4 h-4" />
+                <span className="text-sm">Filters</span>
+              </Button>
+            )}
+          </div>
         </div>
         
-        {/* Filters Row */}
-        {showFilters && filters.length > 0 && (
-          <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6">
-            <div className="flex items-center gap-2 mb-3">
-              <FilterIcon className="h-4 w-4 text-gray-500" />
-              <span className="text-sm font-medium text-gray-700">Filters</span>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-4">
+        {/* Filters */}
+        {showFiltersState && filters.length > 0 && (
+          <div className="mb-6 px-2 sm:px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-3 mb-4">
               {filters.map(renderFilter)}
             </div>
-            
             <div className="flex justify-end">
               <button 
-                className="text-sm text-gray-500 hover:text-gray-700"
+                className="text-sm text-[#8798ad] hover:text-gray-700"
                 onClick={() => setFilterValues({})}
               >
                 Clear Filters
