@@ -129,6 +129,7 @@ export const ComponentShowcase: React.FC = () => {
   const [location, navigate] = useLocation();
   const [showSAILFormDemo, setShowSAILFormDemo] = useState(false);
   const [currentSection, setCurrentSection] = useState('A');
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   
   // FormTable demo data
   const [trainingData, setTrainingData] = useState<TableRow[]>([
@@ -1447,7 +1448,7 @@ export const ComponentShowcase: React.FC = () => {
                           </div>
                         </div>
                         
-                        <Dialog>
+                        <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
                           <DialogTrigger asChild>
                             <Button className="bg-[#5DADE2] hover:bg-[#4A9BD1] text-white">
                               View SCOMP Main Table Screen Preview
@@ -1464,13 +1465,7 @@ export const ComponentShowcase: React.FC = () => {
                               </DialogHeader>
                               <button
                                 className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
-                                onClick={(e) => {
-                                  const dialog = e.currentTarget.closest('[role="dialog"]');
-                                  const backdrop = dialog?.parentElement;
-                                  if (backdrop) {
-                                    backdrop.click();
-                                  }
-                                }}
+                                onClick={() => setIsPreviewOpen(false)}
                               >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
