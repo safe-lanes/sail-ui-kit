@@ -532,7 +532,10 @@ export const ComponentShowcase: React.FC = () => {
   SafetyRatingBadge,
   TMSAComplianceIndicator,
   OperationsDashboard
-} from "@/components/maritime";`}
+} from "@/components/maritime";
+
+// Layout Components
+import { SCOMPMainTableScreen } from "@/components/SCOMPMainTableScreen";`}
                       </pre>
                     </div>
                     
@@ -579,11 +582,162 @@ export const ComponentShowcase: React.FC = () => {
                       </pre>
                     </div>
 
+                    <div>
+                      <h4 className="font-medium mb-2">SCOMP Main Table Screen Usage:</h4>
+                      <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
+{`<SCOMPMainTableScreen
+  screenTitle="Crew Management"
+  currentModule="Crew Appraisals"
+  showFilters={true}
+  filters={[
+    { 
+      id: 'search', 
+      type: 'search', 
+      placeholder: 'Search crew members...', 
+      label: 'Search' 
+    },
+    { 
+      id: 'rank', 
+      type: 'select', 
+      placeholder: 'Select rank...', 
+      label: 'Rank',
+      options: [
+        { value: 'master', label: 'Master' },
+        { value: 'chief-officer', label: 'Chief Officer' },
+        { value: 'able-seaman', label: 'Able Seaman' }
+      ]
+    },
+    { id: 'dateFrom', type: 'date', label: 'From Date' }
+  ]}
+  columnDefs={[
+    { 
+      field: 'id', 
+      headerName: 'Crew ID', 
+      flex: 1, 
+      minWidth: 120,
+      filter: 'agTextColumnFilter', 
+      sortable: true 
+    },
+    { 
+      field: 'name', 
+      headerName: 'Name', 
+      flex: 2, 
+      minWidth: 160,
+      filter: 'agTextColumnFilter', 
+      sortable: true 
+    },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 120,
+      pinned: 'right',
+      cellRenderer: ActionsCellRenderer
+    }
+  ]}
+  sampleData={crewData}
+  primaryAction={{
+    label: 'Add New Crew',
+    icon: <PlusIcon className="w-4 h-4" />
+  }}
+/>`}
+                      </pre>
+                    </div>
+
+                    <div>
+                      <h4 className="font-medium mb-2">Filter Configuration Options:</h4>
+                      <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
+{`// Filter Types Available:
+const filters = [
+  // Search filter
+  { id: 'search', type: 'search', placeholder: 'Search...', label: 'Search' },
+  
+  // Select dropdown filter  
+  { 
+    id: 'status', 
+    type: 'select', 
+    placeholder: 'Select status...', 
+    label: 'Status',
+    options: [
+      { value: 'active', label: 'Active' },
+      { value: 'inactive', label: 'Inactive' }
+    ]
+  },
+  
+  // Date filter
+  { id: 'dateFrom', type: 'date', label: 'From Date' },
+  { id: 'dateTo', type: 'date', label: 'To Date' }
+];`}
+                      </pre>
+                    </div>
+
+                    <div>
+                      <h4 className="font-medium mb-2">AG Grid Column Configuration:</h4>
+                      <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
+{`// Column Definition Examples:
+const columnDefs = [
+  // Basic text column with responsive flex sizing
+  { 
+    field: 'name', 
+    headerName: 'Name', 
+    flex: 2,           // Takes 2x space vs flex: 1 columns
+    minWidth: 160,     // Minimum width before scrolling
+    filter: 'agTextColumnFilter', 
+    sortable: true,
+    resizable: true 
+  },
+  
+  // Set filter for categorical data
+  { 
+    field: 'rank', 
+    headerName: 'Rank', 
+    flex: 1,
+    minWidth: 130,
+    filter: 'agSetColumnFilter',  // Dropdown with checkboxes
+    sortable: true 
+  },
+  
+  // Date column with date picker filter
+  { 
+    field: 'signOn', 
+    headerName: 'Sign-On Date', 
+    flex: 1,
+    minWidth: 120,
+    filter: 'agDateColumnFilter', 
+    sortable: true 
+  },
+  
+  // Actions column (pinned to right, always visible)
+  {
+    field: 'actions',
+    headerName: 'Actions',
+    width: 120,           // Fixed width, not flex
+    sortable: false,
+    filter: false,
+    resizable: false,
+    pinned: 'right',      // Always visible during scroll
+    cellRenderer: ActionsCellRenderer  // Custom React component
+  }
+];`}
+                      </pre>
+                    </div>
+
+                    <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                      <h4 className="font-medium text-green-900 mb-2">🆕 Recent Improvements & Features</h4>
+                      <div className="text-sm text-green-800 space-y-2">
+                        <p><strong>✅ Fixed AG Grid Filter Popups:</strong> Filter dialogs now have solid white backgrounds with clear readability</p>
+                        <p><strong>✅ Actions Column Pinning:</strong> Actions column stays visible on the right during horizontal scrolling</p>
+                        <p><strong>✅ Responsive Column Sizing:</strong> Flex-based column widths eliminate white space and improve mobile responsiveness</p>
+                        <p><strong>✅ Dialog Close Button:</strong> Proper state management for modal close functionality</p>
+                        <p><strong>✅ ActionsCellRenderer:</strong> React component for view/edit/delete buttons in Actions column</p>
+                        <p><strong>✅ Filter Toggle:</strong> Show/hide filters with smooth transitions and state persistence</p>
+                      </div>
+                    </div>
+
                     <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                       <h4 className="font-medium text-blue-900 mb-2">Component Library Information</h4>
                       <div className="text-sm text-blue-800 space-y-1">
                         <p><strong>Version:</strong> {MARITIME_COMPONENTS_VERSION}</p>
-                        <p><strong>Total Components:</strong> 5 main components</p>
+                        <p><strong>Total Components:</strong> 6 main components (includes SCOMPMainTableScreen)</p>
                         <p><strong>Total Constants:</strong> {VESSEL_TYPES.length + Object.keys(MARITIME_RANKS).length + TMSA_ELEMENTS.length + INCIDENT_TYPES.length + Object.keys(SEVERITY_LEVELS).length} constants and enums</p>
                         <p><strong>Documentation:</strong> All components include TypeScript types and tooltips</p>
                       </div>
