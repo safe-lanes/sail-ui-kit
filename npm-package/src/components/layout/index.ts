@@ -19,9 +19,6 @@ export type {
   SidebarSection,
 } from '../../types/layout';
 
-export type { 
-  SCOMPMainTableScreenProps,
-  FilterConfig
-} from './SCOMPMainTableScreen';
+export type { SCOMPMainTableScreenProps, FilterConfig } from './SCOMPMainTableScreen';
 
 export { ActionsCellRenderer } from './SCOMPMainTableScreen';
