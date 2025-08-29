@@ -1417,14 +1417,31 @@ export const ComponentShowcase: React.FC = () => {
                               View SCOMP Main Table Screen Preview
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-7xl w-[95vw] h-[90vh] p-0">
-                            <DialogHeader className="p-6 pb-4">
-                              <DialogTitle>SCOMP Main Table Screen Preview</DialogTitle>
-                              <DialogDescription>
-                                Interactive preview showing different module configurations and flexible layout options
-                              </DialogDescription>
-                            </DialogHeader>
-                            <div className="px-6 pb-6 space-y-6 overflow-y-auto">
+                          <DialogContent className="max-w-none w-screen h-screen p-0 m-0 rounded-none border-0">
+                            {/* Full Screen Header with Close Button */}
+                            <div className="relative p-6 pb-4 border-b">
+                              <DialogHeader>
+                                <DialogTitle>SCOMP Main Table Screen Preview</DialogTitle>
+                                <DialogDescription>
+                                  Interactive preview showing different module configurations and flexible layout options
+                                </DialogDescription>
+                              </DialogHeader>
+                              <button
+                                className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                onClick={(e) => {
+                                  const dialog = e.currentTarget.closest('[role="dialog"]');
+                                  const backdrop = dialog?.parentElement;
+                                  if (backdrop) {
+                                    backdrop.click();
+                                  }
+                                }}
+                              >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                              </button>
+                            </div>
+                            <div className="px-6 pb-6 space-y-6 overflow-y-auto flex-1">
                               {/* Basic Configuration Example */}
                               <div>
                                 <h5 className="text-sm font-medium mb-3 text-gray-700">Basic Configuration - Crew Management</h5>
