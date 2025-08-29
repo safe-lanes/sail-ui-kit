@@ -154,9 +154,11 @@ export function SCOMPMainTableScreen({
         <div className="flex items-center h-full">
           {/* Logo */}
           <div className="flex items-center ml-4">
-            <div className="w-14 h-10 bg-blue-500 rounded flex items-center justify-center text-white text-xs font-bold">
-              LOGO
-            </div>
+            <img 
+              src="/attached_assets/SAIL logo Transparent_1756440190320.png" 
+              alt="SAIL Logo" 
+              className="w-14 h-10 object-contain"
+            />
           </div>
 
           {/* Navigation Menu */}
