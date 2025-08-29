@@ -1446,6 +1446,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div>
                                 <h5 className="text-sm font-medium mb-3 text-gray-700">Basic Configuration - Crew Management</h5>
                                 <SCOMPMainTableScreen
+                                  previewMode={true}
                                   screenTitle="Crew Management"
                                   filters={[
                                     { id: 'search', type: 'search', placeholder: 'Search crew members...', label: 'Search' },
@@ -1484,6 +1485,7 @@ export const ComponentShowcase: React.FC = () => {
                               <div>
                                 <h5 className="text-sm font-medium mb-3 text-gray-700">Different Module Configuration - Port State Control</h5>
                                 <SCOMPMainTableScreen
+                                  previewMode={true}
                                   currentModule="Port State Control"
                                   navigationItems={[
                                     { id: 'inspections', label: 'Inspections', icon: <div className="w-4 h-4 bg-red-400 rounded"></div>, isActive: true },

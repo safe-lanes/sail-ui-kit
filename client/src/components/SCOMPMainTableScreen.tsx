@@ -53,6 +53,7 @@ interface SCOMPMainTableScreenProps {
   
   // Layout Options
   className?: string;
+  previewMode?: boolean; // For when used in showcase/preview context
 }
 
 export function SCOMPMainTableScreen({
@@ -65,7 +66,8 @@ export function SCOMPMainTableScreen({
   sampleData = [],
   columnDefs = [],
   primaryAction,
-  className = ''
+  className = '',
+  previewMode = false
 }: SCOMPMainTableScreenProps) {
   
   const [filterValues, setFilterValues] = useState<Record<string, string>>({});
@@ -146,7 +148,7 @@ export function SCOMPMainTableScreen({
   };
 
   return (
-    <div className={`w-full h-[600px] bg-gray-50 border border-gray-200 rounded-lg overflow-hidden ${className}`}>
+    <div className={`w-full h-[600px] bg-gray-50 border border-gray-200 rounded-lg overflow-hidden ${previewMode ? 'mb-8' : ''} ${className}`}>
       {/* Top Navigation */}
       <header className="w-full h-[67px] bg-[#F1F1F1] border-b-2 border-[#5DADE2]">
         <div className="flex items-center h-full">
@@ -193,7 +195,7 @@ export function SCOMPMainTableScreen({
       </header>
       
       {/* Left Sidebar */}
-      <aside className="absolute left-0 w-[67px] bg-[#16569e]" style={{ top: '67px', height: 'calc(600px - 67px)' }}>
+      <aside className={`${previewMode ? 'relative' : 'absolute left-0'} w-[67px] bg-[#16569e] float-left`} style={{ top: previewMode ? '0' : '67px', height: 'calc(600px - 67px)' }}>
         {/* Top Section */}
         <div className="w-full h-[79px] flex flex-col items-center justify-center bg-[#52baf3]">
           <div className="w-6 h-6 mb-1">{sidebarItemsToShow[0]?.icon}</div>
@@ -214,7 +216,7 @@ export function SCOMPMainTableScreen({
       </aside>
       
       {/* Main Content Area */}
-      <main className="ml-[67px] p-6" style={{ height: 'calc(600px - 67px)', overflow: 'auto' }}>
+      <main className={`${previewMode ? 'ml-0' : 'ml-[67px]'} p-6 ${previewMode ? 'overflow-hidden' : ''}`} style={{ height: 'calc(600px - 67px)', overflow: previewMode ? 'hidden' : 'auto' }}>
         {/* Screen Title and Primary Action */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold text-gray-900">{screenTitle}</h1>
