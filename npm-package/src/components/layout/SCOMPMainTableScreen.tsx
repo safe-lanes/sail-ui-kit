@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FilterIcon, SearchIcon, PlusIcon } from "lucide-react";
+import { FilterIcon, SearchIcon } from "lucide-react";
 
 // Filter Types
 export interface FilterConfig {
@@ -35,7 +35,7 @@ export interface SCOMPMainTableScreenProps {
   filters?: FilterConfig[];
   
   // Table Configuration - AG Grid ColDef compatible
-  sampleData?: any[];
+  sampleData?: Record<string, unknown>[];
   columnDefs?: Array<{
     field: string;
     headerName: string;
@@ -46,8 +46,8 @@ export interface SCOMPMainTableScreenProps {
     sortable?: boolean;
     resizable?: boolean;
     pinned?: 'left' | 'right';
-    cellRenderer?: any;
-    cellStyle?: any;
+    cellRenderer?: React.ComponentType<unknown> | string;
+    cellStyle?: Record<string, unknown> | ((params: unknown) => Record<string, unknown>);
   }>;
   
   // Actions
@@ -62,7 +62,7 @@ export interface SCOMPMainTableScreenProps {
 }
 
 // Actions Cell Renderer for AG Grid Actions Column
-export const ActionsCellRenderer = (props: any) => {
+export const ActionsCellRenderer = (props: { data?: { id?: string | number } }) => {
   return (
     <div className="flex items-center gap-2 justify-center py-1">
       <button 
@@ -133,7 +133,7 @@ export function SCOMPMainTableScreen({
   const navItemsToShow = navigationItems.length > 0 ? navigationItems : defaultNavItems;
   const sidebarItemsToShow = sidebarItems.length > 0 ? sidebarItems : defaultSidebarItems;
   
-  const renderFilter = (filter: FilterConfig, index: number) => {
+  const renderFilter = (filter: FilterConfig) => {
     const value = filterValues[filter.id] || '';
     
     switch (filter.type) {
