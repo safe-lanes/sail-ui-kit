@@ -3,6 +3,7 @@
 // Standard Navigation Components
 export { StandardTopNavigationBar } from './StandardTopNavigationBar';
 export { StandardLeftSidebar } from './StandardLeftSidebar';
+export { SCOMPMainTableScreen } from './SCOMPMainTableScreen';
 
 // TMSA Layout Components (mentioned in README)
 export { TMSAAppLayout } from './TMSAAppLayout';
@@ -17,3 +18,9 @@ export type {
   NavigationItem,
   SidebarSection,
 } from '../../types/layout';
+
+export type { 
+  SCOMPMainTableScreenProps,
+  FilterConfig,
+  ColumnConfig 
+} from './SCOMPMainTableScreen';

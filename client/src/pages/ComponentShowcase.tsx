@@ -16,7 +16,8 @@ import {
   MousePointer,
   Layout,
   MessageSquare,
-  Layers
+  Layers,
+  Plus as PlusIcon
 } from "lucide-react";
 import { 
   Alert, 
@@ -72,6 +73,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { StandardNavigationBar } from "@/components/StandardNavigationBar";
+import { SCOMPMainTableScreen } from "@/components/SCOMPMainTableScreen";
 import { 
   VesselStatusIndicator,
   SafetyRatingBadge,
@@ -1384,6 +1386,114 @@ export const ComponentShowcase: React.FC = () => {
                         <Skeleton className="h-4 w-[250px]" />
                         <Skeleton className="h-4 w-[200px]" />
                         <Skeleton className="h-4 w-[150px]" />
+                      </div>
+                    </div>
+                    <Separator />
+
+                    {/* SCOMP Main Table Screen */}
+                    <div>
+                      <h4 className="font-medium mb-3">SCOMP Main Table Screen</h4>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Flexible main table screen layout with configurable navigation, filters, and AG Grid integration. 
+                        Supports different module configurations and responsive design.
+                      </p>
+                      
+                      {/* Basic Configuration Example */}
+                      <div className="mb-6">
+                        <h5 className="text-sm font-medium mb-3 text-gray-700">Basic Configuration</h5>
+                        <SCOMPMainTableScreen
+                          screenTitle="Crew Management"
+                          filters={[
+                            { id: 'search', type: 'search', placeholder: 'Search crew members...', label: 'Search' },
+                            { 
+                              id: 'rank', 
+                              type: 'select', 
+                              placeholder: 'Select rank...', 
+                              label: 'Rank',
+                              options: [
+                                { value: 'master', label: 'Master' },
+                                { value: 'chief-engineer', label: 'Chief Engineer' },
+                                { value: 'able-seaman', label: 'Able Seaman' }
+                              ]
+                            },
+                            { id: 'vessel', type: 'select', placeholder: 'Select vessel...', label: 'Vessel' }
+                          ]}
+                          columnDefs={[
+                            { field: 'id', headerName: 'Crew ID' },
+                            { field: 'name', headerName: 'Name' },
+                            { field: 'rank', headerName: 'Rank' },
+                            { field: 'vessel', headerName: 'Vessel' }
+                          ]}
+                          sampleData={[
+                            { id: '2025-05-14', name: 'James Michael', rank: 'Master', vessel: 'MT Sail One' },
+                            { id: '2025-03-12', name: 'Anna Marie Johnson', rank: 'Chief Engineer', vessel: 'MT Sail Ten' },
+                            { id: '2025-02-15', name: 'David Lee Brown', rank: 'Able Seaman', vessel: 'MT Sail Two' }
+                          ]}
+                          primaryAction={{
+                            label: 'Add New Crew',
+                            icon: <PlusIcon className="w-4 h-4" />
+                          }}
+                        />
+                      </div>
+
+                      {/* Different Module Configuration Example */}
+                      <div className="mb-6">
+                        <h5 className="text-sm font-medium mb-3 text-gray-700">Different Module Configuration - Port State Control</h5>
+                        <SCOMPMainTableScreen
+                          currentModule="Port State Control"
+                          navigationItems={[
+                            { id: 'inspections', label: 'Inspections', icon: <div className="w-4 h-4 bg-red-400 rounded"></div>, isActive: true },
+                            { id: 'certificates', label: 'Certificates', icon: <div className="w-4 h-4 bg-yellow-400 rounded"></div>, isActive: false },
+                            { id: 'deficiencies', label: 'Deficiencies', icon: <div className="w-4 h-4 bg-orange-400 rounded"></div>, isActive: false },
+                            { id: 'reports', label: 'Reports', icon: <div className="w-4 h-4 bg-blue-400 rounded"></div>, isActive: false }
+                          ]}
+                          screenTitle="Port State Control Inspections"
+                          filters={[
+                            { id: 'search', type: 'search', placeholder: 'Search inspections...', label: 'Search' },
+                            { 
+                              id: 'status', 
+                              type: 'select', 
+                              placeholder: 'Select status...', 
+                              label: 'Status',
+                              options: [
+                                { value: 'passed', label: 'Passed' },
+                                { value: 'deficiencies', label: 'Deficiencies Found' },
+                                { value: 'detained', label: 'Detained' }
+                              ]
+                            },
+                            { id: 'dateFrom', type: 'date', label: 'From Date' },
+                            { id: 'dateTo', type: 'date', label: 'To Date' }
+                          ]}
+                          columnDefs={[
+                            { field: 'inspectionId', headerName: 'Inspection ID' },
+                            { field: 'vessel', headerName: 'Vessel' },
+                            { field: 'port', headerName: 'Port' },
+                            { field: 'status', headerName: 'Status' },
+                            { field: 'date', headerName: 'Date' }
+                          ]}
+                          sampleData={[
+                            { inspectionId: 'PSC-2025-001', vessel: 'MT Atlantic Star', port: 'Hamburg', status: 'Passed', date: '2025-01-15' },
+                            { inspectionId: 'PSC-2025-002', vessel: 'MT Pacific Wave', port: 'Rotterdam', status: 'Deficiencies', date: '2025-01-20' }
+                          ]}
+                          primaryAction={{
+                            label: 'New Inspection',
+                            icon: <PlusIcon className="w-4 h-4" />
+                          }}
+                        />
+                      </div>
+
+                      {/* Features Information */}
+                      <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h5 className="text-sm font-medium text-blue-900 mb-2">Component Features</h5>
+                        <div className="text-sm text-blue-800 space-y-2">
+                          <div><strong>Flexible Navigation:</strong> Configurable top navigation with 4-8+ module icons</div>
+                          <div><strong>Dynamic Sidebar:</strong> Customizable left sidebar with sub-module navigation</div>
+                          <div><strong>Configurable Filters:</strong> Support for search, select, date, and number filters</div>
+                          <div><strong>AG Grid Integration:</strong> Ready for AG Grid Enterprise features (sorting, filtering, export)</div>
+                          <div><strong>Responsive Design:</strong> Mobile-friendly layout with proper breakpoints</div>
+                          <div><strong>Consistent Styling:</strong> Maritime-themed colors and professional appearance</div>
+                          <div><strong>Action Support:</strong> Primary action buttons and context menus</div>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
