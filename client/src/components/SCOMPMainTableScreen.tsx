@@ -155,7 +155,7 @@ export function SCOMPMainTableScreen({
           {/* Logo */}
           <div className="flex items-center ml-4">
             <img 
-              src="/attached_assets/SAIL logo Transparent_1756440190320.png" 
+              src="/figmaAssets/sail-logo.png" 
               alt="SAIL Logo" 
               className="w-14 h-10 object-contain"
             />
