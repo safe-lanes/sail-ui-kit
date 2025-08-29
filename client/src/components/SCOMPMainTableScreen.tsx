@@ -3,6 +3,8 @@ import { FilterIcon, SearchIcon, PlusIcon } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import AgGridTable from '@/components/AgGridTable';
+import { ColDef, GridReadyEvent } from 'ag-grid-enterprise';
 
 // Filter Types for the demo
 interface FilterConfig {
@@ -14,12 +16,8 @@ interface FilterConfig {
   width?: string;
 }
 
-// Demo Column Configuration
-interface ColumnConfig {
-  field: string;
-  headerName: string;
-  width?: number;
-}
+// Column Configuration using AG Grid ColDef
+type ColumnConfig = ColDef;
 
 // Main Table Screen Props for the demo
 interface SCOMPMainTableScreenProps {
@@ -46,7 +44,7 @@ interface SCOMPMainTableScreenProps {
   
   // Table Configuration
   sampleData?: any[];
-  columnDefs?: ColumnConfig[];
+  columnDefs?: ColDef[];
   
   // Actions
   primaryAction?: {
@@ -260,63 +258,39 @@ export function SCOMPMainTableScreen({
           </div>
         )}
         
-        {/* AG Grid Table Placeholder */}
-        <div className="bg-white rounded-lg border border-gray-200">
-          <div className="p-4 border-b bg-gray-50">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-700">Data Table (AG Grid)</span>
-              <span className="text-xs text-gray-500">
-                {sampleData.length} records
-              </span>
-            </div>
-          </div>
-          
-          {/* Table Header */}
-          {columnDefs.length > 0 && (
-            <div className="grid gap-4 p-4 border-b bg-gray-50" style={{ gridTemplateColumns: `repeat(${columnDefs.length}, 1fr)` }}>
-              {columnDefs.map((col, idx) => (
-                <div key={idx} className="text-sm font-medium text-gray-700">
-                  {col.headerName}
+        {/* AG Grid Table */}
+        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          {sampleData.length > 0 && columnDefs.length > 0 ? (
+            <AgGridTable
+              rowData={sampleData}
+              columnDefs={columnDefs}
+              autoHeight={true}
+              maxHeight="600px"
+              minHeight="300px"
+              theme="alpine"
+              enableSideBar={true}
+              enableStatusBar={true}
+              enableRowGrouping={false}
+              enablePivoting={false}
+              enableAdvancedFilter={false}
+              rowSelection={false}
+              className="ag-theme-alpine"
+            />
+          ) : (
+            <div className="p-8 text-center text-gray-500 min-h-[300px] flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gray-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
                 </div>
-              ))}
-            </div>
-          )}
-          
-          {/* Table Data */}
-          <div className="min-h-[200px]">
-            {sampleData.length > 0 && columnDefs.length > 0 ? (
-              <div className="divide-y divide-gray-200">
-                {sampleData.slice(0, 5).map((row, idx) => (
-                  <div key={idx} className="grid gap-4 p-4 hover:bg-gray-50" style={{ gridTemplateColumns: `repeat(${columnDefs.length}, 1fr)` }}>
-                    {columnDefs.map((col, colIdx) => (
-                      <div key={colIdx} className="text-sm text-gray-600">
-                        {row[col.field] || '-'}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-                {sampleData.length > 5 && (
-                  <div className="p-4 text-center text-xs text-gray-400">
-                    ... and {sampleData.length - 5} more records
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="p-8 text-center text-gray-500">
-                <div className="mb-4">
-                  <div className="w-16 h-16 bg-gray-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="font-medium">AG Grid Enterprise Table</p>
-                <p className="text-xs text-gray-400 mt-2">
-                  Configurable data table with advanced features like filtering, sorting, grouping, and export
+                <p className="font-medium text-gray-700">AG Grid Enterprise Table</p>
+                <p className="text-xs text-gray-400 mt-2 max-w-sm">
+                  Enterprise data table with advanced features like filtering, sorting, grouping, pivoting, and export capabilities. Configure columnDefs and sampleData props to display data.
                 </p>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </main>
     </div>
