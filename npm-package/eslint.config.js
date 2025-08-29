@@ -4,7 +4,7 @@ import tseslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
-export default tseslint.config(
+export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -14,6 +14,7 @@ export default tseslint.config(
         ...globals.browser,
         ...globals.node,
       },
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -30,8 +31,10 @@ export default tseslint.config(
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-expressions': 'off',
       'react/prop-types': 'off',
       'no-unused-vars': 'off',
+      'no-unused-expressions': 'off',
     },
     settings: {
       react: {
@@ -41,5 +44,5 @@ export default tseslint.config(
   },
   {
     ignores: ['dist/', 'node_modules/', '*.config.js'],
-  }
-);
+  },
+];
