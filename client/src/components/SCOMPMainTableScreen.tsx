@@ -241,19 +241,21 @@ export function SCOMPMainTableScreen({
         
         {/* Filters */}
         {showFiltersState && filters.length > 0 && (
-          <div className="mb-6 px-2 sm:px-4">
-            <div className="flex items-end gap-3">
+          <div className="mb-6">
+            <div className="flex items-end gap-3 px-2 sm:px-4">
               <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-3">
                 {filters.map(renderFilter)}
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 text-[#8798ad] hover:text-gray-700 border-[#e1e8ed] text-xs"
-                onClick={() => setFilterValues({})}
-              >
-                Clear Filters
-              </Button>
+              <div className="self-start sm:self-auto">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 text-[#8798ad] hover:text-gray-700 border-[#e1e8ed] text-xs"
+                  onClick={() => setFilterValues({})}
+                >
+                  Clear Filters
+                </Button>
+              </div>
             </div>
           </div>
         )}
