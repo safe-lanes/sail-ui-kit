@@ -89,3 +89,41 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+/* AG Grid Filter Popup Styling */
+.ag-theme-alpine .ag-filter-wrapper,
+.ag-theme-alpine .ag-popup,
+.ag-theme-alpine .ag-filter-panel {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  z-index: 1000 !important;
+}
+
+.ag-theme-alpine .ag-filter-apply-panel {
+  background-color: white !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+.ag-theme-alpine .ag-set-filter-list {
+  background-color: white !important;
+}
+
+.ag-theme-alpine .ag-virtual-list-item {
+  background-color: white !important;
+}
+
+.ag-theme-alpine .ag-set-filter-item {
+  background-color: white !important;
+  color: #374151 !important;
+}
+
+.ag-theme-alpine .ag-set-filter-item:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.ag-theme-alpine .ag-input-field-input {
+  background-color: white !important;
+  border: 1px solid #d1d5db !important;
+  color: #374151 !important;
+}
