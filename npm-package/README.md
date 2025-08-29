@@ -35,8 +35,28 @@ Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules
 ## Installation
 
 ```bash
-npm install scomp-ui@1.0.6
+npm install scomp-ui@1.0.2
 ```
+
+## Development & Build Process
+
+This package includes comprehensive quality checks that run automatically during build:
+
+```bash
+# Development workflow
+npm run dev          # Watch mode for development
+npm run quality      # Run all quality checks (type-check + lint + format)
+npm run build        # Quality checks + production build
+npm run prepare      # Runs automatically before publishing
+```
+
+**Build Process:**
+- **Type Check**: TypeScript compilation validation
+- **Lint**: ESLint code quality and style checks
+- **Format Check**: Prettier code formatting validation
+- **Build**: Rollup bundle creation (only after quality checks pass)
+
+The build command ensures that only high-quality, error-free code gets packaged and published.
 
 ## Important: CSS Setup Required
 
