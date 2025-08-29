@@ -2190,7 +2190,9 @@ import {
   LeftSidebar,
   ModuleNavigator,
   StandardTopNavigationBar,
-  StandardLeftSidebar
+  StandardLeftSidebar,
+  SCOMPMainTableScreen,
+  ActionsCellRenderer
 } from 'scomp';
 import 'scomp/dist/index.css';
 
@@ -2312,6 +2314,63 @@ function ModuleNavigatorExample() {
       }}
       layout="grid" // or "list"
       showDescriptions={true}
+    />
+  );
+}
+
+// SCOMPMainTableScreen - Full-Screen Table Layout
+function MainTableScreenExample() {
+  const navigationItems = [
+    { id: 'crew', label: 'Crew List', icon: '👥', isActive: true },
+    { id: 'appraisals', label: 'Appraisals', icon: '📋', isActive: false },
+    { id: 'reports', label: 'Reports', icon: '📊', isActive: false }
+  ];
+
+  const filters = [
+    { id: 'search', type: 'search', placeholder: 'Search crew members...' },
+    { 
+      id: 'rank', 
+      type: 'select', 
+      placeholder: 'Select rank...', 
+      options: [
+        { value: 'master', label: 'Master' },
+        { value: 'chief-officer', label: 'Chief Officer' }
+      ]
+    },
+    { id: 'date', type: 'date', label: 'From Date' }
+  ];
+
+  const columnDefs = [
+    { field: 'id', headerName: 'Crew ID', flex: 1, minWidth: 120 },
+    { field: 'name', headerName: 'Name', flex: 2, minWidth: 160 },
+    { field: 'rank', headerName: 'Rank', flex: 1, minWidth: 130 },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 120,
+      pinned: 'right',
+      cellRenderer: ActionsCellRenderer
+    }
+  ];
+
+  const sampleData = [
+    { id: 'CREW001', name: 'James Wilson', rank: 'Master' },
+    { id: 'CREW002', name: 'Maria Rodriguez', rank: 'Chief Officer' }
+  ];
+
+  return (
+    <SCOMPMainTableScreen
+      currentModule="Crew Management"
+      navigationItems={navigationItems}
+      screenTitle="Crew Management"
+      showFilters={true}
+      filters={filters}
+      columnDefs={columnDefs}
+      sampleData={sampleData}
+      primaryAction={{
+        label: 'Add New Crew',
+        icon: '➕'
+      }}
     />
   );
 }

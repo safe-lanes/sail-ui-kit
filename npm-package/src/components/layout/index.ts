@@ -21,6 +21,7 @@ export type {
 
 export type { 
   SCOMPMainTableScreenProps,
-  FilterConfig,
-  ColumnConfig 
+  FilterConfig
 } from './SCOMPMainTableScreen';
+
+export { ActionsCellRenderer } from './SCOMPMainTableScreen';

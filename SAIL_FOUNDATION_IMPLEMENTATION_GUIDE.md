@@ -449,6 +449,345 @@ function App() {
 }
 ```
 
+### 4. SCOMPMainTableScreen
+
+A comprehensive full-screen table layout component with integrated navigation, dynamic filtering, and AG Grid Enterprise support. Designed for data-heavy maritime applications like crew management, inspections, audits, and compliance tracking.
+
+#### Features
+- **Full-screen Layout**: Complete screen layout with integrated top navigation and left sidebar
+- **Dynamic Filtering**: Configurable filters (search, select, date) with toggle show/hide functionality
+- **AG Grid Integration**: Enterprise-grade data table with advanced features
+- **Responsive Design**: Flex-based column sizing and mobile-optimized layout
+- **Actions Column**: Pinned actions column with view/edit/delete buttons
+- **Multi-Module Support**: Configurable navigation for different TMSA modules
+- **Maritime Theming**: Consistent colors (#5DADE2, #52baf3, #16569e) across all components
+- **Filter Popup Transparency Fix**: Solid white backgrounds for clear readability
+- **TypeScript Support**: Fully typed props and configuration interfaces
+
+#### Props Interface
+```typescript
+export interface SCOMPMainTableScreenProps {
+  // Navigation Configuration
+  currentModule?: string;
+  navigationItems?: Array<{
+    id: string;
+    label: string;
+    icon: React.ReactNode;
+    isActive?: boolean;
+  }>;
+  
+  // Sidebar Configuration  
+  sidebarItems?: Array<{
+    icon: React.ReactNode;
+    label: string;
+    isActive?: boolean;
+  }>;
+  
+  // Main Content Configuration
+  screenTitle: string;
+  showFilters?: boolean;
+  filters?: FilterConfig[];
+  
+  // Table Configuration - AG Grid ColDef compatible
+  sampleData?: any[];
+  columnDefs?: Array<{
+    field: string;
+    headerName: string;
+    width?: number;
+    flex?: number;           // Responsive sizing
+    minWidth?: number;       // Minimum width before scroll
+    filter?: string | boolean;
+    sortable?: boolean;
+    resizable?: boolean;
+    pinned?: 'left' | 'right';  // Pin columns
+    cellRenderer?: any;      // Custom cell renderers
+    cellStyle?: any;
+  }>;
+  
+  // Actions
+  primaryAction?: {
+    label: string;
+    icon?: React.ReactNode;
+  };
+  
+  // Layout Options
+  className?: string;
+  previewMode?: boolean;
+}
+
+export interface FilterConfig {
+  id: string;
+  type: 'search' | 'select' | 'date' | 'dateRange' | 'number';
+  placeholder?: string;
+  label?: string;
+  options?: Array<{ value: string; label: string }>;
+  width?: string;
+}
+```
+
+#### Usage Example - Basic Implementation
+```tsx
+import React from 'react';
+import { SCOMPMainTableScreen, ActionsCellRenderer } from 'sail-ui-kit';
+import 'sail-ui-kit/dist/index.css'; // Required for styling
+import { Users, FileText, Settings, PlusIcon } from 'lucide-react';
+
+const CrewManagementScreen = () => {
+  const navigationItems = [
+    { id: 'crew', label: 'Crew List', icon: <Users size={16} />, isActive: true },
+    { id: 'appraisals', label: 'Appraisals', icon: <FileText size={16} />, isActive: false },
+    { id: 'reports', label: 'Reports', icon: <FileText size={16} />, isActive: false },
+    { id: 'settings', label: 'Settings', icon: <Settings size={16} />, isActive: false }
+  ];
+
+  const filters = [
+    { id: 'search', type: 'search', placeholder: 'Search crew members...', label: 'Search' },
+    { 
+      id: 'rank', 
+      type: 'select', 
+      placeholder: 'Select rank...', 
+      label: 'Rank',
+      options: [
+        { value: 'master', label: 'Master' },
+        { value: 'chief-officer', label: 'Chief Officer' },
+        { value: 'able-seaman', label: 'Able Seaman' }
+      ]
+    },
+    { id: 'dateFrom', type: 'date', label: 'From Date' }
+  ];
+
+  const columnDefs = [
+    { 
+      field: 'id', 
+      headerName: 'Crew ID', 
+      flex: 1, 
+      minWidth: 120,
+      filter: 'agTextColumnFilter', 
+      sortable: true 
+    },
+    { 
+      field: 'name', 
+      headerName: 'Name', 
+      flex: 2, 
+      minWidth: 160,
+      filter: 'agTextColumnFilter', 
+      sortable: true 
+    },
+    { 
+      field: 'rank', 
+      headerName: 'Rank', 
+      flex: 1, 
+      minWidth: 130,
+      filter: 'agSetColumnFilter', 
+      sortable: true 
+    },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 120,
+      sortable: false,
+      filter: false,
+      resizable: false,
+      pinned: 'right',  // Always visible during horizontal scroll
+      cellRenderer: ActionsCellRenderer  // Built-in actions component
+    }
+  ];
+
+  const sampleData = [
+    { id: 'CREW001', name: 'James Wilson', rank: 'Master' },
+    { id: 'CREW002', name: 'Maria Rodriguez', rank: 'Chief Officer' },
+    { id: 'CREW003', name: 'Ahmed Al-Rashid', rank: 'Able Seaman' }
+  ];
+
+  return (
+    <SCOMPMainTableScreen
+      currentModule="Crew Management"
+      navigationItems={navigationItems}
+      screenTitle="Crew Management"
+      showFilters={true}
+      filters={filters}
+      columnDefs={columnDefs}
+      sampleData={sampleData}
+      primaryAction={{
+        label: 'Add New Crew',
+        icon: <PlusIcon size={16} />
+      }}
+    />
+  );
+};
+```
+
+#### Advanced Usage - Custom Module Configuration
+```tsx
+import { SCOMPMainTableScreen } from 'sail-ui-kit';
+import { Shield, AlertTriangle, CheckCircle, FileText } from 'lucide-react';
+
+const PortStateControlScreen = () => {
+  const customNavigationItems = [
+    { id: 'inspections', label: 'Inspections', icon: <Shield size={16} />, isActive: true },
+    { id: 'certificates', label: 'Certificates', icon: <CheckCircle size={16} />, isActive: false },
+    { id: 'deficiencies', label: 'Deficiencies', icon: <AlertTriangle size={16} />, isActive: false },
+    { id: 'reports', label: 'Reports', icon: <FileText size={16} />, isActive: false }
+  ];
+
+  const advancedFilters = [
+    { id: 'search', type: 'search', placeholder: 'Search inspections...', label: 'Search' },
+    { 
+      id: 'port', 
+      type: 'select', 
+      placeholder: 'Select port...', 
+      label: 'Port',
+      options: [
+        { value: 'hamburg', label: 'Hamburg' },
+        { value: 'rotterdam', label: 'Rotterdam' },
+        { value: 'singapore', label: 'Singapore' }
+      ]
+    },
+    { 
+      id: 'status', 
+      type: 'select', 
+      placeholder: 'Select status...', 
+      label: 'Status',
+      options: [
+        { value: 'passed', label: 'Passed' },
+        { value: 'deficiencies', label: 'Deficiencies Found' },
+        { value: 'detained', label: 'Detained' }
+      ]
+    },
+    { id: 'dateFrom', type: 'date', label: 'From Date' },
+    { id: 'dateTo', type: 'date', label: 'To Date' }
+  ];
+
+  const columnDefs = [
+    { field: 'inspectionId', headerName: 'Inspection ID', flex: 1.5, minWidth: 140, filter: 'agTextColumnFilter', sortable: true },
+    { field: 'vessel', headerName: 'Vessel', flex: 2, minWidth: 160, filter: 'agTextColumnFilter', sortable: true },
+    { field: 'port', headerName: 'Port', flex: 1, minWidth: 120, filter: 'agSetColumnFilter', sortable: true },
+    { 
+      field: 'status', 
+      headerName: 'Status', 
+      flex: 1, 
+      minWidth: 120,
+      filter: 'agSetColumnFilter', 
+      sortable: true,
+      cellRenderer: (params: any) => {
+        const status = params.value;
+        const colorClass = status === 'Passed' ? 'bg-green-100 text-green-800' : 
+                          status === 'Deficiencies' ? 'bg-yellow-100 text-yellow-800' : 
+                          'bg-red-100 text-red-800';
+        return `<span class="inline-flex px-2 py-1 rounded-full text-xs font-medium ${colorClass}">${status}</span>`;
+      }
+    },
+    { field: 'date', headerName: 'Date', flex: 1, minWidth: 110, filter: 'agDateColumnFilter', sortable: true },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 120,
+      sortable: false,
+      filter: false,
+      resizable: false,
+      pinned: 'right',
+      cellRenderer: ActionsCellRenderer
+    }
+  ];
+
+  return (
+    <SCOMPMainTableScreen
+      currentModule="Port State Control"
+      navigationItems={customNavigationItems}
+      screenTitle="Port State Control Inspections"
+      showFilters={true}
+      filters={advancedFilters}
+      columnDefs={columnDefs}
+      sampleData={inspectionData}
+      primaryAction={{
+        label: 'New Inspection',
+        icon: <PlusIcon size={16} />
+      }}
+    />
+  );
+};
+```
+
+#### ActionsCellRenderer Component
+The built-in ActionsCellRenderer provides standard view/edit/delete buttons:
+
+```tsx
+// Built-in component - no import needed, included with SCOMPMainTableScreen
+{
+  field: 'actions',
+  headerName: 'Actions',
+  width: 120,
+  sortable: false,
+  filter: false,
+  resizable: false,
+  pinned: 'right',
+  cellRenderer: ActionsCellRenderer  // Provides view/edit/delete buttons
+}
+```
+
+#### Recent Improvements (Latest Version)
+- **✅ Filter Popup Transparency Fix**: AG Grid filter dialogs now have solid white backgrounds with clear text readability
+- **✅ Actions Column Pinning**: Actions column stays visible on the right during horizontal scrolling
+- **✅ Responsive Column Sizing**: Flex-based column widths eliminate white space and improve mobile responsiveness
+- **✅ Dialog Close Button**: Proper state management for modal close functionality in Component Showcase
+- **✅ ActionsCellRenderer**: React component for consistent view/edit/delete buttons across all tables
+- **✅ Filter Toggle**: Smooth show/hide filters with state persistence
+
+#### AG Grid Integration Requirements
+To use SCOMPMainTableScreen with actual AG Grid functionality, ensure you have:
+
+```bash
+# Install AG Grid Enterprise
+npm install ag-grid-enterprise ag-grid-react
+```
+
+```tsx
+// In your implementation file
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-enterprise';
+
+// Replace the table placeholder with actual AgGridReact component
+<AgGridReact
+  rowData={sampleData}
+  columnDefs={columnDefs}
+  defaultColDef={{
+    sortable: true,
+    filter: true,
+    resizable: true,
+    floatingFilter: true
+  }}
+  sideBar={{
+    toolPanels: ['columns', 'filters'],
+    defaultToolPanel: null
+  }}
+  className="ag-theme-alpine"
+/>
+```
+
+#### CSS Requirements for Filter Popup Fix
+Include this CSS in your application for proper filter popup styling:
+
+```css
+/* AG Grid Filter Popup Styling */
+.ag-theme-alpine .ag-filter-wrapper,
+.ag-theme-alpine .ag-popup,
+.ag-theme-alpine .ag-filter-panel {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  z-index: 1000 !important;
+}
+
+.ag-theme-alpine .ag-set-filter-item {
+  background-color: white !important;
+  color: #374151 !important;
+}
+
+.ag-theme-alpine .ag-set-filter-item:hover {
+  background-color: #f3f4f6 !important;
+}
+```
+
 ## Implementation Guidelines
 
 ### 1. Project Setup
@@ -469,6 +808,8 @@ import 'sail-ui-kit/dist/index.css';
 import { 
   StandardTopNavigationBar, 
   StandardLeftSidebar,
+  SCOMPMainTableScreen,
+  ActionsCellRenderer,
   SAILForm,
   ExampleSAILForm,
   Button,
@@ -478,7 +819,9 @@ import {
   type NavigationItem,
   type SidebarSection,
   type SAILFormProps,
-  type SAILFormSection
+  type SAILFormSection,
+  type SCOMPMainTableScreenProps,
+  type FilterConfig
 } from 'sail-ui-kit';
 
 // CSS import (if not in root component)
@@ -999,10 +1342,14 @@ For issues, feature requests, or contributions:
 - Initial release
 - StandardTopNavigationBar component  
 - StandardLeftSidebar component
+- SCOMPMainTableScreen component with AG Grid Enterprise integration
+- ActionsCellRenderer for standardized table actions
 - SAIL Form system with popup modals and stepper navigation
 - ExampleSAILForm with complete crew appraisal implementation
 - SAILForm, SAILFormField, and related form components
 - Interactive maritime tables and form elements
+- Filter popup transparency fixes for better readability
+- Responsive flex-based column sizing
 - TypeScript support
 - Full documentation and examples
 
