@@ -1417,7 +1417,7 @@ export const ComponentShowcase: React.FC = () => {
                               View SCOMP Main Table Screen Preview
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-none w-screen h-screen p-0 m-0 rounded-none border-0">
+                          <DialogContent className="max-w-none w-screen h-screen p-0 m-0 rounded-none border-0 [&>button]:hidden">
                             {/* Full Screen Header with Close Button */}
                             <div className="relative p-6 pb-4 border-b">
                               <DialogHeader>
