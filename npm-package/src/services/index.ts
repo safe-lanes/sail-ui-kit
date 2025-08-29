@@ -147,13 +147,9 @@ export const Validators = {
 // Module integration helpers
 export const ModuleIntegration = {
   isModuleAvailable: async (): Promise<boolean> => {
-    try {
-      // const modules = await SHARED_SERVICES.api.get<Array<{ code: string; isActive: boolean }>>("/modules");
-      // return modules.some((module: { code: string; isActive: boolean }) => module.code === moduleCode && module.isActive);
-      return false; // Placeholder until services are implemented
-    } catch {
-      return false;
-    }
+    // const modules = await SHARED_SERVICES.api.get<Array<{ code: string; isActive: boolean }>>("/modules");
+    // return modules.some((module: { code: string; isActive: boolean }) => module.code === moduleCode && module.isActive);
+    return false; // Placeholder until services are implemented
   },
 
   getModuleConfig: async (): Promise<Record<string, unknown>> => {

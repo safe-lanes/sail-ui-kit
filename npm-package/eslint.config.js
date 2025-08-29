@@ -1,12 +1,12 @@
 import js from '@eslint/js';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 export default [
   js.configs.recommended,
-  ...tseslint.configs.recommended,
   {
     files: ['src/**/*.{ts,tsx}'],
     languageOptions: {
@@ -14,7 +14,7 @@ export default [
         ...globals.browser,
         ...globals.node,
       },
-      parser: tseslint.parser,
+      parser: tsParser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -24,6 +24,7 @@ export default [
       },
     },
     plugins: {
+      '@typescript-eslint': tsPlugin,
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
     },
@@ -31,10 +32,8 @@ export default [
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-expressions': 'off',
       'react/prop-types': 'off',
       'no-unused-vars': 'off',
-      'no-unused-expressions': 'off',
     },
     settings: {
       react: {
