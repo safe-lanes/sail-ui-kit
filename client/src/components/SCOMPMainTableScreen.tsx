@@ -152,9 +152,17 @@ export function SCOMPMainTableScreen({
       {/* Top Navigation */}
       <header className="w-full h-[67px] bg-[#F1F1F1] border-b-2 border-[#5DADE2]">
         <div className="flex items-center h-full">
-
+          {/* Logo positioned above left sidebar */}
+          <div className="w-[67px] flex items-center justify-center">
+            <img 
+              src="/figmaAssets/sail-logo.png" 
+              alt="SAIL Logo" 
+              className="w-12 h-8 object-contain"
+            />
+          </div>
+          
           {/* Navigation Menu */}
-          <nav className="flex ml-8">
+          <nav className="flex ml-2">
             {/* Module Navigator */}
             <button className="flex flex-col items-center justify-center w-[100px] h-[65px] bg-[#F1F1F1] border-r border-gray-300 hover:bg-gray-300 cursor-pointer transition-colors">
               <div className="w-6 h-6 mb-1">
@@ -190,18 +198,17 @@ export function SCOMPMainTableScreen({
       
       {/* Left Sidebar */}
       <aside className={`${previewMode ? 'relative' : 'absolute left-0'} w-[67px] bg-[#16569e] float-left`} style={{ top: previewMode ? '0' : '67px', height: 'calc(600px - 67px)' }}>
-        {/* Top Section with Logo */}
+        {/* Top Section */}
         <div className="w-full h-[79px] flex flex-col items-center justify-center bg-[#52baf3]">
-          <img 
-            src="/figmaAssets/sail-logo.png" 
-            alt="SAIL Logo" 
-            className="w-12 h-8 object-contain"
-          />
+          <div className="w-6 h-6 mb-1">{sidebarItemsToShow[0]?.icon}</div>
+          <div className="text-white text-[10px] font-normal">
+            {sidebarItemsToShow[0]?.label}
+          </div>
         </div>
 
-        {/* Navigation Items */}
+        {/* Bottom Section */}
         <div className="p-2 space-y-3">
-          {sidebarItemsToShow.map((item, index) => (
+          {sidebarItemsToShow.slice(1).map((item, index) => (
             <div key={index} className="flex flex-col items-center p-2 hover:bg-blue-800 rounded cursor-pointer transition-colors">
               <div className="w-4 h-4 mb-1">{item.icon}</div>
               <div className="text-white text-[8px] text-center">{item.label}</div>
