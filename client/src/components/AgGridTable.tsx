@@ -144,7 +144,7 @@ const AgGridTable: React.FC<AgGridTableProps> = ({
           toolPanel: 'agFiltersToolPanel',
         }
       ],
-      defaultToolPanel: 'columns'
+      defaultToolPanel: null
     } : false,
     
     // Status Bar

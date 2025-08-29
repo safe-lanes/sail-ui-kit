@@ -74,6 +74,42 @@ import {
 } from "@/components/ui/popover";
 import { StandardNavigationBar } from "@/components/StandardNavigationBar";
 import { SCOMPMainTableScreen } from "@/components/SCOMPMainTableScreen";
+import { Edit3, Trash2 } from 'lucide-react';
+
+// Actions Cell Renderer Component for AG Grid
+const ActionsCellRenderer = (props: any) => {
+  return (
+    <div className="flex items-center gap-1 justify-center py-1">
+      <Button
+        variant="ghost"
+        size="sm"
+        className="p-1 h-7 w-7"
+        title="View"
+        onClick={() => console.log('View clicked for:', props.data.id || props.data.inspectionId)}
+      >
+        <Eye className="w-3 h-3" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="p-1 h-7 w-7"
+        title="Edit"
+        onClick={() => console.log('Edit clicked for:', props.data.id || props.data.inspectionId)}
+      >
+        <Edit3 className="w-3 h-3" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="p-1 h-7 w-7 text-red-600 hover:text-red-700"
+        title="Delete"
+        onClick={() => console.log('Delete clicked for:', props.data.id || props.data.inspectionId)}
+      >
+        <Trash2 className="w-3 h-3" />
+      </Button>
+    </div>
+  );
+};
 import { 
   VesselStatusIndicator,
   SafetyRatingBadge,
@@ -1464,10 +1500,10 @@ export const ComponentShowcase: React.FC = () => {
                                     { id: 'vessel', type: 'select', placeholder: 'Select vessel...', label: 'Vessel' }
                                   ]}
                                   columnDefs={[
-                                    { field: 'id', headerName: 'Crew ID', width: 120, filter: 'agTextColumnFilter', sortable: true },
-                                    { field: 'name', headerName: 'Name', width: 150, filter: 'agTextColumnFilter', sortable: true },
-                                    { field: 'rank', headerName: 'Rank', width: 130, filter: 'agSetColumnFilter', sortable: true },
-                                    { field: 'vessel', headerName: 'Vessel', width: 140, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'id', headerName: 'Crew ID', flex: 1, minWidth: 120, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'name', headerName: 'Name', flex: 2, minWidth: 160, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'rank', headerName: 'Rank', flex: 1, minWidth: 130, filter: 'agSetColumnFilter', sortable: true },
+                                    { field: 'vessel', headerName: 'Vessel', flex: 1.5, minWidth: 150, filter: 'agTextColumnFilter', sortable: true },
                                     {
                                       field: 'actions',
                                       headerName: 'Actions',
@@ -1475,27 +1511,29 @@ export const ComponentShowcase: React.FC = () => {
                                       sortable: false,
                                       filter: false,
                                       resizable: false,
-                                      cellRenderer: () => {
-                                        return `
-                                          <div class="flex items-center gap-2 justify-center py-1">
-                                            <button class="p-1 hover:bg-gray-100 rounded" title="View">
-                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                              </svg>
-                                            </button>
-                                            <button class="p-1 hover:bg-gray-100 rounded" title="Edit">
-                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                              </svg>
-                                            </button>
-                                            <button class="p-1 hover:bg-gray-100 rounded text-red-600" title="Delete">
-                                              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                              </svg>
-                                            </button>
-                                          </div>
+                                      pinned: 'right',
+                                      cellRenderer: (params: any) => {
+                                        const eDiv = document.createElement('div');
+                                        eDiv.className = 'flex items-center gap-2 justify-center py-1';
+                                        eDiv.innerHTML = `
+                                          <button class="p-1 hover:bg-gray-100 rounded" title="View" onclick="console.log('View clicked for:', '${params.data.id}')">
+                                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                          </button>
+                                          <button class="p-1 hover:bg-gray-100 rounded" title="Edit" onclick="console.log('Edit clicked for:', '${params.data.id}')">
+                                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                          </button>
+                                          <button class="p-1 hover:bg-gray-100 rounded text-red-600" title="Delete" onclick="console.log('Delete clicked for:', '${params.data.id}')">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                          </button>
                                         `;
+                                        return ActionsCellRenderer(params);
                                       }
                                     }
                                   ]}
@@ -1541,13 +1579,14 @@ export const ComponentShowcase: React.FC = () => {
                                     { id: 'dateTo', type: 'date', label: 'To Date' }
                                   ]}
                                   columnDefs={[
-                                    { field: 'inspectionId', headerName: 'Inspection ID', width: 140, filter: 'agTextColumnFilter', sortable: true },
-                                    { field: 'vessel', headerName: 'Vessel', width: 150, filter: 'agTextColumnFilter', sortable: true },
-                                    { field: 'port', headerName: 'Port', width: 120, filter: 'agSetColumnFilter', sortable: true },
+                                    { field: 'inspectionId', headerName: 'Inspection ID', flex: 1.5, minWidth: 140, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'vessel', headerName: 'Vessel', flex: 2, minWidth: 160, filter: 'agTextColumnFilter', sortable: true },
+                                    { field: 'port', headerName: 'Port', flex: 1, minWidth: 120, filter: 'agSetColumnFilter', sortable: true },
                                     { 
                                       field: 'status', 
                                       headerName: 'Status', 
-                                      width: 130, 
+                                      flex: 1, 
+                                      minWidth: 120,
                                       filter: 'agSetColumnFilter', 
                                       sortable: true,
                                       cellRenderer: (params: any) => {
@@ -1555,10 +1594,10 @@ export const ComponentShowcase: React.FC = () => {
                                         const colorClass = status === 'Passed' ? 'bg-green-100 text-green-800' : 
                                                           status === 'Deficiencies' ? 'bg-yellow-100 text-yellow-800' : 
                                                           'bg-red-100 text-red-800';
-                                        return `<span class="px-2 py-1 rounded-full text-xs font-medium ${colorClass}">${status}</span>`;
+                                        return `<span class="inline-flex px-2 py-1 rounded-full text-xs font-medium ${colorClass}">${status}</span>`;
                                       }
                                     },
-                                    { field: 'date', headerName: 'Date', width: 120, filter: 'agDateColumnFilter', sortable: true },
+                                    { field: 'date', headerName: 'Date', flex: 1, minWidth: 110, filter: 'agDateColumnFilter', sortable: true },
                                     {
                                       field: 'actions',
                                       headerName: 'Actions',
@@ -1566,27 +1605,29 @@ export const ComponentShowcase: React.FC = () => {
                                       sortable: false,
                                       filter: false,
                                       resizable: false,
-                                      cellRenderer: () => {
-                                        return `
-                                          <div class="flex items-center gap-2 justify-center py-1">
-                                            <button class="p-1 hover:bg-gray-100 rounded" title="View">
-                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                              </svg>
-                                            </button>
-                                            <button class="p-1 hover:bg-gray-100 rounded" title="Edit">
-                                              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                              </svg>
-                                            </button>
-                                            <button class="p-1 hover:bg-gray-100 rounded text-red-600" title="Delete">
-                                              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                              </svg>
-                                            </button>
-                                          </div>
+                                      pinned: 'right',
+                                      cellRenderer: (params: any) => {
+                                        const eDiv = document.createElement('div');
+                                        eDiv.className = 'flex items-center gap-2 justify-center py-1';
+                                        eDiv.innerHTML = `
+                                          <button class="p-1 hover:bg-gray-100 rounded" title="View" onclick="console.log('View clicked for:', '${params.data.inspectionId}')">
+                                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 616 0z"></path>
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                          </button>
+                                          <button class="p-1 hover:bg-gray-100 rounded" title="Edit" onclick="console.log('Edit clicked for:', '${params.data.inspectionId}')">
+                                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                          </button>
+                                          <button class="p-1 hover:bg-gray-100 rounded text-red-600" title="Delete" onclick="console.log('Delete clicked for:', '${params.data.inspectionId}')">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                          </button>
                                         `;
+                                        return ActionsCellRenderer(params);
                                       }
                                     }
                                   ]}
