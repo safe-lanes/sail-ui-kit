@@ -1,10 +1,10 @@
-# scomp
+# scomp-ui
 
 Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules
 
 ## Overview
 
-`scomp` is a comprehensive NPM package that provides all the necessary components, services, and utilities for building TMSA (Tanker Management Self Assessment) modules in the SAIL Phase 2 maritime ERP system. It serves as the shared foundation across all microfrontend applications.
+`scomp-ui` is a comprehensive NPM package that provides all the necessary components, services, and utilities for building TMSA (Tanker Management Self Assessment) modules in the SAIL Phase 2 maritime ERP system. It serves as the shared foundation across all microfrontend applications.
 
 ## Features
 
@@ -35,7 +35,7 @@ Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules
 ## Installation
 
 ```bash
-npm install scomp@1.0.6
+npm install scomp-ui@1.0.6
 ```
 
 ## Important: CSS Setup Required
@@ -43,7 +43,7 @@ npm install scomp@1.0.6
 **The package now includes complete Tailwind CSS styling (81KB with 4,145 utilities).** You must import the CSS file for components to display correctly:
 
 ```jsx
-import 'scomp/dist/index.css';
+import 'scomp-ui/dist/index.css';
 ```
 
 **Before CSS import:** Components appear as plain HTML with no styling
@@ -69,8 +69,8 @@ import {
   Card, 
   CardContent,
   usePermissions 
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function TechnicalModule() {
   const { can } = usePermissions();
@@ -120,8 +120,8 @@ import {
   VesselStatusIndicator,
   SafetyRatingBadge,
   TMSAComplianceIndicator 
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function MaritimeComponents() {
   return (
@@ -155,8 +155,8 @@ function MaritimeComponents() {
 ### 3. Using Services
 
 ```jsx
-import { useApi, SHARED_SERVICES } from 'scomp';
-import 'scomp/dist/index.css';
+import { useApi, SHARED_SERVICES } from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function VesselList() {
   const { data: vessels, loading } = useApi('/vessels');
@@ -187,8 +187,8 @@ import {
   ProtectedRoute, 
   PermissionGuard,
   useRBAC 
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function App() {
   return (
@@ -239,8 +239,8 @@ The package includes a standardized "SAIL Form" system based on the Crew Apprais
 
 ```tsx
 import React from 'react';
-import { ExampleSAILForm, Button } from 'scomp';
-import 'scomp/dist/index.css';
+import { ExampleSAILForm, Button } from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 const MyCrewAppraisalForm = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -274,8 +274,8 @@ const MyCrewAppraisalForm = () => {
 ### Custom SAIL Form Implementation
 
 ```tsx
-import { SAILForm, Label, Input, Select, Button } from 'scomp';
-import 'scomp/dist/index.css';
+import { SAILForm, Label, Input, Select, Button } from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 const CustomMaritimeForm = () => {
   const sections = [
@@ -496,8 +496,8 @@ The FormTable component provides standardized table functionality for dynamic da
 
 ```tsx
 import React, { useState } from 'react';
-import { FormTable, TableColumn, FormTableRow } from 'scomp';
-import 'scomp/dist/index.css';
+import { FormTable, TableColumn, FormTableRow } from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function TrainingRecordsTable() {
   const [trainingData, setTrainingData] = useState<FormTableRow[]>([
@@ -599,7 +599,7 @@ function CompetenceAssessmentTable() {
 
 ## SAIL Phase 2 Responsive Design Standards
 
-All components in scomp follow a standardized three-breakpoint responsive system designed specifically for maritime applications:
+All components in scomp-ui follow a standardized three-breakpoint responsive system designed specifically for maritime applications:
 
 ### Breakpoint System
 - **Mobile**: Default (0px-767px) - Compact layouts, stacked navigation, horizontal scrolling tables
@@ -673,8 +673,8 @@ All components in scomp follow a standardized three-breakpoint responsive system
 The package includes `ExampleSAILForm` which provides a complete implementation:
 
 ```tsx
-import { ExampleSAILForm, Button } from 'scomp';
-import 'scomp/dist/index.css';
+import { ExampleSAILForm, Button } from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 // Complete crew appraisal form with:
 // - Part A: Seafarer's Information (all fields)  
@@ -728,8 +728,8 @@ import {
   Checkbox,
   RadioGroup,
   RadioGroupItem
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function FormExample() {
   return (
@@ -809,7 +809,7 @@ import {
   AvatarImage,
   Separator,
   Progress
-} from 'scomp';
+} from 'scomp-ui';
 
 function LayoutExample() {
   return (
@@ -872,7 +872,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from 'scomp';
+} from 'scomp-ui';
 
 function InteractiveExample() {
   return (
@@ -952,8 +952,8 @@ import {
   IncidentSeverityIndicator,
   IncidentReportForm,
   OperationsDashboard
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function MaritimeExample() {
   return (
@@ -1100,9 +1100,9 @@ import {
   SAILFormSection,
   SAILTable,
   ExampleSAILForm 
-} from 'scomp';
+} from 'scomp-ui';
 import { useForm } from 'react-hook-form';
-import 'scomp/dist/index.css';
+import 'scomp-ui/dist/index.css';
 
 function FormsExample() {
   const form = useForm({
@@ -1446,8 +1446,8 @@ import {
   ComplianceCard,
   CrewCard,
   IncidentCard
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function DashboardExample() {
   // Sample data for demonstration
@@ -1779,9 +1779,9 @@ import {
   FeedbackModal,
   ProgressIndicator,
   LinearProgress
-} from 'scomp';
+} from 'scomp-ui';
 import { useState } from 'react';
-import 'scomp/dist/index.css';
+import 'scomp-ui/dist/index.css';
 
 function FeedbackExample() {
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
@@ -2193,8 +2193,8 @@ import {
   StandardLeftSidebar,
   SCOMPMainTableScreen,
   ActionsCellRenderer
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 function LayoutExample() {
   const menuItems = [
@@ -2392,8 +2392,8 @@ import {
   RoleBasedAccess,
   useRBAC,
   usePermissions
-} from 'scomp';
-import 'scomp/dist/index.css';
+} from 'scomp-ui';
+import 'scomp-ui/dist/index.css';
 
 // Main RBAC Setup
 function RBACExample() {
@@ -2576,7 +2576,7 @@ function ProtectedRouteExample() {
 
 ### SHARED_SERVICES
 ```jsx
-import { SHARED_SERVICES } from 'scomp';
+import { SHARED_SERVICES } from 'scomp-ui';
 
 // API requests
 await SHARED_SERVICES.api.get('/vessels');
@@ -2603,7 +2603,7 @@ import {
   usePermissions, 
   useApi, 
   useLocalStorage 
-} from 'scomp';
+} from 'scomp-ui';
 
 // RBAC and permissions
 const { user, login, logout } = useRBAC();
@@ -2624,7 +2624,7 @@ import {
   MARITIME_RANKS, 
   TMSA_ELEMENTS,
   DEFAULT_PERMISSIONS 
-} from 'scomp';
+} from 'scomp-ui';
 
 // Maritime constants
 console.log(VESSEL_TYPES); // ['Oil Tanker', 'Container', ...]
@@ -2650,7 +2650,7 @@ The package includes complete CSS styling with:
 **Important:** Always import the CSS file in your application entry point or main component:
 
 ```jsx
-import 'scomp/dist/index.css';
+import 'scomp-ui/dist/index.css';
 ```
 
 **What's included in the CSS:**
