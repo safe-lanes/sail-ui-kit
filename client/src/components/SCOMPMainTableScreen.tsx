@@ -152,14 +152,6 @@ export function SCOMPMainTableScreen({
       {/* Top Navigation */}
       <header className="w-full h-[67px] bg-[#F1F1F1] border-b-2 border-[#5DADE2]">
         <div className="flex items-center h-full">
-          {/* Logo */}
-          <div className="flex items-center ml-4">
-            <img 
-              src="/figmaAssets/sail-logo.png" 
-              alt="SAIL Logo" 
-              className="w-14 h-10 object-contain"
-            />
-          </div>
 
           {/* Navigation Menu */}
           <nav className="flex ml-8">
@@ -198,17 +190,18 @@ export function SCOMPMainTableScreen({
       
       {/* Left Sidebar */}
       <aside className={`${previewMode ? 'relative' : 'absolute left-0'} w-[67px] bg-[#16569e] float-left`} style={{ top: previewMode ? '0' : '67px', height: 'calc(600px - 67px)' }}>
-        {/* Top Section */}
+        {/* Top Section with Logo */}
         <div className="w-full h-[79px] flex flex-col items-center justify-center bg-[#52baf3]">
-          <div className="w-6 h-6 mb-1">{sidebarItemsToShow[0]?.icon}</div>
-          <div className="text-white text-[10px] font-normal">
-            {sidebarItemsToShow[0]?.label}
-          </div>
+          <img 
+            src="/figmaAssets/sail-logo.png" 
+            alt="SAIL Logo" 
+            className="w-12 h-8 object-contain"
+          />
         </div>
 
-        {/* Bottom Section */}
+        {/* Navigation Items */}
         <div className="p-2 space-y-3">
-          {sidebarItemsToShow.slice(1).map((item, index) => (
+          {sidebarItemsToShow.map((item, index) => (
             <div key={index} className="flex flex-col items-center p-2 hover:bg-blue-800 rounded cursor-pointer transition-colors">
               <div className="w-4 h-4 mb-1">{item.icon}</div>
               <div className="text-white text-[8px] text-center">{item.label}</div>
