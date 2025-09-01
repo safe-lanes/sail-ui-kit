@@ -60,7 +60,7 @@ export interface TMSAAppLayoutProps {
   onModuleChange?: (moduleId: string) => void;
   user?: User;
   className?: string;
-  
+
   // Notification props
   showNotifications?: boolean;
   notificationCount?: number;
@@ -68,18 +68,18 @@ export interface TMSAAppLayoutProps {
   onNotificationClick?: () => void;
   onNotificationRead?: (notificationId: string) => void;
   onNotificationAction?: (notificationId: string, actionUrl?: string) => void;
-  
+
   // Settings and profile props
   onSettingsClick?: () => void;
   onProfileClick?: () => void;
   onUserSettingsClick?: () => void;
   onLogout?: () => void;
-  
+
   // Sidebar configuration
   sidebarDefaultOpen?: boolean;
   sidebarCollapsible?: boolean;
   onSidebarToggle?: (open: boolean) => void;
-  
+
   // Layout customization
   headerHeight?: string;
   maxContentWidth?: string;
@@ -91,7 +91,7 @@ export interface TopNavigationBarProps {
   currentModule?: string;
   onModuleChange?: (moduleId: string) => void;
   user?: User;
-  
+
   // Notification props
   showNotifications?: boolean;
   notificationCount?: number;
@@ -99,20 +99,20 @@ export interface TopNavigationBarProps {
   onNotificationClick?: () => void;
   onNotificationRead?: (notificationId: string) => void;
   onNotificationAction?: (notificationId: string, actionUrl?: string) => void;
-  
+
   // Action callbacks
   onSettingsClick?: () => void;
   onProfileClick?: () => void;
   onUserSettingsClick?: () => void;
   onLogout?: () => void;
-  
+
   // UI customization
   showSearch?: boolean;
   onSearchClick?: () => void;
   showHelp?: boolean;
   onHelpClick?: () => void;
   customActions?: React.ReactNode;
-  
+
   // Styling
   className?: string;
   height?: string;
@@ -124,11 +124,11 @@ export interface LeftSidebarProps {
   moduleName: string;
   footer?: React.ReactNode;
   className?: string;
-  
+
   // Interaction callbacks
   onMenuItemClick?: (item: MenuItem) => void;
   onQuickActionClick?: (actionId: string) => void;
-  
+
   // Quick actions configuration
   quickActions?: {
     id: string;
@@ -137,17 +137,17 @@ export interface LeftSidebarProps {
     tooltip?: string;
     onClick?: () => void;
   }[];
-  
+
   // Header customization
   headerContent?: React.ReactNode;
   showModuleIcon?: boolean;
   moduleIcon?: React.ReactNode;
-  
+
   // Behavior props
   collapsible?: boolean;
   defaultCollapsed?: boolean;
   onToggle?: (collapsed: boolean) => void;
-  
+
   // Section configuration
   showQuickActions?: boolean;
   customSections?: {

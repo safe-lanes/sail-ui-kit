@@ -20,37 +20,49 @@ import type { LeftSidebarProps, MenuItem } from '../../types/layout';
  * Standardized Left Sidebar
  * Provides module-specific navigation menu with enhanced interactivity
  */
-export function LeftSidebar({ 
-  menuItems, 
-  moduleName, 
-  footer, 
+export function LeftSidebar({
+  menuItems,
+  moduleName,
+  footer,
   className = '',
-  
+
   // Interaction callbacks
   onMenuItemClick,
   onQuickActionClick,
-  
+
   // Quick actions configuration
   quickActions = [
-    { id: 'operations', label: 'Operations', icon: <Anchor className="h-4 w-4" />, tooltip: 'Maritime Operations' },
-    { id: 'settings', label: 'Settings', icon: <Settings className="h-4 w-4" />, tooltip: 'Module Settings' }
+    {
+      id: 'operations',
+      label: 'Operations',
+      icon: <Anchor className="h-4 w-4" />,
+      tooltip: 'Maritime Operations',
+    },
+    {
+      id: 'settings',
+      label: 'Settings',
+      icon: <Settings className="h-4 w-4" />,
+      tooltip: 'Module Settings',
+    },
   ],
-  
+
   // Header customization
   headerContent,
   showModuleIcon = true,
   moduleIcon = <Ship className="h-5 w-5 text-white" />,
-  
-  // Behavior props
-  collapsible = false,
-  defaultCollapsed = false,
-  onToggle,
-  
+
+  // Behavior props (for future implementation)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  collapsible: _collapsible = false,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  defaultCollapsed: _defaultCollapsed = false,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onToggle: _onToggle,
+
   // Section configuration
   showQuickActions = true,
   customSections = [],
 }: LeftSidebarProps) {
-  
   // Handle menu item click
   const handleMenuItemClick = (item: MenuItem) => {
     if (onMenuItemClick) {
@@ -63,7 +75,16 @@ export function LeftSidebar({
   };
 
   // Handle quick action click
-  const handleQuickActionClick = (actionId: string, action: any) => {
+  const handleQuickActionClick = (
+    actionId: string,
+    action: {
+      id: string;
+      label: string;
+      icon: React.ReactNode;
+      tooltip?: string;
+      onClick?: () => void;
+    }
+  ) => {
     if (action.onClick) {
       action.onClick();
     } else if (onQuickActionClick) {
@@ -102,9 +123,9 @@ export function LeftSidebar({
             <SidebarMenu>
               {menuItems.map(item => (
                 <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton 
-                    asChild={!onMenuItemClick} 
-                    isActive={item.isActive} 
+                  <SidebarMenuButton
+                    asChild={!onMenuItemClick}
+                    isActive={item.isActive}
                     tooltip={item.tooltip}
                     onClick={() => handleMenuItemClick(item)}
                   >
@@ -113,7 +134,10 @@ export function LeftSidebar({
                         {item.icon}
                         <span className="flex-1">{item.label}</span>
                         {item.badge && (
-                          <Badge variant={item.badge.variant || 'secondary'} className="ml-auto h-5">
+                          <Badge
+                            variant={item.badge.variant || 'secondary'}
+                            className="ml-auto h-5"
+                          >
                             {item.badge.text}
                           </Badge>
                         )}
@@ -128,7 +152,10 @@ export function LeftSidebar({
                         {item.icon}
                         <span className="flex-1">{item.label}</span>
                         {item.badge && (
-                          <Badge variant={item.badge.variant || 'secondary'} className="ml-auto h-5">
+                          <Badge
+                            variant={item.badge.variant || 'secondary'}
+                            className="ml-auto h-5"
+                          >
                             {item.badge.text}
                           </Badge>
                         )}
@@ -158,7 +185,7 @@ export function LeftSidebar({
               <SidebarMenu>
                 {quickActions.map(action => (
                   <SidebarMenuItem key={action.id}>
-                    <SidebarMenuButton 
+                    <SidebarMenuButton
                       tooltip={action.tooltip}
                       onClick={() => handleQuickActionClick(action.id, action)}
                     >
@@ -180,9 +207,7 @@ export function LeftSidebar({
               <SidebarGroupLabel className="text-xs font-medium text-muted-foreground">
                 {section.title}
               </SidebarGroupLabel>
-              <SidebarGroupContent>
-                {section.content}
-              </SidebarGroupContent>
+              <SidebarGroupContent>{section.content}</SidebarGroupContent>
             </SidebarGroup>
           </div>
         ))}

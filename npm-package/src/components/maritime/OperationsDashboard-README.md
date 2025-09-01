@@ -5,6 +5,7 @@ Enterprise-grade maritime operations dashboard with **60+ enhanced props** for c
 ## Quick Reference
 
 ### Basic Usage
+
 ```tsx
 import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
 
@@ -12,10 +13,11 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
   vessels={vesselData}
   onVesselSelect={handleVesselDetails}
   className="w-full h-screen"
-/>
+/>;
 ```
 
 ### Enterprise Configuration
+
 ```tsx
 <OperationsDashboard
   // Real-time data management
@@ -23,22 +25,18 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
   dataSource="websocket"
   updateInterval={5000}
   onDataUpdate={handleDataUpdate}
-  
   // Interactive capabilities
   enableInteractiveCallbacks={true}
   onVesselSelect={handleVesselSelection}
   onMetricClick={handleMetricDrillDown}
-  
   // Advanced filtering
   enableFiltering={true}
   customFilters={customFilterConfig}
   onFilterChange={handleFilterChange}
-  
   // Performance optimization
   enableVirtualization={true}
   enableDataCaching={true}
   performanceMode="optimized"
-  
   // Maritime features
   showPerformanceMetrics={true}
   maritimeRegulations={complianceRules}
@@ -49,24 +47,28 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
 ## Key Features
 
 ### 🚢 Real-time Vessel Monitoring
+
 - Live position tracking with AIS integration
 - Engine performance and fuel consumption monitoring
 - Weather and sea condition overlay
 - Route optimization and ETA calculations
 
 ### 📊 Interactive Analytics
+
 - Drill-down capabilities for detailed analysis
 - Customizable KPI dashboards
 - Performance benchmarking across fleet
 - Predictive maintenance indicators
 
 ### ⚡ Enterprise Performance
+
 - Virtualized rendering for large fleets
 - Intelligent data caching and synchronization
 - WebSocket integration for real-time updates
 - Optimized for 500+ concurrent vessels
 
 ### 🎛️ Advanced Configuration
+
 - Customizable dashboard layouts
 - Role-based access controls
 - Multi-language support for global operations
@@ -74,36 +76,40 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
 
 ## Core Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `vessels` | `VesselData[]` | `[]` | Array of vessel data objects |
-| `onVesselSelect` | `(vessel: VesselData) => void` | - | Callback when vessel is selected |
-| `enableRealTimeUpdates` | `boolean` | `false` | Enable live data updates |
-| `enableInteractiveCallbacks` | `boolean` | `false` | Enable interactive drill-down |
-| `showPerformanceMetrics` | `boolean` | `true` | Display performance indicators |
-| `enableDrillDown` | `boolean` | `false` | Enable detailed analytics |
+| Prop                         | Type                           | Default | Description                      |
+| ---------------------------- | ------------------------------ | ------- | -------------------------------- |
+| `vessels`                    | `VesselData[]`                 | `[]`    | Array of vessel data objects     |
+| `onVesselSelect`             | `(vessel: VesselData) => void` | -       | Callback when vessel is selected |
+| `enableRealTimeUpdates`      | `boolean`                      | `false` | Enable live data updates         |
+| `enableInteractiveCallbacks` | `boolean`                      | `false` | Enable interactive drill-down    |
+| `showPerformanceMetrics`     | `boolean`                      | `true`  | Display performance indicators   |
+| `enableDrillDown`            | `boolean`                      | `false` | Enable detailed analytics        |
 
 ## Enhanced Props (60+ Total)
 
 ### Data Management
+
 - `dataSource`: WebSocket, REST API, or static data configuration
 - `updateInterval`: Real-time update frequency control
 - `enableDataCaching`: Intelligent caching for performance
 - `onDataUpdate`: Custom data synchronization handlers
 
 ### Interactive Features
+
 - `enableInteractiveCallbacks`: Full interactive mode activation
 - `onMetricClick`: KPI drill-down callback handlers
 - `onAlertClick`: Alert management integration
 - `customInteractions`: Define custom interaction behaviors
 
 ### Filtering & Search
+
 - `enableFiltering`: Advanced filtering capabilities
 - `customFilters`: Define custom filter predicates
 - `enableSearch`: Global search functionality
 - `searchPlaceholder`: Customizable search interface
 
 ### Performance & Optimization
+
 - `enableVirtualization`: Large dataset rendering optimization
 - `performanceMode`: Performance optimization strategies
 - `maxConcurrentUpdates`: Limit concurrent data operations
@@ -114,12 +120,13 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
 ## Maritime Integration
 
 ### Compliance Monitoring
+
 ```tsx
 <OperationsDashboard
   maritimeRegulations={{
     solas: true,
     marpol: true,
-    stcw: true
+    stcw: true,
   }}
   complianceMonitoring={true}
   onComplianceAlert={handleComplianceIssue}
@@ -127,6 +134,7 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
 ```
 
 ### Emergency Response
+
 ```tsx
 <OperationsDashboard
   emergencyProtocols={emergencyConfig}
@@ -137,6 +145,7 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
 ```
 
 ### Fleet Management
+
 ```tsx
 <OperationsDashboard
   enableFleetView={true}
@@ -162,7 +171,7 @@ import { OperationsDashboard, VesselData, DashboardConfig } from 'scomp-ui/sail-
 const config: DashboardConfig = {
   enableRealTime: true,
   updateInterval: 5000,
-  performanceMode: 'optimized'
+  performanceMode: 'optimized',
 };
 ```
 

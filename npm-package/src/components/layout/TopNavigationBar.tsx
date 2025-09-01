@@ -11,11 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '../ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Bell, Settings, LogOut, User, Search, HelpCircle } from 'lucide-react';
 import type { TopNavigationBarProps } from '../../types/layout';
 
@@ -29,7 +25,7 @@ export function TopNavigationBar({
   currentModule,
   onModuleChange,
   user,
-  
+
   // Notification props
   showNotifications = true,
   notificationCount = 0,
@@ -37,20 +33,20 @@ export function TopNavigationBar({
   onNotificationClick,
   onNotificationRead,
   onNotificationAction,
-  
+
   // Action callbacks
   onSettingsClick,
   onProfileClick,
   onUserSettingsClick,
   onLogout,
-  
+
   // UI customization
   showSearch = false,
   onSearchClick,
   showHelp = false,
   onHelpClick,
   customActions,
-  
+
   // Styling
   className = '',
   height = 'h-16',
@@ -77,16 +73,23 @@ export function TopNavigationBar({
   // Get severity color for notifications
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'critical': return 'bg-red-100 text-red-800 border-red-200';
-      case 'high': return 'bg-orange-100 text-orange-800 border-orange-200';
-      case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'low': return 'bg-blue-100 text-blue-800 border-blue-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'critical':
+        return 'bg-red-100 text-red-800 border-red-200';
+      case 'high':
+        return 'bg-orange-100 text-orange-800 border-orange-200';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'low':
+        return 'bg-blue-100 text-blue-800 border-blue-200';
+      default:
+        return 'bg-gray-100 text-gray-800 border-gray-200';
     }
   };
 
   return (
-    <header className={`${height} ${backgroundColor} border-b border-gray-200 flex items-center justify-between px-4 sticky top-0 z-50 ${className}`}>
+    <header
+      className={`${height} ${backgroundColor} border-b border-gray-200 flex items-center justify-between px-4 sticky top-0 z-50 ${className}`}
+    >
       {/* Left Section - Module Navigator */}
       <div className="flex items-center gap-4">
         <ModuleNavigator
@@ -127,8 +130,8 @@ export function TopNavigationBar({
               <Button variant="ghost" size="sm" onClick={onNotificationClick} className="relative">
                 <Bell className="h-5 w-5" />
                 {displayCount > 0 && (
-                  <Badge 
-                    variant="destructive" 
+                  <Badge
+                    variant="destructive"
                     className="absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-[10px]"
                   >
                     {displayCount > 99 ? '99+' : displayCount}
@@ -140,12 +143,14 @@ export function TopNavigationBar({
               <div className="border-b p-4">
                 <h3 className="font-medium">Notifications</h3>
                 <p className="text-sm text-muted-foreground">
-                  {displayCount > 0 ? `${displayCount} unread notifications` : 'No new notifications'}
+                  {displayCount > 0
+                    ? `${displayCount} unread notifications`
+                    : 'No new notifications'}
                 </p>
               </div>
               <div className="max-h-80 overflow-y-auto">
                 {notifications.length > 0 ? (
-                  notifications.slice(0, 10).map((notification) => (
+                  notifications.slice(0, 10).map(notification => (
                     <div
                       key={notification.id}
                       className={`p-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer ${
@@ -161,7 +166,9 @@ export function TopNavigationBar({
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className={`px-2 py-1 text-xs rounded-full border ${getSeverityColor(notification.severity)}`}>
+                            <span
+                              className={`px-2 py-1 text-xs rounded-full border ${getSeverityColor(notification.severity)}`}
+                            >
                               {notification.severity.toUpperCase()}
                             </span>
                             <span className="text-xs text-gray-500">
@@ -169,7 +176,9 @@ export function TopNavigationBar({
                             </span>
                           </div>
                           <p className="font-medium text-sm">{notification.title}</p>
-                          <p className="text-sm text-gray-600 line-clamp-2">{notification.message}</p>
+                          <p className="text-sm text-gray-600 line-clamp-2">
+                            {notification.message}
+                          </p>
                           {notification.actionRequired && (
                             <p className="text-xs text-orange-600 mt-1">Action Required</p>
                           )}

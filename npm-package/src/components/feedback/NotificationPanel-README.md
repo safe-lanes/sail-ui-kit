@@ -5,6 +5,7 @@ Advanced notification management system with **80+ enhanced props** for maritime
 ## Quick Reference
 
 ### Basic Usage
+
 ```tsx
 import { NotificationPanel } from 'scomp-ui/sail-ui-kit';
 
@@ -12,32 +13,29 @@ import { NotificationPanel } from 'scomp-ui/sail-ui-kit';
   notifications={notificationData}
   onMarkAsRead={handleMarkAsRead}
   onNotificationClick={handleNotificationClick}
-/>
+/>;
 ```
 
 ### Enterprise Configuration
+
 ```tsx
 <NotificationPanel
   // Advanced filtering
   enableFiltering={true}
   customFilters={filterPredicates}
   onFilterChange={handleFilterUpdate}
-  
   // Bulk operations
   enableBulkOperations={true}
   onBulkMarkAsRead={handleBulkRead}
   onBulkDelete={handleBulkDelete}
-  
   // Real-time updates
   enableRealTimeUpdates={true}
   onWebSocketConnect={handleWSConnection}
   connectionMonitoring={true}
-  
   // Sound and alerts
   enableSoundAlerts={true}
   soundSettings={audioConfig}
   visualAlerts={visualConfig}
-  
   // Priority escalation
   showPriorityEscalation={true}
   escalationRules={priorityRules}
@@ -48,24 +46,28 @@ import { NotificationPanel } from 'scomp-ui/sail-ui-kit';
 ## Key Features
 
 ### 🔍 Advanced Filtering
+
 - Dynamic filter predicates and conditions
 - Real-time search across all notification fields
 - Saved filter presets for quick access
 - Maritime-specific filter categories
 
 ### 📦 Bulk Operations
+
 - Multi-selection with progress tracking
 - Batch operations for read/unread/delete
 - Bulk assignment and routing capabilities
 - Error handling and retry mechanisms
 
 ### ⚡ Real-time Updates
+
 - WebSocket integration with connection monitoring
 - Live notification streaming and synchronization
 - Connection status indicators and recovery
 - Optimistic updates with conflict resolution
 
 ### 🔊 Sound & Visual Alerts
+
 - Maritime-appropriate audio alerts
 - Visual indicators for different priority levels
 - Customizable alert thresholds and conditions
@@ -73,37 +75,41 @@ import { NotificationPanel } from 'scomp-ui/sail-ui-kit';
 
 ## Core Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `notifications` | `NotificationData[]` | `[]` | Array of notification objects |
-| `onMarkAsRead` | `(id: string) => void` | - | Mark single notification as read |
-| `onNotificationClick` | `(notification: NotificationData) => void` | - | Handle notification click |
-| `enableFiltering` | `boolean` | `false` | Enable advanced filtering |
-| `enableBulkOperations` | `boolean` | `false` | Enable bulk operations |
-| `enableRealTimeUpdates` | `boolean` | `false` | Enable real-time updates |
-| `enableSoundAlerts` | `boolean` | `false` | Enable audio notifications |
+| Prop                    | Type                                       | Default | Description                      |
+| ----------------------- | ------------------------------------------ | ------- | -------------------------------- |
+| `notifications`         | `NotificationData[]`                       | `[]`    | Array of notification objects    |
+| `onMarkAsRead`          | `(id: string) => void`                     | -       | Mark single notification as read |
+| `onNotificationClick`   | `(notification: NotificationData) => void` | -       | Handle notification click        |
+| `enableFiltering`       | `boolean`                                  | `false` | Enable advanced filtering        |
+| `enableBulkOperations`  | `boolean`                                  | `false` | Enable bulk operations           |
+| `enableRealTimeUpdates` | `boolean`                                  | `false` | Enable real-time updates         |
+| `enableSoundAlerts`     | `boolean`                                  | `false` | Enable audio notifications       |
 
 ## Enhanced Props (80+ Total)
 
 ### Filtering and Search
+
 - `customFilters`: Define custom filter predicates
 - `savedFilters`: User-saved filter configurations
 - `onFilterChange`: Filter change event handlers
 - `enableGlobalSearch`: Global search capabilities
 
 ### Bulk Operations
+
 - `enableBulkOperations`: Bulk operation activation
 - `onBulkMarkAsRead`: Batch read status updates
 - `onBulkDelete`: Batch deletion handlers
 - `bulkOperationProgress`: Progress tracking for bulk operations
 
 ### Real-time Features
+
 - `enableRealTimeUpdates`: Live update activation
 - `webSocketUrl`: WebSocket connection configuration
 - `onWebSocketConnect`: Connection event handlers
 - `connectionMonitoring`: Connection health monitoring
 
 ### Sound and Alerts
+
 - `enableSoundAlerts`: Audio notification system
 - `soundSettings`: Audio configuration and volume
 - `visualAlerts`: Visual alert customization
@@ -114,37 +120,40 @@ import { NotificationPanel } from 'scomp-ui/sail-ui-kit';
 ## Maritime Integration
 
 ### Emergency Response
+
 ```tsx
 <NotificationPanel
   enableEmergencyMode={true}
   emergencyProtocols={{
     autoEscalate: true,
     notifyBridge: true,
-    soundGeneralAlarm: true
+    soundGeneralAlarm: true,
   }}
   onEmergencyAlert={handleEmergencyResponse}
 />
 ```
 
 ### Fleet Communication
+
 ```tsx
 <NotificationPanel
   enableFleetCommunication={true}
   fleetSettings={{
     crossVesselNotifications: true,
     shoreBasedAlerts: true,
-    weatherWarnings: true
+    weatherWarnings: true,
   }}
 />
 ```
 
 ### Priority Management
+
 ```tsx
 <NotificationPanel
   showPriorityEscalation={true}
   escalationRules={{
-    'critical': { escalateAfter: 300, notifyRoles: ['captain', 'chief-officer'] },
-    'high': { escalateAfter: 900, notifyRoles: ['officer-on-watch'] }
+    critical: { escalateAfter: 300, notifyRoles: ['captain', 'chief-officer'] },
+    high: { escalateAfter: 900, notifyRoles: ['officer-on-watch'] },
   }}
 />
 ```
@@ -152,27 +161,29 @@ import { NotificationPanel } from 'scomp-ui/sail-ui-kit';
 ## Advanced Features
 
 ### Smart Filtering
+
 ```tsx
 <NotificationPanel
   customFilters={[
     {
       id: 'safety-critical',
       name: 'Safety Critical',
-      predicate: (notification) => 
-        notification.category === 'safety' && notification.priority === 'critical'
+      predicate: notification =>
+        notification.category === 'safety' && notification.priority === 'critical',
     },
     {
       id: 'engine-alerts',
       name: 'Engine Alerts',
-      predicate: (notification) => 
-        notification.source === 'engine-room' && notification.type === 'alert'
-    }
+      predicate: notification =>
+        notification.source === 'engine-room' && notification.type === 'alert',
+    },
   ]}
   enableFilterPresets={true}
 />
 ```
 
 ### Bulk Operations
+
 ```tsx
 <NotificationPanel
   enableBulkOperations={true}
@@ -184,6 +195,7 @@ import { NotificationPanel } from 'scomp-ui/sail-ui-kit';
 ```
 
 ### Real-time Synchronization
+
 ```tsx
 <NotificationPanel
   enableRealTimeUpdates={true}
@@ -205,11 +217,11 @@ npm install scomp-ui/sail-ui-kit
 Full TypeScript definitions included:
 
 ```tsx
-import { 
-  NotificationPanel, 
-  NotificationData, 
+import {
+  NotificationPanel,
+  NotificationData,
   FilterPredicate,
-  EscalationRule 
+  EscalationRule,
 } from 'scomp-ui/sail-ui-kit';
 
 const notifications: NotificationData[] = [
@@ -218,8 +230,8 @@ const notifications: NotificationData[] = [
     title: 'Engine Temperature High',
     category: 'machinery',
     priority: 'high',
-    timestamp: new Date()
-  }
+    timestamp: new Date(),
+  },
 ];
 ```
 

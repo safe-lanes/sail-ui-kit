@@ -29,29 +29,29 @@ export interface FormTableProps {
   showComments?: boolean;
   emptyMessage?: string;
   className?: string;
-  
+
   // Enhanced table props
   onRowAdd?: (row: FormTableRow) => void;
   onRowUpdate?: (rowId: string, field: string, value: unknown) => void;
   onRowDelete?: (rowId: string) => void;
   onRowReorder?: (fromIndex: number, toIndex: number) => void;
-  
+
   // Validation and errors
   validationRules?: Record<string, (value: unknown) => string | null>;
   errors?: Record<string, Record<string, string>>;
   onValidationError?: (rowId: string, field: string, error: string) => void;
-  
+
   // Bulk operations
   enableBulkActions?: boolean;
   onBulkDelete?: (rowIds: string[]) => void;
   onBulkUpdate?: (rowIds: string[], updates: Record<string, unknown>) => void;
-  
+
   // Import/Export
   enableImport?: boolean;
   enableExport?: boolean;
   onImport?: (data: FormTableRow[]) => void;
   onExport?: () => FormTableRow[];
-  
+
   // Table behavior
   sortable?: boolean;
   filterable?: boolean;
@@ -61,13 +61,13 @@ export interface FormTableProps {
     pageSize: number;
     showSizeSelector?: boolean;
   };
-  
+
   // UI customization
   maxHeight?: string;
   stickyHeader?: boolean;
   showRowNumbers?: boolean;
   alternateRowColors?: boolean;
-  
+
   // Comments enhancement
   onCommentAdd?: (rowId: string, comment: string) => void;
   onCommentUpdate?: (rowId: string, comment: string) => void;

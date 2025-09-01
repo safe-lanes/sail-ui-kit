@@ -32,9 +32,9 @@ export interface NotificationPanelProps {
   onClearAll?: () => void;
   maxHeight?: string;
   className?: string;
-  
+
   // ✨ ENTERPRISE ENHANCEMENTS
-  
+
   // Advanced filtering and grouping
   enableGrouping?: boolean;
   groupBy?: 'category' | 'priority' | 'vessel' | 'date' | 'type';
@@ -48,7 +48,7 @@ export interface NotificationPanelProps {
     dateRange?: { start: Date; end: Date };
   };
   onFilterChange?: (filters: Record<string, unknown>) => void;
-  
+
   // Bulk operations
   enableBulkActions?: boolean;
   selectedNotifications?: string[];
@@ -62,31 +62,34 @@ export interface NotificationPanelProps {
     icon?: React.ReactNode;
     onClick: (notificationIds: string[]) => void;
   }>;
-  
+
   // Real-time updates
   enableRealTime?: boolean;
   onNewNotification?: (notification: Notification) => void;
   onNotificationUpdate?: (notificationId: string, updates: Partial<Notification>) => void;
   websocketConnection?: boolean;
   autoRefreshInterval?: number;
-  
+
   // Search functionality
   enableSearch?: boolean;
   searchPlaceholder?: string;
   onSearch?: (searchTerm: string) => void;
   searchableFields?: string[];
   highlightSearchTerms?: boolean;
-  
+
   // Notification templates and customization
-  notificationTemplates?: Record<string, {
-    title: string;
-    messageFormat: string;
-    icon?: React.ReactNode;
-    priority: string;
-  }>;
+  notificationTemplates?: Record<
+    string,
+    {
+      title: string;
+      messageFormat: string;
+      icon?: React.ReactNode;
+      priority: string;
+    }
+  >;
   customNotificationRenderer?: (notification: Notification) => React.ReactNode;
   enableCustomActions?: boolean;
-  
+
   // Sound and visual alerts
   enableSoundAlerts?: boolean;
   soundConfig?: {
@@ -98,14 +101,14 @@ export interface NotificationPanelProps {
   enableToastNotifications?: boolean;
   toastPosition?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
   enableBrowserNotifications?: boolean;
-  
+
   // Archiving and history
   enableArchiving?: boolean;
   onArchive?: (notificationId: string) => void;
   onUnarchive?: (notificationId: string) => void;
   showArchived?: boolean;
   archiveRetentionDays?: number;
-  
+
   // Snooze functionality
   enableSnooze?: boolean;
   onSnooze?: (notificationId: string, duration: number) => void;
@@ -114,7 +117,7 @@ export interface NotificationPanelProps {
     minutes: number;
   }>;
   onSnoozeExpire?: (notificationId: string) => void;
-  
+
   // Priority escalation
   priorityEscalation?: {
     enabled: boolean;
@@ -126,7 +129,7 @@ export interface NotificationPanelProps {
     }>;
   };
   onPriorityEscalate?: (notificationId: string, newPriority: string) => void;
-  
+
   // Notification routing and assignment
   enableAssignment?: boolean;
   onAssign?: (notificationId: string, assigneeId: string) => void;
@@ -137,20 +140,20 @@ export interface NotificationPanelProps {
     role: string;
     department?: string;
   }>;
-  
+
   // Analytics and reporting
   onAnalyticsEvent?: (event: string, data: Record<string, unknown>) => void;
   trackUserInteractions?: boolean;
   enableNotificationMetrics?: boolean;
   onExportNotifications?: (format: 'csv' | 'excel' | 'json') => void;
-  
+
   // Performance optimization
   enableVirtualization?: boolean;
   pageSize?: number;
   enableLazyLoading?: boolean;
   onLoadMore?: () => void;
   hasMoreNotifications?: boolean;
-  
+
   // User preferences
   userPreferences?: {
     defaultGrouping?: string;
@@ -160,7 +163,7 @@ export interface NotificationPanelProps {
   };
   onPreferencesChange?: (preferences: Record<string, unknown>) => void;
   enableUserPreferences?: boolean;
-  
+
   // Maritime-specific features
   vesselContext?: {
     currentVessel?: string;
@@ -174,22 +177,26 @@ export interface NotificationPanelProps {
     description: string;
     priority: string;
   }>;
-  
+
   // Integration hooks
-  onIntegrationAction?: (action: string, notificationId: string, data?: Record<string, unknown>) => void;
+  onIntegrationAction?: (
+    action: string,
+    notificationId: string,
+    data?: Record<string, unknown>
+  ) => void;
   externalSystems?: Array<{
     id: string;
     name: string;
     enabled: boolean;
     actions: string[];
   }>;
-  
+
   // Error handling and retry
   onError?: (error: Error, context: string) => void;
   onRetry?: (notificationId: string) => void;
   enableOfflineMode?: boolean;
   offlineNotifications?: Notification[];
-  
+
   // Accessibility enhancements
   enableScreenReaderSupport?: boolean;
   announceNewNotifications?: boolean;

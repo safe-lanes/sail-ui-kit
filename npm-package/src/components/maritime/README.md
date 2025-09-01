@@ -5,9 +5,11 @@ This directory contains enhanced maritime-specific UI components optimized for v
 ## Components Overview
 
 ### OperationsDashboard
+
 Enterprise-grade maritime operations dashboard with real-time monitoring, interactive analytics, and comprehensive vessel management capabilities.
 
 **Enhanced Features (60+ props):**
+
 - Real-time data management with WebSocket integration
 - Interactive callbacks for drill-down analytics
 - Advanced filtering and customization options
@@ -18,6 +20,7 @@ Enterprise-grade maritime operations dashboard with real-time monitoring, intera
 [📖 **View Complete Documentation**](../../../../guides/OperationsDashboard.md)
 
 **Quick Start:**
+
 ```tsx
 import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
 
@@ -28,13 +31,15 @@ import { OperationsDashboard } from 'scomp-ui/sail-ui-kit';
   enableInteractiveCallbacks={true}
   showPerformanceMetrics={true}
   enableDrillDown={true}
-/>
+/>;
 ```
 
 ### IncidentReportForm
+
 Comprehensive incident reporting system with workflow management, collaboration features, and maritime compliance integration.
 
 **Enhanced Features (100+ props):**
+
 - Advanced workflow management with step progression
 - Collaboration features with commenting and approvals
 - File attachments and evidence collection
@@ -46,6 +51,7 @@ Comprehensive incident reporting system with workflow management, collaboration 
 [📖 **View Complete Documentation**](../../../../guides/IncidentReportForm.md)
 
 **Quick Start:**
+
 ```tsx
 import { IncidentReportForm } from 'scomp-ui/sail-ui-kit';
 
@@ -57,7 +63,7 @@ import { IncidentReportForm } from 'scomp-ui/sail-ui-kit';
   allowAttachments={true}
   autoSave={true}
   complianceChecks={maritimeRegulations}
-/>
+/>;
 ```
 
 ## Installation
@@ -69,11 +75,11 @@ npm install scomp-ui/sail-ui-kit
 ## Usage
 
 ```tsx
-import { 
-  OperationsDashboard, 
+import {
+  OperationsDashboard,
   IncidentReportForm,
   VesselStatusIndicator,
-  SafetyRatingBadge 
+  SafetyRatingBadge,
 } from 'scomp-ui/sail-ui-kit';
 ```
 

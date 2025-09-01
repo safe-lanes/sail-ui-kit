@@ -1,6 +1,6 @@
 {
   "name": "scomp-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Maritime UI Components and Shared Foundation for SAIL Phase 2 TMSA Modules",
   "type": "module",
   "main": "dist/index.js",

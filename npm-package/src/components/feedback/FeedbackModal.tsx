@@ -37,9 +37,9 @@ export interface FeedbackModalProps {
   currentModule?: string;
   allowRating?: boolean;
   className?: string;
-  
+
   // ✨ ENTERPRISE ENHANCEMENTS
-  
+
   // Template and pre-filling
   feedbackTemplates?: Array<{
     id: string;
@@ -52,7 +52,7 @@ export interface FeedbackModalProps {
   onTemplateSelect?: (templateId: string) => void;
   enableTemplates?: boolean;
   autoFillFromContext?: boolean;
-  
+
   // File attachments and screenshots
   attachments?: Array<{
     id: string;
@@ -68,7 +68,7 @@ export interface FeedbackModalProps {
   maxAttachments?: number;
   maxFileSize?: number;
   allowedFileTypes?: string[];
-  
+
   // Routing and assignment
   routingRules?: Array<{
     type: string;
@@ -85,7 +85,7 @@ export interface FeedbackModalProps {
     expertise: string[];
   }>;
   enableManualAssignment?: boolean;
-  
+
   // Follow-up and tracking
   enableFollowUp?: boolean;
   onFollowUpSubscribe?: (feedbackId: string, notify: boolean) => void;
@@ -97,14 +97,14 @@ export interface FeedbackModalProps {
     timestamp: Date;
     updatedBy: string;
   }>;
-  
+
   // Validation and quality checks
   validationRules?: Record<string, (value: unknown) => string | null>;
   onValidationError?: (errors: Record<string, string>) => void;
   enableDuplicateCheck?: boolean;
   onDuplicateCheck?: (feedback: FeedbackData) => Promise<string[]>;
   duplicateSuggestions?: string[];
-  
+
   // User preferences and history
   userHistory?: Array<{
     id: string;
@@ -117,7 +117,7 @@ export interface FeedbackModalProps {
   enableDrafts?: boolean;
   onDraftSave?: (draft: Partial<FeedbackData>) => void;
   onDraftLoad?: () => Partial<FeedbackData>;
-  
+
   // Custom fields and dynamic forms
   customFields?: Array<{
     id: string;
@@ -130,7 +130,7 @@ export interface FeedbackModalProps {
   }>;
   onCustomFieldChange?: (fieldId: string, value: unknown) => void;
   dynamicFormConfig?: Record<string, unknown>;
-  
+
   // Integration and notifications
   onSlackNotify?: (feedback: FeedbackData, channel: string) => void;
   onEmailNotify?: (feedback: FeedbackData, recipients: string[]) => void;
@@ -140,13 +140,13 @@ export interface FeedbackModalProps {
     email?: { enabled: boolean; recipients: string[] };
     jira?: { enabled: boolean; project: string };
   };
-  
+
   // Analytics and metrics
   onAnalyticsEvent?: (event: string, data: Record<string, unknown>) => void;
   trackSubmissionMetrics?: boolean;
   enableSentimentAnalysis?: boolean;
   onSentimentAnalysis?: (text: string) => Promise<{ score: number; sentiment: string }>;
-  
+
   // Batch feedback and surveys
   enableBatchMode?: boolean;
   batchQuestions?: Array<{
@@ -158,7 +158,7 @@ export interface FeedbackModalProps {
   }>;
   onBatchSubmit?: (responses: Record<string, unknown>) => void;
   surveyMode?: boolean;
-  
+
   // User interface customization
   theme?: 'light' | 'dark' | 'auto';
   brandColors?: {
@@ -169,7 +169,7 @@ export interface FeedbackModalProps {
   customLogo?: string;
   footerText?: string;
   enableMinimizedMode?: boolean;
-  
+
   // Advanced features
   enableVoiceRecording?: boolean;
   onVoiceRecord?: (audioBlob: Blob) => void;
@@ -177,7 +177,7 @@ export interface FeedbackModalProps {
   enableCollaboration?: boolean;
   onCollaboratorAdd?: (email: string) => void;
   collaborators?: string[];
-  
+
   // Feedback lifecycle management
   onStatusChange?: (feedbackId: string, status: string, reason?: string) => void;
   onPriorityChange?: (feedbackId: string, priority: string) => void;
@@ -188,7 +188,7 @@ export interface FeedbackModalProps {
     description: string;
     order: number;
   }>;
-  
+
   // Maritime-specific features
   vesselContext?: {
     vesselId: string;
@@ -204,14 +204,14 @@ export interface FeedbackModalProps {
   };
   complianceFeedback?: boolean;
   regulatoryReporting?: boolean;
-  
+
   // Error handling and recovery
   onSubmissionError?: (error: Error, feedback: FeedbackData) => void;
   enableRetry?: boolean;
   onRetry?: () => void;
   offlineMode?: boolean;
   onOfflineSubmit?: (feedback: FeedbackData) => void;
-  
+
   // Performance and UX
   enableAutoSave?: boolean;
   autoSaveInterval?: number;

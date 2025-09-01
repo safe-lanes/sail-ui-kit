@@ -30,16 +30,16 @@ interface IncidentReportFormProps {
   onSave: (incident: IncidentReport) => void;
   onCancel: () => void;
   readonly?: boolean;
-  
+
   // ✨ ENTERPRISE ENHANCEMENTS
-  
+
   // Validation and form management
   validationRules?: Record<string, (value: unknown) => string | null>;
   onValidationError?: (errors: Record<string, string>) => void;
   validateOnChange?: boolean;
   validateOnSubmit?: boolean;
   customValidation?: (incident: Partial<IncidentReport>) => Record<string, string>;
-  
+
   // Workflow management
   currentStep?: number;
   totalSteps?: number;
@@ -53,7 +53,7 @@ interface IncidentReportFormProps {
   }>;
   enableWorkflow?: boolean;
   onWorkflowComplete?: (incident: IncidentReport) => void;
-  
+
   // Auto-save and persistence
   autoSave?: boolean;
   autoSaveInterval?: number;
@@ -62,7 +62,7 @@ interface IncidentReportFormProps {
   onDraftSave?: (draftId: string, incident: Partial<IncidentReport>) => void;
   onDraftLoad?: (draftId: string) => Partial<IncidentReport>;
   enableDrafts?: boolean;
-  
+
   // File attachments and evidence
   attachments?: Array<{
     id: string;
@@ -79,7 +79,7 @@ interface IncidentReportFormProps {
   maxAttachments?: number;
   maxFileSize?: number;
   allowedFileTypes?: string[];
-  
+
   // Collaboration features
   comments?: Array<{
     id: string;
@@ -93,7 +93,7 @@ interface IncidentReportFormProps {
   onCommentDelete?: (commentId: string) => void;
   enableComments?: boolean;
   enableMentions?: boolean;
-  
+
   // Review and approval workflow
   reviewers?: Array<{
     id: string;
@@ -107,7 +107,7 @@ interface IncidentReportFormProps {
   onReviewSubmit?: (status: 'approved' | 'rejected', comments?: string) => void;
   requireReview?: boolean;
   minRequiredApprovals?: number;
-  
+
   // Dynamic field configuration
   customFields?: Array<{
     id: string;
@@ -119,7 +119,7 @@ interface IncidentReportFormProps {
   }>;
   onCustomFieldChange?: (fieldId: string, value: unknown) => void;
   fieldVisibilityRules?: Record<string, (incident: Partial<IncidentReport>) => boolean>;
-  
+
   // Templates and pre-filling
   templates?: Array<{
     id: string;
@@ -130,7 +130,7 @@ interface IncidentReportFormProps {
   onTemplateSelect?: (templateId: string) => void;
   onTemplateSave?: (name: string, incident: Partial<IncidentReport>) => void;
   enableTemplates?: boolean;
-  
+
   // Integration and data sources
   onVesselLookup?: (query: string) => Promise<string[]>;
   onPersonnelLookup?: (query: string) => Promise<string[]>;
@@ -138,7 +138,7 @@ interface IncidentReportFormProps {
   availableVessels?: string[];
   availablePersonnel?: string[];
   availableLocations?: string[];
-  
+
   // Notification and alerts
   onNotificationSend?: (recipients: string[], message: string) => void;
   notificationRules?: Array<{
@@ -147,7 +147,7 @@ interface IncidentReportFormProps {
     template: string;
   }>;
   enableNotifications?: boolean;
-  
+
   // Audit trail and history
   changeHistory?: Array<{
     id: string;
@@ -160,14 +160,14 @@ interface IncidentReportFormProps {
   }>;
   onChangeLog?: (field: string, oldValue: unknown, newValue: unknown, reason?: string) => void;
   enableAuditTrail?: boolean;
-  
+
   // Export and reporting
   onExport?: (format: 'pdf' | 'docx' | 'excel') => void;
   onPrint?: () => void;
   onGenerateReport?: () => void;
   reportTemplate?: string;
   enableExport?: boolean;
-  
+
   // Form behavior and UX
   enableTabNavigation?: boolean;
   enableKeyboardShortcuts?: boolean;
@@ -175,15 +175,18 @@ interface IncidentReportFormProps {
   showProgressIndicator?: boolean;
   enableFormValidationSummary?: boolean;
   confirmOnCancel?: boolean;
-  
+
   // Conditional logic and dynamic behavior
   onFieldVisibilityChange?: (field: string, visible: boolean) => void;
-  dependentFields?: Record<string, {
-    dependsOn: string;
-    condition: (value: unknown) => boolean;
-    action: 'show' | 'hide' | 'require' | 'disable';
-  }>;
-  
+  dependentFields?: Record<
+    string,
+    {
+      dependsOn: string;
+      condition: (value: unknown) => boolean;
+      action: 'show' | 'hide' | 'require' | 'disable';
+    }
+  >;
+
   // Data quality and completeness
   requiredFieldsPerStep?: Record<number, string[]>;
   dataQualityChecks?: Array<{
@@ -191,7 +194,7 @@ interface IncidentReportFormProps {
     check: (value: unknown) => { valid: boolean; message?: string; suggestion?: string };
   }>;
   onDataQualityIssue?: (field: string, issue: string, suggestion?: string) => void;
-  
+
   // User permissions and access control
   userPermissions?: {
     canEdit?: boolean;
@@ -202,7 +205,7 @@ interface IncidentReportFormProps {
     editableFields?: string[];
   };
   onPermissionCheck?: (action: string, field?: string) => boolean;
-  
+
   // Maritime-specific enhancements
   emergencyMode?: boolean;
   onEmergencyProtocolTrigger?: (incident: Partial<IncidentReport>) => void;

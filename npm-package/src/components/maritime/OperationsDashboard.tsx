@@ -41,9 +41,9 @@ interface OperationsDashboardProps {
     date: string;
   }>;
   className?: string;
-  
+
   // ✨ ENTERPRISE ENHANCEMENTS
-  
+
   // Real-time data management
   loading?: boolean;
   lastUpdated?: Date;
@@ -51,14 +51,19 @@ interface OperationsDashboardProps {
   refreshInterval?: number;
   onRefresh?: () => void;
   onDataUpdate?: (data: Partial<OperationsDashboardProps>) => void;
-  
+
   // Interactive callbacks
   onVesselClick?: (vessel: VesselSummary) => void;
   onVesselDoubleClick?: (vessel: VesselSummary) => void;
-  onIncidentClick?: (incident: { id: string; title: string; severity: string; date: string }) => void;
+  onIncidentClick?: (incident: {
+    id: string;
+    title: string;
+    severity: string;
+    date: string;
+  }) => void;
   onKPIClick?: (kpi: 'vessels' | 'utilization' | 'crew' | 'incidents') => void;
   onTMSAElementClick?: (element: TMSAElement) => void;
-  
+
   // Filtering and search
   enableFiltering?: boolean;
   onFilterChange?: (filters: {
@@ -69,11 +74,11 @@ interface OperationsDashboardProps {
   }) => void;
   onSearch?: (searchTerm: string) => void;
   searchPlaceholder?: string;
-  
+
   // Drill-down capabilities
   onDrillDown?: (type: 'fleet' | 'vessel' | 'incident' | 'tmsa', id?: string) => void;
   enableDrillDown?: boolean;
-  
+
   // Customization options
   visibleSections?: {
     kpis?: boolean;
@@ -88,7 +93,7 @@ interface OperationsDashboardProps {
     timeRange?: '24h' | '7d' | '30d' | '90d';
     chartType?: 'line' | 'bar' | 'area';
   };
-  
+
   // Alert and notification management
   alerts?: Array<{
     id: string;
@@ -101,21 +106,21 @@ interface OperationsDashboardProps {
   onAlertClick?: (alertId: string) => void;
   onAlertDismiss?: (alertId: string) => void;
   maxAlerts?: number;
-  
+
   // Export and reporting
   onExport?: (format: 'pdf' | 'excel' | 'csv', section?: string) => void;
   onGenerateReport?: (type: 'fleet' | 'compliance' | 'incidents' | 'comprehensive') => void;
   enableExport?: boolean;
-  
+
   // User interaction tracking
   onUserAction?: (action: string, details: Record<string, unknown>) => void;
   trackInteractions?: boolean;
-  
+
   // Performance optimization
   enableVirtualization?: boolean;
   maxVisibleVessels?: number;
   lazyLoadIncidents?: boolean;
-  
+
   // Maritime-specific features
   complianceThresholds?: {
     vesselUtilization?: number;
@@ -130,13 +135,13 @@ interface OperationsDashboardProps {
     enabled?: boolean;
     onPortUpdate?: (vessel: string, port: Record<string, unknown>) => void;
   };
-  
+
   // Layout and responsive behavior
   isMobile?: boolean;
   collapsibleSections?: boolean;
   defaultCollapsed?: string[];
   onSectionToggle?: (sectionId: string, collapsed: boolean) => void;
-  
+
   // Custom actions and menu items
   customActions?: Array<{
     id: string;
@@ -150,12 +155,12 @@ interface OperationsDashboardProps {
     label: string;
     onClick: (context: Record<string, unknown>) => void;
   }>;
-  
+
   // Error handling
   error?: string;
   onErrorDismiss?: () => void;
   onRetry?: () => void;
-  
+
   // Accessibility
   ariaLabel?: string;
   enableKeyboardNavigation?: boolean;

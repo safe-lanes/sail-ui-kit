@@ -58,13 +58,17 @@ export interface SCOMPMainTableScreenProps {
   onRowClick?: (rowData: Record<string, unknown>) => void;
   onRowDoubleClick?: (rowData: Record<string, unknown>) => void;
   onRowSelect?: (selectedRows: Record<string, unknown>[]) => void;
-  onCellValueChanged?: (params: { data: Record<string, unknown>; field: string; newValue: unknown }) => void;
-  
+  onCellValueChanged?: (params: {
+    data: Record<string, unknown>;
+    field: string;
+    newValue: unknown;
+  }) => void;
+
   // Data operations
   loading?: boolean;
   onRefresh?: () => void;
   onDataExport?: (format: 'csv' | 'excel' | 'pdf') => void;
-  
+
   // Bulk operations
   enableBulkActions?: boolean;
   bulkActions?: Array<{
@@ -80,7 +84,7 @@ export interface SCOMPMainTableScreenProps {
     icon?: React.ReactNode;
     onClick?: () => void;
   };
-  
+
   secondaryActions?: Array<{
     id: string;
     label: string;
@@ -91,12 +95,12 @@ export interface SCOMPMainTableScreenProps {
   // Layout Options
   className?: string;
   previewMode?: boolean;
-  
+
   // Search functionality
   enableGlobalSearch?: boolean;
   onGlobalSearch?: (searchTerm: string) => void;
   searchPlaceholder?: string;
-  
+
   // Pagination
   pagination?: {
     enabled: boolean;
@@ -106,31 +110,31 @@ export interface SCOMPMainTableScreenProps {
     onPageChange: (page: number) => void;
     onPageSizeChange: (pageSize: number) => void;
   };
-  
+
   // Error handling
   error?: string;
   onErrorDismiss?: () => void;
-  
+
   // ✨ ADDITIONAL ENTERPRISE FEATURES - COMPREHENSIVE ENHANCEMENT
-  
+
   // Selection Management
   selectionMode?: 'single' | 'multiple' | 'none';
   selectedRowIds?: (string | number)[];
   onSelectionChange?: (selectedIds: (string | number)[]) => void;
   onSelectionClear?: () => void;
-  
+
   // Sorting Management
   onSortChange?: (sortBy: string, sortOrder: 'asc' | 'desc') => void;
   defaultSort?: { field: string; order: 'asc' | 'desc' };
   multiColumnSort?: boolean;
-  
+
   // Column Management
   onColumnResize?: (columnId: string, width: number) => void;
   onColumnReorder?: (fromIndex: number, toIndex: number) => void;
   onColumnVisibilityChange?: (columnId: string, visible: boolean) => void;
   visibleColumns?: string[];
   enableColumnCustomization?: boolean;
-  
+
   // Context Menu
   onContextMenu?: (event: React.MouseEvent, rowData?: Record<string, unknown>) => void;
   contextMenuItems?: Array<{
@@ -140,21 +144,26 @@ export interface SCOMPMainTableScreenProps {
     onClick: (rowData: Record<string, unknown>) => void;
     disabled?: boolean;
   }>;
-  
+
   // Drag & Drop
   enableRowReorder?: boolean;
   onRowReorder?: (fromIndex: number, toIndex: number) => void;
   enableDragDrop?: boolean;
   onRowDrop?: (draggedRow: Record<string, unknown>, targetRow: Record<string, unknown>) => void;
-  
+
   // Inline Cell Editing
   enableInlineEditing?: boolean;
   editableColumns?: string[];
   onCellEditStart?: (rowId: string | number, columnId: string) => void;
-  onCellEditComplete?: (rowId: string | number, columnId: string, newValue: unknown, oldValue: unknown) => void;
+  onCellEditComplete?: (
+    rowId: string | number,
+    columnId: string,
+    newValue: unknown,
+    oldValue: unknown
+  ) => void;
   onCellEditCancel?: (rowId: string | number, columnId: string) => void;
   onCellValidation?: (rowId: string | number, columnId: string, value: unknown) => string | null;
-  
+
   // Toolbar & Header Actions
   toolbarActions?: Array<{
     id: string;
@@ -166,13 +175,13 @@ export interface SCOMPMainTableScreenProps {
   }>;
   customHeaderActions?: React.ReactNode;
   showToolbar?: boolean;
-  
+
   // Table State Management
   onTableStateChange?: (state: Record<string, unknown>) => void;
   persistTableState?: boolean;
   tableStateKey?: string;
   restoreTableState?: (key: string) => Record<string, unknown>;
-  
+
   // Enhanced Data Management
   onDataValidation?: (data: Record<string, unknown>[]) => Record<string, string[]>;
   validateRowData?: (rowData: Record<string, unknown>) => string[];
@@ -182,26 +191,26 @@ export interface SCOMPMainTableScreenProps {
   enableRowAdd?: boolean;
   enableRowUpdate?: boolean;
   enableRowDelete?: boolean;
-  
+
   // Performance & Data Loading
   virtualScrolling?: boolean;
   lazyLoading?: boolean;
   loadMoreData?: () => void;
   hasMoreData?: boolean;
   rowBufferSize?: number;
-  
+
   // Extended Export & Print
   onPrint?: () => void;
   onPreview?: () => void;
   exportFormats?: Array<'csv' | 'excel' | 'pdf' | 'json'>;
   customExportData?: () => Record<string, unknown>[];
-  
+
   // Accessibility & Navigation
   ariaLabel?: string;
   ariaDescription?: string;
   enableKeyboardNavigation?: boolean;
   onKeyDown?: (event: React.KeyboardEvent) => void;
-  
+
   // Row Grouping & Hierarchy
   enableGrouping?: boolean;
   groupByColumns?: string[];
@@ -209,17 +218,17 @@ export interface SCOMPMainTableScreenProps {
   expandedGroups?: string[];
   onGroupExpand?: (groupId: string, expanded: boolean) => void;
   groupRowRenderer?: React.ComponentType<unknown>;
-  
+
   // Notifications & Feedback
   onNotification?: (type: 'success' | 'error' | 'warning' | 'info', message: string) => void;
   showNotifications?: boolean;
   notificationDuration?: number;
-  
+
   // Audit & User Tracking
   onUserAction?: (action: string, details: Record<string, unknown>) => void;
   auditMode?: boolean;
   trackUserInteractions?: boolean;
-  
+
   // Advanced Filtering
   enableAdvancedFilters?: boolean;
   onAdvancedFilterChange?: (filters: Record<string, unknown>) => void;
@@ -229,18 +238,18 @@ export interface SCOMPMainTableScreenProps {
     filters: Record<string, unknown>;
   }>;
   onSaveFilter?: (name: string, filters: Record<string, unknown>) => void;
-  
+
   // Data Synchronization
   enableAutoRefresh?: boolean;
   autoRefreshInterval?: number;
   onDataSync?: () => void;
   lastSyncTime?: Date;
-  
+
   // Custom Renderers
   customRowRenderer?: React.ComponentType<{ data: Record<string, unknown> }>;
   customHeaderRenderer?: React.ComponentType<{ column: unknown }>;
   customFooterRenderer?: React.ComponentType<unknown>;
-  
+
   // Maritime-Specific Features
   vesselContext?: {
     vesselId?: string;

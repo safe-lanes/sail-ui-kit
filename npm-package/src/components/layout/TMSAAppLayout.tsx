@@ -17,7 +17,7 @@ export function TMSAAppLayout({
   onModuleChange,
   user,
   className = '',
-  
+
   // Notification props
   showNotifications = true,
   notificationCount,
@@ -25,18 +25,18 @@ export function TMSAAppLayout({
   onNotificationClick,
   onNotificationRead,
   onNotificationAction,
-  
+
   // Settings and profile props
   onSettingsClick,
   onProfileClick,
   onUserSettingsClick,
   onLogout,
-  
+
   // Sidebar configuration
   sidebarDefaultOpen = true,
   sidebarCollapsible = true,
   onSidebarToggle,
-  
+
   // Layout customization
   headerHeight = '4rem',
   maxContentWidth = '7xl',
@@ -51,7 +51,6 @@ export function TMSAAppLayout({
         onModuleChange={onModuleChange}
         user={user}
         height={headerHeight}
-        
         // Notification props
         showNotifications={showNotifications}
         notificationCount={notificationCount}
@@ -59,7 +58,6 @@ export function TMSAAppLayout({
         onNotificationClick={onNotificationClick}
         onNotificationRead={onNotificationRead}
         onNotificationAction={onNotificationAction}
-        
         // Action callbacks
         onSettingsClick={onSettingsClick}
         onProfileClick={onProfileClick}
@@ -68,14 +66,11 @@ export function TMSAAppLayout({
       />
 
       {/* Main Layout with Sidebar */}
-      <SidebarProvider 
-        defaultOpen={sidebarDefaultOpen}
-        onOpenChange={onSidebarToggle}
-      >
+      <SidebarProvider defaultOpen={sidebarDefaultOpen} onOpenChange={onSidebarToggle}>
         <div className={`flex min-h-[calc(100vh-${headerHeight})]`}>
           {/* Left Sidebar - Enhanced with new props */}
-          <LeftSidebar 
-            menuItems={menuItems} 
+          <LeftSidebar
+            menuItems={menuItems}
             moduleName={moduleName}
             collapsible={sidebarCollapsible}
           />

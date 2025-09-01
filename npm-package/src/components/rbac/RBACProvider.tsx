@@ -25,28 +25,28 @@ interface RBACProviderProps {
   initialUser?: User | null;
   onLogin?: (credentials: Record<string, unknown>) => Promise<User>;
   onLogout?: () => void;
-  
+
   // Enhanced authentication props
   tokenStorageKey?: string;
   sessionTimeoutMs?: number;
   onSessionTimeout?: () => void;
   onAuthError?: (error: Error) => void;
-  
+
   // Permission management
   permissionCacheKey?: string;
   refreshPermissions?: () => Promise<string[]>;
   onPermissionDenied?: (permission: string) => void;
-  
+
   // Role management
   roleHierarchy?: Record<string, string[]>;
   allowRoleInheritance?: boolean;
-  
+
   // Security features
   autoLogoutOnInactivity?: boolean;
   inactivityTimeoutMs?: number;
   enforcePasswordPolicy?: boolean;
   requireMFA?: boolean;
-  
+
   // Debugging and monitoring
   enableAuditLog?: boolean;
   onUserAction?: (action: string, details?: Record<string, unknown>) => void;
