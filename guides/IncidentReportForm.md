@@ -3,15 +3,200 @@
 ## Overview
 The IncidentReportForm component provides a comprehensive incident reporting interface for maritime applications. It enables structured documentation of safety incidents, near-misses, and operational events with TMSA-compliant reporting standards optimized for maritime safety management systems.
 
-## Component Interface
+## Enhanced Component Interface
+
+The IncidentReportForm component has been significantly enhanced with **100+ enterprise props** for comprehensive incident management capabilities:
 
 ```typescript
 interface IncidentReportFormProps {
-  mode?: 'create' | 'edit' | 'view';
-  initialData?: Partial<IncidentReport>;
-  onSubmit?: (data: IncidentReport) => void;
-  onCancel?: () => void;
-  className?: string;
+  // Core functionality
+  incident?: Partial<IncidentReport>;
+  onSave: (incident: IncidentReport) => void;
+  onCancel: () => void;
+  readonly?: boolean;
+  
+  // ✨ ENTERPRISE ENHANCEMENTS
+  
+  // Validation and form management
+  validationRules?: Record<string, (value: unknown) => string | null>;
+  onValidationError?: (errors: Record<string, string>) => void;
+  validateOnChange?: boolean;
+  validateOnSubmit?: boolean;
+  customValidation?: (incident: Partial<IncidentReport>) => Record<string, string>;
+  
+  // Workflow management
+  currentStep?: number;
+  totalSteps?: number;
+  onStepChange?: (step: number) => void;
+  workflowSteps?: Array<{
+    id: string;
+    title: string;
+    description?: string;
+    required?: boolean;
+    completed?: boolean;
+  }>;
+  enableWorkflow?: boolean;
+  onWorkflowComplete?: (incident: IncidentReport) => void;
+  
+  // Auto-save and persistence
+  autoSave?: boolean;
+  autoSaveInterval?: number;
+  onAutoSave?: (incident: Partial<IncidentReport>) => void;
+  draftId?: string;
+  onDraftSave?: (draftId: string, incident: Partial<IncidentReport>) => void;
+  onDraftLoad?: (draftId: string) => Partial<IncidentReport>;
+  enableDrafts?: boolean;
+  
+  // File attachments and evidence
+  attachments?: Array<{
+    id: string;
+    name: string;
+    type: string;
+    size: number;
+    url: string;
+    uploadedBy?: string;
+    uploadedAt?: Date;
+  }>;
+  onAttachmentUpload?: (files: FileList) => void;
+  onAttachmentDelete?: (attachmentId: string) => void;
+  onAttachmentView?: (attachmentId: string) => void;
+  maxAttachments?: number;
+  maxFileSize?: number;
+  allowedFileTypes?: string[];
+  
+  // Collaboration features
+  comments?: Array<{
+    id: string;
+    author: string;
+    content: string;
+    timestamp: Date;
+    type?: 'comment' | 'review' | 'approval';
+  }>;
+  onCommentAdd?: (comment: string) => void;
+  onCommentEdit?: (commentId: string, content: string) => void;
+  onCommentDelete?: (commentId: string) => void;
+  enableComments?: boolean;
+  enableMentions?: boolean;
+  
+  // Review and approval workflow
+  reviewers?: Array<{
+    id: string;
+    name: string;
+    role: string;
+    status: 'pending' | 'approved' | 'rejected';
+    comments?: string;
+  }>;
+  onReviewerAdd?: (reviewerId: string) => void;
+  onReviewerRemove?: (reviewerId: string) => void;
+  onReviewSubmit?: (status: 'approved' | 'rejected', comments?: string) => void;
+  requireReview?: boolean;
+  minRequiredApprovals?: number;
+  
+  // Dynamic field configuration
+  customFields?: Array<{
+    id: string;
+    type: 'text' | 'select' | 'multiselect' | 'date' | 'textarea' | 'checkbox';
+    label: string;
+    required?: boolean;
+    options?: string[];
+    validation?: (value: unknown) => string | null;
+  }>;
+  onCustomFieldChange?: (fieldId: string, value: unknown) => void;
+  fieldVisibilityRules?: Record<string, (incident: Partial<IncidentReport>) => boolean>;
+  
+  // Templates and pre-filling
+  templates?: Array<{
+    id: string;
+    name: string;
+    description?: string;
+    data: Partial<IncidentReport>;
+  }>;
+  onTemplateSelect?: (templateId: string) => void;
+  onTemplateSave?: (name: string, incident: Partial<IncidentReport>) => void;
+  enableTemplates?: boolean;
+  
+  // Integration and data sources
+  onVesselLookup?: (query: string) => Promise<string[]>;
+  onPersonnelLookup?: (query: string) => Promise<string[]>;
+  onLocationLookup?: (query: string) => Promise<string[]>;
+  availableVessels?: string[];
+  availablePersonnel?: string[];
+  availableLocations?: string[];
+  
+  // Notification and alerts
+  onNotificationSend?: (recipients: string[], message: string) => void;
+  notificationRules?: Array<{
+    trigger: 'severity_change' | 'status_change' | 'assignment';
+    recipients: string[];
+    template: string;
+  }>;
+  enableNotifications?: boolean;
+  
+  // Audit trail and history
+  changeHistory?: Array<{
+    id: string;
+    field: string;
+    oldValue: unknown;
+    newValue: unknown;
+    changedBy: string;
+    changedAt: Date;
+    reason?: string;
+  }>;
+  onChangeLog?: (field: string, oldValue: unknown, newValue: unknown, reason?: string) => void;
+  enableAuditTrail?: boolean;
+  
+  // Export and reporting
+  onExport?: (format: 'pdf' | 'docx' | 'excel') => void;
+  onPrint?: () => void;
+  onGenerateReport?: () => void;
+  reportTemplate?: string;
+  enableExport?: boolean;
+  
+  // Form behavior and UX
+  enableTabNavigation?: boolean;
+  enableKeyboardShortcuts?: boolean;
+  onKeyboardShortcut?: (shortcut: string) => void;
+  showProgressIndicator?: boolean;
+  enableFormValidationSummary?: boolean;
+  confirmOnCancel?: boolean;
+  
+  // Conditional logic and dynamic behavior
+  onFieldVisibilityChange?: (field: string, visible: boolean) => void;
+  dependentFields?: Record<string, {
+    dependsOn: string;
+    condition: (value: unknown) => boolean;
+    action: 'show' | 'hide' | 'require' | 'disable';
+  }>;
+  
+  // Data quality and completeness
+  requiredFieldsPerStep?: Record<number, string[]>;
+  dataQualityChecks?: Array<{
+    field: string;
+    check: (value: unknown) => { valid: boolean; message?: string; suggestion?: string };
+  }>;
+  onDataQualityIssue?: (field: string, issue: string, suggestion?: string) => void;
+  
+  // User permissions and access control
+  userPermissions?: {
+    canEdit?: boolean;
+    canSubmit?: boolean;
+    canDelete?: boolean;
+    canReview?: boolean;
+    canApprove?: boolean;
+    editableFields?: string[];
+  };
+  onPermissionCheck?: (action: string, field?: string) => boolean;
+  
+  // Maritime-specific enhancements
+  emergencyMode?: boolean;
+  onEmergencyProtocolTrigger?: (incident: Partial<IncidentReport>) => void;
+  complianceChecks?: Array<{
+    regulation: string;
+    check: (incident: Partial<IncidentReport>) => boolean;
+    message: string;
+  }>;
+  maritimeAuthorityNotification?: boolean;
+  onAuthorityNotify?: (incident: IncidentReport, authorities: string[]) => void;
 }
 
 interface IncidentReport {
@@ -42,12 +227,27 @@ interface IncidentReport {
 }
 ```
 
-## Key Features
-- **Maritime Compliance**: TMSA, ISM Code, and MLC compliant reporting structure
-- **Structured Workflow**: Guided incident reporting with validation
-- **Multi-step Process**: Progressive disclosure for comprehensive documentation
-- **Evidence Collection**: File attachment and photo documentation support
-- **Real-time Validation**: Immediate feedback on required fields and data quality
+## Enhanced Key Features
+
+### Core Maritime Capabilities
+- **Maritime Compliance**: TMSA, ISM Code, and MLC compliant reporting with automated compliance checks
+- **Structured Workflow**: Multi-step guided reporting with customizable workflow stages
+- **Multi-step Process**: Progressive disclosure with validation at each step and smart form navigation
+- **Evidence Collection**: Advanced file attachment system with versioning and metadata capture
+- **Real-time Validation**: Intelligent validation with custom rules and data quality suggestions
+
+### Enterprise Enhancements
+- **Advanced Workflow Management**: Configurable multi-step processes with approval chains and status tracking
+- **Collaboration Features**: Real-time commenting, reviewer assignment, and team collaboration tools
+- **Auto-save & Draft Management**: Automatic saving with draft recovery and version control
+- **Dynamic Field Configuration**: Customizable forms with conditional field visibility and validation
+- **Template System**: Pre-configured incident templates for common scenarios and rapid reporting
+- **Integration Capabilities**: Smart lookup for vessels, personnel, and locations with external system integration
+- **Audit Trail & History**: Complete change tracking with user attribution and reason logging
+- **Advanced Notifications**: Smart notification system with customizable triggers and escalation rules
+- **Export & Reporting**: Generate comprehensive reports in multiple formats with custom templates
+- **Maritime Authority Integration**: Automated regulatory notification and compliance reporting
+- **Emergency Response**: Emergency mode with rapid reporting and instant escalation protocols
 
 ## Basic Usage
 
@@ -641,51 +841,897 @@ function ComprehensiveIncidentReportForm() {
 }
 ```
 
-## Performance Considerations
+## Enterprise Feature Examples
 
-- **Form State Management**: Efficient state updates for large forms
-- **Validation**: Real-time validation without performance impact
-- **File Handling**: Optimized attachment processing
-- **Auto-save**: Periodic saving of draft reports
-
-## Accessibility Features
-
-- **Form Navigation**: Clear step-by-step progression
-- **Screen Reader Support**: Proper form labels and descriptions
-- **Keyboard Navigation**: Full keyboard accessibility
-- **Error Handling**: Clear validation messages and error states
-
-## Common Patterns
+### Advanced Workflow Management
 
 ```tsx
-// Basic incident report
+function WorkflowEnabledIncidentForm() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [workflowData, setWorkflowData] = useState({});
+  
+  const workflowSteps = [
+    {
+      id: 'basic-info',
+      title: 'Basic Information',
+      description: 'Incident overview and classification',
+      required: true,
+      completed: false
+    },
+    {
+      id: 'details',
+      title: 'Incident Details',
+      description: 'Detailed description and circumstances',
+      required: true,
+      completed: false
+    },
+    {
+      id: 'investigation',
+      title: 'Investigation',
+      description: 'Root cause analysis and findings',
+      required: false,
+      completed: false
+    },
+    {
+      id: 'actions',
+      title: 'Actions & Response',
+      description: 'Corrective and preventive actions',
+      required: true,
+      completed: false
+    },
+    {
+      id: 'review',
+      title: 'Review & Approval',
+      description: 'Management review and approval',
+      required: true,
+      completed: false
+    }
+  ];
+
+  const handleStepChange = (step) => {
+    // Validate current step before allowing navigation
+    if (validateCurrentStep()) {
+      setCurrentStep(step);
+      updateWorkflowProgress(step);
+    }
+  };
+
+  const handleWorkflowComplete = (incident) => {
+    // Trigger final approvals and notifications
+    notifyStakeholders(incident);
+    submitToRegulatoryAuthorities(incident);
+    generateComplianceReport(incident);
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Workflow Progress Indicator */}
+      <div className="bg-white border rounded-lg p-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold">Incident Report Progress</h3>
+          <span className="text-sm text-gray-600">Step {currentStep} of {workflowSteps.length}</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          {workflowSteps.map((step, index) => (
+            <div key={step.id} className="flex items-center">
+              <div className={`
+                w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+                ${currentStep > index + 1 ? 'bg-green-500 text-white' : 
+                  currentStep === index + 1 ? 'bg-blue-500 text-white' : 
+                  'bg-gray-200 text-gray-600'}
+              `}>
+                {currentStep > index + 1 ? '✓' : index + 1}
+              </div>
+              {index < workflowSteps.length - 1 && (
+                <div className={`w-16 h-1 mx-2 ${
+                  currentStep > index + 1 ? 'bg-green-500' : 'bg-gray-200'
+                }`} />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <IncidentReportForm
+        incident={workflowData}
+        onSave={handleSave}
+        onCancel={handleCancel}
+        
+        // Workflow management
+        currentStep={currentStep}
+        totalSteps={workflowSteps.length}
+        onStepChange={handleStepChange}
+        workflowSteps={workflowSteps}
+        enableWorkflow={true}
+        onWorkflowComplete={handleWorkflowComplete}
+        
+        // Step-specific required fields
+        requiredFieldsPerStep={{
+          1: ['title', 'incidentType', 'severity', 'dateTime', 'location'],
+          2: ['description', 'reportedBy'],
+          4: ['immediateActions'],
+          5: ['finalReview']
+        }}
+      />
+    </div>
+  );
+}
+```
+
+### Auto-save and Draft Management
+
+```tsx
+function AutoSaveIncidentForm() {
+  const [draftId, setDraftId] = useState(null);
+  const [lastSaved, setLastSaved] = useState(null);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  const handleAutoSave = async (incidentData) => {
+    try {
+      const savedDraft = await saveDraftToStorage(draftId, incidentData);
+      setDraftId(savedDraft.id);
+      setLastSaved(new Date());
+      setHasUnsavedChanges(false);
+      
+      showNotification('Draft saved automatically', 'success');
+    } catch (error) {
+      console.error('Auto-save failed:', error);
+      showNotification('Auto-save failed. Please save manually.', 'warning');
+    }
+  };
+
+  const handleDraftSave = (draftId, incidentData) => {
+    return saveDraftToLocalStorage(draftId, incidentData);
+  };
+
+  const handleDraftLoad = (draftId) => {
+    return loadDraftFromLocalStorage(draftId);
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Auto-save Status */}
+      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+        <div className="flex items-center space-x-2">
+          <div className={`w-2 h-2 rounded-full ${
+            hasUnsavedChanges ? 'bg-yellow-500' : 'bg-green-500'
+          }`} />
+          <span className="text-sm text-gray-600">
+            {hasUnsavedChanges ? 'Unsaved changes' : 'All changes saved'}
+          </span>
+        </div>
+        {lastSaved && (
+          <span className="text-xs text-gray-500">
+            Last saved: {lastSaved.toLocaleTimeString()}
+          </span>
+        )}
+      </div>
+
+      <IncidentReportForm
+        incident={incidentData}
+        onSave={handleSave}
+        onCancel={handleCancel}
+        
+        // Auto-save and persistence
+        autoSave={true}
+        autoSaveInterval={30000} // 30 seconds
+        onAutoSave={handleAutoSave}
+        draftId={draftId}
+        onDraftSave={handleDraftSave}
+        onDraftLoad={handleDraftLoad}
+        enableDrafts={true}
+      />
+    </div>
+  );
+}
+```
+
+### File Attachments and Evidence Collection
+
+```tsx
+function EvidenceCollectionForm() {
+  const [attachments, setAttachments] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState({});
+
+  const handleAttachmentUpload = async (files) => {
+    const fileArray = Array.from(files);
+    
+    for (const file of fileArray) {
+      const uploadId = `upload-${Date.now()}-${Math.random()}`;
+      
+      try {
+        setUploadProgress(prev => ({ ...prev, [uploadId]: 0 }));
+        
+        // Simulate upload with progress
+        const attachment = await uploadFileWithProgress(file, (progress) => {
+          setUploadProgress(prev => ({ ...prev, [uploadId]: progress }));
+        });
+        
+        setAttachments(prev => [...prev, {
+          id: attachment.id,
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          url: attachment.url,
+          uploadedBy: currentUser.name,
+          uploadedAt: new Date(),
+          thumbnail: attachment.thumbnail
+        }]);
+        
+        setUploadProgress(prev => {
+          const { [uploadId]: removed, ...rest } = prev;
+          return rest;
+        });
+        
+      } catch (error) {
+        console.error('Upload failed:', error);
+        showNotification(`Failed to upload ${file.name}`, 'error');
+      }
+    }
+  };
+
+  const handleAttachmentDelete = (attachmentId) => {
+    setAttachments(prev => prev.filter(att => att.id !== attachmentId));
+    deleteFileFromStorage(attachmentId);
+  };
+
+  const handleAttachmentView = (attachmentId) => {
+    const attachment = attachments.find(att => att.id === attachmentId);
+    if (attachment) {
+      window.open(attachment.url, '_blank');
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Attachment Summary */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <h3 className="font-semibold text-blue-900 mb-2">Evidence Collection</h3>
+        <p className="text-sm text-blue-800">
+          Attach photos, documents, and other evidence related to this incident. 
+          Supported formats: Images, PDFs, videos (max 10MB each).
+        </p>
+        {attachments.length > 0 && (
+          <div className="mt-3">
+            <span className="text-sm font-medium text-blue-800">
+              {attachments.length} file{attachments.length !== 1 ? 's' : ''} attached
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Upload Progress */}
+      {Object.keys(uploadProgress).length > 0 && (
+        <div className="space-y-2">
+          {Object.entries(uploadProgress).map(([uploadId, progress]) => (
+            <div key={uploadId} className="bg-white border rounded-lg p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">Uploading...</span>
+                <span className="text-sm text-gray-600">{Math.round(progress)}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div 
+                  className="bg-blue-600 h-2 rounded-full transition-all"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <IncidentReportForm
+        incident={incidentData}
+        onSave={handleSave}
+        onCancel={handleCancel}
+        
+        // File attachments and evidence
+        attachments={attachments}
+        onAttachmentUpload={handleAttachmentUpload}
+        onAttachmentDelete={handleAttachmentDelete}
+        onAttachmentView={handleAttachmentView}
+        maxAttachments={20}
+        maxFileSize={10 * 1024 * 1024} // 10MB
+        allowedFileTypes={['image/*', 'application/pdf', 'video/*', '.doc', '.docx']}
+      />
+    </div>
+  );
+}
+```
+
+### Collaboration and Review System
+
+```tsx
+function CollaborativeIncidentForm() {
+  const [comments, setComments] = useState([]);
+  const [reviewers, setReviewers] = useState([
+    {
+      id: 'safety-manager',
+      name: 'Sarah Johnson',
+      role: 'Safety Manager',
+      status: 'pending',
+      comments: ''
+    },
+    {
+      id: 'chief-engineer',
+      name: 'Mike Chen',
+      role: 'Chief Engineer',
+      status: 'pending',
+      comments: ''
+    }
+  ]);
+
+  const handleCommentAdd = (comment) => {
+    const newComment = {
+      id: `comment-${Date.now()}`,
+      author: currentUser.name,
+      content: comment,
+      timestamp: new Date(),
+      type: 'comment'
+    };
+    
+    setComments(prev => [...prev, newComment]);
+    
+    // Notify mentioned users
+    const mentions = extractMentions(comment);
+    if (mentions.length > 0) {
+      notifyMentionedUsers(mentions, newComment);
+    }
+  };
+
+  const handleReviewSubmit = (status, comments) => {
+    const review = {
+      reviewerId: currentUser.id,
+      status,
+      comments,
+      timestamp: new Date()
+    };
+    
+    setReviewers(prev => prev.map(reviewer => 
+      reviewer.id === currentUser.id 
+        ? { ...reviewer, status, comments }
+        : reviewer
+    ));
+    
+    // Add review as a comment
+    const reviewComment = {
+      id: `review-${Date.now()}`,
+      author: currentUser.name,
+      content: `${status === 'approved' ? 'Approved' : 'Rejected'}: ${comments}`,
+      timestamp: new Date(),
+      type: 'review'
+    };
+    
+    setComments(prev => [...prev, reviewComment]);
+    
+    // Check if all required approvals are received
+    const approvedCount = reviewers.filter(r => r.status === 'approved').length;
+    if (approvedCount >= minRequiredApprovals) {
+      triggerFinalApproval();
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Review Status */}
+      <div className="bg-white border rounded-lg p-4">
+        <h3 className="font-semibold mb-4">Review & Approval Status</h3>
+        <div className="space-y-3">
+          {reviewers.map(reviewer => (
+            <div key={reviewer.id} className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <div className="font-medium">{reviewer.name}</div>
+                <div className="text-sm text-gray-600">{reviewer.role}</div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  reviewer.status === 'approved' ? 'bg-green-100 text-green-800' :
+                  reviewer.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                  'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {reviewer.status}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Comments Section */}
+      <div className="bg-white border rounded-lg p-4">
+        <h3 className="font-semibold mb-4">Comments & Discussion</h3>
+        <div className="space-y-3 max-h-60 overflow-y-auto">
+          {comments.map(comment => (
+            <div key={comment.id} className="flex space-x-3">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                  {comment.author.charAt(0).toUpperCase()}
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center space-x-2">
+                  <span className="font-medium text-sm">{comment.author}</span>
+                  <span className="text-xs text-gray-500">
+                    {comment.timestamp.toLocaleString()}
+                  </span>
+                  {comment.type === 'review' && (
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                      Review
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm text-gray-700 mt-1">{comment.content}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <IncidentReportForm
+        incident={incidentData}
+        onSave={handleSave}
+        onCancel={handleCancel}
+        
+        // Collaboration features
+        comments={comments}
+        onCommentAdd={handleCommentAdd}
+        onCommentEdit={(commentId, content) => updateComment(commentId, content)}
+        onCommentDelete={(commentId) => deleteComment(commentId)}
+        enableComments={true}
+        enableMentions={true}
+        
+        // Review and approval workflow
+        reviewers={reviewers}
+        onReviewerAdd={(reviewerId) => addReviewer(reviewerId)}
+        onReviewerRemove={(reviewerId) => removeReviewer(reviewerId)}
+        onReviewSubmit={handleReviewSubmit}
+        requireReview={true}
+        minRequiredApprovals={2}
+      />
+    </div>
+  );
+}
+```
+
+### Dynamic Field Configuration and Templates
+
+```tsx
+function CustomizableIncidentForm() {
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [customFields, setCustomFields] = useState([]);
+
+  const incidentTemplates = [
+    {
+      id: 'personal-injury',
+      name: 'Personal Injury Template',
+      description: 'For incidents involving crew member injuries',
+      data: {
+        incidentType: 'Personal Injury',
+        severity: 'high',
+        customFields: {
+          injuredPersonName: '',
+          injuryType: '',
+          bodyPartAffected: '',
+          medicalTreatment: '',
+          timeOffWork: ''
+        }
+      }
+    },
+    {
+      id: 'environmental',
+      name: 'Environmental Incident Template',
+      description: 'For pollution or environmental incidents',
+      data: {
+        incidentType: 'Environmental Incident',
+        severity: 'critical',
+        customFields: {
+          pollutantType: '',
+          quantityReleased: '',
+          environmentalImpact: '',
+          containmentActions: '',
+          authorityNotification: true
+        }
+      }
+    },
+    {
+      id: 'equipment-failure',
+      name: 'Equipment Failure Template',
+      description: 'For machinery and equipment failures',
+      data: {
+        incidentType: 'Equipment Failure',
+        severity: 'medium',
+        customFields: {
+          equipmentType: '',
+          failureMode: '',
+          downtime: '',
+          repairCost: '',
+          spareParts: ''
+        }
+      }
+    }
+  ];
+
+  const customFieldDefinitions = [
+    {
+      id: 'injuredPersonName',
+      type: 'text',
+      label: 'Injured Person Name',
+      required: true,
+      validation: (value) => value ? null : 'Name is required'
+    },
+    {
+      id: 'injuryType',
+      type: 'select',
+      label: 'Type of Injury',
+      required: true,
+      options: ['Cut/Laceration', 'Bruise', 'Burn', 'Fracture', 'Sprain', 'Other']
+    },
+    {
+      id: 'pollutantType',
+      type: 'select',
+      label: 'Pollutant Type',
+      required: true,
+      options: ['Oil', 'Chemical', 'Sewage', 'Garbage', 'Other']
+    },
+    {
+      id: 'quantityReleased',
+      type: 'text',
+      label: 'Quantity Released',
+      required: true,
+      validation: (value) => {
+        if (!value) return 'Quantity is required';
+        if (isNaN(Number(value))) return 'Must be a valid number';
+        return null;
+      }
+    }
+  ];
+
+  const handleTemplateSelect = (templateId) => {
+    const template = incidentTemplates.find(t => t.id === templateId);
+    setSelectedTemplate(template);
+    
+    // Load template data and custom fields
+    if (template) {
+      setIncidentData(template.data);
+      setCustomFields(Object.keys(template.data.customFields || {}));
+    }
+  };
+
+  const handleTemplateSave = (name, incidentData) => {
+    const newTemplate = {
+      id: `custom-${Date.now()}`,
+      name,
+      description: 'Custom template',
+      data: incidentData
+    };
+    
+    saveCustomTemplate(newTemplate);
+    showNotification('Template saved successfully', 'success');
+  };
+
+  const fieldVisibilityRules = {
+    injuredPersonName: (incident) => incident.incidentType === 'Personal Injury',
+    medicalTreatment: (incident) => incident.incidentType === 'Personal Injury',
+    pollutantType: (incident) => incident.incidentType === 'Environmental Incident',
+    quantityReleased: (incident) => incident.incidentType === 'Environmental Incident'
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Template Selection */}
+      <div className="bg-white border rounded-lg p-4">
+        <h3 className="font-semibold mb-4">Incident Templates</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {incidentTemplates.map(template => (
+            <div 
+              key={template.id}
+              className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                selectedTemplate?.id === template.id 
+                  ? 'border-blue-500 bg-blue-50' 
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+              onClick={() => handleTemplateSelect(template.id)}
+            >
+              <h4 className="font-medium">{template.name}</h4>
+              <p className="text-sm text-gray-600 mt-1">{template.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <IncidentReportForm
+        incident={incidentData}
+        onSave={handleSave}
+        onCancel={handleCancel}
+        
+        // Dynamic field configuration
+        customFields={customFieldDefinitions.filter(field => 
+          customFields.includes(field.id)
+        )}
+        onCustomFieldChange={(fieldId, value) => {
+          setIncidentData(prev => ({
+            ...prev,
+            customFields: { ...prev.customFields, [fieldId]: value }
+          }));
+        }}
+        fieldVisibilityRules={fieldVisibilityRules}
+        
+        // Templates and pre-filling
+        templates={incidentTemplates}
+        onTemplateSelect={handleTemplateSelect}
+        onTemplateSave={handleTemplateSave}
+        enableTemplates={true}
+      />
+    </div>
+  );
+}
+```
+
+### Maritime Authority Notification and Emergency Response
+
+```tsx
+function EmergencyResponseIncidentForm() {
+  const [emergencyMode, setEmergencyMode] = useState(false);
+  const [complianceIssues, setComplianceIssues] = useState([]);
+  const [authorityNotifications, setAuthorityNotifications] = useState([]);
+
+  const complianceChecks = [
+    {
+      regulation: 'SOLAS Chapter IX',
+      check: (incident) => incident.severity === 'critical' && incident.incidentType === 'Fire/Explosion',
+      message: 'Critical fire incidents require immediate flag state notification'
+    },
+    {
+      regulation: 'MARPOL Annex I',
+      check: (incident) => incident.incidentType === 'Environmental Incident',
+      message: 'Environmental incidents require port state and coastal authority notification'
+    },
+    {
+      regulation: 'MLC 2006',
+      check: (incident) => incident.incidentType === 'Personal Injury' && incident.severity === 'critical',
+      message: 'Serious crew injuries require flag state and next port notification'
+    }
+  ];
+
+  const handleEmergencyProtocolTrigger = (incident) => {
+    setEmergencyMode(true);
+    
+    // Trigger emergency protocols
+    const emergencyActions = [
+      'Notify bridge team immediately',
+      'Activate emergency response team',
+      'Prepare for potential evacuation',
+      'Contact nearest coast guard',
+      'Notify company emergency hotline'
+    ];
+    
+    // Auto-populate immediate actions
+    setIncidentData(prev => ({
+      ...prev,
+      immediateActions: emergencyActions.join('\n'),
+      emergencyProtocolActivated: true,
+      emergencyActivatedAt: new Date()
+    }));
+    
+    // Send immediate notifications
+    notifyEmergencyContacts(incident);
+    
+    showNotification('Emergency protocols activated', 'error');
+  };
+
+  const handleAuthorityNotify = (incident, authorities) => {
+    const notifications = authorities.map(authority => ({
+      id: `notification-${Date.now()}-${authority}`,
+      authority,
+      incident: incident.id,
+      notifiedAt: new Date(),
+      status: 'sent',
+      confirmationNumber: generateConfirmationNumber()
+    }));
+    
+    setAuthorityNotifications(prev => [...prev, ...notifications]);
+    
+    // Send actual notifications (API call)
+    sendAuthorityNotifications(incident, authorities);
+    
+    showNotification(`Notifications sent to ${authorities.length} authorities`, 'success');
+  };
+
+  const checkCompliance = (incident) => {
+    const issues = complianceChecks
+      .filter(check => check.check(incident))
+      .map(check => ({
+        regulation: check.regulation,
+        message: check.message,
+        severity: 'warning'
+      }));
+    
+    setComplianceIssues(issues);
+    return issues;
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Emergency Mode Indicator */}
+      {emergencyMode && (
+        <div className="bg-red-50 border-2 border-red-500 rounded-lg p-4">
+          <div className="flex items-center space-x-2">
+            <AlertTriangle className="h-6 w-6 text-red-600" />
+            <div>
+              <h3 className="font-bold text-red-900">EMERGENCY MODE ACTIVATED</h3>
+              <p className="text-red-800">Emergency response protocols are in effect. All notifications have been sent to emergency contacts.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Compliance Issues */}
+      {complianceIssues.length > 0 && (
+        <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-4">
+          <h3 className="font-semibold text-yellow-900 mb-3">Regulatory Compliance Requirements</h3>
+          <div className="space-y-2">
+            {complianceIssues.map((issue, index) => (
+              <div key={index} className="flex items-start space-x-2">
+                <AlertTriangle className="h-4 w-4 text-yellow-600 mt-0.5" />
+                <div>
+                  <div className="font-medium text-yellow-800">{issue.regulation}</div>
+                  <div className="text-sm text-yellow-700">{issue.message}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Authority Notifications */}
+      {authorityNotifications.length > 0 && (
+        <div className="bg-blue-50 border border-blue-300 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-900 mb-3">Authority Notifications Sent</h3>
+          <div className="space-y-2">
+            {authorityNotifications.map(notification => (
+              <div key={notification.id} className="flex items-center justify-between p-2 bg-white rounded border">
+                <div>
+                  <div className="font-medium">{notification.authority}</div>
+                  <div className="text-sm text-gray-600">
+                    Sent: {notification.notifiedAt.toLocaleString()}
+                  </div>
+                </div>
+                <div className="text-sm">
+                  Ref: {notification.confirmationNumber}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <IncidentReportForm
+        incident={incidentData}
+        onSave={handleSave}
+        onCancel={handleCancel}
+        
+        // Maritime-specific enhancements
+        emergencyMode={emergencyMode}
+        onEmergencyProtocolTrigger={handleEmergencyProtocolTrigger}
+        complianceChecks={complianceChecks}
+        maritimeAuthorityNotification={true}
+        onAuthorityNotify={handleAuthorityNotify}
+        
+        // Validation with compliance checking
+        customValidation={(incident) => {
+          const issues = checkCompliance(incident);
+          return issues.reduce((acc, issue) => {
+            acc[`compliance_${issue.regulation}`] = issue.message;
+            return acc;
+          }, {});
+        }}
+      />
+    </div>
+  );
+}
+```
+
+## Enhanced Performance Considerations
+
+- **Form State Management**: Optimized state updates with smart batching for complex forms
+- **Validation**: Asynchronous validation with debouncing to prevent performance impact
+- **File Handling**: Progressive upload with chunking for large files and evidence collection
+- **Auto-save**: Intelligent auto-save with conflict resolution and offline support
+- **Workflow Management**: Efficient step navigation with preloading and smart caching
+- **Collaboration**: Real-time synchronization with optimistic updates for seamless teamwork
+
+## Enhanced Accessibility Features
+
+- **Form Navigation**: Intuitive step-by-step progression with keyboard shortcuts
+- **Screen Reader Support**: Comprehensive ARIA labels and live regions for dynamic content
+- **Keyboard Navigation**: Full keyboard accessibility with customizable shortcuts
+- **Error Handling**: Clear validation messages with suggestions and guided correction
+- **Voice Commands**: Optional voice input for hands-free operation in emergency situations
+- **High Contrast**: Maritime-optimized color schemes for various lighting conditions
+
+## Enterprise Patterns
+
+```tsx
+// Workflow-enabled form with auto-save
 <IncidentReportForm
-  mode="create"
-  onSubmit={handleSubmit}
-  onCancel={handleCancel}
+  enableWorkflow={true}
+  currentStep={2}
+  workflowSteps={customWorkflowSteps}
+  autoSave={true}
+  autoSaveInterval={30000}
+  onWorkflowComplete={handleWorkflowComplete}
 />
 
-// Edit existing report
+// Collaborative form with review system
 <IncidentReportForm
-  mode="edit"
-  initialData={existingReport}
-  onSubmit={handleUpdate}
+  enableComments={true}
+  enableMentions={true}
+  reviewers={assignedReviewers}
+  requireReview={true}
+  minRequiredApprovals={2}
+  onReviewSubmit={handleReviewSubmit}
 />
 
-// View-only mode
+// Template-based form with custom fields
 <IncidentReportForm
-  mode="view"
-  initialData={reportData}
+  templates={incidentTemplates}
+  enableTemplates={true}
+  customFields={dynamicFields}
+  fieldVisibilityRules={visibilityRules}
+  onTemplateSelect={handleTemplateSelect}
+/>
+
+// Emergency response form
+<IncidentReportForm
+  emergencyMode={true}
+  complianceChecks={maritimeComplianceChecks}
+  maritimeAuthorityNotification={true}
+  onEmergencyProtocolTrigger={handleEmergencyResponse}
+  onAuthorityNotify={handleAuthorityNotification}
+/>
+
+// Evidence collection form
+<IncidentReportForm
+  attachments={evidenceFiles}
+  maxAttachments={20}
+  maxFileSize={10485760}
+  allowedFileTypes={['image/*', 'application/pdf', 'video/*']}
+  onAttachmentUpload={handleEvidenceUpload}
 />
 ```
 
-## Integration with Maritime Systems
+## Enhanced Integration with Maritime Systems
 
-The IncidentReportForm component integrates seamlessly with:
-- **Safety Management**: ISM and TMSA compliance documentation
-- **Emergency Response**: Real-time incident notification and response
-- **Regulatory Reporting**: Automated submission to maritime authorities
-- **Trend Analysis**: Data collection for safety trend analysis
-- **Training Systems**: Incident-based learning and training updates
+The enhanced IncidentReportForm component provides comprehensive integration with:
 
-Use this component to ensure comprehensive incident documentation and maintain compliance with maritime safety regulations.
+### Safety Management Systems
+- **ISM Code Compliance**: Automated documentation aligned with ISM Code requirements
+- **TMSA Integration**: Seamless integration with TMSA assessment and improvement processes
+- **Safety Culture**: Incident reporting that promotes transparent safety culture
+- **Trend Analysis**: Data collection optimized for safety trend identification and analysis
+
+### Emergency Response Systems
+- **Emergency Protocols**: Automated triggering of emergency response procedures
+- **Communication Systems**: Integration with vessel communication and alert systems
+- **Evacuation Procedures**: Support for emergency evacuation documentation and tracking
+- **Search and Rescue**: Integration with SAR coordination and reporting systems
+
+### Regulatory Compliance
+- **Authority Notification**: Automated notifications to maritime authorities and regulators
+- **Flag State Reporting**: Streamlined reporting to flag state administrations
+- **Port State Control**: Documentation aligned with PSC inspection requirements
+- **Environmental Compliance**: MARPOL and environmental regulation compliance tracking
+
+### Fleet Management Integration
+- **Vessel Systems**: Integration with vessel management and operational systems
+- **Crew Management**: Connection to crew training and certification tracking
+- **Maintenance Systems**: Link incident reports to planned maintenance and inspections
+- **Performance Analytics**: Integration with fleet performance and efficiency monitoring
+
+### Advanced Analytics and Intelligence
+- **Predictive Analytics**: Machine learning integration for incident prediction and prevention
+- **Root Cause Analysis**: AI-powered analysis for systematic root cause identification
+- **Risk Assessment**: Automated risk scoring and mitigation recommendation systems
+- **Benchmarking**: Industry-wide incident benchmarking and best practice identification
+
+Use this enhanced component to ensure comprehensive incident documentation, maintain regulatory compliance, and drive continuous improvement in maritime safety management while supporting emergency response and collaborative investigation processes.

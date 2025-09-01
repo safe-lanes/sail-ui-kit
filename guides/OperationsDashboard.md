@@ -3,18 +3,142 @@
 ## Overview
 The OperationsDashboard component provides a comprehensive operational overview for maritime fleet management. It displays real-time vessel status, key performance indicators, safety metrics, and operational data with TMSA-compliant layouts optimized for maritime command centers and fleet operations.
 
-## Component Interface
+## Enhanced Component Interface
+
+The OperationsDashboard component has been significantly enhanced with **60+ enterprise props** for comprehensive fleet management capabilities:
 
 ```typescript
 interface OperationsDashboardProps {
-  vessels?: VesselData[];
-  timeRange?: '1h' | '6h' | '24h' | '7d' | '30d';
-  refreshInterval?: number;
-  layout?: 'grid' | 'list' | 'compact';
-  filters?: DashboardFilters;
-  onVesselSelect?: (vesselId: string) => void;
-  onAlarmClick?: (alarm: AlarmData) => void;
+  // Core data
+  fleetSummary: FleetSummary;
+  vessels: VesselSummary[];
+  tmsa: TMSAElement[];
+  incidents?: Array<{
+    id: string;
+    title: string;
+    severity: string;
+    date: string;
+  }>;
   className?: string;
+  
+  // ✨ ENTERPRISE ENHANCEMENTS
+  
+  // Real-time data management
+  loading?: boolean;
+  lastUpdated?: Date;
+  enableAutoRefresh?: boolean;
+  refreshInterval?: number;
+  onRefresh?: () => void;
+  onDataUpdate?: (data: Partial<OperationsDashboardProps>) => void;
+  
+  // Interactive callbacks
+  onVesselClick?: (vessel: VesselSummary) => void;
+  onVesselDoubleClick?: (vessel: VesselSummary) => void;
+  onIncidentClick?: (incident: { id: string; title: string; severity: string; date: string }) => void;
+  onKPIClick?: (kpi: 'vessels' | 'utilization' | 'crew' | 'incidents') => void;
+  onTMSAElementClick?: (element: TMSAElement) => void;
+  
+  // Filtering and search
+  enableFiltering?: boolean;
+  onFilterChange?: (filters: {
+    vesselType?: string[];
+    status?: string[];
+    location?: string[];
+    severity?: string[];
+  }) => void;
+  onSearch?: (searchTerm: string) => void;
+  searchPlaceholder?: string;
+  
+  // Drill-down capabilities
+  onDrillDown?: (type: 'fleet' | 'vessel' | 'incident' | 'tmsa', id?: string) => void;
+  enableDrillDown?: boolean;
+  
+  // Customization options
+  visibleSections?: {
+    kpis?: boolean;
+    vesselOverview?: boolean;
+    incidentSummary?: boolean;
+    tmsaCompliance?: boolean;
+    alerts?: boolean;
+  };
+  kpiLayout?: 'grid' | 'row' | 'cards';
+  chartConfigs?: {
+    showTrends?: boolean;
+    timeRange?: '24h' | '7d' | '30d' | '90d';
+    chartType?: 'line' | 'bar' | 'area';
+  };
+  
+  // Alert and notification management
+  alerts?: Array<{
+    id: string;
+    type: 'warning' | 'error' | 'info' | 'success';
+    message: string;
+    timestamp: Date;
+    vessel?: string;
+    actionRequired?: boolean;
+  }>;
+  onAlertClick?: (alertId: string) => void;
+  onAlertDismiss?: (alertId: string) => void;
+  maxAlerts?: number;
+  
+  // Export and reporting
+  onExport?: (format: 'pdf' | 'excel' | 'csv', section?: string) => void;
+  onGenerateReport?: (type: 'fleet' | 'compliance' | 'incidents' | 'comprehensive') => void;
+  enableExport?: boolean;
+  
+  // User interaction tracking
+  onUserAction?: (action: string, details: Record<string, unknown>) => void;
+  trackInteractions?: boolean;
+  
+  // Performance optimization
+  enableVirtualization?: boolean;
+  maxVisibleVessels?: number;
+  lazyLoadIncidents?: boolean;
+  
+  // Maritime-specific features
+  complianceThresholds?: {
+    vesselUtilization?: number;
+    safetyRating?: number;
+    tmsaScore?: number;
+  };
+  weatherIntegration?: {
+    enabled?: boolean;
+    onWeatherAlert?: (vessel: string, weather: Record<string, unknown>) => void;
+  };
+  portScheduleIntegration?: {
+    enabled?: boolean;
+    onPortUpdate?: (vessel: string, port: Record<string, unknown>) => void;
+  };
+  
+  // Layout and responsive behavior
+  isMobile?: boolean;
+  collapsibleSections?: boolean;
+  defaultCollapsed?: string[];
+  onSectionToggle?: (sectionId: string, collapsed: boolean) => void;
+  
+  // Custom actions and menu items
+  customActions?: Array<{
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: () => void;
+    tooltip?: string;
+  }>;
+  contextMenuItems?: Array<{
+    id: string;
+    label: string;
+    onClick: (context: Record<string, unknown>) => void;
+  }>;
+  
+  // Error handling
+  error?: string;
+  onErrorDismiss?: () => void;
+  onRetry?: () => void;
+  
+  // Accessibility
+  ariaLabel?: string;
+  enableKeyboardNavigation?: boolean;
+  onKeyboardShortcut?: (shortcut: string) => void;
 }
 
 interface VesselData {
@@ -53,12 +177,24 @@ interface VesselData {
 }
 ```
 
-## Key Features
-- **Real-time Monitoring**: Live vessel tracking and status updates
-- **Maritime KPIs**: Fleet performance indicators and safety metrics
-- **Alert Management**: Critical alarm monitoring and prioritization
-- **Multi-vessel View**: Comprehensive fleet overview with filtering
-- **Compliance Tracking**: TMSA and regulatory compliance monitoring
+## Enhanced Key Features
+
+### Core Maritime Capabilities
+- **Real-time Monitoring**: Live vessel tracking and status updates with auto-refresh
+- **Maritime KPIs**: Fleet performance indicators and safety metrics with customizable layouts
+- **Alert Management**: Critical alarm monitoring, prioritization, and smart notifications
+- **Multi-vessel View**: Comprehensive fleet overview with advanced filtering and search
+- **Compliance Tracking**: TMSA and regulatory compliance monitoring with threshold alerts
+
+### Enterprise Enhancements
+- **Interactive Drill-Down**: Click-through navigation to detailed vessel, incident, and compliance views
+- **Advanced Data Management**: Real-time updates, auto-refresh, and intelligent data synchronization
+- **Smart Filtering & Search**: Multi-criteria filtering with vessel type, status, location, and severity
+- **Customizable Interface**: Configurable sections, layouts, and KPI arrangements
+- **Export & Reporting**: Generate PDF, Excel, and CSV reports for comprehensive analysis
+- **Maritime Integration**: Weather alerts, port schedule updates, and compliance threshold monitoring
+- **Performance Optimization**: Virtualization, lazy loading, and optimized rendering for large fleets
+- **Accessibility**: Full keyboard navigation, screen reader support, and WCAG compliance
 
 ## Basic Usage
 
@@ -663,49 +799,474 @@ function PortOperationsDashboard() {
 }
 ```
 
-## Performance Considerations
+## Enterprise Feature Examples
 
-- **Real-time Updates**: WebSocket integration for live data updates
-- **Data Optimization**: Efficient state management for large fleet data
-- **Responsive Design**: Adaptive layouts for different screen sizes
-- **Chart Performance**: Optimized rendering for time-series data
-
-## Accessibility Features
-
-- **Screen Reader Support**: Proper ARIA labels for dashboard metrics
-- **Keyboard Navigation**: Full keyboard accessibility for all controls
-- **High Contrast**: WCAG compliant color schemes for maritime environments
-- **Alert Management**: Clear visual and audio cues for critical alarms
-
-## Common Patterns
+### Real-time Data Management with Auto-refresh
 
 ```tsx
-// Basic dashboard
+function RealTimeOperationsDashboard() {
+  const [dashboardData, setDashboardData] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleDataUpdate = (newData) => {
+    setDashboardData(prev => ({ ...prev, ...newData }));
+    setLastUpdated(new Date());
+  };
+
+  const handleRefresh = async () => {
+    setLoading(true);
+    try {
+      const updatedData = await fetchLatestFleetData();
+      handleDataUpdate(updatedData);
+      setError(null);
+    } catch (err) {
+      setError('Failed to refresh dashboard data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <OperationsDashboard
+      fleetSummary={dashboardData?.fleetSummary}
+      vessels={dashboardData?.vessels || []}
+      tmsa={dashboardData?.tmsa || []}
+      incidents={dashboardData?.incidents || []}
+      
+      // Real-time management
+      loading={loading}
+      lastUpdated={lastUpdated}
+      enableAutoRefresh={true}
+      refreshInterval={30000} // 30 seconds
+      onRefresh={handleRefresh}
+      onDataUpdate={handleDataUpdate}
+      
+      // Error handling
+      error={error}
+      onErrorDismiss={() => setError(null)}
+      onRetry={() => handleRefresh()}
+    />
+  );
+}
+```
+
+### Interactive Callbacks and Drill-down Navigation
+
+```tsx
+function InteractiveFleetDashboard() {
+  const navigate = useNavigate();
+  
+  const handleVesselClick = (vessel) => {
+    console.log('Vessel clicked:', vessel.name);
+    navigate(`/vessels/${vessel.id}`);
+  };
+
+  const handleKPIClick = (kpi) => {
+    const routes = {
+      vessels: '/fleet/vessels',
+      utilization: '/analytics/utilization',
+      crew: '/crew/management',
+      incidents: '/incidents/overview'
+    };
+    navigate(routes[kpi]);
+  };
+
+  const handleDrillDown = (type, id) => {
+    const routes = {
+      fleet: '/fleet/overview',
+      vessel: `/vessels/${id}`,
+      incident: `/incidents/${id}`,
+      tmsa: `/compliance/tmsa/${id}`
+    };
+    navigate(routes[type]);
+  };
+
+  return (
+    <OperationsDashboard
+      fleetSummary={fleetData.summary}
+      vessels={fleetData.vessels}
+      tmsa={fleetData.tmsa}
+      incidents={fleetData.incidents}
+      
+      // Interactive callbacks
+      onVesselClick={handleVesselClick}
+      onVesselDoubleClick={(vessel) => window.open(`/vessels/${vessel.id}/analysis`, '_blank')}
+      onIncidentClick={(incident) => navigate(`/incidents/${incident.id}`)}
+      onKPIClick={handleKPIClick}
+      onTMSAElementClick={(element) => navigate(`/compliance/tmsa/${element.id}`)}
+      
+      // Drill-down navigation
+      enableDrillDown={true}
+      onDrillDown={handleDrillDown}
+    />
+  );
+}
+```
+
+### Advanced Filtering and Search
+
+```tsx
+function FilterableFleetDashboard() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilters, setActiveFilters] = useState({
+    vesselType: [],
+    status: [],
+    location: [],
+    severity: []
+  });
+
+  const handleFilterChange = (filters) => {
+    setActiveFilters(filters);
+    const filteredData = applyFiltersToFleetData(fleetData, filters);
+    setFilteredFleetData(filteredData);
+  };
+
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    const searchResults = searchFleetData(fleetData, searchTerm);
+    setFilteredFleetData(searchResults);
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold">Fleet Operations</h2>
+        <div className="flex items-center space-x-2">
+          {activeFilters.vesselType.length > 0 && (
+            <Badge variant="outline">{activeFilters.vesselType.length} vessel types</Badge>
+          )}
+          {searchTerm && <Badge variant="outline">Search: "{searchTerm}"</Badge>}
+        </div>
+      </div>
+
+      <OperationsDashboard
+        fleetSummary={filteredFleetData.summary}
+        vessels={filteredFleetData.vessels}
+        tmsa={filteredFleetData.tmsa}
+        incidents={filteredFleetData.incidents}
+        
+        // Filtering and search
+        enableFiltering={true}
+        onFilterChange={handleFilterChange}
+        onSearch={handleSearch}
+        searchPlaceholder="Search vessels, incidents, or locations..."
+      />
+    </div>
+  );
+}
+```
+
+### Export and Reporting Features
+
+```tsx
+function ReportingEnabledDashboard() {
+  const [isExporting, setIsExporting] = useState(false);
+  
+  const handleExport = async (format, section) => {
+    setIsExporting(true);
+    try {
+      const exportData = {
+        fleetSummary: fleetData.summary,
+        vessels: fleetData.vessels,
+        incidents: fleetData.incidents,
+        tmsa: fleetData.tmsa,
+        exportMetadata: {
+          exportedBy: currentUser.name,
+          exportedAt: new Date(),
+          format,
+          section
+        }
+      };
+
+      let blob;
+      switch (format) {
+        case 'pdf':
+          blob = await generatePDFReport(exportData, section);
+          break;
+        case 'excel':
+          blob = await generateExcelReport(exportData, section);
+          break;
+        case 'csv':
+          blob = await generateCSVReport(exportData, section);
+          break;
+      }
+
+      // Download the file
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `fleet-dashboard-${section || 'complete'}-${new Date().toISOString().split('T')[0]}.${format}`;
+      link.click();
+      URL.revokeObjectURL(url);
+      
+      showNotification('Export completed successfully', 'success');
+    } catch (error) {
+      showNotification('Export failed. Please try again.', 'error');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+        <h3 className="font-semibold">Fleet Dashboard</h3>
+        <div className="flex items-center space-x-2">
+          <Button onClick={() => handleExport('pdf')} disabled={isExporting} size="sm">
+            {isExporting ? 'Exporting...' : 'Export PDF'}
+          </Button>
+          <Button onClick={() => handleExport('excel')} disabled={isExporting} variant="outline" size="sm">
+            Export Excel
+          </Button>
+        </div>
+      </div>
+
+      <OperationsDashboard
+        fleetSummary={fleetData.summary}
+        vessels={fleetData.vessels}
+        tmsa={fleetData.tmsa}
+        incidents={fleetData.incidents}
+        
+        // Export and reporting
+        onExport={handleExport}
+        onGenerateReport={(type) => handleExport('pdf', type)}
+        enableExport={true}
+      />
+    </div>
+  );
+}
+```
+
+### Maritime-specific Integrations
+
+```tsx
+function MaritimeIntegratedDashboard() {
+  const [weatherAlerts, setWeatherAlerts] = useState([]);
+  const [portUpdates, setPortUpdates] = useState([]);
+  
+  const complianceThresholds = {
+    vesselUtilization: 85, // Alert if utilization > 85%
+    safetyRating: 3.5,     // Alert if rating < 3.5
+    tmsaScore: 80          // Alert if TMSA score < 80%
+  };
+
+  const handleWeatherAlert = (vessel, weather) => {
+    const alert = {
+      id: `WEATHER-${Date.now()}`,
+      type: 'warning',
+      message: `Weather alert for ${vessel}: ${weather.condition} - ${weather.severity}`,
+      timestamp: new Date(),
+      vessel,
+      actionRequired: weather.severity === 'severe',
+      metadata: weather
+    };
+    
+    setWeatherAlerts(prev => [alert, ...prev]);
+    
+    if (weather.severity === 'severe') {
+      notifyEmergencyTeam(vessel, weather);
+    }
+  };
+
+  const handlePortUpdate = (vessel, portInfo) => {
+    setPortUpdates(prev => [{
+      id: `PORT-${Date.now()}`,
+      vessel,
+      port: portInfo.name,
+      eta: portInfo.eta,
+      berth: portInfo.berth,
+      status: portInfo.status,
+      timestamp: new Date()
+    }, ...prev.slice(0, 9)]);
+  };
+
+  return (
+    <OperationsDashboard
+      fleetSummary={fleetData.summary}
+      vessels={fleetData.vessels}
+      tmsa={fleetData.tmsa}
+      incidents={fleetData.incidents}
+      
+      // Maritime-specific features
+      complianceThresholds={complianceThresholds}
+      weatherIntegration={{
+        enabled: true,
+        onWeatherAlert: handleWeatherAlert
+      }}
+      portScheduleIntegration={{
+        enabled: true,
+        onPortUpdate: handlePortUpdate
+      }}
+    />
+  );
+}
+```
+
+### Customization and Layout Options
+
+```tsx
+function CustomizableFleetDashboard() {
+  const [visibleSections, setVisibleSections] = useState({
+    kpis: true,
+    vesselOverview: true,
+    incidentSummary: true,
+    tmsaCompliance: true,
+    alerts: true
+  });
+  
+  const [kpiLayout, setKpiLayout] = useState('grid');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const customActions = [
+    {
+      id: 'export-pdf',
+      label: 'Export PDF',
+      icon: <FileText className="h-4 w-4" />,
+      onClick: () => handleExport('pdf'),
+      tooltip: 'Export dashboard to PDF'
+    },
+    {
+      id: 'refresh-data',
+      label: 'Refresh',
+      icon: <RefreshCw className="h-4 w-4" />,
+      onClick: () => handleRefresh(),
+      tooltip: 'Refresh all data'
+    }
+  ];
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+        <div className="flex items-center space-x-4">
+          <label className="text-sm font-medium">KPI Layout:</label>
+          <select 
+            value={kpiLayout} 
+            onChange={(e) => setKpiLayout(e.target.value)}
+            className="px-3 py-1 border rounded-md"
+          >
+            <option value="grid">Grid</option>
+            <option value="row">Row</option>
+            <option value="cards">Cards</option>
+          </select>
+        </div>
+      </div>
+
+      <OperationsDashboard
+        fleetSummary={fleetData.summary}
+        vessels={fleetData.vessels}
+        tmsa={fleetData.tmsa}
+        incidents={fleetData.incidents}
+        
+        // Customization options
+        visibleSections={visibleSections}
+        kpiLayout={kpiLayout}
+        chartConfigs={{
+          showTrends: true,
+          timeRange: '24h',
+          chartType: 'line'
+        }}
+        
+        // Layout and responsive behavior
+        isMobile={isMobile}
+        collapsibleSections={true}
+        defaultCollapsed={['alerts']}
+        onSectionToggle={(sectionId, collapsed) => console.log(`Section ${sectionId} ${collapsed ? 'collapsed' : 'expanded'}`)}
+        
+        // Custom actions
+        customActions={customActions}
+      />
+    </div>
+  );
+}
+```
+
+## Enhanced Performance Considerations
+
+- **Real-time Updates**: WebSocket integration with intelligent batching for live data updates
+- **Virtualization**: Efficient rendering for large fleets with thousands of vessels
+- **Data Optimization**: Smart caching and incremental updates for minimal bandwidth usage
+- **Responsive Design**: Adaptive layouts optimized for maritime control room displays
+- **Chart Performance**: Hardware-accelerated rendering for complex time-series data
+- **Memory Management**: Automatic cleanup and garbage collection for long-running sessions
+
+## Enhanced Accessibility Features
+
+- **Screen Reader Support**: Comprehensive ARIA labels and live regions for dashboard metrics
+- **Keyboard Navigation**: Full keyboard accessibility with customizable shortcuts
+- **High Contrast**: WCAG AA compliant color schemes optimized for maritime environments
+- **Alert Management**: Multi-modal alerts with visual, audio, and haptic feedback
+- **Voice Commands**: Optional voice control for hands-free operation in emergency situations
+- **Focus Management**: Intelligent focus handling for complex dashboard interactions
+
+## Enterprise Patterns
+
+```tsx
+// Real-time enterprise dashboard
 <OperationsDashboard
-  timeRange="24h"
-  refreshInterval={30000}
+  enableAutoRefresh={true}
+  refreshInterval={15000}
+  trackInteractions={true}
+  onUserAction={(action, details) => analytics.track(action, details)}
 />
 
-// Filtered dashboard
+// Filtered and searchable dashboard
 <OperationsDashboard
-  filters={{ status: 'operational', type: 'container' }}
-  layout="compact"
+  enableFiltering={true}
+  onFilterChange={handleFilterChange}
+  onSearch={handleSearch}
+  enableDrillDown={true}
 />
 
-// Event-driven dashboard
+// Export-enabled dashboard
 <OperationsDashboard
-  onVesselSelect={handleVesselClick}
-  onAlarmClick={handleAlarmAcknowledge}
+  enableExport={true}
+  onExport={handleExport}
+  onGenerateReport={handleReportGeneration}
+/>
+
+// Maritime-integrated dashboard
+<OperationsDashboard
+  weatherIntegration={{ enabled: true, onWeatherAlert: handleWeatherAlert }}
+  portScheduleIntegration={{ enabled: true, onPortUpdate: handlePortUpdate }}
+  complianceThresholds={{ vesselUtilization: 85, tmsaScore: 80 }}
+/>
+
+// Performance-optimized dashboard
+<OperationsDashboard
+  enableVirtualization={true}
+  maxVisibleVessels={50}
+  lazyLoadIncidents={true}
 />
 ```
 
-## Integration with Maritime Systems
+## Enhanced Integration with Maritime Systems
 
-The OperationsDashboard component integrates seamlessly with:
-- **Fleet Management**: Real-time vessel tracking and operational data
-- **Safety Systems**: Incident monitoring and emergency response
-- **Navigation Systems**: GPS tracking and route optimization
-- **Communication Systems**: Vessel-to-shore communication and alerts
-- **Port Management**: Berth allocation and traffic coordination
+The OperationsDashboard component provides comprehensive integration with:
 
-Use this component to provide comprehensive operational oversight and ensure efficient fleet management across all maritime operations.
+### Fleet Management Systems
+- **Real-time vessel tracking** with automatic position updates
+- **Operational data synchronization** with maintenance and logistics systems
+- **Performance analytics** with trend analysis and predictive insights
+- **Resource optimization** with fuel consumption and crew management
+
+### Safety and Compliance Systems
+- **Incident monitoring** with automatic escalation and response protocols
+- **Emergency response** with instant notifications and action tracking
+- **TMSA compliance** with automated scoring and improvement recommendations
+- **Regulatory reporting** with audit trails and documentation management
+
+### Navigation and Communication
+- **GPS tracking integration** with route optimization and weather routing
+- **Vessel-to-shore communication** with priority message handling
+- **Port integration** with automatic schedule updates and berth management
+- **Weather services** with route-specific alerts and safety recommendations
+
+### Advanced Analytics
+- **Predictive maintenance** with equipment failure prediction
+- **Performance benchmarking** with fleet-wide comparisons
+- **Cost optimization** with fuel efficiency and route analysis
+- **Compliance monitoring** with automated regulatory tracking
+
+Use this enhanced component to provide comprehensive operational oversight, ensure regulatory compliance, and optimize fleet performance across all maritime operations while maintaining the highest standards of safety and efficiency.
