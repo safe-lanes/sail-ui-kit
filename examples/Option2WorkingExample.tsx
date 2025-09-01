@@ -16,7 +16,8 @@ import {
   Info,
   CheckCircle,
   Wrench,
-  Cloud
+  Cloud,
+  User
 } from 'lucide-react';
 
 // Notification interface
@@ -29,6 +30,30 @@ interface Notification {
   timestamp: Date;
   read: boolean;
   actionRequired?: boolean;
+}
+
+// Profile interface
+interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  avatar?: string;
+  vessel: string;
+  department: string;
+  joinDate: string;
+  phoneNumber: string;
+  emergencyContact: {
+    name: string;
+    phone: string;
+    relationship: string;
+  };
+  certifications: {
+    name: string;
+    issueDate: string;
+    expiryDate: string;
+    status: 'valid' | 'expiring' | 'expired';
+  }[];
 }
 
 // Settings interface
@@ -57,6 +82,7 @@ function Option2WorkingExample() {
   // Panel state
   const [showNotificationPanel, setShowNotificationPanel] = useState(false);
   const [showSettingsPanel, setShowSettingsPanel] = useState(false);
+  const [showProfilePanel, setShowProfilePanel] = useState(false);
 
   // Sample notifications data
   const [notifications, setNotifications] = useState<Notification[]>([
@@ -101,6 +127,44 @@ function Option2WorkingExample() {
       actionRequired: false
     }
   ]);
+
+  // Profile state
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    id: '1',
+    name: 'Captain James Wilson',
+    email: 'j.wilson@maritime.com',
+    role: 'Master',
+    avatar: '/api/placeholder/40/40',
+    vessel: 'MV Atlantic Star',
+    department: 'Navigation',
+    joinDate: '2019-03-15',
+    phoneNumber: '+1-555-0123',
+    emergencyContact: {
+      name: 'Sarah Wilson',
+      phone: '+1-555-0456',
+      relationship: 'Spouse'
+    },
+    certifications: [
+      {
+        name: 'Master Mariner License',
+        issueDate: '2018-01-15',
+        expiryDate: '2026-01-15',
+        status: 'valid'
+      },
+      {
+        name: 'STCW Basic Safety Training',
+        issueDate: '2020-06-10',
+        expiryDate: '2025-06-10',
+        status: 'expiring'
+      },
+      {
+        name: 'Radar Observer Certificate',
+        issueDate: '2019-03-20',
+        expiryDate: '2024-03-20',
+        status: 'expired'
+      }
+    ]
+  });
 
   // Settings state
   const [settings, setSettings] = useState<AppSettings>({
@@ -175,12 +239,21 @@ function Option2WorkingExample() {
     console.log("Bell icon clicked!");
     setShowNotificationPanel(true);
     setShowSettingsPanel(false); // Close settings if open
+    setShowProfilePanel(false); // Close profile if open
   };
 
   const handleSettingsClick = () => {
     console.log("Gear icon clicked!");
     setShowSettingsPanel(true);
     setShowNotificationPanel(false); // Close notifications if open
+    setShowProfilePanel(false); // Close profile if open
+  };
+
+  const handleProfileClick = () => {
+    console.log("Profile clicked!");
+    setShowProfilePanel(true);
+    setShowNotificationPanel(false); // Close notifications if open
+    setShowSettingsPanel(false); // Close settings if open
   };
 
   const handleLogout = () => {
@@ -227,6 +300,42 @@ function Option2WorkingExample() {
         [key]: value
       }
     }));
+  };
+
+  // Profile functions
+  const updateProfile = (field: keyof UserProfile, value: any) => {
+    setUserProfile(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const updateEmergencyContact = (field: string, value: string) => {
+    setUserProfile(prev => ({
+      ...prev,
+      emergencyContact: {
+        ...prev.emergencyContact,
+        [field]: value
+      }
+    }));
+  };
+
+  const saveProfile = () => {
+    console.log('Saving profile:', userProfile);
+    setShowProfilePanel(false);
+    
+    // Show success notification
+    const successNotification: Notification = {
+      id: Date.now().toString(),
+      type: 'compliance',
+      severity: 'low',
+      title: 'Profile Updated',
+      message: 'Your profile information has been updated successfully.',
+      timestamp: new Date(),
+      read: false,
+      actionRequired: false
+    };
+    setNotifications(prev => [successNotification, ...prev]);
   };
 
   const saveSettings = () => {
@@ -351,6 +460,12 @@ function Option2WorkingExample() {
                         className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
                       >
                         Test Gear Icon
+                      </button>
+                      <button 
+                        onClick={handleProfileClick}
+                        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                      >
+                        Test Profile
                       </button>
                     </div>
                   </div>
@@ -635,6 +750,179 @@ function Option2WorkingExample() {
                   className="flex-1 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
                   Save Settings
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Profile Panel - Shows when profile is clicked */}
+      {showProfilePanel && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50" 
+            onClick={() => setShowProfilePanel(false)} 
+          />
+          <div className="absolute right-0 top-0 h-full w-full max-w-lg bg-white shadow-xl">
+            <div className="flex h-full flex-col">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b p-4">
+                <div className="flex items-center gap-2">
+                  <User className="h-5 w-5" />
+                  <h2 className="text-lg font-semibold">Profile</h2>
+                </div>
+                <button
+                  onClick={() => setShowProfilePanel(false)}
+                  className="p-1 hover:bg-gray-100 rounded"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Profile Content */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                {/* Basic Information */}
+                <div>
+                  <h3 className="text-lg font-medium mb-4">Basic Information</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Full Name</label>
+                      <input
+                        type="text"
+                        value={userProfile.name}
+                        onChange={(e) => updateProfile('name', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Email</label>
+                      <input
+                        type="email"
+                        value={userProfile.email}
+                        onChange={(e) => updateProfile('email', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Role</label>
+                      <select
+                        value={userProfile.role}
+                        onChange={(e) => updateProfile('role', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      >
+                        <option value="Master">Master</option>
+                        <option value="Chief Officer">Chief Officer</option>
+                        <option value="Second Officer">Second Officer</option>
+                        <option value="Third Officer">Third Officer</option>
+                        <option value="Chief Engineer">Chief Engineer</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Vessel</label>
+                      <select
+                        value={userProfile.vessel}
+                        onChange={(e) => updateProfile('vessel', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      >
+                        <option value="MV Atlantic Star">MV Atlantic Star</option>
+                        <option value="MV Pacific Dawn">MV Pacific Dawn</option>
+                        <option value="MV Northern Light">MV Northern Light</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Phone Number</label>
+                      <input
+                        type="tel"
+                        value={userProfile.phoneNumber}
+                        onChange={(e) => updateProfile('phoneNumber', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Emergency Contact */}
+                <div>
+                  <h3 className="text-lg font-medium mb-4">Emergency Contact</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Contact Name</label>
+                      <input
+                        type="text"
+                        value={userProfile.emergencyContact.name}
+                        onChange={(e) => updateEmergencyContact('name', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Contact Phone</label>
+                      <input
+                        type="tel"
+                        value={userProfile.emergencyContact.phone}
+                        onChange={(e) => updateEmergencyContact('phone', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Relationship</label>
+                      <select
+                        value={userProfile.emergencyContact.relationship}
+                        onChange={(e) => updateEmergencyContact('relationship', e.target.value)}
+                        className="w-full border rounded px-3 py-2"
+                      >
+                        <option value="Spouse">Spouse</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Sibling">Sibling</option>
+                        <option value="Child">Child</option>
+                        <option value="Friend">Friend</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Certifications */}
+                <div>
+                  <h3 className="text-lg font-medium mb-4">Certifications</h3>
+                  <div className="space-y-3">
+                    {userProfile.certifications.map((cert, index) => (
+                      <div key={index} className="border rounded p-3">
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-medium">{cert.name}</h4>
+                          <span className={`px-2 py-1 text-xs rounded ${
+                            cert.status === 'expired' ? 'bg-red-100 text-red-800' :
+                            cert.status === 'expiring' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-green-100 text-green-800'
+                          }`}>
+                            {cert.status === 'expired' ? 'Expired' :
+                             cert.status === 'expiring' ? 'Expiring Soon' : 'Valid'}
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-600">
+                          Issued: {new Date(cert.issueDate).toLocaleDateString()}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Expires: {new Date(cert.expiryDate).toLocaleDateString()}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="border-t p-4 flex gap-3">
+                <button
+                  onClick={() => setShowProfilePanel(false)}
+                  className="flex-1 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={saveProfile}
+                  className="flex-1 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  Save Profile
                 </button>
               </div>
             </div>
