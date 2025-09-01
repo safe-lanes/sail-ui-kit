@@ -41,6 +41,125 @@ interface OperationsDashboardProps {
     date: string;
   }>;
   className?: string;
+  
+  // ✨ ENTERPRISE ENHANCEMENTS
+  
+  // Real-time data management
+  loading?: boolean;
+  lastUpdated?: Date;
+  enableAutoRefresh?: boolean;
+  refreshInterval?: number;
+  onRefresh?: () => void;
+  onDataUpdate?: (data: Partial<OperationsDashboardProps>) => void;
+  
+  // Interactive callbacks
+  onVesselClick?: (vessel: VesselSummary) => void;
+  onVesselDoubleClick?: (vessel: VesselSummary) => void;
+  onIncidentClick?: (incident: { id: string; title: string; severity: string; date: string }) => void;
+  onKPIClick?: (kpi: 'vessels' | 'utilization' | 'crew' | 'incidents') => void;
+  onTMSAElementClick?: (element: TMSAElement) => void;
+  
+  // Filtering and search
+  enableFiltering?: boolean;
+  onFilterChange?: (filters: {
+    vesselType?: string[];
+    status?: string[];
+    location?: string[];
+    severity?: string[];
+  }) => void;
+  onSearch?: (searchTerm: string) => void;
+  searchPlaceholder?: string;
+  
+  // Drill-down capabilities
+  onDrillDown?: (type: 'fleet' | 'vessel' | 'incident' | 'tmsa', id?: string) => void;
+  enableDrillDown?: boolean;
+  
+  // Customization options
+  visibleSections?: {
+    kpis?: boolean;
+    vesselOverview?: boolean;
+    incidentSummary?: boolean;
+    tmsaCompliance?: boolean;
+    alerts?: boolean;
+  };
+  kpiLayout?: 'grid' | 'row' | 'cards';
+  chartConfigs?: {
+    showTrends?: boolean;
+    timeRange?: '24h' | '7d' | '30d' | '90d';
+    chartType?: 'line' | 'bar' | 'area';
+  };
+  
+  // Alert and notification management
+  alerts?: Array<{
+    id: string;
+    type: 'warning' | 'error' | 'info' | 'success';
+    message: string;
+    timestamp: Date;
+    vessel?: string;
+    actionRequired?: boolean;
+  }>;
+  onAlertClick?: (alertId: string) => void;
+  onAlertDismiss?: (alertId: string) => void;
+  maxAlerts?: number;
+  
+  // Export and reporting
+  onExport?: (format: 'pdf' | 'excel' | 'csv', section?: string) => void;
+  onGenerateReport?: (type: 'fleet' | 'compliance' | 'incidents' | 'comprehensive') => void;
+  enableExport?: boolean;
+  
+  // User interaction tracking
+  onUserAction?: (action: string, details: Record<string, unknown>) => void;
+  trackInteractions?: boolean;
+  
+  // Performance optimization
+  enableVirtualization?: boolean;
+  maxVisibleVessels?: number;
+  lazyLoadIncidents?: boolean;
+  
+  // Maritime-specific features
+  complianceThresholds?: {
+    vesselUtilization?: number;
+    safetyRating?: number;
+    tmsaScore?: number;
+  };
+  weatherIntegration?: {
+    enabled?: boolean;
+    onWeatherAlert?: (vessel: string, weather: Record<string, unknown>) => void;
+  };
+  portScheduleIntegration?: {
+    enabled?: boolean;
+    onPortUpdate?: (vessel: string, port: Record<string, unknown>) => void;
+  };
+  
+  // Layout and responsive behavior
+  isMobile?: boolean;
+  collapsibleSections?: boolean;
+  defaultCollapsed?: string[];
+  onSectionToggle?: (sectionId: string, collapsed: boolean) => void;
+  
+  // Custom actions and menu items
+  customActions?: Array<{
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: () => void;
+    tooltip?: string;
+  }>;
+  contextMenuItems?: Array<{
+    id: string;
+    label: string;
+    onClick: (context: Record<string, unknown>) => void;
+  }>;
+  
+  // Error handling
+  error?: string;
+  onErrorDismiss?: () => void;
+  onRetry?: () => void;
+  
+  // Accessibility
+  ariaLabel?: string;
+  enableKeyboardNavigation?: boolean;
+  onKeyboardShortcut?: (shortcut: string) => void;
 }
 
 export function OperationsDashboard({

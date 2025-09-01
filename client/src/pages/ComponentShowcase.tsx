@@ -678,12 +678,79 @@ export const ComponentShowcase: React.FC = () => {
 
                     <Separator />
 
-                    {/* Enhancement Summary */}
+                    <Separator />
+
+                    {/* NEW ENHANCED COMPONENTS */}
                     <div>
-                      <h4 className="font-medium mb-3">📈 Enhancement Summary</h4>
+                      <h4 className="font-medium mb-3">🚢 OperationsDashboard - Maritime Operations Control</h4>
+                      <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h5 className="text-blue-900 font-medium mb-2">✨ NEW: 60+ Enterprise Props Added</h5>
+                        <div className="text-sm text-blue-800 space-y-1">
+                          <p><strong>🔄 Real-time Features:</strong> Auto-refresh, data updates, WebSocket support, last update tracking</p>
+                          <p><strong>🖱️ Interactivity:</strong> Vessel clicks, KPI drill-downs, incident navigation, TMSA element actions</p>
+                          <p><strong>🔍 Advanced Filtering:</strong> Multi-criteria filters, search functionality, saved filter presets</p>
+                          <p><strong>📊 Customization:</strong> Configurable sections, layout options, chart configurations, alert management</p>
+                          <p><strong>🚢 Maritime Features:</strong> Weather integration, port schedules, compliance thresholds, vessel context</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    <div>
+                      <h4 className="font-medium mb-3">📋 IncidentReportForm - Maritime Incident Management</h4>
+                      <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h5 className="text-red-900 font-medium mb-2">✨ NEW: 100+ Enterprise Props Added</h5>
+                        <div className="text-sm text-red-800 space-y-1">
+                          <p><strong>📝 Workflow Management:</strong> Multi-step workflows, progress tracking, conditional logic</p>
+                          <p><strong>📎 File Attachments:</strong> Evidence upload, file validation, attachment management</p>
+                          <p><strong>👥 Collaboration:</strong> Comments, mentions, review workflows, approval processes</p>
+                          <p><strong>🔄 Auto-save:</strong> Draft management, persistence, conflict resolution</p>
+                          <p><strong>⚓ Maritime Features:</strong> Emergency protocols, authority notifications, compliance checks</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    <div>
+                      <h4 className="font-medium mb-3">🔔 NotificationPanel - Enterprise Notification Management</h4>
+                      <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h5 className="text-green-900 font-medium mb-2">✨ NEW: 80+ Enterprise Props Added</h5>
+                        <div className="text-sm text-green-800 space-y-1">
+                          <p><strong>📊 Advanced Filtering:</strong> Grouping, sorting, date ranges, multi-criteria filters</p>
+                          <p><strong>⚡ Bulk Operations:</strong> Select all, bulk actions, mass read/dismiss capabilities</p>
+                          <p><strong>🔊 Sound Alerts:</strong> Configurable sounds per priority, browser notifications</p>
+                          <p><strong>⏰ Snooze & Archive:</strong> Temporary dismissal, retention policies, archival management</p>
+                          <p><strong>🚢 Maritime Integration:</strong> Vessel context, emergency overrides, compliance routing</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    <div>
+                      <h4 className="font-medium mb-3">💬 FeedbackModal - Enterprise Feedback System</h4>
+                      <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                        <h5 className="text-purple-900 font-medium mb-2">✨ NEW: 90+ Enterprise Props Added</h5>
+                        <div className="text-sm text-purple-800 space-y-1">
+                          <p><strong>📝 Templates:</strong> Pre-filled forms, feedback categories, smart auto-fill from context</p>
+                          <p><strong>📎 Attachments:</strong> File uploads, screenshots, evidence capture, validation</p>
+                          <p><strong>🔄 Routing:</strong> Automated assignment, department routing, expertise matching</p>
+                          <p><strong>📊 Analytics:</strong> Sentiment analysis, metrics tracking, follow-up management</p>
+                          <p><strong>🚢 Maritime Context:</strong> Vessel operations, watch keeper info, weather conditions</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Separator />
+
+                    {/* Comprehensive Enhancement Summary */}
+                    <div>
+                      <h4 className="font-medium mb-3">🎯 Complete Enhancement Summary</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-gray-50 p-4 rounded-lg">
-                          <h5 className="font-medium text-gray-900 mb-2">Components Enhanced</h5>
+                          <h5 className="font-medium text-gray-900 mb-2">All Enhanced Components</h5>
                           <div className="space-y-1 text-sm text-gray-700">
                             <p>✅ TMSAAppLayout</p>
                             <p>✅ TopNavigationBar</p>
@@ -692,10 +759,14 @@ export const ComponentShowcase: React.FC = () => {
                             <p>✅ SAILForm</p>
                             <p>✅ FormTable</p>
                             <p>✅ SCOMPMainTableScreen</p>
+                            <p><strong>🆕 OperationsDashboard</strong></p>
+                            <p><strong>🆕 IncidentReportForm</strong></p>
+                            <p><strong>🆕 NotificationPanel</strong></p>
+                            <p><strong>🆕 FeedbackModal</strong></p>
                           </div>
                         </div>
                         <div className="bg-gray-50 p-4 rounded-lg">
-                          <h5 className="font-medium text-gray-900 mb-2">New Features Added</h5>
+                          <h5 className="font-medium text-gray-900 mb-2">Enterprise Features</h5>
                           <div className="space-y-1 text-sm text-gray-700">
                             <p>🔔 Complete notification systems</p>
                             <p>👤 Full user interaction (Profile, Settings, Logout)</p>
@@ -703,7 +774,8 @@ export const ComponentShowcase: React.FC = () => {
                             <p>✅ Enhanced form validation</p>
                             <p>🛡️ Robust RBAC with maritime features</p>
                             <p>📱 Mobile-responsive design</p>
-                            <p>🎯 100+ new props added</p>
+                            <p><strong>🎯 400+ new props added total</strong></p>
+                            <p><strong>🚢 Maritime-specific enhancements</strong></p>
                           </div>
                         </div>
                       </div>

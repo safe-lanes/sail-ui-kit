@@ -32,6 +32,169 @@ export interface NotificationPanelProps {
   onClearAll?: () => void;
   maxHeight?: string;
   className?: string;
+  
+  // ✨ ENTERPRISE ENHANCEMENTS
+  
+  // Advanced filtering and grouping
+  enableGrouping?: boolean;
+  groupBy?: 'category' | 'priority' | 'vessel' | 'date' | 'type';
+  onGroupingChange?: (groupBy: string) => void;
+  enableAdvancedFiltering?: boolean;
+  filterOptions?: {
+    categories?: string[];
+    priorities?: string[];
+    types?: string[];
+    vessels?: string[];
+    dateRange?: { start: Date; end: Date };
+  };
+  onFilterChange?: (filters: Record<string, unknown>) => void;
+  
+  // Bulk operations
+  enableBulkActions?: boolean;
+  selectedNotifications?: string[];
+  onSelectionChange?: (selectedIds: string[]) => void;
+  onBulkMarkAsRead?: (notificationIds: string[]) => void;
+  onBulkDismiss?: (notificationIds: string[]) => void;
+  onBulkArchive?: (notificationIds: string[]) => void;
+  bulkActions?: Array<{
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: (notificationIds: string[]) => void;
+  }>;
+  
+  // Real-time updates
+  enableRealTime?: boolean;
+  onNewNotification?: (notification: Notification) => void;
+  onNotificationUpdate?: (notificationId: string, updates: Partial<Notification>) => void;
+  websocketConnection?: boolean;
+  autoRefreshInterval?: number;
+  
+  // Search functionality
+  enableSearch?: boolean;
+  searchPlaceholder?: string;
+  onSearch?: (searchTerm: string) => void;
+  searchableFields?: string[];
+  highlightSearchTerms?: boolean;
+  
+  // Notification templates and customization
+  notificationTemplates?: Record<string, {
+    title: string;
+    messageFormat: string;
+    icon?: React.ReactNode;
+    priority: string;
+  }>;
+  customNotificationRenderer?: (notification: Notification) => React.ReactNode;
+  enableCustomActions?: boolean;
+  
+  // Sound and visual alerts
+  enableSoundAlerts?: boolean;
+  soundConfig?: {
+    critical?: string;
+    high?: string;
+    medium?: string;
+    low?: string;
+  };
+  enableToastNotifications?: boolean;
+  toastPosition?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+  enableBrowserNotifications?: boolean;
+  
+  // Archiving and history
+  enableArchiving?: boolean;
+  onArchive?: (notificationId: string) => void;
+  onUnarchive?: (notificationId: string) => void;
+  showArchived?: boolean;
+  archiveRetentionDays?: number;
+  
+  // Snooze functionality
+  enableSnooze?: boolean;
+  onSnooze?: (notificationId: string, duration: number) => void;
+  snoozeOptions?: Array<{
+    label: string;
+    minutes: number;
+  }>;
+  onSnoozeExpire?: (notificationId: string) => void;
+  
+  // Priority escalation
+  priorityEscalation?: {
+    enabled: boolean;
+    rules: Array<{
+      priority: string;
+      timeThreshold: number; // minutes
+      escalateTo: string;
+      notify: string[];
+    }>;
+  };
+  onPriorityEscalate?: (notificationId: string, newPriority: string) => void;
+  
+  // Notification routing and assignment
+  enableAssignment?: boolean;
+  onAssign?: (notificationId: string, assigneeId: string) => void;
+  onUnassign?: (notificationId: string) => void;
+  availableAssignees?: Array<{
+    id: string;
+    name: string;
+    role: string;
+    department?: string;
+  }>;
+  
+  // Analytics and reporting
+  onAnalyticsEvent?: (event: string, data: Record<string, unknown>) => void;
+  trackUserInteractions?: boolean;
+  enableNotificationMetrics?: boolean;
+  onExportNotifications?: (format: 'csv' | 'excel' | 'json') => void;
+  
+  // Performance optimization
+  enableVirtualization?: boolean;
+  pageSize?: number;
+  enableLazyLoading?: boolean;
+  onLoadMore?: () => void;
+  hasMoreNotifications?: boolean;
+  
+  // User preferences
+  userPreferences?: {
+    defaultGrouping?: string;
+    defaultFilters?: Record<string, unknown>;
+    muteCategories?: string[];
+    customSounds?: Record<string, string>;
+  };
+  onPreferencesChange?: (preferences: Record<string, unknown>) => void;
+  enableUserPreferences?: boolean;
+  
+  // Maritime-specific features
+  vesselContext?: {
+    currentVessel?: string;
+    fleetMode?: boolean;
+  };
+  emergencyOverride?: boolean;
+  onEmergencyAcknowledge?: (notificationId: string) => void;
+  complianceNotifications?: boolean;
+  maritimeRegulations?: Array<{
+    code: string;
+    description: string;
+    priority: string;
+  }>;
+  
+  // Integration hooks
+  onIntegrationAction?: (action: string, notificationId: string, data?: Record<string, unknown>) => void;
+  externalSystems?: Array<{
+    id: string;
+    name: string;
+    enabled: boolean;
+    actions: string[];
+  }>;
+  
+  // Error handling and retry
+  onError?: (error: Error, context: string) => void;
+  onRetry?: (notificationId: string) => void;
+  enableOfflineMode?: boolean;
+  offlineNotifications?: Notification[];
+  
+  // Accessibility enhancements
+  enableScreenReaderSupport?: boolean;
+  announceNewNotifications?: boolean;
+  keyboardShortcuts?: Record<string, () => void>;
+  enableHighContrast?: boolean;
 }
 
 const typeConfig = {

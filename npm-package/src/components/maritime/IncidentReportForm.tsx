@@ -30,6 +30,189 @@ interface IncidentReportFormProps {
   onSave: (incident: IncidentReport) => void;
   onCancel: () => void;
   readonly?: boolean;
+  
+  // ✨ ENTERPRISE ENHANCEMENTS
+  
+  // Validation and form management
+  validationRules?: Record<string, (value: unknown) => string | null>;
+  onValidationError?: (errors: Record<string, string>) => void;
+  validateOnChange?: boolean;
+  validateOnSubmit?: boolean;
+  customValidation?: (incident: Partial<IncidentReport>) => Record<string, string>;
+  
+  // Workflow management
+  currentStep?: number;
+  totalSteps?: number;
+  onStepChange?: (step: number) => void;
+  workflowSteps?: Array<{
+    id: string;
+    title: string;
+    description?: string;
+    required?: boolean;
+    completed?: boolean;
+  }>;
+  enableWorkflow?: boolean;
+  onWorkflowComplete?: (incident: IncidentReport) => void;
+  
+  // Auto-save and persistence
+  autoSave?: boolean;
+  autoSaveInterval?: number;
+  onAutoSave?: (incident: Partial<IncidentReport>) => void;
+  draftId?: string;
+  onDraftSave?: (draftId: string, incident: Partial<IncidentReport>) => void;
+  onDraftLoad?: (draftId: string) => Partial<IncidentReport>;
+  enableDrafts?: boolean;
+  
+  // File attachments and evidence
+  attachments?: Array<{
+    id: string;
+    name: string;
+    type: string;
+    size: number;
+    url: string;
+    uploadedBy?: string;
+    uploadedAt?: Date;
+  }>;
+  onAttachmentUpload?: (files: FileList) => void;
+  onAttachmentDelete?: (attachmentId: string) => void;
+  onAttachmentView?: (attachmentId: string) => void;
+  maxAttachments?: number;
+  maxFileSize?: number;
+  allowedFileTypes?: string[];
+  
+  // Collaboration features
+  comments?: Array<{
+    id: string;
+    author: string;
+    content: string;
+    timestamp: Date;
+    type?: 'comment' | 'review' | 'approval';
+  }>;
+  onCommentAdd?: (comment: string) => void;
+  onCommentEdit?: (commentId: string, content: string) => void;
+  onCommentDelete?: (commentId: string) => void;
+  enableComments?: boolean;
+  enableMentions?: boolean;
+  
+  // Review and approval workflow
+  reviewers?: Array<{
+    id: string;
+    name: string;
+    role: string;
+    status: 'pending' | 'approved' | 'rejected';
+    comments?: string;
+  }>;
+  onReviewerAdd?: (reviewerId: string) => void;
+  onReviewerRemove?: (reviewerId: string) => void;
+  onReviewSubmit?: (status: 'approved' | 'rejected', comments?: string) => void;
+  requireReview?: boolean;
+  minRequiredApprovals?: number;
+  
+  // Dynamic field configuration
+  customFields?: Array<{
+    id: string;
+    type: 'text' | 'select' | 'multiselect' | 'date' | 'textarea' | 'checkbox';
+    label: string;
+    required?: boolean;
+    options?: string[];
+    validation?: (value: unknown) => string | null;
+  }>;
+  onCustomFieldChange?: (fieldId: string, value: unknown) => void;
+  fieldVisibilityRules?: Record<string, (incident: Partial<IncidentReport>) => boolean>;
+  
+  // Templates and pre-filling
+  templates?: Array<{
+    id: string;
+    name: string;
+    description?: string;
+    data: Partial<IncidentReport>;
+  }>;
+  onTemplateSelect?: (templateId: string) => void;
+  onTemplateSave?: (name: string, incident: Partial<IncidentReport>) => void;
+  enableTemplates?: boolean;
+  
+  // Integration and data sources
+  onVesselLookup?: (query: string) => Promise<string[]>;
+  onPersonnelLookup?: (query: string) => Promise<string[]>;
+  onLocationLookup?: (query: string) => Promise<string[]>;
+  availableVessels?: string[];
+  availablePersonnel?: string[];
+  availableLocations?: string[];
+  
+  // Notification and alerts
+  onNotificationSend?: (recipients: string[], message: string) => void;
+  notificationRules?: Array<{
+    trigger: 'severity_change' | 'status_change' | 'assignment';
+    recipients: string[];
+    template: string;
+  }>;
+  enableNotifications?: boolean;
+  
+  // Audit trail and history
+  changeHistory?: Array<{
+    id: string;
+    field: string;
+    oldValue: unknown;
+    newValue: unknown;
+    changedBy: string;
+    changedAt: Date;
+    reason?: string;
+  }>;
+  onChangeLog?: (field: string, oldValue: unknown, newValue: unknown, reason?: string) => void;
+  enableAuditTrail?: boolean;
+  
+  // Export and reporting
+  onExport?: (format: 'pdf' | 'docx' | 'excel') => void;
+  onPrint?: () => void;
+  onGenerateReport?: () => void;
+  reportTemplate?: string;
+  enableExport?: boolean;
+  
+  // Form behavior and UX
+  enableTabNavigation?: boolean;
+  enableKeyboardShortcuts?: boolean;
+  onKeyboardShortcut?: (shortcut: string) => void;
+  showProgressIndicator?: boolean;
+  enableFormValidationSummary?: boolean;
+  confirmOnCancel?: boolean;
+  
+  // Conditional logic and dynamic behavior
+  onFieldVisibilityChange?: (field: string, visible: boolean) => void;
+  dependentFields?: Record<string, {
+    dependsOn: string;
+    condition: (value: unknown) => boolean;
+    action: 'show' | 'hide' | 'require' | 'disable';
+  }>;
+  
+  // Data quality and completeness
+  requiredFieldsPerStep?: Record<number, string[]>;
+  dataQualityChecks?: Array<{
+    field: string;
+    check: (value: unknown) => { valid: boolean; message?: string; suggestion?: string };
+  }>;
+  onDataQualityIssue?: (field: string, issue: string, suggestion?: string) => void;
+  
+  // User permissions and access control
+  userPermissions?: {
+    canEdit?: boolean;
+    canSubmit?: boolean;
+    canDelete?: boolean;
+    canReview?: boolean;
+    canApprove?: boolean;
+    editableFields?: string[];
+  };
+  onPermissionCheck?: (action: string, field?: string) => boolean;
+  
+  // Maritime-specific enhancements
+  emergencyMode?: boolean;
+  onEmergencyProtocolTrigger?: (incident: Partial<IncidentReport>) => void;
+  complianceChecks?: Array<{
+    regulation: string;
+    check: (incident: Partial<IncidentReport>) => boolean;
+    message: string;
+  }>;
+  maritimeAuthorityNotification?: boolean;
+  onAuthorityNotify?: (incident: IncidentReport, authorities: string[]) => void;
 }
 
 const INCIDENT_TYPES = [

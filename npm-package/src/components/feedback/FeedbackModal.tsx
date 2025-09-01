@@ -37,6 +37,190 @@ export interface FeedbackModalProps {
   currentModule?: string;
   allowRating?: boolean;
   className?: string;
+  
+  // ✨ ENTERPRISE ENHANCEMENTS
+  
+  // Template and pre-filling
+  feedbackTemplates?: Array<{
+    id: string;
+    name: string;
+    type: string;
+    category: string;
+    template: Partial<FeedbackData>;
+    description?: string;
+  }>;
+  onTemplateSelect?: (templateId: string) => void;
+  enableTemplates?: boolean;
+  autoFillFromContext?: boolean;
+  
+  // File attachments and screenshots
+  attachments?: Array<{
+    id: string;
+    name: string;
+    type: string;
+    size: number;
+    url: string;
+  }>;
+  onAttachmentUpload?: (files: FileList) => void;
+  onAttachmentDelete?: (attachmentId: string) => void;
+  enableScreenshot?: boolean;
+  onScreenshotCapture?: () => Promise<Blob>;
+  maxAttachments?: number;
+  maxFileSize?: number;
+  allowedFileTypes?: string[];
+  
+  // Routing and assignment
+  routingRules?: Array<{
+    type: string;
+    category: string;
+    priority: string;
+    assignTo: string;
+    department: string;
+  }>;
+  onAutoRoute?: (feedback: FeedbackData) => string;
+  availableAssignees?: Array<{
+    id: string;
+    name: string;
+    department: string;
+    expertise: string[];
+  }>;
+  enableManualAssignment?: boolean;
+  
+  // Follow-up and tracking
+  enableFollowUp?: boolean;
+  onFollowUpSubscribe?: (feedbackId: string, notify: boolean) => void;
+  trackingId?: string;
+  onTrackingGenerate?: () => string;
+  statusUpdates?: Array<{
+    status: string;
+    message: string;
+    timestamp: Date;
+    updatedBy: string;
+  }>;
+  
+  // Validation and quality checks
+  validationRules?: Record<string, (value: unknown) => string | null>;
+  onValidationError?: (errors: Record<string, string>) => void;
+  enableDuplicateCheck?: boolean;
+  onDuplicateCheck?: (feedback: FeedbackData) => Promise<string[]>;
+  duplicateSuggestions?: string[];
+  
+  // User preferences and history
+  userHistory?: Array<{
+    id: string;
+    type: string;
+    title: string;
+    submittedAt: Date;
+    status: string;
+  }>;
+  onHistoryView?: (feedbackId: string) => void;
+  enableDrafts?: boolean;
+  onDraftSave?: (draft: Partial<FeedbackData>) => void;
+  onDraftLoad?: () => Partial<FeedbackData>;
+  
+  // Custom fields and dynamic forms
+  customFields?: Array<{
+    id: string;
+    type: 'text' | 'select' | 'multiselect' | 'checkbox' | 'date' | 'rating';
+    label: string;
+    required?: boolean;
+    options?: string[];
+    dependsOn?: string;
+    condition?: (value: unknown) => boolean;
+  }>;
+  onCustomFieldChange?: (fieldId: string, value: unknown) => void;
+  dynamicFormConfig?: Record<string, unknown>;
+  
+  // Integration and notifications
+  onSlackNotify?: (feedback: FeedbackData, channel: string) => void;
+  onEmailNotify?: (feedback: FeedbackData, recipients: string[]) => void;
+  onJiraTicketCreate?: (feedback: FeedbackData) => Promise<string>;
+  integrationSettings?: {
+    slack?: { enabled: boolean; defaultChannel: string };
+    email?: { enabled: boolean; recipients: string[] };
+    jira?: { enabled: boolean; project: string };
+  };
+  
+  // Analytics and metrics
+  onAnalyticsEvent?: (event: string, data: Record<string, unknown>) => void;
+  trackSubmissionMetrics?: boolean;
+  enableSentimentAnalysis?: boolean;
+  onSentimentAnalysis?: (text: string) => Promise<{ score: number; sentiment: string }>;
+  
+  // Batch feedback and surveys
+  enableBatchMode?: boolean;
+  batchQuestions?: Array<{
+    id: string;
+    question: string;
+    type: 'rating' | 'text' | 'choice';
+    required?: boolean;
+    options?: string[];
+  }>;
+  onBatchSubmit?: (responses: Record<string, unknown>) => void;
+  surveyMode?: boolean;
+  
+  // User interface customization
+  theme?: 'light' | 'dark' | 'auto';
+  brandColors?: {
+    primary: string;
+    secondary: string;
+    accent: string;
+  };
+  customLogo?: string;
+  footerText?: string;
+  enableMinimizedMode?: boolean;
+  
+  // Advanced features
+  enableVoiceRecording?: boolean;
+  onVoiceRecord?: (audioBlob: Blob) => void;
+  maxRecordingDuration?: number;
+  enableCollaboration?: boolean;
+  onCollaboratorAdd?: (email: string) => void;
+  collaborators?: string[];
+  
+  // Feedback lifecycle management
+  onStatusChange?: (feedbackId: string, status: string, reason?: string) => void;
+  onPriorityChange?: (feedbackId: string, priority: string) => void;
+  onCategoryChange?: (feedbackId: string, category: string) => void;
+  workflowSteps?: Array<{
+    id: string;
+    name: string;
+    description: string;
+    order: number;
+  }>;
+  
+  // Maritime-specific features
+  vesselContext?: {
+    vesselId: string;
+    vesselName: string;
+    voyage?: string;
+    port?: string;
+  };
+  operationalContext?: {
+    watchKeeper?: string;
+    operationType?: string;
+    weatherConditions?: string;
+    seaState?: string;
+  };
+  complianceFeedback?: boolean;
+  regulatoryReporting?: boolean;
+  
+  // Error handling and recovery
+  onSubmissionError?: (error: Error, feedback: FeedbackData) => void;
+  enableRetry?: boolean;
+  onRetry?: () => void;
+  offlineMode?: boolean;
+  onOfflineSubmit?: (feedback: FeedbackData) => void;
+  
+  // Performance and UX
+  enableAutoSave?: boolean;
+  autoSaveInterval?: number;
+  onAutoSave?: (draft: Partial<FeedbackData>) => void;
+  enableTabNavigation?: boolean;
+  enableKeyboardShortcuts?: boolean;
+  loadingState?: boolean;
+  submitButtonText?: string;
+  cancelButtonText?: string;
 }
 
 const feedbackTypes = [
