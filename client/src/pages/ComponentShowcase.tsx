@@ -633,15 +633,45 @@ export const ComponentShowcase: React.FC = () => {
 
                     {/* SCOMPMainTableScreen Enhancements */}
                     <div>
-                      <h4 className="font-medium mb-3">🖥️ SCOMPMainTableScreen - Complete Data Screens</h4>
+                      <h4 className="font-medium mb-3">🖥️ SCOMPMainTableScreen - Enterprise Data Management</h4>
                       <div className="bg-cyan-50 p-4 rounded-lg border border-cyan-200">
-                        <h5 className="text-cyan-900 font-medium mb-2">🚀 Full Data Management</h5>
+                        <h5 className="text-cyan-900 font-medium mb-2">🚀 Comprehensive Enterprise Features</h5>
                         <div className="text-sm text-cyan-800 space-y-1">
-                          <p><strong>✨ Table Interactions:</strong> onRowClick, onRowDoubleClick, onRowSelect, onCellValueChanged</p>
-                          <p><strong>✨ Data Operations:</strong> loading states, onRefresh, onDataExport (CSV/Excel/PDF)</p>
-                          <p><strong>✨ Bulk Actions:</strong> enableBulkActions, bulkActions[] with configurable operations</p>
-                          <p><strong>✨ Search & Pagination:</strong> enableGlobalSearch, pagination config with page size controls</p>
-                          <p><strong>✨ Error Handling:</strong> error states with dismissal callbacks</p>
+                          <p><strong>✨ Selection Management:</strong> selectionMode, selectedRowIds, onSelectionChange, onSelectionClear</p>
+                          <p><strong>✨ Advanced Sorting:</strong> onSortChange, defaultSort, multiColumnSort</p>
+                          <p><strong>✨ Column Management:</strong> onColumnResize, onColumnReorder, onColumnVisibilityChange, visibleColumns</p>
+                          <p><strong>✨ Context Menus:</strong> onContextMenu, contextMenuItems with custom actions</p>
+                          <p><strong>✨ Drag & Drop:</strong> enableRowReorder, onRowReorder, enableDragDrop, onRowDrop</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-purple-50 p-4 rounded-lg border border-purple-200 mt-2">
+                        <h5 className="text-purple-900 font-medium mb-2">✏️ Advanced Editing & Validation</h5>
+                        <div className="text-sm text-purple-800 space-y-1">
+                          <p><strong>✨ Inline Editing:</strong> enableInlineEditing, editableColumns, onCellEditComplete, onCellValidation</p>
+                          <p><strong>✨ Data Management:</strong> onRowAdd, onRowUpdate, onRowDelete, validateRowData</p>
+                          <p><strong>✨ Toolbar Actions:</strong> toolbarActions[], customHeaderActions, showToolbar</p>
+                          <p><strong>✨ State Persistence:</strong> persistTableState, tableStateKey, restoreTableState</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-orange-50 p-4 rounded-lg border border-orange-200 mt-2">
+                        <h5 className="text-orange-900 font-medium mb-2">⚡ Performance & Advanced Features</h5>
+                        <div className="text-sm text-orange-800 space-y-1">
+                          <p><strong>✨ Performance:</strong> virtualScrolling, lazyLoading, loadMoreData, rowBufferSize</p>
+                          <p><strong>✨ Grouping:</strong> enableGrouping, groupByColumns, onGroupChange, expandedGroups</p>
+                          <p><strong>✨ Advanced Filters:</strong> enableAdvancedFilters, savedFilters, onSaveFilter</p>
+                          <p><strong>✨ Auto-Sync:</strong> enableAutoRefresh, autoRefreshInterval, onDataSync</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200 mt-2">
+                        <h5 className="text-emerald-900 font-medium mb-2">🚢 Maritime-Specific Features</h5>
+                        <div className="text-sm text-emerald-800 space-y-1">
+                          <p><strong>✨ Vessel Context:</strong> vesselId, vesselName, vesselType integration</p>
+                          <p><strong>✨ Compliance:</strong> complianceMode, auditTrail, maritimeValidation</p>
+                          <p><strong>✨ User Tracking:</strong> onUserAction, auditMode, trackUserInteractions</p>
+                          <p><strong>✨ Accessibility:</strong> ariaLabel, enableKeyboardNavigation, onKeyDown</p>
                         </div>
                       </div>
                     </div>

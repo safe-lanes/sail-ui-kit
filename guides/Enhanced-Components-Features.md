@@ -290,50 +290,134 @@ interface FormTableProps {
 
 ## 📊 Enhanced Table Components
 
-### SCOMPMainTableScreen - Complete Data Screen
+### SCOMPMainTableScreen - Enterprise Data Management
 
 ```typescript
 interface SCOMPMainTableScreenProps {
-  // 🧭 Navigation
+  // 🧭 Navigation & Basic Config
   currentModule?: string;
   navigationItems?: NavigationItem[];
   sidebarItems?: SidebarItem[];
-  
-  // 🎯 Content Configuration
   screenTitle: string;
+  
+  // 🎯 Enhanced Filtering
   showFilters?: boolean;
   filters?: FilterConfig[];
   onFilterChange?: (filterId: string, value: unknown) => void;
   onFiltersReset?: () => void;
+  enableAdvancedFilters?: boolean;
+  savedFilters?: SavedFilter[];
+  onSaveFilter?: (name: string, filters: Record<string, unknown>) => void;
   
-  // 📊 Enhanced Table Functionality
+  // 📊 Selection Management
+  selectionMode?: 'single' | 'multiple' | 'none';
+  selectedRowIds?: (string | number)[];
+  onSelectionChange?: (selectedIds: (string | number)[]) => void;
+  onSelectionClear?: () => void;
+  
+  // 🔄 Advanced Table Interactions
   onRowClick?: (rowData: Record<string, unknown>) => void;
   onRowDoubleClick?: (rowData: Record<string, unknown>) => void;
   onRowSelect?: (selectedRows: Record<string, unknown>[]) => void;
   onCellValueChanged?: (params: CellChangeParams) => void;
   
-  // 🔄 Data Operations
-  loading?: boolean;
-  onRefresh?: () => void;
-  onDataExport?: (format: 'csv' | 'excel' | 'pdf') => void;
+  // 📋 Context Menu & Right-Click
+  onContextMenu?: (event: React.MouseEvent, rowData?: Record<string, unknown>) => void;
+  contextMenuItems?: ContextMenuItem[];
   
-  // 📦 Bulk Operations
-  enableBulkActions?: boolean;
-  bulkActions?: BulkAction[];
+  // ✏️ Inline Editing
+  enableInlineEditing?: boolean;
+  editableColumns?: string[];
+  onCellEditStart?: (rowId: string | number, columnId: string) => void;
+  onCellEditComplete?: (rowId: string | number, columnId: string, newValue: unknown, oldValue: unknown) => void;
+  onCellValidation?: (rowId: string | number, columnId: string, value: unknown) => string | null;
   
-  // 🎬 Actions
+  // 🏗️ Column Management
+  onColumnResize?: (columnId: string, width: number) => void;
+  onColumnReorder?: (fromIndex: number, toIndex: number) => void;
+  onColumnVisibilityChange?: (columnId: string, visible: boolean) => void;
+  visibleColumns?: string[];
+  enableColumnCustomization?: boolean;
+  
+  // 📊 Sorting & Grouping
+  onSortChange?: (sortBy: string, sortOrder: 'asc' | 'desc') => void;
+  defaultSort?: { field: string; order: 'asc' | 'desc' };
+  multiColumnSort?: boolean;
+  enableGrouping?: boolean;
+  groupByColumns?: string[];
+  onGroupChange?: (groupedColumns: string[]) => void;
+  
+  // 🚚 Drag & Drop
+  enableRowReorder?: boolean;
+  onRowReorder?: (fromIndex: number, toIndex: number) => void;
+  enableDragDrop?: boolean;
+  onRowDrop?: (draggedRow: Record<string, unknown>, targetRow: Record<string, unknown>) => void;
+  
+  // 🛠️ Toolbar & Actions
+  toolbarActions?: ToolbarAction[];
+  customHeaderActions?: React.ReactNode;
+  showToolbar?: boolean;
   primaryAction?: ActionConfig;
   secondaryActions?: ActionConfig[];
   
-  // 🔍 Search & Pagination
-  enableGlobalSearch?: boolean;
-  onGlobalSearch?: (searchTerm: string) => void;
-  searchPlaceholder?: string;
-  pagination?: PaginationConfig;
+  // 💾 State Management
+  onTableStateChange?: (state: Record<string, unknown>) => void;
+  persistTableState?: boolean;
+  tableStateKey?: string;
+  restoreTableState?: (key: string) => Record<string, unknown>;
   
-  // 🚨 Error Handling
-  error?: string;
-  onErrorDismiss?: () => void;
+  // 🔄 Data Management
+  onRowAdd?: (newRow: Record<string, unknown>) => void;
+  onRowUpdate?: (rowId: string | number, updates: Record<string, unknown>) => void;
+  onRowDelete?: (rowIds: (string | number)[]) => void;
+  validateRowData?: (rowData: Record<string, unknown>) => string[];
+  onDataValidation?: (data: Record<string, unknown>[]) => Record<string, string[]>;
+  
+  // ⚡ Performance
+  virtualScrolling?: boolean;
+  lazyLoading?: boolean;
+  loadMoreData?: () => void;
+  hasMoreData?: boolean;
+  rowBufferSize?: number;
+  
+  // 📤 Export & Print
+  onDataExport?: (format: 'csv' | 'excel' | 'pdf' | 'json') => void;
+  exportFormats?: Array<'csv' | 'excel' | 'pdf' | 'json'>;
+  onPrint?: () => void;
+  onPreview?: () => void;
+  customExportData?: () => Record<string, unknown>[];
+  
+  // ♿ Accessibility
+  ariaLabel?: string;
+  ariaDescription?: string;
+  enableKeyboardNavigation?: boolean;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
+  
+  // 🔔 Notifications & Feedback
+  onNotification?: (type: 'success' | 'error' | 'warning' | 'info', message: string) => void;
+  showNotifications?: boolean;
+  notificationDuration?: number;
+  
+  // 📊 Audit & Tracking
+  onUserAction?: (action: string, details: Record<string, unknown>) => void;
+  auditMode?: boolean;
+  trackUserInteractions?: boolean;
+  
+  // 🔄 Auto-Sync
+  enableAutoRefresh?: boolean;
+  autoRefreshInterval?: number;
+  onDataSync?: () => void;
+  lastSyncTime?: Date;
+  
+  // 🚢 Maritime-Specific Features
+  vesselContext?: {
+    vesselId?: string;
+    vesselName?: string;
+    vesselType?: string;
+  };
+  complianceMode?: boolean;
+  auditTrail?: boolean;
+  maritimeValidation?: boolean;
 }
 ```
 

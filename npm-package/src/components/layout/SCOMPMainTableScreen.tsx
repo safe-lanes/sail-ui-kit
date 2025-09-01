@@ -110,6 +110,146 @@ export interface SCOMPMainTableScreenProps {
   // Error handling
   error?: string;
   onErrorDismiss?: () => void;
+  
+  // ✨ ADDITIONAL ENTERPRISE FEATURES - COMPREHENSIVE ENHANCEMENT
+  
+  // Selection Management
+  selectionMode?: 'single' | 'multiple' | 'none';
+  selectedRowIds?: (string | number)[];
+  onSelectionChange?: (selectedIds: (string | number)[]) => void;
+  onSelectionClear?: () => void;
+  
+  // Sorting Management
+  onSortChange?: (sortBy: string, sortOrder: 'asc' | 'desc') => void;
+  defaultSort?: { field: string; order: 'asc' | 'desc' };
+  multiColumnSort?: boolean;
+  
+  // Column Management
+  onColumnResize?: (columnId: string, width: number) => void;
+  onColumnReorder?: (fromIndex: number, toIndex: number) => void;
+  onColumnVisibilityChange?: (columnId: string, visible: boolean) => void;
+  visibleColumns?: string[];
+  enableColumnCustomization?: boolean;
+  
+  // Context Menu
+  onContextMenu?: (event: React.MouseEvent, rowData?: Record<string, unknown>) => void;
+  contextMenuItems?: Array<{
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: (rowData: Record<string, unknown>) => void;
+    disabled?: boolean;
+  }>;
+  
+  // Drag & Drop
+  enableRowReorder?: boolean;
+  onRowReorder?: (fromIndex: number, toIndex: number) => void;
+  enableDragDrop?: boolean;
+  onRowDrop?: (draggedRow: Record<string, unknown>, targetRow: Record<string, unknown>) => void;
+  
+  // Inline Cell Editing
+  enableInlineEditing?: boolean;
+  editableColumns?: string[];
+  onCellEditStart?: (rowId: string | number, columnId: string) => void;
+  onCellEditComplete?: (rowId: string | number, columnId: string, newValue: unknown, oldValue: unknown) => void;
+  onCellEditCancel?: (rowId: string | number, columnId: string) => void;
+  onCellValidation?: (rowId: string | number, columnId: string, value: unknown) => string | null;
+  
+  // Toolbar & Header Actions
+  toolbarActions?: Array<{
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: () => void;
+    disabled?: boolean;
+    tooltip?: string;
+  }>;
+  customHeaderActions?: React.ReactNode;
+  showToolbar?: boolean;
+  
+  // Table State Management
+  onTableStateChange?: (state: Record<string, unknown>) => void;
+  persistTableState?: boolean;
+  tableStateKey?: string;
+  restoreTableState?: (key: string) => Record<string, unknown>;
+  
+  // Enhanced Data Management
+  onDataValidation?: (data: Record<string, unknown>[]) => Record<string, string[]>;
+  validateRowData?: (rowData: Record<string, unknown>) => string[];
+  onRowAdd?: (newRow: Record<string, unknown>) => void;
+  onRowUpdate?: (rowId: string | number, updates: Record<string, unknown>) => void;
+  onRowDelete?: (rowIds: (string | number)[]) => void;
+  enableRowAdd?: boolean;
+  enableRowUpdate?: boolean;
+  enableRowDelete?: boolean;
+  
+  // Performance & Data Loading
+  virtualScrolling?: boolean;
+  lazyLoading?: boolean;
+  loadMoreData?: () => void;
+  hasMoreData?: boolean;
+  rowBufferSize?: number;
+  
+  // Extended Export & Print
+  onPrint?: () => void;
+  onPreview?: () => void;
+  exportFormats?: Array<'csv' | 'excel' | 'pdf' | 'json'>;
+  customExportData?: () => Record<string, unknown>[];
+  
+  // Accessibility & Navigation
+  ariaLabel?: string;
+  ariaDescription?: string;
+  enableKeyboardNavigation?: boolean;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
+  
+  // Row Grouping & Hierarchy
+  enableGrouping?: boolean;
+  groupByColumns?: string[];
+  onGroupChange?: (groupedColumns: string[]) => void;
+  expandedGroups?: string[];
+  onGroupExpand?: (groupId: string, expanded: boolean) => void;
+  groupRowRenderer?: React.ComponentType<unknown>;
+  
+  // Notifications & Feedback
+  onNotification?: (type: 'success' | 'error' | 'warning' | 'info', message: string) => void;
+  showNotifications?: boolean;
+  notificationDuration?: number;
+  
+  // Audit & User Tracking
+  onUserAction?: (action: string, details: Record<string, unknown>) => void;
+  auditMode?: boolean;
+  trackUserInteractions?: boolean;
+  
+  // Advanced Filtering
+  enableAdvancedFilters?: boolean;
+  onAdvancedFilterChange?: (filters: Record<string, unknown>) => void;
+  savedFilters?: Array<{
+    id: string;
+    name: string;
+    filters: Record<string, unknown>;
+  }>;
+  onSaveFilter?: (name: string, filters: Record<string, unknown>) => void;
+  
+  // Data Synchronization
+  enableAutoRefresh?: boolean;
+  autoRefreshInterval?: number;
+  onDataSync?: () => void;
+  lastSyncTime?: Date;
+  
+  // Custom Renderers
+  customRowRenderer?: React.ComponentType<{ data: Record<string, unknown> }>;
+  customHeaderRenderer?: React.ComponentType<{ column: unknown }>;
+  customFooterRenderer?: React.ComponentType<unknown>;
+  
+  // Maritime-Specific Features
+  vesselContext?: {
+    vesselId?: string;
+    vesselName?: string;
+    vesselType?: string;
+  };
+  complianceMode?: boolean;
+  auditTrail?: boolean;
+  maritimeValidation?: boolean;
 }
 
 // Actions Cell Renderer for AG Grid Actions Column
