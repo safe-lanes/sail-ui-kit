@@ -19,6 +19,11 @@ interface TMSAAppLayoutProps {
   headerActions?: React.ReactNode;
   footer?: React.ReactNode;
   className?: string;
+  // CRITICAL: These props make bell and gear icons functional
+  onNotificationClick?: () => void;
+  onSettingsClick?: () => void;
+  notificationCount?: number;
+  showNotifications?: boolean;
 }
 
 interface NavigationItem {
@@ -119,66 +124,207 @@ function App() {
 }
 ```
 
-## Advanced Usage with Header Actions
+## Functional Bell and Gear Icons Implementation
 
 ```jsx
+import React, { useState } from 'react';
 import { TMSAAppLayout } from 'scomp-ui';
-import { Bell, Search, Plus, MessageSquare } from 'lucide-react';
+import { Bell, Settings, X, AlertTriangle } from 'lucide-react';
 
-function AdvancedApp() {
-  const headerActions = (
-    <div className="flex items-center gap-3">
-      {/* Search */}
-      <div className="relative">
-        <Search className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search vessels, crew..."
-          className="pl-10 pr-4 py-2 border rounded-lg w-64"
-        />
-      </div>
+function FunctionalTMSAApp() {
+  const [showNotificationPanel, setShowNotificationPanel] = useState(false);
+  const [showSettingsPanel, setShowSettingsPanel] = useState(false);
+  const [notifications, setNotifications] = useState([
+    {
+      id: '1',
+      type: 'weather',
+      severity: 'high',
+      title: 'Severe Weather Alert',
+      message: 'Strong winds forecast for current route',
+      timestamp: new Date(),
+      read: false
+    },
+    {
+      id: '2', 
+      type: 'maintenance',
+      severity: 'medium',
+      title: 'Engine Maintenance Due',
+      message: 'Main engine maintenance due in 48 hours',
+      timestamp: new Date(),
+      read: false
+    }
+  ]);
 
-      {/* Quick Actions */}
-      <button className="p-2 hover:bg-gray-100 rounded-lg">
-        <Plus className="h-5 w-5" />
-      </button>
+  // CRITICAL: These handlers make the icons functional
+  const handleNotificationClick = () => {
+    setShowNotificationPanel(true);
+    setShowSettingsPanel(false);
+  };
 
-      {/* Messages */}
-      <button className="p-2 hover:bg-gray-100 rounded-lg relative">
-        <MessageSquare className="h-5 w-5" />
-        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-          2
-        </span>
-      </button>
+  const handleSettingsClick = () => {
+    setShowSettingsPanel(true);
+    setShowNotificationPanel(false);
+  };
 
-      {/* Notifications */}
-      <button className="p-2 hover:bg-gray-100 rounded-lg relative">
-        <Bell className="h-5 w-5" />
-        <span className="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-          5
-        </span>
-      </button>
-    </div>
-  );
-
-  const footer = (
-    <div className="text-center text-sm text-gray-500 py-4">
-      © 2024 Maritime Solutions Ltd. TMSA Compliant System v2.1
-    </div>
-  );
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <TMSAAppLayout
-      title="Advanced Fleet Management"
-      user={currentUser}
-      navigation={navigation}
-      headerActions={headerActions}
-      footer={footer}
-      currentPath={currentPath}
-      onNavigate={handleNavigate}
-    >
-      <Routes />
-    </TMSAAppLayout>
+    <>
+      <TMSAAppLayout
+        title="Maritime Fleet Management"
+        user={currentUser}
+        navigation={navigation}
+        currentPath={currentPath}
+        onNavigate={setCurrentPath}
+        // CRITICAL: Pass these props to make bell and gear icons work
+        onNotificationClick={handleNotificationClick}
+        onSettingsClick={handleSettingsClick}
+        notificationCount={unreadCount}
+        showNotifications={true}
+      >
+        <div className="p-6">
+          {/* Your page content */}
+          <h2 className="text-2xl font-bold">Dashboard</h2>
+        </div>
+      </TMSAAppLayout>
+
+      {/* Notification Panel */}
+      {showNotificationPanel && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50" 
+            onClick={() => setShowNotificationPanel(false)} 
+          />
+          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl">
+            <div className="flex h-full flex-col">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b p-4">
+                <div className="flex items-center gap-2">
+                  <Bell className="h-5 w-5" />
+                  <h2 className="text-lg font-semibold">Notifications</h2>
+                  {unreadCount > 0 && (
+                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                      {unreadCount}
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={() => setShowNotificationPanel(false)}
+                  className="p-1 hover:bg-gray-100 rounded"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Notifications List */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                {notifications.map((notification) => (
+                  <div
+                    key={notification.id}
+                    className={`p-4 border rounded-lg ${
+                      notification.read ? 'bg-gray-50' : 'bg-yellow-50 border-yellow-200'
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <AlertTriangle className="h-4 w-4 text-orange-600 mt-1" />
+                      <div className="flex-1">
+                        <h3 className="font-medium text-sm">{notification.title}</h3>
+                        <p className="text-sm text-gray-600 mt-1">{notification.message}</p>
+                        <p className="text-xs text-gray-400 mt-2">
+                          {notification.timestamp.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Settings Panel */}
+      {showSettingsPanel && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50" 
+            onClick={() => setShowSettingsPanel(false)} 
+          />
+          <div className="absolute right-0 top-0 h-full w-full max-w-lg bg-white shadow-xl">
+            <div className="flex h-full flex-col">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b p-4">
+                <div className="flex items-center gap-2">
+                  <Settings className="h-5 w-5" />
+                  <h2 className="text-lg font-semibold">Settings</h2>
+                </div>
+                <button
+                  onClick={() => setShowSettingsPanel(false)}
+                  className="p-1 hover:bg-gray-100 rounded"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Settings Content */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                <div>
+                  <h3 className="text-lg font-medium mb-4">Notification Preferences</h3>
+                  <div className="space-y-3">
+                    <label className="flex items-center justify-between">
+                      <span>Email Alerts</span>
+                      <input type="checkbox" defaultChecked className="rounded" />
+                    </label>
+                    <label className="flex items-center justify-between">
+                      <span>Weather Alerts</span>
+                      <input type="checkbox" defaultChecked className="rounded" />
+                    </label>
+                    <label className="flex items-center justify-between">
+                      <span>Maintenance Reminders</span>
+                      <input type="checkbox" defaultChecked className="rounded" />
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-medium mb-4">Display</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Theme</label>
+                      <select className="w-full border rounded px-3 py-2">
+                        <option>Light</option>
+                        <option>Dark</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Language</label>
+                      <select className="w-full border rounded px-3 py-2">
+                        <option>English</option>
+                        <option>Spanish</option>
+                        <option>French</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="border-t p-4 flex gap-3">
+                <button 
+                  onClick={() => setShowSettingsPanel(false)}
+                  className="flex-1 py-2 border rounded hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button className="flex-1 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                  Save Settings
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 ```
