@@ -20,6 +20,7 @@ export interface SCOMPMainTableScreenProps {
     label: string;
     icon: React.ReactNode;
     isActive?: boolean;
+    onClick?: (id: string) => void;
   }>;
 
   // Sidebar Configuration
@@ -27,12 +28,15 @@ export interface SCOMPMainTableScreenProps {
     icon: React.ReactNode;
     label: string;
     isActive?: boolean;
+    onClick?: () => void;
   }>;
 
   // Main Content Configuration
   screenTitle: string;
   showFilters?: boolean;
   filters?: FilterConfig[];
+  onFilterChange?: (filterId: string, value: unknown) => void;
+  onFiltersReset?: () => void;
 
   // Table Configuration - AG Grid ColDef compatible
   sampleData?: Record<string, unknown>[];
@@ -50,15 +54,62 @@ export interface SCOMPMainTableScreenProps {
     cellStyle?: Record<string, unknown> | ((params: unknown) => Record<string, unknown>);
   }>;
 
+  // Enhanced table functionality
+  onRowClick?: (rowData: Record<string, unknown>) => void;
+  onRowDoubleClick?: (rowData: Record<string, unknown>) => void;
+  onRowSelect?: (selectedRows: Record<string, unknown>[]) => void;
+  onCellValueChanged?: (params: { data: Record<string, unknown>; field: string; newValue: unknown }) => void;
+  
+  // Data operations
+  loading?: boolean;
+  onRefresh?: () => void;
+  onDataExport?: (format: 'csv' | 'excel' | 'pdf') => void;
+  
+  // Bulk operations
+  enableBulkActions?: boolean;
+  bulkActions?: Array<{
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: (selectedRows: Record<string, unknown>[]) => void;
+  }>;
+
   // Actions
   primaryAction?: {
     label: string;
     icon?: React.ReactNode;
+    onClick?: () => void;
   };
+  
+  secondaryActions?: Array<{
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: () => void;
+  }>;
 
   // Layout Options
   className?: string;
   previewMode?: boolean;
+  
+  // Search functionality
+  enableGlobalSearch?: boolean;
+  onGlobalSearch?: (searchTerm: string) => void;
+  searchPlaceholder?: string;
+  
+  // Pagination
+  pagination?: {
+    enabled: boolean;
+    pageSize: number;
+    currentPage: number;
+    totalRecords: number;
+    onPageChange: (page: number) => void;
+    onPageSizeChange: (pageSize: number) => void;
+  };
+  
+  // Error handling
+  error?: string;
+  onErrorDismiss?: () => void;
 }
 
 // Actions Cell Renderer for AG Grid Actions Column

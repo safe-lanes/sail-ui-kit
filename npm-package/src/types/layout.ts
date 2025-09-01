@@ -25,6 +25,19 @@ export interface MenuItem {
   tooltip?: string;
 }
 
+// Notification interface
+export interface Notification {
+  id: string;
+  type: 'weather' | 'maintenance' | 'crew' | 'compliance' | 'safety' | 'general';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  title: string;
+  message: string;
+  timestamp: Date;
+  read: boolean;
+  actionRequired: boolean;
+  actionUrl?: string;
+}
+
 // User Information
 export interface User {
   id: string;
@@ -32,6 +45,10 @@ export interface User {
   email: string;
   role: string;
   avatar?: string;
+  department?: string;
+  vessel?: string;
+  permissions?: string[];
+  preferences?: Record<string, unknown>;
 }
 
 // Component Props
@@ -43,6 +60,30 @@ export interface TMSAAppLayoutProps {
   onModuleChange?: (moduleId: string) => void;
   user?: User;
   className?: string;
+  
+  // Notification props
+  showNotifications?: boolean;
+  notificationCount?: number;
+  notifications?: Notification[];
+  onNotificationClick?: () => void;
+  onNotificationRead?: (notificationId: string) => void;
+  onNotificationAction?: (notificationId: string, actionUrl?: string) => void;
+  
+  // Settings and profile props
+  onSettingsClick?: () => void;
+  onProfileClick?: () => void;
+  onUserSettingsClick?: () => void;
+  onLogout?: () => void;
+  
+  // Sidebar configuration
+  sidebarDefaultOpen?: boolean;
+  sidebarCollapsible?: boolean;
+  onSidebarToggle?: (open: boolean) => void;
+  
+  // Layout customization
+  headerHeight?: string;
+  maxContentWidth?: string;
+  contentPadding?: string;
 }
 
 export interface TopNavigationBarProps {
@@ -50,10 +91,32 @@ export interface TopNavigationBarProps {
   currentModule?: string;
   onModuleChange?: (moduleId: string) => void;
   user?: User;
+  
+  // Notification props
   showNotifications?: boolean;
+  notificationCount?: number;
+  notifications?: Notification[];
   onNotificationClick?: () => void;
+  onNotificationRead?: (notificationId: string) => void;
+  onNotificationAction?: (notificationId: string, actionUrl?: string) => void;
+  
+  // Action callbacks
   onSettingsClick?: () => void;
+  onProfileClick?: () => void;
+  onUserSettingsClick?: () => void;
   onLogout?: () => void;
+  
+  // UI customization
+  showSearch?: boolean;
+  onSearchClick?: () => void;
+  showHelp?: boolean;
+  onHelpClick?: () => void;
+  customActions?: React.ReactNode;
+  
+  // Styling
+  className?: string;
+  height?: string;
+  backgroundColor?: string;
 }
 
 export interface LeftSidebarProps {
@@ -61,6 +124,37 @@ export interface LeftSidebarProps {
   moduleName: string;
   footer?: React.ReactNode;
   className?: string;
+  
+  // Interaction callbacks
+  onMenuItemClick?: (item: MenuItem) => void;
+  onQuickActionClick?: (actionId: string) => void;
+  
+  // Quick actions configuration
+  quickActions?: {
+    id: string;
+    label: string;
+    icon: React.ReactNode;
+    tooltip?: string;
+    onClick?: () => void;
+  }[];
+  
+  // Header customization
+  headerContent?: React.ReactNode;
+  showModuleIcon?: boolean;
+  moduleIcon?: React.ReactNode;
+  
+  // Behavior props
+  collapsible?: boolean;
+  defaultCollapsed?: boolean;
+  onToggle?: (collapsed: boolean) => void;
+  
+  // Section configuration
+  showQuickActions?: boolean;
+  customSections?: {
+    id: string;
+    title: string;
+    content: React.ReactNode;
+  }[];
 }
 
 export interface ModuleNavigatorProps {

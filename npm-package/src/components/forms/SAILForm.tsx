@@ -25,6 +25,46 @@ export interface SAILFormProps {
   submitButtonText?: string;
   initialSection?: string;
   className?: string;
+  
+  // Enhanced form props
+  onSectionChange?: (sectionId: string) => void;
+  onValidationError?: (errors: Record<string, string>) => void;
+  autoSave?: boolean;
+  autoSaveIntervalMs?: number;
+  onAutoSave?: () => void;
+  
+  // Progress tracking
+  showProgress?: boolean;
+  completedSections?: string[];
+  onProgressUpdate?: (progress: { completed: number; total: number }) => void;
+  
+  // Validation and submission
+  validateOnSave?: boolean;
+  validateOnSubmit?: boolean;
+  submitOnLastSection?: boolean;
+  
+  // Layout customization
+  sidebarPosition?: 'left' | 'right';
+  sidebarCollapsible?: boolean;
+  fullScreen?: boolean;
+  maxWidth?: string;
+  
+  // Accessibility
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  
+  // Custom actions
+  customActions?: React.ReactNode;
+  customHeader?: React.ReactNode;
+  customFooter?: React.ReactNode;
+  
+  // Data persistence
+  formData?: Record<string, unknown>;
+  onFormDataChange?: (data: Record<string, unknown>) => void;
+  enableDrafts?: boolean;
+  draftId?: string;
+  onDraftSave?: (draftId: string, data: Record<string, unknown>) => void;
+  onDraftLoad?: (draftId: string) => Record<string, unknown>;
 }
 
 export const SAILForm: React.FC<SAILFormProps> = ({

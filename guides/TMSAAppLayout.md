@@ -8,22 +8,48 @@ TMSAAppLayout provides a complete maritime application layout with navigation, h
 ```typescript
 interface TMSAAppLayoutProps {
   children: React.ReactNode;
-  title: string;
+  moduleName: string;
+  menuItems: MenuItem[];
+  currentModule?: string;
+  onModuleChange?: (moduleId: string) => void;
   user?: User;
-  navigation: NavigationItem[];
-  currentPath?: string;
-  onNavigate?: (path: string) => void;
-  showSidebar?: boolean;
-  sidebarCollapsed?: boolean;
-  onSidebarToggle?: () => void;
-  headerActions?: React.ReactNode;
-  footer?: React.ReactNode;
   className?: string;
-  // CRITICAL: These props make bell and gear icons functional
-  onNotificationClick?: () => void;
-  onSettingsClick?: () => void;
-  notificationCount?: number;
+  
+  // ✨ NEW: Notification functionality - FULLY FUNCTIONAL
   showNotifications?: boolean;
+  notificationCount?: number;
+  notifications?: Notification[];
+  onNotificationClick?: () => void;
+  onNotificationRead?: (notificationId: string) => void;
+  onNotificationAction?: (notificationId: string, actionUrl?: string) => void;
+  
+  // ✨ NEW: Settings and profile functionality - FULLY FUNCTIONAL  
+  onSettingsClick?: () => void;
+  onProfileClick?: () => void;
+  onUserSettingsClick?: () => void;
+  onLogout?: () => void;
+  
+  // ✨ NEW: Sidebar configuration
+  sidebarDefaultOpen?: boolean;
+  sidebarCollapsible?: boolean;
+  onSidebarToggle?: (open: boolean) => void;
+  
+  // ✨ NEW: Layout customization
+  headerHeight?: string;
+  maxContentWidth?: string;
+  contentPadding?: string;
+}
+
+interface Notification {
+  id: string;
+  type: 'weather' | 'maintenance' | 'crew' | 'compliance' | 'safety' | 'general';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  title: string;
+  message: string;
+  timestamp: Date;
+  read: boolean;
+  actionRequired: boolean;
+  actionUrl?: string;
 }
 
 interface NavigationItem {
@@ -103,21 +129,39 @@ function App() {
 
   return (
     <TMSAAppLayout
-      title="Maritime Fleet Management"
+      moduleName="Crew Management"
+      menuItems={menuItems}
+      currentModule="crewing"
+      onModuleChange={(moduleId) => setCurrentModule(moduleId)}
       user={currentUser}
-      navigation={navigation}
-      currentPath={currentPath}
-      onNavigate={setCurrentPath}
-      showSidebar={true}
-      sidebarCollapsed={sidebarCollapsed}
-      onSidebarToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
+      
+      // ✨ NEW: Full notification functionality
+      showNotifications={true}
+      notificationCount={unreadNotifications.length}
+      notifications={notifications}
+      onNotificationClick={() => setShowNotificationPanel(true)}
+      onNotificationRead={(id) => markNotificationAsRead(id)}
+      onNotificationAction={(id, url) => handleNotificationAction(id, url)}
+      
+      // ✨ NEW: Full user interaction functionality
+      onSettingsClick={() => setShowSettingsPanel(true)}
+      onProfileClick={() => setShowProfilePanel(true)}
+      onUserSettingsClick={() => setShowUserSettingsPanel(true)}
+      onLogout={() => handleLogout()}
+      
+      // ✨ NEW: Sidebar configuration
+      sidebarDefaultOpen={!isMobile}
+      sidebarCollapsible={true}
+      onSidebarToggle={(open) => setSidebarOpen(open)}
+      
+      // ✨ NEW: Layout customization
+      headerHeight="4rem"
+      maxContentWidth="7xl"
+      contentPadding="6"
     >
-      <div className="p-6">
-        {/* Your page content based on currentPath */}
-        {currentPath === '/dashboard' && <DashboardPage />}
-        {currentPath === '/fleet' && <FleetManagementPage />}
-        {currentPath === '/crew' && <CrewManagementPage />}
-        {currentPath === '/compliance' && <TMSACompliancePage />}
+      <div className="space-y-6">
+        {/* Your page content - all functionality now works! */}
+        <DashboardContent />
       </div>
     </TMSAAppLayout>
   );
